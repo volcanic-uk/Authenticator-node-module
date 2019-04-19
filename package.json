@@ -1,0 +1,25 @@
+{
+  "name": "authenticator-node-module",
+  "version": "1.0.0",
+  "description": "a node module meant to authorize communication to various volcanic services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volcanic-uk/Authenticator-node-module.git"
+  },
+  "keywords": [
+    "Authenticator"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/volcanic-uk/Authenticator-node-module/issues"
+  },
+  "homepage": "https://github.com/volcanic-uk/Authenticator-node-module#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
