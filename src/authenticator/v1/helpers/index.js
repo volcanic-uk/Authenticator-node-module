@@ -1,4 +1,7 @@
+// Third party modules includes here:
 const axios = require('axios');
+
+// defint the custom fetch method as an async function
 const customFetch = async (methodType="get", URL, headers, data) => {
     try{
         let response =  await axios({
@@ -12,10 +15,10 @@ const customFetch = async (methodType="get", URL, headers, data) => {
                 ...data
             }
         });
-        console.log(response);
+        return response.data;
     } 
     catch (error) {
-        console.log(error);
+        return error;
     }
 }
 
