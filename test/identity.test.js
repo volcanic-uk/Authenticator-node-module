@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const identity = require('../src/authenticator/v1/identity/index').identityLogin;
+const identity = require('../index').identityLogin;
 require('dotenv').config();
 
 describe('identity', () => {
@@ -16,4 +16,5 @@ describe('identity', () => {
             assert.typeOf(e,'string')
         }
     })
+
 });
