@@ -2,13 +2,12 @@
 const axios = require('axios');
 
 // defint the custom fetch method as an async function
-const customFetch = async (methodType="get", URL, headers, data) => {
+const customFetch = async (methodType="get", path, headers, data) => {
     try{
         let response =  await axios({
             method: methodType,
-            url: URL,
+            url: process.env.AUTH_DOMAIN+path,
             headers:{
-                cors:true,
                 ...headers
             },
             data:{
@@ -18,7 +17,7 @@ const customFetch = async (methodType="get", URL, headers, data) => {
         return response.data;
     } 
     catch (error) {
-        return error;
+        throw error;
     }
 }
 
