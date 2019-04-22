@@ -1,7 +1,8 @@
 // local dependencies & modules call 
-const ApiFetchHelper = require('./src/authenticator/v1/identity/index'); // login api fucntion based on helper fetch API
+const identityLogin = require('./src/authenticator/v1/identity/index'); // authenticate login module import
 
-ApiFetchHelper.fetchLoginApi("post", "http://localhost:3000/api/v1/identity/login", null, {
+// identity login test
+identityLogin("post", "http://localhost:3000/api/v1/identity/login", null, {
     "name": "testt",
     "secret": "123456789"
 });
