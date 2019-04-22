@@ -11,11 +11,9 @@ exports.identityLogin = async (identityName, identitySecret) => {
         }
 
         let result = await fetch.customFetch(routes.login.method, routes.login.path, null, credentials);
-        result.token;
-    } 
-    
-    catch (error){
-        throw error;
+        return result.token;
+    } catch (error){
+        throw error.response.data.reason.message;
     }
 }
  
