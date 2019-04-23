@@ -1,6 +1,6 @@
 // Third party modules includes here:
 const axios = require('axios');
-const envVars = require('../authenticator/v1/config');
+const envVars = require('../v1/authenticator/v1/config');
 
 // defint the custom fetch method as an async function
 const customFetch = async (methodType = 'get', path, headers, data) => {
