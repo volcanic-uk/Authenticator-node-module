@@ -16,3 +16,25 @@ exports.identityLogin = async (identityName, identitySecret) => {
         throw error.response.data.reason.message;
     }
 };
+
+exports.identityRegister = async (identityName, token) => {
+    try {
+        let credential = {
+            name: identityName
+        };
+
+        let header = {
+            Authorization: 'Bearer ' + token
+        };
+
+        let user = await fetch(routes.register.method, routes.register.path, header, credential);
+        return user = {
+            id: user.identity.id,
+            name: user.identity.name,
+            secret: user.identity.secret
+        };
+    }
+    catch (error) {
+        throw error.response.data.reason.message;
+    }
+};
