@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const identity = require('../src/v1/index').identityLogin;
+const identity = require('../v1/index').identityLogin;
 require('dotenv').config();
 
 describe('identity', () => {
