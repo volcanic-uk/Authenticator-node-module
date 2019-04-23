@@ -1,6 +1,6 @@
 // require the custom api fetch from the helpers module folder
 const fetch = require('../../../helpers/index');
-const routes = require('../../../config/index');
+const routes = require('../config');
 
 //define the fetch API function as an asynchronous one and waiting for the fetch api method to process the response
 exports.identityLogin = async (identityName, identitySecret) => {
