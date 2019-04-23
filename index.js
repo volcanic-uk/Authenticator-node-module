@@ -4,4 +4,4 @@ const identityLogin = require('./src/authenticator/v1/identity').identityLogin; 
 
 module.exports = {
     identityLogin
-}
+};
