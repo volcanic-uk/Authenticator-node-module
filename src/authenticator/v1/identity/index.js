@@ -22,7 +22,6 @@ exports.identityRegister = async (identityName, token) => {
         let credential = {
             name: identityName
         };
-
         let header = {
             Authorization: 'Bearer ' + token
         };
@@ -33,8 +32,7 @@ exports.identityRegister = async (identityName, token) => {
             name: user.identity.name,
             secret: user.identity.secret
         };
-    }
-    catch (error) {
+    } catch (error) {
         throw error.response.data.reason.message;
     }
 };
