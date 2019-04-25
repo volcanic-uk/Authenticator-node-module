@@ -8,25 +8,29 @@ describe('identity', () => {
     let tmpIdentityName = 'Volcanic' + Math.floor(Math.random() * 10000);
     let identity = null;
     let token = null;
+
+    // register
     it('should return a result ok and identity params as an object containing: secret, name, and an id OR a string when it is rejected', async () => {
-        identity = await identityRegister(tmpIdentityName, 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTY4NTI2NTYsImlhdCI6MTU1NTk4ODY1NiwiaXNzIjoiVm9sY2FuaWMgYmV0dGVyIHBlb3BsZSB0ZWNobm9sb2d5IiwianRpIjoiN2FiNjczYTAtNjU3NC0xMWU5LWE2OWUtMmQ5NzQ2ODA3OTEzIn0.AACbWLKGWQYTDbqEHrvJCGww6kXh6Tt0nUbhcJybytgOrYrz_qZzWlVsp0Yz9UQr33m9opDpHbawRw-Ef8YLwon7AMNYDTv0wysJWyEiGBXAK_2i-YnAU-eKVXlptsHATCdGX_7uYp0MwYVNW_u0QkozgRcWAVk0s1nFReZXDB8_u2a7');
+        identity = await identityRegister(tmpIdentityName, 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTcwNDY1NTQsImlhdCI6MTU1NjE4MjU1NCwiaXNzIjoiVm9sY2FuaWMgYmV0dGVyIHBlb3BsZSB0ZWNobm9sb2d5IiwianRpIjoiZWYxNmVjYjAtNjczNy0xMWU5LTg3ZWUtNjcxOTJjNGViYmQxIn0.ALA1vd5yH7sMEnN9s8Ddq15XecvHhPjLJEV0jwKUpKYOdrmY7p3JB2TUBpHJ0iApEoDGBByepFbL5PP2Zitvf9GDAFj-xWPR9tyHohkx1y06eYVwBdGRFfVDLxs45fV6briJxvHWWkr44DETlmfwHwzOCO5Qu2ZXOUnyxeKyDsEQIrVI');
         assert.typeOf(identity, 'object');
     });
 
     it('should return a string if the name added already exists', async () => {
         try {
-            await identityRegister(identity.name, 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTY4NTI2NTYsImlhdCI6MTU1NTk4ODY1NiwiaXNzIjoiVm9sY2FuaWMgYmV0dGVyIHBlb3BsZSB0ZWNobm9sb2d5IiwianRpIjoiN2FiNjczYTAtNjU3NC0xMWU5LWE2OWUtMmQ5NzQ2ODA3OTEzIn0.AACbWLKGWQYTDbqEHrvJCGww6kXh6Tt0nUbhcJybytgOrYrz_qZzWlVsp0Yz9UQr33m9opDpHbawRw-Ef8YLwon7AMNYDTv0wysJWyEiGBXAK_2i-YnAU-eKVXlptsHATCdGX_7uYp0MwYVNW_u0QkozgRcWAVk0s1nFReZXDB8_u2a7');
+            await identityRegister(identity.name, 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTcwNDY1NTQsImlhdCI6MTU1NjE4MjU1NCwiaXNzIjoiVm9sY2FuaWMgYmV0dGVyIHBlb3BsZSB0ZWNobm9sb2d5IiwianRpIjoiZWYxNmVjYjAtNjczNy0xMWU5LTg3ZWUtNjcxOTJjNGViYmQxIn0.ALA1vd5yH7sMEnN9s8Ddq15XecvHhPjLJEV0jwKUpKYOdrmY7p3JB2TUBpHJ0iApEoDGBByepFbL5PP2Zitvf9GDAFj-xWPR9tyHohkx1y06eYVwBdGRFfVDLxs45fV6briJxvHWWkr44DETlmfwHwzOCO5Qu2ZXOUnyxeKyDsEQIrVI');
         } catch (error) {
             assert.typeOf(error, 'string');
         }
     });
 
-    it('should return a token as a string type', async () => {
-        token = await identityLogin(identity.name, identity.secret);
-        assert.typeOf(token, 'string');
+    // login
+    it('should return a token as an object type when login', async () => {
+        let result = await identityLogin(identity.name, identity.secret);
+        token = result.token;
+        assert.typeOf(result, 'object');
     });
 
-    it('should return a string if the credentials were wrong, containing a bad request', async () => {
+    it('should on login return a string if the credentials were wrong, containing a bad request', async () => {
         try {
             await identityLogin(identity.name, identity.secret + 'testing purposes *&^%$');
         } catch (error) {
@@ -34,6 +38,8 @@ describe('identity', () => {
         }
     });
 
+
+    // validation
     it('should return an object when the token is valid with the info related to it', async () => {
         let result = await identityValidation(token);
         assert.typeOf(result, 'object');
@@ -47,6 +53,7 @@ describe('identity', () => {
         }
     });
 
+    // logout
     it('should return a string saying the token has been blacklisted on logout', async () => {
         let logout = await identityLogout(token);
         assert.typeOf(logout, 'string');
