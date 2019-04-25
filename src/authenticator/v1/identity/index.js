@@ -44,7 +44,7 @@ exports.validateToken = async (token) => {
         };
 
         let tokenInfo = await fetch(routes.validation.method, routes.validation.path, null, data);
-        return tokenInfo = {
+        return {
             expiration_time: tokenInfo.message.exp,
             issued_at: tokenInfo.message.iat,
             issuer: tokenInfo.message.iss,
