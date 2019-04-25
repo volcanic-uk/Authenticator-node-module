@@ -15,10 +15,13 @@
 // local dependencies & modules call 
 require('dotenv').config(); // environement config file 
 
-const { identityLogin, identityRegister, identityValidation } = require ('../src/authenticator/v1/identity');
+const { identityLogin, identityRegister, identityValidation, identityLogout } = require('../src/authenticator/v1/identity');
+
+identityLogout('eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTcwNDE0MTgsImlhdCI6MTU1NjE3NzQxOCwiaXNzIjoiVm9sY2FuaWMgYmV0dGVyIHBlb3BsZSB0ZWNobm9sb2d5IiwianRpIjoiZjllOGY3YzAtNjcyYi0xMWU5LTk3MzAtMWQ5Mzc3OWJlODBjIn0.ANxP2nDOVw1AdJ_QjTiDbrcIE_mc2OnIqGEKjUbD9EX4tV4nmGsyoMrKLBpzC0-j8O3dT-nTIURIULfUuvzG9JZxAG_f_Bb-M5hzL_2vD3hUvayLxm-tjaC-_SomTSIPIldc3dblM_DkIFtNSzJ6hArgosg5MAORmGvyIeAnFdRRmIAx');
 
 module.exports = {
     identityLogin,
     identityRegister,
-    identityValidation
+    identityValidation,
+    identityLogout
 };

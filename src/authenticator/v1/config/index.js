@@ -13,6 +13,10 @@ module.exports = {
         path: '/api/v1/identity/validate',
         method: 'POST'
     },
+    logout: {
+        path: '/api/v1/identity/logout',
+        method: 'POST'
+    },
     env: {
         domain: process.env.AUTH_DOMAIN
     }

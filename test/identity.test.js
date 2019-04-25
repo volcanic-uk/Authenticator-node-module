@@ -2,6 +2,7 @@ const assert = require('chai').assert;
 const identityLogin = require('../v1/index').identityLogin;
 const identityRegister = require('../v1/index').identityRegister;
 const identityValidation = require('../v1/index').identityValidation;
+const identityLogout = require('../v1/index').identityLogout;
 
 require('dotenv').config();
 
@@ -44,6 +45,19 @@ describe('identity', () => {
     it('should return a string as an error when the token is not valid', async () => {
         try {
             await identityValidation(token + 'testing purposes *&^%$');
+        } catch (error) {
+            assert.typeOf(error, 'string');
+        }
+    });
+
+    it('should return a string saying the token has been blacklisted on logout', async () => {
+        let logout = await identityLogout(token);
+        assert.typeOf(logout, 'string');
+    });
+
+    it('should return a string when the token is not valid or already been blacklisted', async () => {
+        try {
+            await identityLogout(token + 'testing purposes *&^%$');
         } catch (error) {
             assert.typeOf(error, 'string');
         }

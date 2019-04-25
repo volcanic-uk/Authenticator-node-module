@@ -37,7 +37,7 @@ exports.identityRegister = async (identityName, token) => {
     }
 };
 
-exports.validateToken = async (token) => {
+exports.identityValidation = async (token) => {
     try {
         let data = {
             token
@@ -52,5 +52,18 @@ exports.validateToken = async (token) => {
         };
     } catch (error) {
         throw error.response.data.result;
+    }
+};
+
+exports.identityLogout = async (token) => {
+    try {
+        let header = {
+            Authorization: 'Bearer ' + token
+        };
+
+        let logout = await fetch(routes.logout.method, routes.logout.path, header, null);
+        return logout.message.message;
+    } catch (error) {
+        throw error.response.data.error.message;
     }
 };
