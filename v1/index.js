@@ -9,6 +9,10 @@
  * @function identityValidation to get a validation response from the identity token validation api by passing the token
  * the function then will return an object containing all the info related to the token provided 
  * as an object containing the following: token expiry date, token issue time, token issuer, and the token id
+ * 
+ * @function identityLogout to black list a token by passing the token as a string parameter 
+ * the function then will return a success or a fail message depending on the token whether it is valid,
+ * blacklisted already, or invalid
  */
 
 
