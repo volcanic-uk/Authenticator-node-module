@@ -1,8 +1,5 @@
 const assert = require('chai').assert;
-const identityLogin = require('../v1/index').identityLogin;
-const identityRegister = require('../v1/index').identityRegister;
-const identityValidation = require('../v1/index').identityValidation;
-const identityLogout = require('../v1/index').identityLogout;
+const { identityLogin, identityRegister, identityValidation, identityLogout } = require('../v1/index');
 
 require('dotenv').config();
 
