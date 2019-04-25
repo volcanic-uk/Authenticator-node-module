@@ -9,6 +9,10 @@ module.exports = {
         path: '/api/v1/identity',
         method: 'POST'
     },
+    validation: {
+        path: '/api/v1/identity/validate',
+        method: 'POST'
+    },
     env: {
         domain: process.env.AUTH_DOMAIN
     }

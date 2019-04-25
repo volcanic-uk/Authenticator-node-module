@@ -36,3 +36,21 @@ exports.identityRegister = async (identityName, token) => {
         throw error.response.data.reason.message;
     }
 };
+
+exports.validateToken = async (token) => {
+    try {
+        let data = {
+            token
+        };
+
+        let tokenInfo = await fetch(routes.validation.method, routes.validation.path, null, data);
+        return tokenInfo = {
+            expiration_time: tokenInfo.message.exp,
+            issued_at: tokenInfo.message.iat,
+            issuer: tokenInfo.message.iss,
+            jwt_id: tokenInfo.message.jti
+        };
+    } catch (error) {
+        throw error.response.data.result;
+    }
+};
