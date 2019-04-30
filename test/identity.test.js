@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const { identityLogin, identityRegister, identityValidation, identityLogout } = require('../v1/index');
+const { identityLogin, identityRegisterAuth, identityValidation, identityLogout } = require('../v1/index');
 
 require('dotenv').config();
 
@@ -11,13 +11,13 @@ describe('identity', () => {
 
     // register
     it('should return a result ok and identity params as an object containing: secret, name, and an id OR a string when it is rejected', async () => {
-        identity = await identityRegister(tmpIdentityName, 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTcwNDY1NTQsImlhdCI6MTU1NjE4MjU1NCwiaXNzIjoiVm9sY2FuaWMgYmV0dGVyIHBlb3BsZSB0ZWNobm9sb2d5IiwianRpIjoiZWYxNmVjYjAtNjczNy0xMWU5LTg3ZWUtNjcxOTJjNGViYmQxIn0.ALA1vd5yH7sMEnN9s8Ddq15XecvHhPjLJEV0jwKUpKYOdrmY7p3JB2TUBpHJ0iApEoDGBByepFbL5PP2Zitvf9GDAFj-xWPR9tyHohkx1y06eYVwBdGRFfVDLxs45fV6briJxvHWWkr44DETlmfwHwzOCO5Qu2ZXOUnyxeKyDsEQIrVI');
+        identity = await identityRegisterAuth(tmpIdentityName);
         assert.typeOf(identity, 'object');
     });
 
     it('should return a string if the name added already exists', async () => {
         try {
-            await identityRegister(identity.name, 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTcwNDY1NTQsImlhdCI6MTU1NjE4MjU1NCwiaXNzIjoiVm9sY2FuaWMgYmV0dGVyIHBlb3BsZSB0ZWNobm9sb2d5IiwianRpIjoiZWYxNmVjYjAtNjczNy0xMWU5LTg3ZWUtNjcxOTJjNGViYmQxIn0.ALA1vd5yH7sMEnN9s8Ddq15XecvHhPjLJEV0jwKUpKYOdrmY7p3JB2TUBpHJ0iApEoDGBByepFbL5PP2Zitvf9GDAFj-xWPR9tyHohkx1y06eYVwBdGRFfVDLxs45fV6briJxvHWWkr44DETlmfwHwzOCO5Qu2ZXOUnyxeKyDsEQIrVI');
+            await identityRegisterAuth(identity.name);
         } catch (error) {
             assert.typeOf(error, 'string');
         }
