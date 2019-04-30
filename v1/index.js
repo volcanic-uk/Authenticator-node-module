@@ -20,10 +20,15 @@
 require('dotenv').config(); // environement config file 
 
 const { identityLogin, identityRegister, identityValidation, identityLogout } = require('../src/authenticator/v1/identity');
+const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
+
+const identityRegisterAuth = async (name) => {
+    return await identityRegister(name, await generateToken());
+};
 
 module.exports = {
     identityLogin,
-    identityRegister,
+    identityRegisterAuth,
     identityValidation,
     identityLogout
 };

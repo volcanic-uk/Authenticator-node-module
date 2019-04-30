@@ -1,6 +1,7 @@
 // require the custom api fetch from the helpers module folder
 const fetch = require('../../../helpers/index').customFetch;
 const routes = require('../config');
+const { addTokenToCache, getTokenFromCache } = require('../cache');
 
 //define the fetch API function as an asynchronous one and waiting for the fetch api method to process the response
 exports.identityLogin = async (identityName, identitySecret) => {
@@ -11,6 +12,9 @@ exports.identityLogin = async (identityName, identitySecret) => {
         };
 
         let result = await fetch(routes.login.method, routes.login.path, null, credentials);
+        // cache the user's token
+        await addTokenToCache(result.response.id, result.response.token);
+
         return {
             token: result.response.token,
             id: result.response.id
@@ -22,19 +26,22 @@ exports.identityLogin = async (identityName, identitySecret) => {
 
 exports.identityRegister = async (identityName, token) => {
     try {
+        if (!token){
+            token = await getTokenFromCache(process.env.VS_IDENTITY);
+        }
         let credential = {
             name: identityName
         };
         let header = {
             Authorization: 'Bearer ' + token
         };
-
         let user = await fetch(routes.register.method, routes.register.path, header, credential);
         return {
             id: user.response.id,
             name: user.response.name,
             secret: user.response.secret
         };
+
     } catch (error) {
         throw error.response.data.reason.message;
     }
