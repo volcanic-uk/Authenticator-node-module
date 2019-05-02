@@ -3,8 +3,7 @@ const { identityLogin, identityValidation } = require('../identity');
 
 exports.generateToken = async () => {
     let existingToken = await getTokenFromCache(process.env.VS_IDENTITY);
-
-    if (!existingToken || existingToken != null) {
+    if (!existingToken || existingToken === null) {
         try {
             let newToken = await identityLogin(process.env.VS_IDENTITY, process.env.VS_SECRET);
             existingToken = newToken.token;
@@ -19,7 +18,7 @@ exports.generateToken = async () => {
             await identityValidation(existingToken);
         } catch (e) {
             existingToken = null;
-            return this.getToken();
+            return this.generateToken();
         }
     }
 };
