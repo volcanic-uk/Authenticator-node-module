@@ -27,7 +27,7 @@ exports.identityLogin = async (identityName, identitySecret) => {
 exports.identityRegister = async (identityName, token) => {
     try {
         if (!token){
-            token = await getTokenFromCache(process.env.VS_IDENTITY);
+            token = await getTokenFromCache(process.env.IDENTITY);
         }
         let credential = {
             name: identityName
