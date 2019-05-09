@@ -7,7 +7,8 @@ exports.generateToken = async () => {
         try {
             let newToken = await identityLogin(process.env.IDENTITY, process.env.SECRET);
             existingToken = newToken.token;
-            addTokenToCache(process.env.IDENTITY, existingToken, process.env.DURATION);
+            let duration = process.env.DURATION*60*1000;
+            addTokenToCache(process.env.IDENTITY, existingToken, duration);
             return existingToken;
         }
         catch (e) {
