@@ -43,7 +43,7 @@ exports.identityRegister = async (identityName, token) => {
         };
 
     } catch (error) {
-        throw error.response.data.reason.message + ': ' + error.response.data.reason.data.name;
+        throw error.response.data.reason.message;
     }
 };
 
