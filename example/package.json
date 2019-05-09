@@ -1,0 +1,22 @@
+{
+  "name": "test_package",
+  "version": "1.0.0",
+  "description": "experimental project to create a node module ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "dani alakabani",
+  "license": "ISC",
+  "dependencies": {
+    "authenticator-node-module": "volcanic-uk/Authenticator-node-module#develop",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}

@@ -1,0 +1,50 @@
+html{
+    margin: 0px;
+    padding: 0px;
+}
+
+.the-form {
+    margin-top: 50px;
+}
+.input{
+    margin-bottom: 30px!important;
+}
+
+#main{
+    position: relative;
+}
+
+#main #main-banner{
+    margin: 0px;
+    width: 100%;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+#main #main-banner img{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    heigt: auto;
+}
+
+#main article {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+#main article h1 {
+    color: white;
+    margin: 0px;
+    text-align: center;
+}
+
+#main article p {
+    color: white;
+    margin: 0px;
+    text-align: center;
+}

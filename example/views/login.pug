@@ -1,0 +1,15 @@
+extends layouts/main-layout.pug
+block content
+  .container
+    h3= message
+    .row
+      form.col.s8.the-form(action='/login', method='POST')
+        .row
+          .input-field.col.s12
+            input#username.input(type='text', name='name', autocomplete='off')
+            label(for='username') Username
+          .input-field.col.s12
+            input#username.input(type='password', name='secret', autocomplete='off')
+            label(for='username') Secret
+          .input-field.col.s12
+          button.btn.waves-effect.waves-light.red.lighten-2(type='submit') Login!
