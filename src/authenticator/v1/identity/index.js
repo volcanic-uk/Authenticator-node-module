@@ -24,13 +24,14 @@ exports.identityLogin = async (identityName, identitySecret) => {
     }
 };
 
-exports.identityRegister = async (identityName, token) => {
+exports.identityRegister = async (identityName, identityPassword=null, token) => {
     try {
         if (!token){
-            token = await getTokenFromCache(process.env.VS_IDENTITY);
+            token = await getTokenFromCache(process.env.IDENTITY);
         }
         let credential = {
-            name: identityName
+            name: identityName,
+            password: identityPassword
         };
         let header = {
             Authorization: 'Bearer ' + token

@@ -2,13 +2,14 @@ const { addTokenToCache, getTokenFromCache } = require('../cache');
 const { identityLogin, identityValidation } = require('../identity');
 
 exports.generateToken = async () => {
-    let existingToken = await getTokenFromCache(process.env.VS_IDENTITY);
+    let existingToken = await getTokenFromCache(process.env.IDENTITY);
 
     if (!existingToken || existingToken != null) {
         try {
-            let newToken = await identityLogin(process.env.VS_IDENTITY, process.env.VS_SECRET);
+            let newToken = await identityLogin(process.env.IDENTITY, process.env.SECRET);
             existingToken = newToken.token;
-            addTokenToCache(process.env.VS_IDENTITY, existingToken);
+            let duration = process.env.DURATION*60*1000;
+            addTokenToCache(process.env.IDENTITY, existingToken, duration);
             return existingToken;
         }
         catch (e) {
@@ -19,7 +20,7 @@ exports.generateToken = async () => {
             await identityValidation(existingToken);
         } catch (e) {
             existingToken = null;
-            return this.getToken();
+            return this.generateToken();
         }
     }
 };

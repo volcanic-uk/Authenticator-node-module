@@ -1,7 +1,7 @@
 const cache = require('memory-cache');
 
-exports.addTokenToCache = async (key, value) => {
-    let cachedToken = await cache.put(key, value);
+exports.addTokenToCache = async (key, value, duration) => {
+    let cachedToken = await cache.put(key, value, duration);
     return cachedToken;
 };
 
