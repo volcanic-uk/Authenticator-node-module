@@ -2,6 +2,17 @@
 const axios = require('axios');
 const envVars = require('../authenticator/v1/config');
 
+/**
+ * 
+ * @function customFetch this function is a core function for the node package as it is needed for all the API request functions in the auth server
+ * this function is dependiing on Axios and it is a bit modified to suit the current needs of the auth server, it takes 4 main params
+ * 
+ * @param {string} methodType specify the request type primarily get and post
+ * @param {string} path the path of the API needed for the request
+ * @param {object} headers the header data needed mainly for authorization purposes to pass a token
+ * @param {object} data the data needed when passing a request like the name or password
+ */
+
 // defint the custom fetch method as an async function
 const customFetch = async (methodType = 'get', path, headers, data) => {
     try {
