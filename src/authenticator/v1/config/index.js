@@ -1,4 +1,4 @@
-const { domainName } = require('../../../../config');
+const { envSetter } = require('../../../../config');
 
 module.exports = {
     login: {
@@ -18,6 +18,6 @@ module.exports = {
         method: 'POST'
     },
     env: {
-        domain: domainName
+        domain: envSetter().server.domainName
     }
 };

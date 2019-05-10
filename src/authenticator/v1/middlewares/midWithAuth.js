@@ -1,6 +1,6 @@
 const { addTokenToCache, getTokenFromCache } = require('../cache');
 const { identityLogin, identityValidation } = require('../identity');
-const { moduleTokenDuration , authIdentity, authSecret } = require('../../../../config');
+const { envSetter } = require('../../../../config');
 
 /**
  * @function generateToken this function is called whenever a token is not in the cahced memory of the run time when the user registers a new identity
@@ -11,13 +11,17 @@ const { moduleTokenDuration , authIdentity, authSecret } = require('../../../../
  */
 
 exports.generateToken = async () => {
-    let existingToken = await getTokenFromCache(authIdentity);
+    const {
+        auth,
+        cache
+    } = envSetter();
+    let existingToken = await getTokenFromCache(auth.authIdentity);
 
     if (!existingToken || existingToken != null) {
         try {
-            let newToken = await identityLogin(authIdentity, authSecret);
+            let newToken = await identityLogin(auth.authIdentity, auth.authSecret);
             existingToken = newToken.token;
-            addTokenToCache(authIdentity, existingToken, moduleTokenDuration);
+            addTokenToCache(auth.authIdentity, existingToken, cache.moduleTokenDuration);
             return existingToken;
         }
         catch (e) {

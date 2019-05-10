@@ -2,7 +2,7 @@
 const fetch = require('../../../helpers/index').customFetch;
 const routes = require('../config');
 const { addTokenToCache, getTokenFromCache } = require('../cache');
-const { thirdPartyTokenDuration, authIdentity } = require('../../../../config');
+const { envSetter } = require('../../../../config');
 
 /**
  * 
@@ -17,6 +17,7 @@ const { thirdPartyTokenDuration, authIdentity } = require('../../../../config');
  * 
  */
 exports.identityLogin = async (identityName, identityPassword) => {
+    const thirdPartyTokenDuration = envSetter().cache.thirdPartyTokenDuration;
     try {
         let credentials = {
             name: identityName,
@@ -52,6 +53,7 @@ exports.identityLogin = async (identityName, identityPassword) => {
  * 
  */
 exports.identityRegister = async (identityName, identityPassword=null, token) => {
+    const authIdentity = envSetter().auth.authIdentity;
     try {
         if (!token){
             token = await getTokenFromCache(authIdentity);
