@@ -24,7 +24,7 @@ exports.identityLogin = async (identityName, identityPassword) => {
 
         let result = await fetch(routes.login.method, routes.login.path, null, credentials);
         // cache the user's token
-        await addTokenToCache(result.response.id, result.response.token, process.env.USER_CACHE_DURATION);
+        await addTokenToCache(result.response.id, result.response.token, process.env.THIRD_PARTY_TOKEN_DURATION);
 
         return {
             token: result.response.token,

@@ -16,7 +16,7 @@ exports.generateToken = async () => {
         try {
             let newToken = await identityLogin(process.env.IDENTITY, process.env.SECRET);
             existingToken = newToken.token;
-            addTokenToCache(process.env.IDENTITY, existingToken, process.env.DURATION);
+            addTokenToCache(process.env.IDENTITY, existingToken, process.env.MODULE_TOKEN_DURATION);
             return existingToken;
         }
         catch (e) {
