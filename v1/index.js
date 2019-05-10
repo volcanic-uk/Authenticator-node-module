@@ -17,7 +17,6 @@
 
 
 // local dependencies & modules call 
-require('dotenv').config(); // environement config file 
 
 const { identityLogin, identityRegister, identityValidation, identityLogout } = require('../src/authenticator/v1/identity');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');

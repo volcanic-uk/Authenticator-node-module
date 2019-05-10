@@ -1,4 +1,4 @@
-require('dotenv').config();
+const { domainName } = require('../../../../config');
 
 module.exports = {
     login: {
@@ -18,6 +18,6 @@ module.exports = {
         method: 'POST'
     },
     env: {
-        domain: process.env.AUTH_DOMAIN
+        domain: domainName
     }
 };
