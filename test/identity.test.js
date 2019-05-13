@@ -20,7 +20,7 @@ describe('identity', () => {
         try {
             await identityRegisterAuth(identity.name);
         } catch (error) {
-            expect(error).to.be.a('string');
+            expect(error).to.be.an('object');
         }
     });
 
@@ -34,7 +34,7 @@ describe('identity', () => {
         try {
             await identityRegisterAuth(identity.name, identity.password);
         } catch (error) {
-            expect(error).to.be.a('string');
+            expect(error).to.be.an('object');
         }
     });
 
@@ -49,7 +49,7 @@ describe('identity', () => {
         try {
             await identityLogin(identity.name, identity.secret + 'testing purposes *&^%$');
         } catch (error) {
-            expect(error).to.be.a('string');
+            expect(error).to.be.an('object');
         }
     });
 
@@ -64,7 +64,7 @@ describe('identity', () => {
         try {
             await identityValidation(token + 'testing purposes *&^%$');
         } catch (error) {
-            expect(error).to.be.a('string');
+            expect(error).to.be.an('object');
         }
     });
 

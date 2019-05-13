@@ -33,7 +33,10 @@ exports.identityLogin = async (identityName, identityPassword) => {
             id: result.response.id
         };
     } catch (error) {
-        throw error.response.data.reason.message;
+        throw {
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.code
+        };
     }
 };
 
@@ -52,10 +55,10 @@ exports.identityLogin = async (identityName, identityPassword) => {
  * this function depends on the custom fetch fucntion in the helper folder.
  * 
  */
-exports.identityRegister = async (identityName, identityPassword=null, token) => {
+exports.identityRegister = async (identityName, identityPassword = null, token) => {
     const authIdentity = envSetter().auth.authIdentity;
     try {
-        if (!token){
+        if (!token) {
             token = await getTokenFromCache(authIdentity);
         }
         let credential = {
@@ -73,7 +76,10 @@ exports.identityRegister = async (identityName, identityPassword=null, token) =>
         };
 
     } catch (error) {
-        throw error.response.data.reason.message;
+        throw {
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.code
+        };
     }
 };
 
@@ -104,7 +110,10 @@ exports.identityValidation = async (token) => {
             jwt_id: tokenInfo.response.jti
         };
     } catch (error) {
-        throw error.response.data.result;
+        throw {
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.code
+        };
     }
 };
 
