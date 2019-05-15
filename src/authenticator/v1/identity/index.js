@@ -2,7 +2,7 @@
 const fetch = require('../../../helpers/index').customFetch;
 const routes = require('../config');
 const { addTokenToCache, getTokenFromCache } = require('../cache');
-const { envSetter } = require('../../../../config');
+const envConfigs = require('../../../../config');
 
 /**
  * 
@@ -17,7 +17,7 @@ const { envSetter } = require('../../../../config');
  * 
  */
 exports.identityLogin = async (identityName, identityPassword) => {
-    const thirdPartyTokenDuration = envSetter().cache.thirdPartyTokenDuration;
+    const thirdPartyTokenDuration = envConfigs.cache.thirdPartyTokenDuration;
     try {
         let credentials = {
             name: identityName,
@@ -27,7 +27,6 @@ exports.identityLogin = async (identityName, identityPassword) => {
         let result = await fetch(routes.login.method, routes.login.path, null, credentials);
         // cache the user's token
         await addTokenToCache(result.response.id, result.response.token, thirdPartyTokenDuration);
-
         return {
             token: result.response.token,
             id: result.response.id
@@ -56,7 +55,7 @@ exports.identityLogin = async (identityName, identityPassword) => {
  * 
  */
 exports.identityRegister = async (identityName, identityPassword = null, token) => {
-    const authIdentity = envSetter().auth.authIdentity;
+    const authIdentity = envConfigs.auth.authIdentity;
     try {
         if (!token) {
             token = await getTokenFromCache(authIdentity);

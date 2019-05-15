@@ -1,6 +1,6 @@
 const { addTokenToCache, getTokenFromCache } = require('../cache');
 const { identityLogin, identityValidation } = require('../identity');
-const { envSetter } = require('../../../../config');
+const envConfigs = require('../../../../config');
 
 /**
  * @function generateToken this function is called whenever a token is not in the cahced memory of the run time when the user registers a new identity
@@ -14,7 +14,7 @@ exports.generateToken = async () => {
     const {
         auth,
         cache
-    } = envSetter();
+    } = envConfigs;
     let existingToken = await getTokenFromCache(auth.authIdentity);
 
     if (!existingToken || existingToken != null) {
