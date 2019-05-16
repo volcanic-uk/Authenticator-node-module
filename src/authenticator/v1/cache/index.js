@@ -12,7 +12,7 @@ const cache = require('memory-cache');
 
 exports.addTokenToCache = async (key, value, duration=60) => {
     try {
-        let DurationInMillisecond = parseInt(duration) * 60 * 60;
+        let DurationInMillisecond = parseInt(duration) * 60 * 60 * 1000;
         let cachedToken = await cache.put(key, value, DurationInMillisecond);
         return cachedToken;
     } catch (error) {
