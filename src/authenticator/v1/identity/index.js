@@ -34,7 +34,7 @@ exports.identityLogin = async (identityName, identityPassword) => {
     } catch (error) {
         throw {
             message: error.response.data.reason.message,
-            code: error.response.data.reason.code
+            code: error.response.data.reason.errorCode
         };
     }
 };
@@ -77,7 +77,7 @@ exports.identityRegister = async (identityName, identityPassword = null, token) 
     } catch (error) {
         throw {
             message: error.response.data.reason.message,
-            code: error.response.data.reason.code
+            code: error.response.data.reason.errorCode
         };
     }
 };
@@ -110,8 +110,7 @@ exports.identityValidation = async (token) => {
         };
     } catch (error) {
         throw {
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.code
+            message: error.response.data.reason.message
         };
     }
 };
@@ -138,6 +137,8 @@ exports.identityLogout = async (token) => {
         let logout = await fetch(routes.logout.method, routes.logout.path, header, null);
         return logout.response.message;
     } catch (error) {
-        throw error.response.data.error.message;
+        throw {
+            message: error.response.data.error.message
+        };
     }
 };
