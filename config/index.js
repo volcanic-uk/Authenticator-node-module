@@ -12,6 +12,8 @@ module.exports = {
     auth: {
         authIdentity: process.env.IDENTITY,
         authSecret: process.env.SECRET
+    },
+    logging: {
+        logs: process.env.ENABLE_LOGGING
     }
 };
-    

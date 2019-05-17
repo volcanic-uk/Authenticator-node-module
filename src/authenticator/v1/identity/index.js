@@ -1,5 +1,5 @@
 // require the custom api fetch from the helpers module folder
-const fetch = require('../../../helpers/index').customFetch;
+const { customFetch, logInfo } = require('../../../helpers/index');
 const routes = require('../config');
 const { addTokenToCache, getTokenFromCache } = require('../cache');
 const envConfigs = require('../../../../config');
@@ -24,7 +24,7 @@ exports.identityLogin = async (identityName, identityPassword) => {
             secret: identityPassword
         };
 
-        let result = await fetch(routes.login.method, routes.login.path, null, credentials);
+        let result = await customFetch(routes.login.method, routes.login.path, null, credentials);
         // cache the user's token
         await addTokenToCache(result.response.id, result.response.token, thirdPartyTokenDuration);
         return {
@@ -67,7 +67,7 @@ exports.identityRegister = async (identityName, identityPassword = null, token) 
         let header = {
             Authorization: 'Bearer ' + token
         };
-        let user = await fetch(routes.register.method, routes.register.path, header, credential);
+        let user = await customFetch(routes.register.method, routes.register.path, header, credential);
         return {
             id: user.response.id,
             name: user.response.name,
@@ -101,17 +101,21 @@ exports.identityValidation = async (token) => {
             token
         };
 
-        let tokenInfo = await fetch(routes.validation.method, routes.validation.path, null, data);
-        return {
+        let tokenInfo = await customFetch(routes.validation.method, routes.validation.path, null, data);
+        logInfo({
+            validity: true,
             expiration_time: tokenInfo.response.exp,
             issued_at: tokenInfo.response.iat,
             issuer: tokenInfo.response.iss,
             jwt_id: tokenInfo.response.jti
-        };
+        });
+        return true;
     } catch (error) {
-        throw {
-            message: error.response.data.reason.message
-        };
+        logInfo({
+            validity: false,
+            error: error.response.data.reason.message
+        });
+        return false;
     }
 };
 
@@ -134,7 +138,7 @@ exports.identityLogout = async (token) => {
             Authorization: 'Bearer ' + token
         };
 
-        let logout = await fetch(routes.logout.method, routes.logout.path, header, null);
+        let logout = await customFetch(routes.logout.method, routes.logout.path, header, null);
         return logout.response.message;
     } catch (error) {
         throw {

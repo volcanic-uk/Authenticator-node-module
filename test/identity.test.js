@@ -48,11 +48,12 @@ describe('identity', () => {
     // validation
     it('should return an object when the token is valid with the info related to it', async () => {
         let result = await identityValidation(token);
-        expect(result).to.be.an('object');
+        expect(result).to.be.a('boolean').that.equals(true);
     });
 
     it('should return a string as an error when the token is not valid', async () => {
-        await expect(identityValidation(token + 'testing purposes *&^%$')).to.be.rejectedWith('invalid token').and.be.instanceOf(Object).and.eventually.has.nested.property('message').that.equals('invalid token');
+        let reject = await identityValidation(token + 'testing purposes *&^%$');
+        await expect(reject).to.be.a('boolean').that.equals(false);
     });
 
     // logout
