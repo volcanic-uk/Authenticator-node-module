@@ -106,8 +106,7 @@ exports.identityValidation = async (token) => {
             validity: true,
             expiration_time: tokenInfo.response.exp,
             issued_at: tokenInfo.response.iat,
-            issuer: tokenInfo.response.iss,
-            jwt_id: tokenInfo.response.jti
+            issuer: tokenInfo.response.iss
         });
         return true;
     } catch (error) {
