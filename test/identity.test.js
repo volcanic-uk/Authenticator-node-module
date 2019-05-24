@@ -1,4 +1,8 @@
-const expect = require('chai').expect;
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
+const expect = chai.expect;
+chai.use(chaiAsPromised);
 const { identityLogin, identityRegisterAuth, identityValidation, identityLogout } = require('../v1/index');
 
 require('dotenv').config();
@@ -16,26 +20,18 @@ describe('identity', () => {
         expect(identity).to.be.an('object');
     });
 
-    it('should return a string if the name added already exists', async () => {
-        try {
-            await identityRegisterAuth(identity.name);
-        } catch (error) {
-            expect(error).to.be.a('string');
-        }
+    it('should be rejected if it is a duplicate entry', async () => {
+        await expect(identityRegisterAuth(identity.name)).to.be.rejectedWith(`Duplicate entry ${identity.name}`).and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1003);
     });
 
     // register with given password
     it('should return a result ok and identity params as an object containing: password provided by the user, name, and an id', async () => {
-        identity = await identityRegisterAuth(tmpIdentityName+1, tmpIdentityPassword);
+        identity = await identityRegisterAuth(tmpIdentityName + 1, tmpIdentityPassword);
         expect(identity).to.be.an('object');
     });
 
     it('should return a string if the name added already exists', async () => {
-        try {
-            await identityRegisterAuth(identity.name, identity.password);
-        } catch (error) {
-            expect(error).to.be.a('string');
-        }
+        await expect(identityRegisterAuth(identity.name)).to.be.rejectedWith(`Duplicate entry ${identity.name}`).and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1003);
     });
 
     // login
@@ -46,26 +42,18 @@ describe('identity', () => {
     });
 
     it('should on login return a string if the credentials were wrong, containing a bad request', async () => {
-        try {
-            await identityLogin(identity.name, identity.secret + 'testing purposes *&^%$');
-        } catch (error) {
-            expect(error).to.be.a('string');
-        }
+        await expect(identityLogin(identity.name, identity.secret + 'testing purposes *&^%$')).to.be.rejectedWith('invalid identity name or secret').and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1001);
     });
-
 
     // validation
     it('should return an object when the token is valid with the info related to it', async () => {
         let result = await identityValidation(token);
-        expect(result).to.be.an('object');
+        expect(result).to.be.a('boolean').that.equals(true);
     });
 
     it('should return a string as an error when the token is not valid', async () => {
-        try {
-            await identityValidation(token + 'testing purposes *&^%$');
-        } catch (error) {
-            expect(error).to.be.a('string');
-        }
+        let reject = await identityValidation(token + 'testing purposes *&^%$');
+        await expect(reject).to.be.a('boolean').that.equals(false);
     });
 
     // logout
@@ -75,11 +63,8 @@ describe('identity', () => {
     });
 
     it('should return a string when the token is not valid or already been blacklisted', async () => {
-        try {
-            await identityLogout(token + 'testing purposes *&^%$');
-        } catch (error) {
-            expect(error).to.be.a('string');
-        }
+        await expect(identityLogout(token + 'testing purposes *&^%$')).to.be.rejectedWith('invalid token').and.be.instanceOf(Object).and.eventually.has.nested.property('message').that.equals('invalid token');
+        await expect(identityLogout(token)).to.be.rejectedWith('Token marked as blacklist and can not be used anymore').and.be.instanceOf(Object).and.eventually.has.nested.property('message').that.equals('Token marked as blacklist and can not be used anymore');
     });
 
 });

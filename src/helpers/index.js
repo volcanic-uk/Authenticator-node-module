@@ -1,6 +1,7 @@
 // Third party modules includes here:
 const axios = require('axios');
 const envVars = require('../authenticator/v1/config');
+const envConfigs = require('../../config');
 
 /**
  * 
@@ -13,8 +14,8 @@ const envVars = require('../authenticator/v1/config');
  * @param {object} data the data needed when passing a request like the name or password
  */
 
-// defint the custom fetch method as an async function
-const customFetch = async (methodType = 'get', path, headers, data) => {
+// define the custom fetch method as an async function
+exports.customFetch = async (methodType = 'get', path, headers, data) => {
     try {
         let response = await axios({
             method: methodType,
@@ -33,6 +34,10 @@ const customFetch = async (methodType = 'get', path, headers, data) => {
     }
 };
 
-module.exports = {
-    customFetch
+exports.logInfo = (data) => {
+    if (envConfigs.logging.logs === 'true') {
+        /* eslint-disable no-console */
+        console.log(data);
+        /* eslint-enable no-console */
+    }
 };
