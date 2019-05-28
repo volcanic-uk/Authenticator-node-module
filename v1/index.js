@@ -19,15 +19,46 @@
 // local dependencies & modules call 
 
 const { identityLogin, identityRegister, identityValidation, identityLogout } = require('../src/authenticator/v1/identity');
+const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
-const identityRegisterAuth = async (name, password=null) => {
+const identityRegisterAuth = async (name, password = null) => {
     return await identityRegister(name, password, await generateToken());
 };
 
+const createPrincipalAuth = async (name, dataset_id) => {
+    return await createNewPrincipal(name, dataset_id, await generateToken());
+};
+
+const deletePrincipalAuth = async (principalId) => {
+    return await deletePrincipal(principalId, await generateToken());
+};
+
+const readPrincipalAuth = async (principal_id) => {
+    return await readPrincipal(principal_id, await generateToken());
+};
+
+const updatePrincipalAuth = async (active, principal_id) => {
+    return await updatePrincipal(active, principal_id, await generateToken());
+};
+
 module.exports = {
-    identityLogin,
-    identityRegisterAuth,
-    identityValidation,
-    identityLogout
+    identity: {
+        identityLogin,
+        identityRegisterAuth,
+        identityValidation,
+        identityLogout
+    },
+    principalWithAuth: {
+        createPrincipalAuth,
+        deletePrincipalAuth,
+        readPrincipalAuth,
+        updatePrincipalAuth
+    },
+    principal: {
+        createNewPrincipal,
+        deletePrincipal,
+        readPrincipal,
+        updatePrincipal
+    }
 };

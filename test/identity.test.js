@@ -3,7 +3,7 @@ const chaiAsPromised = require('chai-as-promised');
 
 const expect = chai.expect;
 chai.use(chaiAsPromised);
-const { identityLogin, identityRegisterAuth, identityValidation, identityLogout } = require('../v1/index');
+const { identityLogin, identityRegisterAuth, identityValidation, identityLogout } = require('../v1/index').identity;
 
 require('dotenv').config();
 

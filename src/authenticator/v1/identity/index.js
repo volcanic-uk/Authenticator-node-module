@@ -24,12 +24,11 @@ exports.identityLogin = async (identityName, identityPassword) => {
             secret: identityPassword
         };
 
-        let result = await customFetch(routes.login.method, routes.login.path, null, credentials);
+        let result = await customFetch(routes.identity.login.method, routes.identity.login.path, null, credentials);
         // cache the user's token
-        await addTokenToCache(result.response.id, result.response.token, thirdPartyTokenDuration);
+        await addTokenToCache(result.response.token, result.response.token, thirdPartyTokenDuration);
         return {
-            token: result.response.token,
-            id: result.response.id
+            token: result.response.token
         };
     } catch (error) {
         throw {
@@ -65,9 +64,9 @@ exports.identityRegister = async (identityName, identityPassword = null, token) 
             password: identityPassword
         };
         let header = {
-            Authorization: 'Bearer ' + token
+            Authorization: `Bearer ${token}`
         };
-        let user = await customFetch(routes.register.method, routes.register.path, header, credential);
+        let user = await customFetch(routes.identity.register.method, routes.identity.register.path, header, credential);
         return {
             id: user.response.id,
             name: user.response.name,
@@ -101,7 +100,7 @@ exports.identityValidation = async (token) => {
             token
         };
 
-        let tokenInfo = await customFetch(routes.validation.method, routes.validation.path, null, data);
+        let tokenInfo = await customFetch(routes.identity.validation.method, routes.identity.validation.path, null, data);
         logInfo({
             validity: true,
             expiration_time: tokenInfo.response.exp,
@@ -137,11 +136,11 @@ exports.identityLogout = async (token) => {
             Authorization: 'Bearer ' + token
         };
 
-        let logout = await customFetch(routes.logout.method, routes.logout.path, header, null);
+        let logout = await customFetch(routes.identity.logout.method, routes.identity.logout.path, header, null);
         return logout.response.message;
     } catch (error) {
         throw {
-            message: error.response.data.error.message
+            message: error.response.data.reason.message
         };
     }
 };
