@@ -22,8 +22,8 @@ const { identityLogin, identityRegister, identityValidation, identityLogout } = 
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
-const identityRegisterAuth = async (name, password = null) => {
-    return await identityRegister(name, password, await generateToken());
+const identityRegisterAuth = async (name, password = null, id) => {
+    return await identityRegister(name, password, id, await generateToken());
 };
 
 const createPrincipalAuth = async (name, dataset_id) => {

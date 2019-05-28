@@ -53,7 +53,7 @@ exports.identityLogin = async (identityName, identityPassword) => {
  * this function depends on the custom fetch fucntion in the helper folder.
  * 
  */
-exports.identityRegister = async (identityName, identityPassword = null, token) => {
+exports.identityRegister = async (identityName, identityPassword = null, principalId, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
     try {
         if (!token) {
@@ -61,7 +61,8 @@ exports.identityRegister = async (identityName, identityPassword = null, token) 
         }
         let credential = {
             name: identityName,
-            password: identityPassword
+            password: identityPassword,
+            principal_id: principalId
         };
         let header = {
             Authorization: `Bearer ${token}`
