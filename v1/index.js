@@ -42,6 +42,7 @@ const updatePrincipalAuth = async (active, principal_id) => {
     return await updatePrincipal(active, principal_id, await generateToken());
 };
 
+
 module.exports = {
     identity: {
         identityLogin,

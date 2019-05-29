@@ -2,6 +2,7 @@
 const axios = require('axios');
 const envVars = require('../authenticator/v1/config');
 const envConfigs = require('../../config');
+const jwt = require('jsonwebtoken');
 
 /**
  * 
@@ -39,5 +40,20 @@ exports.logInfo = (data) => {
         /* eslint-disable no-console */
         console.log(data);
         /* eslint-enable no-console */
+    }
+};
+
+exports.decode = async (token) => {
+    try {
+        let decoded = jwt.decode(token, { complete: true });
+        let decodedResult = decoded.payload.sub.split('/');
+        return {
+            stack: decodedResult[2] || null,
+            dataset_id: decodedResult[3] || null,
+            principal: decodedResult[4] || null,
+            identity: decodedResult[5] || null
+        };
+    } catch (error) {
+        throw error;
     }
 };

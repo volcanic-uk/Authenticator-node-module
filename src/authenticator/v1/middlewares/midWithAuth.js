@@ -13,13 +13,13 @@ const envConfigs = require('../../../../config');
 exports.generateToken = async () => {
     const {
         auth,
-        cache
+        cache,
     } = envConfigs;
     let existingToken = await getTokenFromCache(auth.authIdentity);
 
     if (!existingToken || existingToken === null) {
         try {
-            let newToken = await identityLogin(auth.authIdentity, auth.authSecret);
+            let newToken = await identityLogin(auth.authIdentity, auth.authSecret, auth.authIssuer);
             existingToken = newToken.token;
             addTokenToCache(auth.authIdentity, existingToken, cache.moduleTokenDuration);
             return existingToken;

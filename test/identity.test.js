@@ -15,6 +15,7 @@ describe('identity', () => {
     let tmpIdentityPassword = 'Password' + Math.floor(Math.random() * 10000);
     let tempPrincipalName = 'Volcanic' + Math.floor(Math.random() * 10000);
     let tempPrincipalId = Math.floor(Math.random() * 10000);
+    let tempIssuer = 'node-module';
     let identity = null;
     let token = null;
     let id = null;
@@ -25,7 +26,7 @@ describe('identity', () => {
             await createNewPrincipal(tempPrincipalName, tempPrincipalId, 'asdasd');
             throw 'can not create principal with malformed or no token';
         } catch (e) {
-            expect(e.message).to.be.equal('jwt malformed');
+            expect(e.message).to.be.equal('Invalid JWT token');
         }
     });
 
@@ -59,7 +60,7 @@ describe('identity', () => {
             await readPrincipal(id, 'asddas');
             throw 'can not read principal with malformed or no token';
         } catch (e) {
-            expect(e.message).to.be.equals('jwt malformed');
+            expect(e.message).to.be.equals('Invalid JWT token');
         }
     });
 
@@ -73,7 +74,7 @@ describe('identity', () => {
             await updatePrincipal(1, id, 'asdasd');
             throw 'can not read principal with malformed or no token';
         } catch (e) {
-            expect(e.message).equals('jwt malformed');
+            expect(e.message).equals('Invalid JWT token');
         }
     });
 
@@ -105,7 +106,7 @@ describe('identity', () => {
             await deletePrincipal(id, 'asdasdasdasdsa');
             throw 'principal requested does not exist';
         } catch (e) {
-            expect(e.message).equals('jwt malformed');
+            expect(e.message).equals('Invalid JWT token');
         }
     });
 
@@ -135,13 +136,13 @@ describe('identity', () => {
 
     // login
     it('should return a token as an object type when login', async () => {
-        let result = await identityLogin(identity.name, identity.secret);
+        let result = await identityLogin(identity.name, identity.secret, tempIssuer);
         token = result.token;
         expect(result).to.be.an('object');
     });
 
     it('should on login return a string if the credentials were wrong, containing a bad request', async () => {
-        await expect(identityLogin(identity.name, identity.secret + 'testing purposes *&^%$')).to.be.rejectedWith('invalid identity name or secret').and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1001);
+        await expect(identityLogin(identity.name, identity.secret + 'testing purposes *&^%$', tempIssuer)).to.be.rejectedWith('invalid identity name or secret').and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1001);
     });
 
     // validation
@@ -162,7 +163,7 @@ describe('identity', () => {
     });
 
     it('should return a string when the token is not valid or already been blacklisted', async () => {
-        await expect(identityLogout(token + 'testing purposes *&^%$')).to.be.rejectedWith('invalid token').and.be.instanceOf(Object).and.eventually.has.nested.property('message').that.equals('invalid token');
+        await expect(identityLogout(token + 'testing purposes *&^%$')).to.be.rejectedWith('Invalid JWT token').and.be.instanceOf(Object).and.eventually.has.nested.property('message').that.equals('Invalid JWT token');
         await expect(identityLogout(token)).to.be.rejectedWith('Token marked as blacklist and can not be used anymore').and.be.instanceOf(Object).and.eventually.has.nested.property('message').that.equals('Token marked as blacklist and can not be used anymore');
     });
 

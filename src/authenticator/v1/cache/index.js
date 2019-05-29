@@ -1,4 +1,5 @@
 const cache = require('memory-cache');
+const config = require('../../../../config');
 
 /**
  * @function addTokenToCache this is an asynchronous function that accepts 3 parameters the key for the token, the value which is the token itself, and then
@@ -10,13 +11,15 @@ const cache = require('memory-cache');
  * @param duration ideally a number containing the duration in which the token should expire
  */
 
-exports.addTokenToCache = async (key, value, duration=60) => {
-    try {
-        let DurationInMillisecond = parseInt(duration) * 60 * 1000;
-        let cachedToken = await cache.put(key, value, DurationInMillisecond);
-        return cachedToken;
-    } catch (error) {
-        throw error;
+exports.addTokenToCache = async (key, value, duration = 60) => {
+    if (config.cache.enableCaching) {
+        try {
+            let DurationInMillisecond = parseInt(duration) * 60 * 1000;
+            let cachedToken = await cache.put(key, value, DurationInMillisecond);
+            return cachedToken;
+        } catch (error) {
+            throw error;
+        }
     }
 };
 

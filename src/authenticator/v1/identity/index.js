@@ -16,12 +16,13 @@ const envConfigs = require('../../../../config');
  * this function depends on the custom fetch fucntion in the helper folder.
  * 
  */
-exports.identityLogin = async (identityName, identityPassword) => {
+exports.identityLogin = async (identityName, identityPassword, issuer) => {
     const thirdPartyTokenDuration = envConfigs.cache.thirdPartyTokenDuration;
     try {
         let credentials = {
             name: identityName,
-            secret: identityPassword
+            secret: identityPassword,
+            issuer: issuer
         };
 
         let result = await customFetch(routes.identity.login.method, routes.identity.login.path, null, credentials);
