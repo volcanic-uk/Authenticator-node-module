@@ -22,8 +22,6 @@ const { identityLogin, identityRegister, remoteIdentityValidation, localIdentity
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
-const cache = require('memory-cache');
-
 const identityRegisterAuth = async (name, password = null, id) => {
     return await identityRegister(name, password, id, await generateToken());
 };
@@ -43,9 +41,6 @@ const readPrincipalAuth = async (principal_id) => {
 const updatePrincipalAuth = async (active, principal_id) => {
     return await updatePrincipal(active, principal_id, await generateToken());
 };
-
-identityLogin('volcanic', 'volcanic!123', 'dani');
-remoteIdentityValidation('eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjlmMzI2NTYxYzhjYzJiMjkyYTk3NDNjNDc4YmQzNDFlIn0.eyJleHAiOjE1NjAxNTUzMzAsInN1YiI6InVzZXI6Ly91bmRlZmluZWQvbnVsbC8xLzEiLCJuYmYiOjE1NTkyOTEzMzEsImlhdCI6MTU1OTI5MTMzMSwiaXNzIjoidW5kZWZpbmVkIn0.APzl-3ml2qQb3Z_gWlDawEcilae5ckr0IHyr7ubXEZG33SEjK3NNyyEMkdbJdZGFeugj3QEguk---9ifQUtoxaFlAb47pThGiY6OeIOTPvk3OQwMa5v0_yuB1e8jE5dkTwG9Wv-DnjJgXlLSilxyUI4m61v4c-1Mya1URBBNC0x2wTl9');
 
 module.exports = {
     identity: {

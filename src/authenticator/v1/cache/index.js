@@ -14,7 +14,6 @@ const config = require('../../../../config');
 exports.putToCache = async (key, value, duration = 60) => {
     if (config.cache.enableCaching) {
         try {
-            let x= 1;
             let DurationInMillisecond = parseInt(duration) * 60 * 1000;
             let cachedToken = await cache.put(key, value, DurationInMillisecond);
             return cachedToken;
