@@ -1,8 +1,9 @@
 // require the custom api fetch from the helpers module folder
-const { customFetch, logInfo } = require('../../../helpers/index');
+const { customFetch, logger } = require('../../../helpers/index');
 const routes = require('../config');
-const { addTokenToCache, getTokenFromCache } = require('../cache');
 const envConfigs = require('../../../../config');
+const jwt = require('jsonwebtoken');
+const { putToCache, getFromCache } = require('../cache');
 
 /**
  * 
@@ -27,7 +28,7 @@ exports.identityLogin = async (identityName, identityPassword, issuer) => {
 
         let result = await customFetch(routes.identity.login.method, routes.identity.login.path, null, credentials);
         // cache the user's token
-        await addTokenToCache(result.response.token, result.response.token, thirdPartyTokenDuration);
+        await putToCache(result.response.token, result.response.token, thirdPartyTokenDuration);
         return {
             token: result.response.token
         };
@@ -58,7 +59,7 @@ exports.identityRegister = async (identityName, identityPassword = null, princip
     const authIdentity = envConfigs.auth.authIdentity;
     try {
         if (!token) {
-            token = await getTokenFromCache(authIdentity);
+            token = await getFromCache(authIdentity);
         }
         let credential = {
             name: identityName,
@@ -96,14 +97,14 @@ exports.identityRegister = async (identityName, identityPassword = null, princip
  * 
  */
 
-exports.identityValidation = async (token) => {
+exports.remoteIdentityValidation = async (token) => {
     try {
         let data = {
             token
         };
 
         let tokenInfo = await customFetch(routes.identity.validation.method, routes.identity.validation.path, null, data);
-        logInfo({
+        logger({
             validity: true,
             expiration_time: tokenInfo.response.exp,
             issued_at: tokenInfo.response.iat,
@@ -112,11 +113,64 @@ exports.identityValidation = async (token) => {
         });
         return true;
     } catch (error) {
-        logInfo({
+        logger({
             validity: false,
             error: error.response.data.reason
         });
         return false;
+    }
+};
+
+exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
+    const thirdPartyTokenDuration = envConfigs.cache.thirdPartyTokenDuration;
+    let decodedToken = null;
+
+    if (headerToken === null || !headerToken) {
+        headerToken = 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjlmMzI2NTYxYzhjYzJiMjkyYTk3NDNjNDc4YmQzNDFlIn0.eyJleHAiOjE1NjAxNDM5ODIsInN1YiI6InVzZXI6Ly91bmRlZmluZWQvbnVsbC8xLzEiLCJuYmYiOjE1NTkyNzk5ODMsImlhdCI6MTU1OTI3OTk4MywiaXNzIjoidW5kZWZpbmVkIn0.AfWy7Ej_kUhMWmMdgfrpBhYhPst9KFAbAnfwdXzIeTU-Izn6q3PO4GLqdPPURP8b8ch1LUhRPRX1-IEy-NW6z81NAd4VVm9WY9u9bzqY8dQFxvo1W-hBkWGY-apHb9gNWWcqlUdry8XGmOtacG7Fb19fhDkyrJcQl07fb3UiJCr9c8qD';
+        //await getFromCache(headerToken);
+    }
+    let header = {
+        Authorization: headerToken
+    };
+
+    try {
+        let decode = jwt.decode(tokenToValidate, { complete: true });
+        if (decode) {
+            decodedToken = decode.header.kid;
+        } else {
+            logger('invalid token');
+            return false, 'invalid token';
+        }
+        let cache = await getFromCache(decodedToken);
+
+        if (!cache || cache === null) {
+            let pub = await customFetch(routes.key.getPublicKey.method, routes.key.getPublicKey.path(decodedToken), header, null).then((success) => {
+                return success.response.key.public_key;
+            }).catch((error) => {
+                throw error;
+            });
+            await putToCache(decodedToken, pub, thirdPartyTokenDuration);
+            let verify = await jwt.verify(tokenToValidate, pub);
+            logger({
+                result: verify, 
+                message: 'token is valid'
+            });
+            return true, 'token is valid';
+        } else {
+            let verify = await jwt.verify(tokenToValidate, cache);
+            logger({
+                result: verify, 
+                message: 'token is valid'
+            });
+            return true, 'token is valid';
+        }
+
+    } catch (e) {
+        logger({
+            internal_error: e, 
+            request_error: e.resonse.data
+        });
+        return false, 'invalid token';
     }
 };
 

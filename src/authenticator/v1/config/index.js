@@ -45,5 +45,13 @@ module.exports = {
     },
     env: {
         domain: envConfigs.server.domainName
+    },
+    key: {
+        getPublicKey :{
+            path: (kid) => {
+                return `/api/v1/key/${kid}`;
+            },
+            method: 'GET'
+        }
     }
 };

@@ -3,7 +3,7 @@ const chaiAsPromised = require('chai-as-promised');
 
 const expect = chai.expect;
 chai.use(chaiAsPromised);
-const { identityLogin, identityRegisterAuth, identityValidation, identityLogout } = require('../v1/index').identity;
+const { identityLogin, identityRegisterAuth, remoteIdentityValidation, identityLogout } = require('../v1/index').identity;
 const { createPrincipalAuth, readPrincipalAuth, updatePrincipalAuth, deletePrincipalAuth } = require('../v1/index').principalWithAuth;
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../v1').principal;
 
@@ -147,12 +147,12 @@ describe('identity', () => {
 
     // validation
     it('should return an object when the token is valid with the info related to it', async () => {
-        let result = await identityValidation(token);
+        let result = await remoteIdentityValidation(token);
         expect(result).to.be.a('boolean').that.equals(true);
     });
 
     it('should return a string as an error when the token is not valid', async () => {
-        let reject = await identityValidation(token + 'testing purposes *&^%$');
+        let reject = await remoteIdentityValidation(token + 'testing purposes *&^%$');
         await expect(reject).to.be.a('boolean').that.equals(false);
     });
 

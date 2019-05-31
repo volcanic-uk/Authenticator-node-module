@@ -1,5 +1,5 @@
-const { addTokenToCache, getTokenFromCache } = require('../cache');
-const { identityLogin, identityValidation } = require('../identity');
+const { putToCache, getFromCache } = require('../cache');
+const { identityLogin, remoteIdentityValidation } = require('../identity');
 const envConfigs = require('../../../../config');
 
 /**
@@ -15,13 +15,12 @@ exports.generateToken = async () => {
         auth,
         cache,
     } = envConfigs;
-    let existingToken = await getTokenFromCache(auth.authIdentity);
-
+    let existingToken = await getFromCache(auth.authIdentity);
     if (!existingToken || existingToken === null) {
         try {
             let newToken = await identityLogin(auth.authIdentity, auth.authSecret, auth.authIssuer);
             existingToken = newToken.token;
-            addTokenToCache(auth.authIdentity, existingToken, cache.moduleTokenDuration);
+            putToCache(auth.authIdentity, existingToken, cache.moduleTokenDuration);
             return existingToken;
         }
         catch (e) {
@@ -29,7 +28,7 @@ exports.generateToken = async () => {
         }
     } else {
         try {
-            await identityValidation(existingToken);
+            await remoteIdentityValidation(existingToken);
         } catch (e) {
             existingToken = null;
             return this.generateToken();

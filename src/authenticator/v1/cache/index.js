@@ -11,9 +11,10 @@ const config = require('../../../../config');
  * @param duration ideally a number containing the duration in which the token should expire
  */
 
-exports.addTokenToCache = async (key, value, duration = 60) => {
+exports.putToCache = async (key, value, duration = 60) => {
     if (config.cache.enableCaching) {
         try {
+            let x= 1;
             let DurationInMillisecond = parseInt(duration) * 60 * 1000;
             let cachedToken = await cache.put(key, value, DurationInMillisecond);
             return cachedToken;
@@ -29,7 +30,7 @@ exports.addTokenToCache = async (key, value, duration = 60) => {
  * @param key ideally a string containing the info for the token to be addressed to retrieve
  */
 
-exports.getTokenFromCache = async (key) => {
+exports.getFromCache = async (key) => {
     try {
         let cachedToken = await cache.get(key);
         return cachedToken;

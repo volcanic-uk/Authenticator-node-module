@@ -35,7 +35,7 @@ exports.customFetch = async (methodType = 'get', path, headers, data) => {
     }
 };
 
-exports.logInfo = (data) => {
+exports.logger = (data) => {
     if (envConfigs.logging.logs === 'true') {
         /* eslint-disable no-console */
         console.log(data);
