@@ -107,13 +107,15 @@ exports.identityValidation = async (token) => {
             validity: true,
             expiration_time: tokenInfo.response.exp,
             issued_at: tokenInfo.response.iat,
-            issuer: tokenInfo.response.iss
+            issuer: tokenInfo.response.iss,
+            not_before: tokenInfo.response.nbf,
+            subject: tokenInfo.response.sub
         });
         return true;
     } catch (error) {
         logInfo({
             validity: false,
-            error: error.response.data.reason.message
+            error: error.response.data.reason
         });
         return false;
     }
