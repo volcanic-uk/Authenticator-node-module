@@ -126,12 +126,13 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
     let decodedToken = null;
 
     if (headerToken === null || !headerToken) {
-        headerToken = 'Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjlmMzI2NTYxYzhjYzJiMjkyYTk3NDNjNDc4YmQzNDFlIn0.eyJleHAiOjE1NjAxNDM5ODIsInN1YiI6InVzZXI6Ly91bmRlZmluZWQvbnVsbC8xLzEiLCJuYmYiOjE1NTkyNzk5ODMsImlhdCI6MTU1OTI3OTk4MywiaXNzIjoidW5kZWZpbmVkIn0.AfWy7Ej_kUhMWmMdgfrpBhYhPst9KFAbAnfwdXzIeTU-Izn6q3PO4GLqdPPURP8b8ch1LUhRPRX1-IEy-NW6z81NAd4VVm9WY9u9bzqY8dQFxvo1W-hBkWGY-apHb9gNWWcqlUdry8XGmOtacG7Fb19fhDkyrJcQl07fb3UiJCr9c8qD';
-        //await getFromCache(headerToken);
+        await getFromCache(headerToken);
     }
     let header = {
-        Authorization: headerToken
+        Authorization: `Bearer ${headerToken}`
     };
+
+    console.log(headerToken);
 
     try {
         let decode = jwt.decode(tokenToValidate, { complete: true });
@@ -168,7 +169,7 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
     } catch (e) {
         logger({
             internal_error: e, 
-            request_error: e.resonse.data
+            request_error: e.resonse
         });
         return false, 'invalid token';
     }

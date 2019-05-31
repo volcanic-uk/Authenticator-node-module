@@ -42,12 +42,16 @@ const updatePrincipalAuth = async (active, principal_id) => {
     return await updatePrincipal(active, principal_id, await generateToken());
 };
 
+const localValidationAuth = async (tokenToValidate) => {
+    return await localIdentityValidation(tokenToValidate, await generateToken());
+};
+
 module.exports = {
     identity: {
         identityLogin,
         identityRegisterAuth,
         remoteIdentityValidation,
-        localIdentityValidation,
+        localValidationAuth,
         identityLogout,
     },
     principalWithAuth: {
