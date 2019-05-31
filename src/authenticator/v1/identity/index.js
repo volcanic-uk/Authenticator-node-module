@@ -138,7 +138,7 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
             decodedToken = decode.header.kid;
         } else {
             logger('invalid token');
-            return false, 'invalid token';
+            return false;
         }
         let cache = await getFromCache(decodedToken);
 
@@ -154,14 +154,14 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
                 result: verify, 
                 message: 'token is valid'
             });
-            return true, 'token is valid';
+            return true;
         } else {
             let verify = await jwt.verify(tokenToValidate, cache);
             logger({
                 result: verify, 
                 message: 'token is valid'
             });
-            return true, 'token is valid';
+            return true;
         }
 
     } catch (e) {
@@ -169,7 +169,7 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
             internal_error: e, 
             request_error: e.resonse
         });
-        return false, 'invalid token';
+        return false;
     }
 };
 
