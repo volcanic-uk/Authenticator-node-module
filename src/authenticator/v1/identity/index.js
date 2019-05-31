@@ -132,8 +132,6 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
         Authorization: `Bearer ${headerToken}`
     };
 
-    console.log(headerToken);
-
     try {
         let decode = jwt.decode(tokenToValidate, { complete: true });
         if (decode) {
