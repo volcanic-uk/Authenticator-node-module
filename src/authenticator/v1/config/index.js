@@ -20,7 +20,7 @@ module.exports = {
         }
     },
     principal: {
-        create :{
+        create: {
             path: '/api/v1/principal',
             method: 'POST'
         },
@@ -39,6 +39,30 @@ module.exports = {
         delete: {
             path: (prinicpalID) => {
                 return `/api/v1/principal/delete/${prinicpalID}`;
+            },
+            method: 'POST'
+        }
+    },
+    permissions: {
+        create: {
+            path: '/api/v1/permission',
+            method: 'POST'
+        },
+        read: {
+            path: (permission_id) => {
+                return `/api/v1/permission/${permission_id}`;
+            },
+            method: 'GET'
+        },
+        update: {
+            path: (permission_id) => {
+                return `/api/v1/permission/update/${permission_id}`;
+            },
+            method: 'POST'
+        },
+        delete: {
+            path: (permission_id) => {
+                return `/api/v1/permission/delete/${permission_id}`;
             },
             method: 'POST'
         }

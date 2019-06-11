@@ -20,11 +20,15 @@
 
 const { identityLogin, identityRegister, remoteIdentityValidation, localIdentityValidation, identityLogout } = require('../src/authenticator/v1/identity');
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
+const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
 const identityRegisterAuth = async (name, password = null, id) => {
     return await identityRegister(name, password, id, await generateToken());
 };
+
+
+// principal authorised functions
 
 const createPrincipalAuth = async (name, dataset_id) => {
     return await createNewPrincipal(name, dataset_id, await generateToken());
@@ -42,6 +46,24 @@ const updatePrincipalAuth = async (active, principal_id) => {
     return await updatePrincipal(active, principal_id, await generateToken());
 };
 
+// permissions authorisation functions
+const createPermissionAuth = async (name, creator_id) => {
+    return await createPermission(name, creator_id, await generateToken());
+};
+
+const readPermissionAuth = async (id) => {
+    return await readPermission(id, await generateToken());
+};
+
+const updatePermissionAuth = async (id, name) => {
+    return await updatePermission(id, name, await generateToken());
+};
+
+const deletePermissionAuth = async (id) => {
+    return await deletePermission(id, await generateToken());
+};
+
+//token validation
 const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
@@ -65,5 +87,11 @@ module.exports = {
         deletePrincipal,
         readPrincipal,
         updatePrincipal
+    },
+    permissions: {
+        createPermissionAuth,
+        readPermissionAuth,
+        updatePermissionAuth,
+        deletePermissionAuth
     }
 };

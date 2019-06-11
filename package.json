@@ -4,7 +4,7 @@
   "description": "a node module meant to authorize communication to various volcanic services",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test --exit",
+    "test": "mocha test --cc --exit",
     "lint": "eslint ."
   },
   "repository": {
