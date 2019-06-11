@@ -12,10 +12,10 @@ require('dotenv').config();
 describe('identity', () => {
 
     let tmpIdentityName = 'Volcanic' + Math.floor(Math.random() * 10000);
+    let tmpArray = [tmpIdentityName];
     let tmpIdentityPassword = 'Password' + Math.floor(Math.random() * 10000);
     let tempPrincipalName = 'Volcanic' + Math.floor(Math.random() * 10000);
     let tempPrincipalId = Math.floor(Math.random() * 10000);
-    let tempIssuer = 'node-module';
     let identity = null;
     let token = null;
     let id = null;
@@ -110,7 +110,7 @@ describe('identity', () => {
         }
     });
 
-    it('should return a message type of string sayng that the princiap is gone if they exist', async () => {
+    it('should return a message type of string sayng that the principal is gone if they exist', async () => {
         expect(deletePrincipalAuth(id)).to.be.instanceOf(Object).and.eventually.have.property('message', 'Successfully deleted');
     });
 
@@ -126,8 +126,8 @@ describe('identity', () => {
 
     // register with given password
     it('should return a result ok and identity params as an object containing: password provided by the user, name, and an id', async () => {
-        identity = await identityRegisterAuth(tmpIdentityName + 1, tmpIdentityPassword, id);
-        expect(identity).to.be.an('object');
+        let identitys = await identityRegisterAuth(tmpIdentityName + 1, tmpIdentityPassword, id);
+        expect(identitys).to.be.an('object');
     });
 
     it('should return a string if the name added already exists', async () => {
@@ -136,13 +136,13 @@ describe('identity', () => {
 
     // login
     it('should return a token as an object type when login', async () => {
-        let result = await identityLogin(identity.name, identity.secret, tempIssuer);
+        let result = await identityLogin(identity.name, identity.secret, tmpArray);
         token = result.token;
         expect(result).to.be.an('object');
     });
 
     it('should on login return a string if the credentials were wrong, containing a bad request', async () => {
-        await expect(identityLogin(identity.name, identity.secret + 'testing purposes *&^%$', tempIssuer)).to.be.rejectedWith('invalid identity name or secret').and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1001);
+        await expect(identityLogin(identity.name, identity.secret + 'testing purposes *&^%$', tmpArray)).to.be.rejectedWith('invalid identity name or secret').and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1001);
     });
 
     // validation

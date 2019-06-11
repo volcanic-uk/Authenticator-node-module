@@ -18,7 +18,7 @@ exports.generateToken = async () => {
     let existingToken = await getFromCache(auth.authIdentity);
     if (!existingToken || existingToken === null) {
         try {
-            let newToken = await identityLogin(auth.authIdentity, auth.authSecret, auth.authIssuer);
+            let newToken = await identityLogin(auth.authIdentity, auth.authSecret, [auth.audience]);
             existingToken = newToken.token;
             putToCache(auth.authIdentity, existingToken, cache.moduleTokenDuration);
             return existingToken;
