@@ -229,7 +229,6 @@ describe('identity', () => {
             await updatePermissionAuth(tmpCreatorId, 'whatevre');
             throw 'permissions does not exist';
         } catch (e) {
-            console.log(e);
             expect(e.message).equals('Permission does not exist');
         }
     });

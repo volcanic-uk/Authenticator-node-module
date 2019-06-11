@@ -40,7 +40,6 @@ exports.createPermission = async (name, creator_id, token) => {
         };
 
     } catch (error) {
-        console.log(error.response.data.reason);
         throw {
             result: error.response.data.result,
             message: error.response.data.reason.message,

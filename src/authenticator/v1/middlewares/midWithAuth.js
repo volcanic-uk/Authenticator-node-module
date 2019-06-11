@@ -21,7 +21,6 @@ exports.generateToken = async () => {
             let newToken = await identityLogin(auth.authIdentity, auth.authSecret, [auth.audience]);
             existingToken = newToken.token;
             putToCache(auth.authIdentity, existingToken, cache.moduleTokenDuration);
-            console.log('working fine');
             return existingToken;
         }
         catch (e) {
