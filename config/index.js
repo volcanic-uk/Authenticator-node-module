@@ -13,7 +13,6 @@ module.exports = {
     auth: {
         authIdentity: process.env.IDENTITY,
         authSecret: process.env.SECRET,
-        authIssuer: process.env.ISSUER,
         audience: process.env.DEFAULT_AUDIENCE
     },
     logging: {
