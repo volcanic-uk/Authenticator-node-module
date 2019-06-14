@@ -23,7 +23,7 @@ exports.identityLogin = async (identityName, identityPassword, audience) => {
         let credentials = {
             name: identityName,
             secret: identityPassword,
-            audience: audience
+            audience: [`${audience}`]
         };
 
         let result = await customFetch(routes.identity.login.method, routes.identity.login.path, null, credentials);

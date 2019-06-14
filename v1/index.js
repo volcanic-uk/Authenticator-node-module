@@ -21,6 +21,7 @@
 const { identityLogin, identityRegister, remoteIdentityValidation, localIdentityValidation, identityLogout } = require('../src/authenticator/v1/identity');
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions');
+const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
 const identityRegisterAuth = async (name, password = null, id) => {
@@ -63,10 +64,30 @@ const deletePermissionAuth = async (id) => {
     return await deletePermission(id, await generateToken());
 };
 
+// groups authorization functions
+
+const craeteGroupAuth = async (name, creator_id) => {
+    return await createGroup(name, creator_id, await generateToken());
+};
+
+const readGroupAuth = async (group_id) => {
+    return await readGroup(group_id, await generateToken());
+};
+
+const updateGroupAuth = async (group_id, name) => {
+    return await updateGroup(group_id, name, await generateToken());
+};
+
+const deleteGroupAuth = async (group_id) => {
+    return await deleteGroup(group_id, await generateToken());
+};
+
 //token validation
 const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
+
+updateGroupAuth(1, 'Derrek');
 
 module.exports = {
     identity: {
@@ -93,5 +114,11 @@ module.exports = {
         readPermissionAuth,
         updatePermissionAuth,
         deletePermissionAuth
+    },
+    groups: {
+        craeteGroupAuth,
+        readGroupAuth,
+        updateGroupAuth,
+        deleteGroupAuth
     }
 };

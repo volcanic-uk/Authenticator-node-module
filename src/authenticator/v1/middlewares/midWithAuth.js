@@ -24,6 +24,7 @@ exports.generateToken = async () => {
             return existingToken;
         }
         catch (e) {
+            console.log('midauth', e);
             throw e;
         }
     } else {

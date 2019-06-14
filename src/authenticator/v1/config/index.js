@@ -67,6 +67,30 @@ module.exports = {
             method: 'POST'
         }
     },
+    groups: {
+        create: {
+            path: '/api/v1/group',
+            method: 'POST'
+        },
+        read: {
+            path: (group_id) => {
+                return `/api/v1/group/${group_id}`;
+            },
+            method: 'GET'
+        },
+        update: {
+            path: (group_id) => {
+                return `/api/v1/group/update/${group_id}`;
+            },
+            method: 'POST'
+        },
+        delete: {
+            path: (group_id) => {
+                return `/api/v1/group/delete/${group_id}`;
+            },
+            method: 'POST'
+        }
+    },
     env: {
         domain: envConfigs.server.domainName
     },
