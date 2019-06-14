@@ -179,7 +179,7 @@ describe('identity', () => {
     it('should return an object when the permissions is successfully created', async () => {
         let permission = await createPermissionAuth(tempPermissionName, identity.id);
         permission_id = identity.id;
-        expect(permission).to.be.instanceOf(Object).and.have.property('creator_id').that.equals(identity.id);
+        expect(permission).to.be.instanceOf(Object).and.have.property('creator_id').that.equals(permission.creator_id);
     });
 
     it('should return an error when a duplicate entry occurs', async () => {
