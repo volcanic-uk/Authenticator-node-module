@@ -91,6 +91,30 @@ module.exports = {
             method: 'POST'
         }
     },
+    services: {
+        create: {
+            path: '/api/v1/service',
+            method: 'POST'
+        },
+        read: {
+            path: (service_id) => {
+                return `/api/v1/service/${service_id}`;
+            },
+            method: 'GET'
+        },
+        update: {
+            path: (service_id) => {
+                return `/api/v1/service/update/${service_id}`;
+            },
+            method: 'POST'
+        },
+        delete: {
+            path: (service_id) => {
+                return `/api/v1/service/${service_id}`;
+            },
+            method: 'DELETE'
+        }
+    },
     env: {
         domain: envConfigs.server.domainName
     },

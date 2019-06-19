@@ -13,7 +13,7 @@ const { getFromCache } = require('../cache');
  * 
  */
 
-exports.createGroup = async (name, token) => {
+exports.createService = async (name, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
 
     if (!token) {
@@ -31,7 +31,7 @@ exports.createGroup = async (name, token) => {
 
     try {
 
-        let create = await customFetch(routes.groups.create.method, routes.groups.create.path, header, credentials);
+        let create = await customFetch(routes.services.create.method, routes.services.create.path, header, credentials);
         return {
             name: create.response.name,
             creator_id: create.response.creator_id,
@@ -55,12 +55,12 @@ exports.createGroup = async (name, token) => {
  * 
  * @function readGroup a function made to fetch a permission data from the auth server, which takes 1 parameter
  * 
- * @param group_id the permission id desired to get its info
+ * @param service_id the permission id desired to get its info
  * @param token is the token needed to pass to the header to authorize the action which is not required in this case
  * 
  */
 
-exports.readGroup = async (group_id, token) => {
+exports.readService = async (service_id, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
     try {
         if (!token) {
@@ -69,7 +69,7 @@ exports.readGroup = async (group_id, token) => {
         let header = {
             Authorization: `Bearer ${token}`
         };
-        let read = await customFetch(routes.groups.read.method, routes.groups.read.path(group_id), header);
+        let read = await customFetch(routes.services.read.method, routes.services.read.path(service_id), header);
         return {
             id: read.response.id,
             name: read.response.name,
@@ -94,12 +94,12 @@ exports.readGroup = async (group_id, token) => {
  * @function updateGroup a function to update the name of a permission in the authenticator API which takes 2 primary params
  * 
  * @param name a string which represents the permission name update desired
- * @param group_id a number that represents the permission id needed to update
+ * @param service_id a number that represents the permission id needed to update
  * @param token which is the authorization token needed in the header to authorize the action
  * 
  */
 
-exports.updateGroup = async (group_id, name, token) => {
+exports.updateService = async (service_id, name, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
 
     if (!token) {
@@ -114,7 +114,7 @@ exports.updateGroup = async (group_id, name, token) => {
     };
 
     try {
-        let update = await customFetch(routes.groups.update.method, routes.groups.update.path(group_id), header, data);
+        let update = await customFetch(routes.services.update.method, routes.services.update.path(service_id), header, data);
         return {
             id: update.response.id,
             name: update.response.name,
@@ -138,12 +138,12 @@ exports.updateGroup = async (group_id, name, token) => {
  * 
  * @function deleteGroup a function made to delete a certain permission from the authentication server which takes 1 primary param
  * 
- * @param group_id the id needed to delete a desired permission from the auth API
+ * @param service_id the id needed to delete a desired permission from the auth API
  * @param token hich is the authorization token needed in the header to authorize the action
  * 
  */
 
-exports.deleteGroup = async (group_id, token) => {
+exports.deleteService = async (service_id, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
 
     if (!token) {
@@ -154,7 +154,7 @@ exports.deleteGroup = async (group_id, token) => {
     };
 
     try {
-        let deleteIt = await customFetch(routes.groups.delete.method, routes.groups.delete.path(group_id), header);
+        let deleteIt = await customFetch(routes.services.delete.method, routes.services.delete.path(service_id), header);
         return {
             message: deleteIt.response.message
         };
@@ -162,7 +162,7 @@ exports.deleteGroup = async (group_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
+            type: error.response.data.reason.type,
             message: error.response.data.reason.message,
             code: error.response.data.reason.errorCode
         };

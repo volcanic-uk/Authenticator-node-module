@@ -22,6 +22,7 @@ const { identityLogin, identityRegister, remoteIdentityValidation, localIdentity
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions');
 const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
+const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
 const identityRegisterAuth = async (name, password = null, id) => {
@@ -82,12 +83,30 @@ const deleteGroupAuth = async (group_id) => {
     return await deleteGroup(group_id, await generateToken());
 };
 
+// services authorization functions
+
+const craeteServiceAuth = async (name) => {
+    return await createService(name, await generateToken());
+};
+
+const readServiceAuth = async (service_id) => {
+    return await readService(service_id, await generateToken());
+};
+
+const updateServiceAuth = async (service_id, name) => {
+    return await updateService(service_id, name, await generateToken());
+};
+
+const deleteServiceAuth = async (service_id) => {
+    return await deleteService(service_id, await generateToken());
+};
+
 //token validation
 const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
 
-updateGroupAuth(1, 'Derrek');
+deleteServiceAuth(1).then(s=>console.log('sucess', s)).catch(e=>console.log('error', e));
 
 module.exports = {
     identity: {
@@ -120,5 +139,11 @@ module.exports = {
         readGroupAuth,
         updateGroupAuth,
         deleteGroupAuth
+    },
+    services: {
+        craeteServiceAuth,
+        readServiceAuth,
+        updateServiceAuth,
+        deleteServiceAuth
     }
 };

@@ -8,6 +8,10 @@ const { createPrincipalAuth, readPrincipalAuth, updatePrincipalAuth, deletePrinc
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../v1').principal;
 const { createPermissionAuth, readPermissionAuth, updatePermissionAuth, deletePermissionAuth } = require('../v1/index').permissions;
 const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions/index');
+const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
+const { craeteGroupAuth, readGroupAuth, updateGroupAuth, deleteGroupAuth } = require('../v1/index').groups;
+const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
+const { craeteServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').services;
 
 describe('identity', () => {
 
@@ -22,6 +26,10 @@ describe('identity', () => {
     let token = null;
     let principal_id = null;
     let permission_id = null;
+    let tmpGroupName = 'Volcanic' + Math.floor(Math.random() * 10000);
+    let group_id = null;
+    let tmpServiceName = 'Volcanic' + Math.floor(Math.random() * 10000);
+    let service_id = null;
 
     // principal creation
     it('should return an error if the Authorization header is missing or token is malformed', async () => {
@@ -83,7 +91,7 @@ describe('identity', () => {
 
     it('should return an error if the principal does not exist', async () => {
         try {
-            await updatePrincipalAuth(1, principal_id+8686896668);
+            await updatePrincipalAuth(1, principal_id + 8686896668);
             throw 'principal does not exist';
         } catch (e) {
             expect(e.message).equals('Principal does not exist');
@@ -97,7 +105,7 @@ describe('identity', () => {
     // delete principal
     it('should return an error if the principal does not exist', async () => {
         try {
-            await deletePrincipalAuth(principal_id+868689666813144);
+            await deletePrincipalAuth(principal_id + 868689666813144);
             throw 'principal requested does not exist';
         } catch (e) {
             expect(e.message).equals('Principal does not exist');
@@ -194,7 +202,7 @@ describe('identity', () => {
     // read permissions
     it('should return an error if the permission does not exist', async () => {
         try {
-            await readPermissionAuth(permission_id+'adasdaefb3y4yy');
+            await readPermissionAuth(permission_id + 'adasdaefb3y4yy');
             throw 'can not retrieve a permissions that does not exist';
         } catch (e) {
             expect(e.message).equals('Permission does not exist');
@@ -240,7 +248,7 @@ describe('identity', () => {
     // delete permissions
     it('should return an error if the permissions does not exist', async () => {
         try {
-            await deletePermissionAuth(principal_id+868689666813144);
+            await deletePermissionAuth(principal_id + 868689666813144);
             throw 'permissions requested does not exist';
         } catch (e) {
             expect(e.message).equals('Permission does not exist');
@@ -260,4 +268,215 @@ describe('identity', () => {
         expect(deletePermissionAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.property('message', 'Successfully deleted');
     });
 
+
+    // groups tests
+
+    // create group
+    it('should return an error on group create, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await createGroup(tmpGroupName, 'asdasd');
+            throw 'can not create group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the group is successfully created', async () => {
+        let group = await craeteGroupAuth(tmpGroupName);
+        group_id = group.id;
+        expect(group).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should return an error when a duplicate entry occurs', async () => {
+        try {
+            await craeteGroupAuth(tmpGroupName);
+            throw 'can not craete a duplicate group name';
+        } catch (e) {
+            expect(e.message).equals(`Duplicate entry ${tmpGroupName}`);
+        }
+    });
+
+    // read a group
+    it('should return an error on group read, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await readGroup(tmpGroupName, 'asdasd');
+            throw 'can not read group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the group is successfully fetched', async () => {
+        let group = await readGroupAuth(group_id);
+        expect(group).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should return an error when a group id does not exist', async () => {
+        try {
+            await readGroupAuth('testingPurposes++++++++');
+            throw 'this group id does not exist';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
+    });
+
+    // group update
+    it('should return an error on group update, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await updateGroup(group_id, 'the new name', 'asdasd');
+            throw 'can not read group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the group is successfully updated', async () => {
+        let group = await updateGroupAuth(group_id, tmpGroupName);
+        expect(group).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should return an error when a group id does not exist on update', async () => {
+        try {
+            await updateGroupAuth('testingPurposes++++++++', tmpGroupName);
+            throw 'this group id does not exist';
+        } catch (e) {
+            expect(e.message).equals('Permission group does not exist');
+        }
+    });
+
+    //delete group 
+    it('should return an error on group delete, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await deleteGroup(group_id, 'asdasd');
+            throw 'can not read group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the group is successfully deleted', async () => {
+        let group = await deleteGroupAuth(group_id);
+        expect(group).to.be.instanceOf(Object).and.have.property('message').that.equals('Successfully deleted');
+    });
+
+    it('should return an error when a group id does not exist on delete', async () => {
+        try {
+            await deleteGroupAuth('testingPurposes++++++++', tmpGroupName);
+            throw 'this group id does not exist';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
+    });
+
+    // services tests
+
+    // create services
+    it('should return an error on service create, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await createService(tmpServiceName, 'asdasd');
+            throw 'can not create group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the group is successfully created', async () => {
+        console.log(tmpServiceName);
+        let service = await craeteServiceAuth(tmpServiceName);
+        service_id = service.id;
+        expect(service).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should return an error when a duplicate entry occurs on service create', async () => {
+        try {
+            console.log(tmpServiceName);
+            await craeteServiceAuth(tmpServiceName);
+            throw 'can not craete a duplicate service name';
+        } catch (e) {
+            console.log(e);
+            expect(e.message).equals(`Duplicate entry ${tmpServiceName}`);
+        }
+    });
+
+    // create services
+    it('should return an error on service create, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await readService(service_id, 'asdasd');
+            throw 'can not create group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the group is successfully read', async () => {
+        let service = await readServiceAuth(service_id);
+        expect(service).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should return an error when a service does not exist read', async () => {
+        try {
+            await readServiceAuth('some wierd id for testing purposes');
+            throw 'can not craete a duplicate service name';
+        } catch (e) {
+            expect(e.message).equals('Service does not exist');
+        }
+    });
+
+
+    // update service
+    it('should return an error on service create, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await updateService(service_id, tmpServiceName + 'testing purposes++++++++', 'asdasd');
+            throw 'can not create group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the service is successfully udated', async () => {
+        let service = await updateServiceAuth(service_id, tmpServiceName + '123');
+        expect(service).to.be.instanceOf(Object).and.have.property('id').to.equal(service_id);
+    });
+
+    it('should return an error when a service does not exist on update', async () => {
+        try {
+            await await updateServiceAuth(service_id + '123123dkfjnkdjb488483', tmpServiceName);
+            throw 'service id does not exist';
+        } catch (e) {
+            expect(e.message).equals('Service does not exist');
+        }
+    });
+
+    // update service
+    it('should return an error on service delete, if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await deleteService(service_id, 'asdasd');
+            throw 'can not delete group with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the service is successfully delete', async () => {
+        let service = await deleteServiceAuth(service_id);
+        expect(service).to.be.instanceOf(Object).and.have.property('message').to.equal('Successfully deleted');
+    });
+
+    it('should return an object when the service is successfully delete', async () => {
+        try {
+            await deleteServiceAuth(service_id);
+            throw 'principal already deleted';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('should return an error when a service does not exist on delete', async () => {
+        try {
+            await await deleteServiceAuth(service_id + '123123dkfjnkdjb488483', tmpServiceName);
+            throw 'service id does not exist';
+        } catch (e) {
+            expect(e.message).equals('Service does not exist');
+        }
+    });
 });
