@@ -381,7 +381,6 @@ describe('identity', () => {
     });
 
     it('should return an object when the group is successfully created', async () => {
-        console.log(tmpServiceName);
         let service = await craeteServiceAuth(tmpServiceName);
         service_id = service.id;
         expect(service).to.be.instanceOf(Object).and.have.property('id');
@@ -389,11 +388,9 @@ describe('identity', () => {
 
     it('should return an error when a duplicate entry occurs on service create', async () => {
         try {
-            console.log(tmpServiceName);
             await craeteServiceAuth(tmpServiceName);
             throw 'can not craete a duplicate service name';
         } catch (e) {
-            console.log(e);
             expect(e.message).equals(`Duplicate entry ${tmpServiceName}`);
         }
     });

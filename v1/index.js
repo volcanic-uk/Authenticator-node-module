@@ -106,8 +106,6 @@ const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
 
-deleteServiceAuth(1).then(s=>console.log('sucess', s)).catch(e=>console.log('error', e));
-
 module.exports = {
     identity: {
         identityLogin,
