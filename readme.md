@@ -11,34 +11,34 @@ This node module is a utility used to request multiple functions and services fr
 
 ## Services Included:
   ###Identities:
-    1- register (name, principalId, password:optional): async function takes 2 main params username and principalId.
-    2- login (name, secret, tokenExpiryDate:optional, audience:[array]optional) async function that will issue a token with max validity of 1 hour by default, unless it has an expiry time provided which can not exceed 24 hours.
-    3- tokenLocalValidation (token) this async function will validate a given token locally by using the JWT npm package by returning true or false, just simply pass the token
-    4- remoteTokenValidaition (token) this async function will validate the token from the auth server and will also return true or false whether the token is valid or not
-    5- identityLogout/blacklistToken (token) async function which will blacklist the given token, and afterwards that token can never be used anymore
+      1- register (name, principalId, password:optional): async function takes 2 main params username and principalId.
+      2- login (name, secret, tokenExpiryDate:optional, audience:[array]optional) async function that will issue a token with max validity of 1 hour by default, unless it has an expiry time provided which can not exceed 24 hours.
+      3- tokenLocalValidation (token) this async function will validate a given token locally by using the JWT npm package by returning true or false, just simply pass the token
+      4- remoteTokenValidaition (token) this async function will validate the token from the auth server and will also return true or false whether the token is valid or not
+      5- identityLogout/blacklistToken (token) async function which will blacklist the given token, and afterwards that token can never be used anymore
   ###Principal full CRUD
-    1- createPrincipal (name, datasetId:optional) async function takes 1 main param as a string which represents the name of the principal needed to be created
-    2- readPrincipal (id) async function takes 1 param which is the id, then the fucntion will fetch the principal from the auth api, and show an object containing all the info related to that consultant
-    3- updatePrincipal(id, activeStatus) async function which takes 2 main params name, active status either 1 or 0, the function then will update the principal with the provided data 
-    4- deletePrincipal (id) async function which takes one main param the id of the desired principal to delete, the function then will return a success message 
+      1- createPrincipal (name, datasetId:optional) async function takes 1 main param as a string which represents the name of the principal needed to be created
+      2- readPrincipal (id) async function takes 1 param which is the id, then the fucntion will fetch the principal from the auth api, and show an object containing all the info related to that consultant
+      3- updatePrincipal(id, activeStatus) async function which takes 2 main params name, active status either 1 or 0, the function then will update the principal with the provided data 
+      4- deletePrincipal (id) async function which takes one main param the id of the desired principal to delete, the function then will return a success message 
   ###Permissions full CRUD
-    1- createPermission (name) async function takes 1 param as a string which represents the name of the permission needed to be created
-    2- readPermission (id) async function takes 1 param which is the id, then the fucntion will fetch the permission from the auth api, and show an object containing all the info related to that consultant
-    3- updatePermission(id, name) async function which takes 2 main params name, id the function then will update the principal with the provided data name for example
-    4- deletePermission (id) async function which takes one main param the id of the desired permission to delete, the function then will return a success message 
+      1- createPermission (name) async function takes 1 param as a string which represents the name of the permission needed to be created
+      2- readPermission (id) async function takes 1 param which is the id, then the fucntion will fetch the permission from the auth api, and show an object containing all the info related to that consultant
+      3- updatePermission(id, name) async function which takes 2 main params name, id the function then will update the principal with the provided data name for example
+      4- deletePermission (id) async function which takes one main param the id of the desired permission to delete, the function then will return a success message 
   ###Group full CRUD
-    1- createGroup (name) async function takes 1 param as a string which represents the name of the group needed to be created
-    2- readGroup (id) async function takes 1 param which is the id, then the fucntion will fetch the group from the auth api, and show an object containing all the info related to that consultant
-    3- updateGroup(id, name) async function which takes 2 main params name, id and an optional description, the function then will update the Group with the provided data name or description if present
-    4- deleteGroup (id) async function which takes one main param the id of the desired group to delete, the function then will return a success message 
+      1- createGroup (name) async function takes 1 param as a string which represents the name of the group needed to be created
+      2- readGroup (id) async function takes 1 param which is the id, then the fucntion will fetch the group from the auth api, and show an object containing all the info related to that consultant
+      3- updateGroup(id, name) async function which takes 2 main params name, id and an optional description, the function then will update the Group with the provided data name or description if present
+      4- deleteGroup (id) async function which takes one main param the id of the desired group to delete, the function then will return a success message 
   ###services full CRUD
-    1- createGroup (name) async function takes 1 param as a string which represents the name of the principal needed to be created
-    2- readPrincipal (id) async function takes 1 param which is the id, then the fucntion will fetch the principal from the auth api, and show an object containing all the info related to that consultant
-    3- updatePrincipal(id, name, description:optional) async function which takes 2 main params name, id and an optional description, the function then will update the principal with the provided data name or description if present
-    4- deletePrincipal (id) async function which takes one main param the id of the desired principal to delete, the function then will return a success message 
+      1- createGroup (name) async function takes 1 param as a string which represents the name of the principal needed to be created
+      2- readPrincipal (id) async function takes 1 param which is the id, then the fucntion will fetch the principal from the auth api, and show an object containing all the info related to that consultant
+      3- updatePrincipal(id, name, description:optional) async function which takes 2 main params name, id and an optional description, the function then will update the principal with the provided data name or description if present
+      4- deletePrincipal (id) async function which takes one main param the id of the desired principal to delete, the function then will return a success message 
   ### helper function and useful services
-  - in memory caching service, on login it will save the token in memory for later usage, to make the user logging and services usage much faster
-  - tokens decoding and subject claims retrieval 
-  - tokens generating middleware
+    - in memory caching service, on login it will save the token in memory for later usage, to make the user logging and services usage much faster
+    - tokens decoding and subject claims retrieval 
+    - tokens generating middleware
 
 for more information about the module and how to use it, checkout the example branch, it has an express server set up with full functionality.
