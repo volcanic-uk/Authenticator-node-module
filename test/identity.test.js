@@ -99,7 +99,7 @@ describe('identity', () => {
     });
 
     it('should return an object having the new upfated status of the principal if they exist', async () => {
-        expect(updatePrincipalAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
+        expect(updatePrincipalAuth(1 ,principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
     });
 
     // delete principal

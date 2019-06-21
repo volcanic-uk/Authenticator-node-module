@@ -29,7 +29,6 @@ const identityRegisterAuth = async (name, password = null, id) => {
     return await identityRegister(name, password, id, await generateToken());
 };
 
-
 // principal authorised functions
 
 const createPrincipalAuth = async (name, dataset_id) => {
@@ -105,6 +104,8 @@ const deleteServiceAuth = async (service_id) => {
 const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
+
+updatePrincipalAuth(1 ,2);
 
 module.exports = {
     identity: {
