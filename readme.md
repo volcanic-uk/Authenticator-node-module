@@ -1,13 +1,13 @@
 # Authenticator Node Module
 
-This node module is a utility used to request multiple functions and services from the authentication server on this repo: https://github.com/volcanic-uk/Authenticator
+This utility is used to request multiple functions and services from the authentication server on this repo: https://github.com/volcanic-uk/Authenticator
 
 ## How to Use:
-1- install the node module to your project by adding the git link to your package.json file into the dependecies field
-2- copy .env.example file to a new .env file in your main project directory, not the module itself
-3- fill in the required information about the server and services you need like the server route, token related info and such
-4- run npm i in your project directory from the terminal to install all dependencies 
-5- require the module and call the functions needed directly from v1, all the functions are structured into categories based on their role.
+- Install the node module to your project by adding the git link to your `package.json` file into the dependecies field.
+- Copy `.env.example` file to a new .env file in your main project directory, not the module itself
+- fill in the required information about the server and services you need like the server route, token related info and such.
+- Run `npm i` in your project directory from the terminal to install all dependencies.
+- Require the module and call the functions needed directly from v1, all the functions are structured into categories based on their role.
 
 ## Services Included:
 
