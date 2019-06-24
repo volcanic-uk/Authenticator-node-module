@@ -17,6 +17,7 @@ exports.generateToken = async () => {
     } = envConfigs;
     let existingToken = await getFromCache(auth.authIdentity);
     if (!existingToken || existingToken === null) {
+
         try {
             let newToken = await identityLogin(auth.authIdentity, auth.authSecret, [auth.audience]);
             existingToken = newToken.token;
@@ -29,6 +30,7 @@ exports.generateToken = async () => {
     } else {
         try {
             await remoteIdentityValidation(existingToken);
+            return existingToken;
         } catch (e) {
             existingToken = null;
             return this.generateToken();

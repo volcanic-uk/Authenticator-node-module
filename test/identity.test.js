@@ -12,6 +12,8 @@ const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/aut
 const { craeteGroupAuth, readGroupAuth, updateGroupAuth, deleteGroupAuth } = require('../v1/index').groups;
 const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
 const { craeteServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').services;
+const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
+const { createPrivilegeAuth, readPrivilegeAuth, updatePrivilegeAuth, deletePrivilegeAuth } = require('../v1/index').privilege;
 
 describe('identity', () => {
 
@@ -30,6 +32,7 @@ describe('identity', () => {
     let group_id = null;
     let tmpServiceName = 'Volcanic' + Math.floor(Math.random() * 10000);
     let service_id = null;
+    let privilegeId = null;
 
     // principal creation
     it('should return an error if the Authorization header is missing or token is malformed', async () => {
@@ -99,7 +102,7 @@ describe('identity', () => {
     });
 
     it('should return an object having the new upfated status of the principal if they exist', async () => {
-        expect(updatePrincipalAuth(1 ,principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
+        expect(updatePrincipalAuth(1, principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
     });
 
     // delete principal
@@ -186,7 +189,7 @@ describe('identity', () => {
 
     it('should return an object when the permissions is successfully created', async () => {
         let permission = await createPermissionAuth(tempPermissionName, identity.id);
-        permission_id = identity.id;
+        permission_id = permission.id;
         expect(permission).to.be.instanceOf(Object).and.have.property('creator_id').that.equals(permission.creator_id);
     });
 
@@ -202,7 +205,7 @@ describe('identity', () => {
     // read permissions
     it('should return an error if the permission does not exist', async () => {
         try {
-            await readPermissionAuth(permission_id + 'adasdaefb3y4yy');
+            await readPermissionAuth(permission_id + '1231231231231232');
             throw 'can not retrieve a permissions that does not exist';
         } catch (e) {
             expect(e.message).equals('Permission does not exist');
@@ -475,5 +478,76 @@ describe('identity', () => {
         } catch (e) {
             expect(e.message).equals('Service does not exist');
         }
+    });
+
+    // privileges test
+    // create privileges
+    it('should return an error if no token is present in the request header', async () => {
+        try {
+            await createPrivilege(permission_id, group_id, 'some scope for testing purposes', 'asdasdasdasda');
+            throw 'should not create a permission with no token';
+        } catch (e) {
+            expect(e.message).to.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object if the request is valid and the privilege is created', async () => {
+        let create = await createPrivilegeAuth(permission_id, group_id, 'some scope for testing purposes');
+        privilegeId = create.id;
+        expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
+    });
+
+    // read privilege 
+    it('should return an error if there is not token in the header present', async () => {
+        try {
+            await readprivilege(privilegeId, 'asdasd');
+            throw 'can\'t create privilege with an invalid token';
+        } catch (e) {
+            expect(e.message).to.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object if the privilege is fetched correctly', async () => {
+        let read = await readPrivilegeAuth(privilegeId);
+        expect(read).to.be.an.instanceOf(Object).and.have.property('group_id');
+    });
+
+    it('should return an error if the privilege doesn\'t exist', async () => {
+        try {
+            await await readPrivilegeAuth(privilegeId+123123);
+            throw 'privilege does not exist';
+        } catch (e) {
+            expect(e.message).to.equal('privilege does not exist');
+        }
+    });
+
+    // update privilege 
+    it('should return an error if the request header has an invalid token', async () => {
+        try {
+            await updatePrivilege(privilegeId, group_id, permission_id, 'some new scope for testing', 'asdasdsd');
+            throw 'can not update identity of an unothorized request';
+        } catch (e) {
+            expect(e.message).to.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object with the updated data for privileges', async () => {
+        let update = await updatePrivilegeAuth(privilegeId, group_id, permission_id, 'some new scope for testing');
+        expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
+    });
+
+    // delete privilege
+    it('should return an error if the request header has an invalid token', async () => {
+        try {
+            await deletePrivilege(privilegeId, 'asdasdsd');
+            throw 'can not update identity of an unothorized request';
+        } catch (e) {
+            expect(e.message).to.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return a success message when the privilege is deleted', async () => {
+        let deletePrev = await deletePrivilegeAuth(privilegeId);
+        expect(deletePrev.message).to.exist;
     });
 });

@@ -1,12 +1,9 @@
 const customFetch = require('../../../helpers').customFetch;
 const routes = require('../config');
-const envConfigs = require('../../../../config');
-const { getFromCache } = require('../cache');
-
 
 /**
  * 
- * @function createGroup a function to create new permission on the authentication server, which takes 2 params 
+ * @function createService a function to create new service on the authentication server, which takes 2 params 
  * 
  * @param name a string whcih represents the permission name desired
  * @param creator_id a number which represents the creator of the permission 
@@ -14,11 +11,6 @@ const { getFromCache } = require('../cache');
  */
 
 exports.createService = async (name, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
 
     let header = {
         Authorization: `Bearer ${token}`
@@ -53,7 +45,7 @@ exports.createService = async (name, token) => {
 
 /**
  * 
- * @function readGroup a function made to fetch a permission data from the auth server, which takes 1 parameter
+ * @function readService a function made to fetch a service data from the auth server, which takes 1 parameter
  * 
  * @param service_id the permission id desired to get its info
  * @param token is the token needed to pass to the header to authorize the action which is not required in this case
@@ -61,11 +53,7 @@ exports.createService = async (name, token) => {
  */
 
 exports.readService = async (service_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
     try {
-        if (!token) {
-            token = await getFromCache(authIdentity);
-        }
         let header = {
             Authorization: `Bearer ${token}`
         };
@@ -91,7 +79,7 @@ exports.readService = async (service_id, token) => {
 
 /**
  * 
- * @function updateGroup a function to update the name of a permission in the authenticator API which takes 2 primary params
+ * @function updateService a function to update the name of a service in the authenticator API which takes 2 primary params
  * 
  * @param name a string which represents the permission name update desired
  * @param service_id a number that represents the permission id needed to update
@@ -100,11 +88,6 @@ exports.readService = async (service_id, token) => {
  */
 
 exports.updateService = async (service_id, name, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -136,7 +119,7 @@ exports.updateService = async (service_id, name, token) => {
 
 /**
  * 
- * @function deleteGroup a function made to delete a certain permission from the authentication server which takes 1 primary param
+ * @function deleteService a function made to delete a certain service from the authentication server which takes 1 primary param
  * 
  * @param service_id the id needed to delete a desired permission from the auth API
  * @param token hich is the authorization token needed in the header to authorize the action
@@ -144,11 +127,6 @@ exports.updateService = async (service_id, name, token) => {
  */
 
 exports.deleteService = async (service_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };

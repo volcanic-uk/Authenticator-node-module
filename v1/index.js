@@ -23,6 +23,7 @@ const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = 
 const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions');
 const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
 const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
+const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
 const identityRegisterAuth = async (name, password = null, id) => {
@@ -31,25 +32,25 @@ const identityRegisterAuth = async (name, password = null, id) => {
 
 // principal authorised functions
 
-const createPrincipalAuth = async (name, dataset_id) => {
-    return await createNewPrincipal(name, dataset_id, await generateToken());
+const createPrincipalAuth = async (name, datasetId) => {
+    return await createNewPrincipal(name, datasetId, await generateToken());
 };
 
 const deletePrincipalAuth = async (principalId) => {
     return await deletePrincipal(principalId, await generateToken());
 };
 
-const readPrincipalAuth = async (principal_id) => {
-    return await readPrincipal(principal_id, await generateToken());
+const readPrincipalAuth = async (principalId) => {
+    return await readPrincipal(principalId, await generateToken());
 };
 
-const updatePrincipalAuth = async (active, principal_id) => {
-    return await updatePrincipal(active, principal_id, await generateToken());
+const updatePrincipalAuth = async (active, principalId) => {
+    return await updatePrincipal(active, principalId, await generateToken());
 };
 
 // permissions authorisation functions
-const createPermissionAuth = async (name, creator_id) => {
-    return await createPermission(name, creator_id, await generateToken());
+const createPermissionAuth = async (name, creatorId) => {
+    return await createPermission(name, creatorId, await generateToken());
 };
 
 const readPermissionAuth = async (id) => {
@@ -66,20 +67,20 @@ const deletePermissionAuth = async (id) => {
 
 // groups authorization functions
 
-const craeteGroupAuth = async (name, creator_id) => {
-    return await createGroup(name, creator_id, await generateToken());
+const craeteGroupAuth = async (name) => {
+    return await createGroup(name, await generateToken());
 };
 
-const readGroupAuth = async (group_id) => {
-    return await readGroup(group_id, await generateToken());
+const readGroupAuth = async (groupId) => {
+    return await readGroup(groupId, await generateToken());
 };
 
-const updateGroupAuth = async (group_id, name) => {
-    return await updateGroup(group_id, name, await generateToken());
+const updateGroupAuth = async (groupId, name) => {
+    return await updateGroup(groupId, name, await generateToken());
 };
 
-const deleteGroupAuth = async (group_id) => {
-    return await deleteGroup(group_id, await generateToken());
+const deleteGroupAuth = async (groupId) => {
+    return await deleteGroup(groupId, await generateToken());
 };
 
 // services authorization functions
@@ -88,16 +89,34 @@ const craeteServiceAuth = async (name) => {
     return await createService(name, await generateToken());
 };
 
-const readServiceAuth = async (service_id) => {
-    return await readService(service_id, await generateToken());
+const readServiceAuth = async (serviceId) => {
+    return await readService(serviceId, await generateToken());
 };
 
-const updateServiceAuth = async (service_id, name) => {
-    return await updateService(service_id, name, await generateToken());
+const updateServiceAuth = async (serviceId, name) => {
+    return await updateService(serviceId, name, await generateToken());
 };
 
-const deleteServiceAuth = async (service_id) => {
-    return await deleteService(service_id, await generateToken());
+const deleteServiceAuth = async (serviceId) => {
+    return await deleteService(serviceId, await generateToken());
+};
+
+// privilege with auth functions
+
+const createPrivilegeAuth = async (premissionId, groupId, scope) => {
+    return await createPrivilege(premissionId, groupId, scope, await generateToken());
+};
+
+const readPrivilegeAuth = async (privilegeId) => {
+    return await readprivilege(privilegeId, await generateToken());
+};
+
+const updatePrivilegeAuth = async (privilegeId, groupId, permissionId, scope) => {
+    return await updatePrivilege(privilegeId, groupId, permissionId, scope, await generateToken());
+};
+
+const deletePrivilegeAuth = async (privilegeId) => {
+    return await deletePrivilege(privilegeId, await generateToken());
 };
 
 //token validation
@@ -142,5 +161,11 @@ module.exports = {
         readServiceAuth,
         updateServiceAuth,
         deleteServiceAuth
+    },
+    privilege: {
+        createPrivilegeAuth,
+        readPrivilegeAuth,
+        updatePrivilegeAuth,
+        deletePrivilegeAuth
     }
 };

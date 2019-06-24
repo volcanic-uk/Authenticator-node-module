@@ -1,7 +1,5 @@
 const customFetch = require('../../../helpers').customFetch;
 const routes = require('../config');
-const envConfigs = require('../../../../config');
-const { getFromCache } = require('../cache');
 
 /**
  * 
@@ -12,16 +10,10 @@ const { getFromCache } = require('../cache');
  * 
  */
 exports.createNewPrincipal = async (name, datasetID=null, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
     let credentials = {
         name: name,
         dataset_id: datasetID
     };
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
 
     let header = {
         Authorization: `Bearer ${token}`
@@ -54,11 +46,7 @@ exports.createNewPrincipal = async (name, datasetID=null, token) => {
  * 
  */
 exports.readPrincipal = async (principalId, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
     try {
-        if (!token){
-            token = await getFromCache(authIdentity);
-        }
         let header = {
             Authorization: `Bearer ${token}` 
         };
@@ -93,11 +81,6 @@ exports.readPrincipal = async (principalId, token) => {
  * 
  */
 exports.updatePrincipal = async (active, principal_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token){
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -136,11 +119,6 @@ exports.updatePrincipal = async (active, principal_id, token) => {
  * 
  */
 exports.deletePrincipal = async (principal_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token){
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };

@@ -91,6 +91,30 @@ module.exports = {
             method: 'DELETE'
         }
     },
+    privileges: {
+        create: {
+            path: '/api/v1/privilege',
+            method: 'POST'
+        },
+        read: {
+            path: (privilege_id) => {
+                return `/api/v1/privilege/${privilege_id}`;
+            },
+            method: 'GET'
+        },
+        update: {
+            path: (privilege_id) => {
+                return `/api/v1/privilege/${privilege_id}`;
+            },
+            method: 'POST'
+        },
+        delete: {
+            path: (privilege_id) => {
+                return `/api/v1/privilege/${privilege_id}`;
+            },
+            method: 'DELETE'
+        }
+    },
     services: {
         create: {
             path: '/api/v1/service',

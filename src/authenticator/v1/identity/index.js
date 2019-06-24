@@ -56,11 +56,7 @@ exports.identityLogin = async (identityName, identityPassword, audience) => {
  * 
  */
 exports.identityRegister = async (identityName, identityPassword = null, principalId, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
     try {
-        if (!token) {
-            token = await getFromCache(authIdentity);
-        }
         let credential = {
             name: identityName,
             password: identityPassword,

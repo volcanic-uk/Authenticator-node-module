@@ -1,8 +1,5 @@
 const customFetch = require('../../../helpers').customFetch;
 const routes = require('../config');
-const envConfigs = require('../../../../config');
-const { getFromCache } = require('../cache');
-
 
 /**
  * 
@@ -14,12 +11,6 @@ const { getFromCache } = require('../cache');
  */
 
 exports.createGroup = async (name, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
-
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -28,9 +19,7 @@ exports.createGroup = async (name, token) => {
         name
     };
 
-
     try {
-
         let create = await customFetch(routes.groups.create.method, routes.groups.create.path, header, credentials);
         return {
             name: create.response.name,
@@ -61,14 +50,11 @@ exports.createGroup = async (name, token) => {
  */
 
 exports.readGroup = async (group_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
+    let header = {
+        Authorization: `Bearer ${token}`
+    };
+
     try {
-        if (!token) {
-            token = await getFromCache(authIdentity);
-        }
-        let header = {
-            Authorization: `Bearer ${token}`
-        };
         let read = await customFetch(routes.groups.read.method, routes.groups.read.path(group_id), header);
         return {
             id: read.response.id,
@@ -100,11 +86,6 @@ exports.readGroup = async (group_id, token) => {
  */
 
 exports.updateGroup = async (group_id, name, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -144,11 +125,6 @@ exports.updateGroup = async (group_id, name, token) => {
  */
 
 exports.deleteGroup = async (group_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };

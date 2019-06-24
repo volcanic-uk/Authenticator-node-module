@@ -1,7 +1,5 @@
 const customFetch = require('../../../helpers').customFetch;
 const routes = require('../config');
-const envConfigs = require('../../../../config');
-const { getFromCache } = require('../cache');
 
 
 /**
@@ -14,12 +12,6 @@ const { getFromCache } = require('../cache');
  */
 
 exports.createPermission = async (name, creator_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token) {
-        token = await getFromCache(authIdentity);
-    }
-
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -60,11 +52,7 @@ exports.createPermission = async (name, creator_id, token) => {
  */
 
 exports.readPermission = async (permission_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
     try {
-        if (!token){
-            token = await getFromCache(authIdentity);
-        }
         let header = {
             Authorization: `Bearer ${token}` 
         };
@@ -99,11 +87,6 @@ exports.readPermission = async (permission_id, token) => {
  */
 
 exports.updatePermission = async (permission_id, name, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token){
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -143,11 +126,6 @@ exports.updatePermission = async (permission_id, name, token) => {
  */
 
 exports.deletePermission = async (permission_id, token) => {
-    const authIdentity = envConfigs.auth.authIdentity;
-
-    if (!token){
-        token = await getFromCache(authIdentity);
-    }
     let header = {
         Authorization: `Bearer ${token}`
     };
