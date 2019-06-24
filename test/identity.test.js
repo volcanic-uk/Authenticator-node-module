@@ -108,7 +108,7 @@ describe('identity', () => {
             await deletePrincipalAuth(principal_id + 868689666813144);
             throw 'principal requested does not exist';
         } catch (e) {
-            expect(e.message).equals('Principal does not exist');
+            expect(e.message).to.equal('Principal does not exist');
         }
     });
 

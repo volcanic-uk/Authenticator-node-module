@@ -105,8 +105,6 @@ const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
 
-updatePrincipalAuth(1 ,2);
-
 module.exports = {
     identity: {
         identityLogin,

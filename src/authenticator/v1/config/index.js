@@ -38,9 +38,9 @@ module.exports = {
         },
         delete: {
             path: (prinicpalID) => {
-                return `/api/v1/principal/delete/${prinicpalID}`;
+                return `/api/v1/principal/${prinicpalID}`;
             },
-            method: 'POST'
+            method: 'DELETE'
         }
     },
     permissions: {
@@ -62,9 +62,9 @@ module.exports = {
         },
         delete: {
             path: (permission_id) => {
-                return `/api/v1/permission/delete/${permission_id}`;
+                return `/api/v1/permission/${permission_id}`;
             },
-            method: 'POST'
+            method: 'DELETE'
         }
     },
     groups: {
@@ -86,9 +86,9 @@ module.exports = {
         },
         delete: {
             path: (group_id) => {
-                return `/api/v1/group/delete/${group_id}`;
+                return `/api/v1/group/${group_id}`;
             },
-            method: 'POST'
+            method: 'DELETE'
         }
     },
     services: {

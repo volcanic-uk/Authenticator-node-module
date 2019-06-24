@@ -152,9 +152,9 @@ exports.deletePrincipal = async (principal_id, token) => {
         };
 
     } catch (error) {
-        throw  {
+        throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
+            type: error.response.data.reason.type,
             message: error.response.data.reason.message,
             code: error.response.data.reason.errorCode
         };
