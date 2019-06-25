@@ -16,7 +16,7 @@ exports.createPermission = async (name, creator_id, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let credentials = {
+    let body = {
         name,
         creator_id
     };
@@ -24,7 +24,7 @@ exports.createPermission = async (name, creator_id, token) => {
 
     try {
 
-        let create = await customFetch(routes.permissions.create.method, routes.permissions.create.path, header, credentials);
+        let create = await customFetch(routes.permissions.create.method, routes.permissions.create.path, header, body);
         return {
             name: create.response.name,
             creator_id: create.response.creator_id,
@@ -91,12 +91,12 @@ exports.updatePermission = async (permission_id, name, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let data = {
+    let body = {
         name
     };
 
     try {
-        let update = await customFetch(routes.permissions.update.method, routes.permissions.update.path(permission_id), header, data);
+        let update = await customFetch(routes.permissions.update.method, routes.permissions.update.path(permission_id), header, body);
         return {
             id: update.response.id,
             name: update.response.name,

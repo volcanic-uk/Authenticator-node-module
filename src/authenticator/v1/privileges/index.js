@@ -16,7 +16,7 @@ exports.createPrivilege = async (permissionId, groupId, scope, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let credentials = {
+    let body = {
         permission_id: permissionId,
         group_id: groupId,
         scope
@@ -24,7 +24,7 @@ exports.createPrivilege = async (permissionId, groupId, scope, token) => {
 
     try {
 
-        let create = await customFetch(routes.privileges.create.method, routes.privileges.create.path, header, credentials);
+        let create = await customFetch(routes.privileges.create.method, routes.privileges.create.path, header, body);
         return create.response;
 
     } catch (error) {
@@ -87,14 +87,14 @@ exports.updatePrivilege = async (privilegeId, groupId, permissionId, scope, toke
         Authorization: `Bearer ${token}`
     };
 
-    let data = {
+    let body = {
         scope,
         group_id: groupId,
         permission_id: permissionId
     };
 
     try {
-        let update = await customFetch(routes.privileges.update.method, routes.privileges.update.path(privilegeId), header, data);
+        let update = await customFetch(routes.privileges.update.method, routes.privileges.update.path(privilegeId), header, body);
         return {
             id: update.response.id,
             scope: update.response.scope,

@@ -10,7 +10,7 @@ const routes = require('../config');
  * 
  */
 exports.createNewPrincipal = async (name, datasetID=null, token) => {
-    let credentials = {
+    let body = {
         name: name,
         dataset_id: datasetID
     };
@@ -20,7 +20,7 @@ exports.createNewPrincipal = async (name, datasetID=null, token) => {
     };
 
     try {
-        let create = await customFetch(routes.principal.create.method, routes.principal.create.path, header, credentials);
+        let create = await customFetch(routes.principal.create.method, routes.principal.create.path, header, body);
         return {
             name: create.response.name,
             dataset_id: create.response.dataset_id,
@@ -85,12 +85,12 @@ exports.updatePrincipal = async (active, principal_id, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let data = {
+    let body = {
         active
     };
 
     try {
-        let update = await customFetch(routes.principal.update.method, routes.principal.update.path(principal_id), header, data);
+        let update = await customFetch(routes.principal.update.method, routes.principal.update.path(principal_id), header, body);
         return {
             id: update.response.id,
             name: update.response.name,

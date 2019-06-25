@@ -3,10 +3,9 @@ const routes = require('../config');
 
 /**
  * 
- * @function createGroup a function to create new permission on the authentication server, which takes 2 params 
+ * @function createGroup a function to create new group on the authentication server, which takes 2 params 
  * 
- * @param name a string whcih represents the permission name desired
- * @param creator_id a number which represents the creator of the permission 
+ * @param name a string whcih represents the group name desired
  * 
  */
 
@@ -15,12 +14,12 @@ exports.createGroup = async (name, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let credentials = {
+    let body = {
         name
     };
 
     try {
-        let create = await customFetch(routes.groups.create.method, routes.groups.create.path, header, credentials);
+        let create = await customFetch(routes.groups.create.method, routes.groups.create.path, header, body);
         return {
             name: create.response.name,
             creator_id: create.response.creator_id,
@@ -42,9 +41,9 @@ exports.createGroup = async (name, token) => {
 
 /**
  * 
- * @function readGroup a function made to fetch a permission data from the auth server, which takes 1 parameter
+ * @function readGroup a function made to fetch a group data from the auth server, which takes 1 parameter
  * 
- * @param group_id the permission id desired to get its info
+ * @param group_id the group id desired to get its info
  * @param token is the token needed to pass to the header to authorize the action which is not required in this case
  * 
  */
@@ -77,10 +76,10 @@ exports.readGroup = async (group_id, token) => {
 
 /**
  * 
- * @function updateGroup a function to update the name of a permission in the authenticator API which takes 2 primary params
+ * @function updateGroup a function to update the name of a group in the authenticator API which takes 2 primary params
  * 
- * @param name a string which represents the permission name update desired
- * @param group_id a number that represents the permission id needed to update
+ * @param name a string which represents the group name update desired
+ * @param group_id a number that represents the group id needed to update
  * @param token which is the authorization token needed in the header to authorize the action
  * 
  */
@@ -90,12 +89,12 @@ exports.updateGroup = async (group_id, name, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let data = {
+    let body = {
         name
     };
 
     try {
-        let update = await customFetch(routes.groups.update.method, routes.groups.update.path(group_id), header, data);
+        let update = await customFetch(routes.groups.update.method, routes.groups.update.path(group_id), header, body);
         return {
             id: update.response.id,
             name: update.response.name,
@@ -117,9 +116,9 @@ exports.updateGroup = async (group_id, name, token) => {
 
 /**
  * 
- * @function deleteGroup a function made to delete a certain permission from the authentication server which takes 1 primary param
+ * @function deleteGroup a function made to delete a certain group from the authentication server which takes 1 primary param
  * 
- * @param group_id the id needed to delete a desired permission from the auth API
+ * @param group_id the id needed to delete a desired group from the auth API
  * @param token hich is the authorization token needed in the header to authorize the action
  * 
  */

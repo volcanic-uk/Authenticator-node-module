@@ -5,8 +5,8 @@ const routes = require('../config');
  * 
  * @function createService a function to create new service on the authentication server, which takes 2 params 
  * 
- * @param name a string whcih represents the permission name desired
- * @param creator_id a number which represents the creator of the permission 
+ * @param name a string whcih represents the service name desired
+ * @param creator_id a number which represents the creator of the service 
  * 
  */
 
@@ -16,14 +16,14 @@ exports.createService = async (name, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let credentials = {
+    let body = {
         name
     };
 
 
     try {
 
-        let create = await customFetch(routes.services.create.method, routes.services.create.path, header, credentials);
+        let create = await customFetch(routes.services.create.method, routes.services.create.path, header, body);
         return {
             name: create.response.name,
             creator_id: create.response.creator_id,
@@ -47,7 +47,7 @@ exports.createService = async (name, token) => {
  * 
  * @function readService a function made to fetch a service data from the auth server, which takes 1 parameter
  * 
- * @param service_id the permission id desired to get its info
+ * @param service_id the service id desired to get its info
  * @param token is the token needed to pass to the header to authorize the action which is not required in this case
  * 
  */
@@ -81,8 +81,8 @@ exports.readService = async (service_id, token) => {
  * 
  * @function updateService a function to update the name of a service in the authenticator API which takes 2 primary params
  * 
- * @param name a string which represents the permission name update desired
- * @param service_id a number that represents the permission id needed to update
+ * @param name a string which represents the service name update desired
+ * @param service_id a number that represents the service id needed to update
  * @param token which is the authorization token needed in the header to authorize the action
  * 
  */
@@ -92,12 +92,12 @@ exports.updateService = async (service_id, name, token) => {
         Authorization: `Bearer ${token}`
     };
 
-    let data = {
+    let body = {
         name
     };
 
     try {
-        let update = await customFetch(routes.services.update.method, routes.services.update.path(service_id), header, data);
+        let update = await customFetch(routes.services.update.method, routes.services.update.path(service_id), header, body);
         return {
             id: update.response.id,
             name: update.response.name,
@@ -121,7 +121,7 @@ exports.updateService = async (service_id, name, token) => {
  * 
  * @function deleteService a function made to delete a certain service from the authentication server which takes 1 primary param
  * 
- * @param service_id the id needed to delete a desired permission from the auth API
+ * @param service_id the id needed to delete a desired service from the auth API
  * @param token hich is the authorization token needed in the header to authorize the action
  * 
  */

@@ -95,11 +95,11 @@ exports.identityRegister = async (identityName, identityPassword = null, princip
 
 exports.remoteIdentityValidation = async (token) => {
     try {
-        let data = {
+        let body = {
             token
         };
 
-        let tokenInfo = await customFetch(routes.identity.validation.method, routes.identity.validation.path, null, data);
+        let tokenInfo = await customFetch(routes.identity.validation.method, routes.identity.validation.path, null, body);
         logger({
             validity: true,
             expiration_time: tokenInfo.response.exp,
