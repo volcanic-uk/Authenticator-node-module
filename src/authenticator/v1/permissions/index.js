@@ -11,14 +11,15 @@ const routes = require('../config');
  * 
  */
 
-exports.createPermission = async (name, creator_id, token) => {
+exports.createPermission = async (name, description, serviceId, token) => {
     let header = {
         Authorization: `Bearer ${token}`
     };
 
     let body = {
         name,
-        creator_id
+        description,
+        service_id: serviceId
     };
 
 

@@ -22,7 +22,7 @@ const { identityLogin, identityRegister, remoteIdentityValidation, localIdentity
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions');
 const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
-const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
+const { createService, readService, updateService, deleteService, fetchAll} = require('../src/authenticator/v1/services');
 const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
@@ -49,8 +49,8 @@ const updatePrincipalAuth = async (active, principalId) => {
 };
 
 // permissions authorisation functions
-const createPermissionAuth = async (name, creatorId) => {
-    return await createPermission(name, creatorId, await generateToken());
+const createPermissionAuth = async (name, description, serviceId) => {
+    return await createPermission(name, description, serviceId, await generateToken());
 };
 
 const readPermissionAuth = async (id) => {
@@ -101,6 +101,10 @@ const deleteServiceAuth = async (serviceId) => {
     return await deleteService(serviceId, await generateToken());
 };
 
+const fetchAllAuth = async () => {
+    return await fetchAll(await generateToken());
+};
+
 // privilege with auth functions
 
 const createPrivilegeAuth = async (premissionId, groupId, scope) => {
@@ -123,6 +127,8 @@ const deletePrivilegeAuth = async (privilegeId) => {
 const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
+
+fetchAllAuth();
 
 module.exports = {
     identity: {
@@ -160,7 +166,8 @@ module.exports = {
         craeteServiceAuth,
         readServiceAuth,
         updateServiceAuth,
-        deleteServiceAuth
+        deleteServiceAuth,
+        fetchAllAuth
     },
     privilege: {
         createPrivilegeAuth,

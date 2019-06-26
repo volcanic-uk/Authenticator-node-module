@@ -126,6 +126,10 @@ module.exports = {
             },
             method: 'GET'
         },
+        readAll: {
+            path: '/api/v1/service/all',
+            method: 'GET'
+        },
         update: {
             path: (service_id) => {
                 return `/api/v1/service/update/${service_id}`;

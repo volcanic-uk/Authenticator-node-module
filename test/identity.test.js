@@ -176,102 +176,6 @@ describe('identity', () => {
         expect(logout).to.be.a('string');
     });
 
-    // permissions tests
-    // register
-    it('should return an error if there is no token present in the header or a token is malformed', async () => {
-        try {
-            await createPermission(tmpCreatorId, tempPermissionName, 'asdasd');
-            throw 'can not create permissions with malformed or no token';
-        } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
-        }
-    });
-
-    it('should return an object when the permissions is successfully created', async () => {
-        let permission = await createPermissionAuth(tempPermissionName, identity.id);
-        permission_id = permission.id;
-        expect(permission).to.be.instanceOf(Object).and.have.property('creator_id').that.equals(permission.creator_id);
-    });
-
-    it('should return an error when a duplicate entry occurs', async () => {
-        try {
-            await createPermissionAuth(tempPermissionName, identity.id);
-            throw 'can not craete a duplicate permission name';
-        } catch (e) {
-            expect(e.message).equals(`Duplicate entry ${tempPermissionName}`);
-        }
-    });
-
-    // read permissions
-    it('should return an error if the permission does not exist', async () => {
-        try {
-            await readPermissionAuth(permission_id + '1231231231231232');
-            throw 'can not retrieve a permissions that does not exist';
-        } catch (e) {
-            expect(e.message).equals('Permission does not exist');
-        }
-    });
-
-    it('should return an error if the request does not have a jwt authorization header', async () => {
-        try {
-            await readPermission(permission_id, 'asddas');
-            throw 'can not read permissions with malformed or no token';
-        } catch (e) {
-            expect(e.message).to.be.equals('Invalid JWT token');
-        }
-    });
-
-    it('should return an object if the permissions is found', async () => {
-        expect(readPermissionAuth(permission_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPermissionName);
-    });
-
-    //update permissions
-    it('should return an error if the header has no auhtorization token or a malformed one', async () => {
-        try {
-            await updatePermission(1, permission_id, 'asdasd');
-            throw 'can not read permissions with malformed or no token';
-        } catch (e) {
-            expect(e.message).equals('Invalid JWT token');
-        }
-    });
-
-    it('should return an error if the permissions does not exist', async () => {
-        try {
-            await updatePermissionAuth(tmpCreatorId, 'whatevre');
-            throw 'permissions does not exist';
-        } catch (e) {
-            expect(e.message).equals('Permission does not exist');
-        }
-    });
-
-    it('should return an object having the new upfated status of the permissions if they exist', async () => {
-        expect(updatePermissionAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(principal_id);
-    });
-
-    // delete permissions
-    it('should return an error if the permissions does not exist', async () => {
-        try {
-            await deletePermissionAuth(principal_id + 868689666813144);
-            throw 'permissions requested does not exist';
-        } catch (e) {
-            expect(e.message).equals('Permission does not exist');
-        }
-    });
-
-    it('should return an error if the request header has no token or it is malformed', async () => {
-        try {
-            await deletePermission(principal_id, 'asdasdasdasdsa');
-            throw 'principal requested does not exist';
-        } catch (e) {
-            expect(e.message).equals('Invalid JWT token');
-        }
-    });
-
-    it('should return a message type of string sayng that the permissions is gone if they exist', async () => {
-        expect(deletePermissionAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.property('message', 'Successfully deleted');
-    });
-
-
     // groups tests
 
     // create group
@@ -480,6 +384,101 @@ describe('identity', () => {
         }
     });
 
+    // permissions tests
+    // register
+    it('should return an error if there is no token present in the header or a token is malformed', async () => {
+        try {
+            await createPermission(tempPermissionName, 'some descriptiom', service_id, 'asdasd');
+            throw 'can not create permissions with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equal('Invalid JWT token');
+        }
+    });
+
+    it('should return an object when the permissions is successfully created', async () => {
+        let permission = await createPermissionAuth(tempPermissionName, 'some descriptiom', service_id, 'asdasd');
+        permission_id = permission.id;
+        expect(permission).to.be.instanceOf(Object).and.have.property('creator_id').that.equals(permission.creator_id);
+    });
+
+    it('should return an error when a duplicate entry occurs', async () => {
+        try {
+            await createPermissionAuth(tempPermissionName, 'some descriptiom', service_id, 'asdasd');
+            throw 'can not craete a duplicate permission name';
+        } catch (e) {
+            expect(e.message).equals(`Duplicate entry ${tempPermissionName}`);
+        }
+    });
+
+    // read permissions
+    it('should return an error if the permission does not exist', async () => {
+        try {
+            await readPermissionAuth(permission_id + '1231231231231232');
+            throw 'can not retrieve a permissions that does not exist';
+        } catch (e) {
+            expect(e.message).equals('Permission does not exist');
+        }
+    });
+
+    it('should return an error if the request does not have a jwt authorization header', async () => {
+        try {
+            await readPermission(permission_id, 'asddas');
+            throw 'can not read permissions with malformed or no token';
+        } catch (e) {
+            expect(e.message).to.be.equals('Invalid JWT token');
+        }
+    });
+
+    it('should return an object if the permissions is found', async () => {
+        expect(readPermissionAuth(permission_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPermissionName);
+    });
+
+    //update permissions
+    it('should return an error if the header has no auhtorization token or a malformed one', async () => {
+        try {
+            await updatePermission(1, permission_id, 'asdasd');
+            throw 'can not read permissions with malformed or no token';
+        } catch (e) {
+            expect(e.message).equals('Invalid JWT token');
+        }
+    });
+
+    it('should return an error if the permissions does not exist', async () => {
+        try {
+            await updatePermissionAuth(tmpCreatorId, 'whatevre');
+            throw 'permissions does not exist';
+        } catch (e) {
+            expect(e.message).equals('Permission does not exist');
+        }
+    });
+
+    it('should return an object having the new upfated status of the permissions if they exist', async () => {
+        expect(updatePermissionAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(principal_id);
+    });
+
+    // delete permissions
+    it('should return an error if the permissions does not exist', async () => {
+        try {
+            await deletePermissionAuth(principal_id + 868689666813144);
+            throw 'permissions requested does not exist';
+        } catch (e) {
+            expect(e.message).equals('Permission does not exist');
+        }
+    });
+
+    it('should return an error if the request header has no token or it is malformed', async () => {
+        try {
+            await deletePermission(principal_id, 'asdasdasdasdsa');
+            throw 'principal requested does not exist';
+        } catch (e) {
+            expect(e.message).equals('Invalid JWT token');
+        }
+    });
+
+    it('should return a message type of string sayng that the permissions is gone if they exist', async () => {
+        expect(deletePermissionAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.property('message', 'Successfully deleted');
+    });
+
     // privileges test
     // create privileges
     it('should return an error if no token is present in the request header', async () => {
@@ -550,4 +549,5 @@ describe('identity', () => {
         let deletePrev = await deletePrivilegeAuth(privilegeId);
         expect(deletePrev.message).to.exist;
     });
+    
 });

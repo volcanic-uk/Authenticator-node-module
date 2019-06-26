@@ -77,6 +77,23 @@ exports.readService = async (service_id, token) => {
     }
 };
 
+exports.fetchAll = async (token) => {
+    try {
+        let header = {
+            Authorization: `Bearer ${token}`
+        };
+        let read = await customFetch(routes.services.readAll.method, routes.services.readAll.path, header);
+        return read.response;
+    } catch (error) {
+        throw {
+            result: error.response.data.result,
+            type: error.response.data.reason.name,
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.errorCode
+        };
+    }
+};
+
 /**
  * 
  * @function updateService a function to update the name of a service in the authenticator API which takes 2 primary params
