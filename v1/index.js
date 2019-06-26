@@ -67,7 +67,7 @@ const deletePermissionAuth = async (id) => {
 
 // groups authorization functions
 
-const craeteGroupAuth = async (name) => {
+const createGroupAuth = async (name) => {
     return await createGroup(name, await generateToken());
 };
 
@@ -85,7 +85,7 @@ const deleteGroupAuth = async (groupId) => {
 
 // services authorization functions
 
-const craeteServiceAuth = async (name) => {
+const createServiceAuth = async (name) => {
     return await createService(name, await generateToken());
 };
 
@@ -157,13 +157,13 @@ module.exports = {
         deletePermissionAuth
     },
     groups: {
-        craeteGroupAuth,
+        createGroupAuth,
         readGroupAuth,
         updateGroupAuth,
         deleteGroupAuth
     },
     services: {
-        craeteServiceAuth,
+        createServiceAuth,
         readServiceAuth,
         updateServiceAuth,
         deleteServiceAuth,

@@ -9,9 +9,9 @@ const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = 
 const { createPermissionAuth, readPermissionAuth, updatePermissionAuth, deletePermissionAuth } = require('../v1/index').permissions;
 const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions/index');
 const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
-const { craeteGroupAuth, readGroupAuth, updateGroupAuth, deleteGroupAuth } = require('../v1/index').groups;
+const { createGroupAuth, readGroupAuth, updateGroupAuth, deleteGroupAuth } = require('../v1/index').groups;
 const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
-const { craeteServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').services;
+const { createServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').services;
 const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { createPrivilegeAuth, readPrivilegeAuth, updatePrivilegeAuth, deletePrivilegeAuth } = require('../v1/index').privilege;
 
@@ -189,14 +189,14 @@ describe('identity', () => {
     });
 
     it('should return an object when the group is successfully created', async () => {
-        let group = await craeteGroupAuth(tmpGroupName);
+        let group = await createGroupAuth(tmpGroupName);
         group_id = group.id;
         expect(group).to.be.instanceOf(Object).and.have.property('id');
     });
 
     it('should return an error when a duplicate entry occurs', async () => {
         try {
-            await craeteGroupAuth(tmpGroupName);
+            await createGroupAuth(tmpGroupName);
             throw 'can not craete a duplicate group name';
         } catch (e) {
             expect(e.message).equals(`Duplicate entry ${tmpGroupName}`);
@@ -288,14 +288,14 @@ describe('identity', () => {
     });
 
     it('should return an object when the group is successfully created', async () => {
-        let service = await craeteServiceAuth(tmpServiceName);
+        let service = await createServiceAuth(tmpServiceName);
         service_id = service.id;
         expect(service).to.be.instanceOf(Object).and.have.property('id');
     });
 
     it('should return an error when a duplicate entry occurs on service create', async () => {
         try {
-            await craeteServiceAuth(tmpServiceName);
+            await createServiceAuth(tmpServiceName);
             throw 'can not craete a duplicate service name';
         } catch (e) {
             expect(e.message).equals(`Duplicate entry ${tmpServiceName}`);
@@ -388,7 +388,7 @@ describe('identity', () => {
     // register
     it('should return an error if there is no token present in the header or a token is malformed', async () => {
         try {
-            await createPermission(tempPermissionName, 'some descriptiom', service_id, 'asdasd');
+            await createPermission(tempPermissionName, 'the permission description', service_id, 'asdasd');
             throw 'can not create permissions with malformed or no token';
         } catch (e) {
             expect(e.message).to.be.equal('Invalid JWT token');
@@ -396,14 +396,14 @@ describe('identity', () => {
     });
 
     it('should return an object when the permissions is successfully created', async () => {
-        let permission = await createPermissionAuth(tempPermissionName, 'some descriptiom', service_id, 'asdasd');
+        let permission = await createPermissionAuth(tempPermissionName, 'the permission description', service_id);
         permission_id = permission.id;
         expect(permission).to.be.instanceOf(Object).and.have.property('creator_id').that.equals(permission.creator_id);
     });
 
     it('should return an error when a duplicate entry occurs', async () => {
         try {
-            await createPermissionAuth(tempPermissionName, 'some descriptiom', service_id, 'asdasd');
+            await createPermissionAuth(tempPermissionName, 'the permission description', service_id);
             throw 'can not craete a duplicate permission name';
         } catch (e) {
             expect(e.message).equals(`Duplicate entry ${tempPermissionName}`);
@@ -549,5 +549,4 @@ describe('identity', () => {
         let deletePrev = await deletePrivilegeAuth(privilegeId);
         expect(deletePrev.message).to.exist;
     });
-    
 });
