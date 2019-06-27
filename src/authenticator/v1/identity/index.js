@@ -55,12 +55,13 @@ exports.identityLogin = async (identityName, identityPassword, audience) => {
  * this function depends on the custom fetch fucntion in the helper folder.
  * 
  */
-exports.identityRegister = async (identityName, identityPassword = null, principalId, token) => {
+exports.identityRegister = async (identityName, identityPassword = null, principalId, token, privileges) => {
     try {
         let credential = {
             name: identityName,
             password: identityPassword,
-            principal_id: principalId
+            principal_id: principalId,
+            privileges
         };
         let header = {
             Authorization: `Bearer ${token}`

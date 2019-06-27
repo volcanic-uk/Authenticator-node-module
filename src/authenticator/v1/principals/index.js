@@ -9,10 +9,11 @@ const routes = require('../config');
  * @param dataseID a number which represents the datasetID that represents the principal
  * 
  */
-exports.createNewPrincipal = async (name, datasetID=null, token) => {
+exports.createNewPrincipal = async (name, datasetID=null, token, privileges) => {
     let body = {
         name: name,
-        dataset_id: datasetID
+        dataset_id: datasetID,
+        privileges
     };
 
     let header = {
