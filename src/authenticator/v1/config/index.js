@@ -82,6 +82,10 @@ module.exports = {
             },
             method: 'GET'
         },
+        readAll: {
+            path: '/api/v1/group/all',
+            method: 'GET'
+        },
         update: {
             path: (group_id) => {
                 return `/api/v1/group/update/${group_id}`;

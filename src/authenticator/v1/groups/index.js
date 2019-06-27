@@ -74,6 +74,24 @@ exports.readGroup = async (group_id, token) => {
     }
 };
 
+exports.readAllGroups = async (token) => {
+    let header = {
+        Authorization: `Bearer ${token}`
+    };
+
+    try {
+        let read = await customFetch(routes.groups.readAll.method, routes.groups.readAll.path, header);
+        return read.response;
+    } catch (error) {
+        throw {
+            result: error.response.data.result,
+            type: error.response.data.reason.name,
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.errorCode
+        };
+    }
+};
+
 /**
  * 
  * @function updateGroup a function to update the name of a group in the authenticator API which takes 2 primary params

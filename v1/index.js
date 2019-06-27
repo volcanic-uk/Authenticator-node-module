@@ -21,8 +21,8 @@
 const { identityLogin, identityRegister, remoteIdentityValidation, localIdentityValidation, identityLogout } = require('../src/authenticator/v1/identity');
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { createPermission, readPermission, updatePermission, deletePermission, fetchAllPermissions } = require('../src/authenticator/v1/permissions');
-const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
-const { createService, readService, updateService, deleteService, fetchAll} = require('../src/authenticator/v1/services');
+const { createGroup, readGroup, readAllGroups, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
+const { createService, readService, updateService, deleteService, fetchAll } = require('../src/authenticator/v1/services');
 const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
@@ -49,8 +49,8 @@ const updatePrincipalAuth = async (active, principalId) => {
 };
 
 // permissions authorisation functions
-const createPermissionAuth = async (name, description, serviceId) => {
-    return await createPermission(name, description, serviceId, await generateToken());
+const createPermissionAuth = async (serviceId, name, description) => {
+    return await createPermission(serviceId, name, description, await generateToken());
 };
 
 const readPermissionAuth = async (id) => {
@@ -85,6 +85,10 @@ const updateGroupAuth = async (groupId, name) => {
 
 const deleteGroupAuth = async (groupId) => {
     return await deleteGroup(groupId, await generateToken());
+};
+
+const fetchAllGroupsAuth = async () => {
+    return await readAllGroups(await generateToken());
 };
 
 // services authorization functions
@@ -163,7 +167,8 @@ module.exports = {
         createGroupAuth,
         readGroupAuth,
         updateGroupAuth,
-        deleteGroupAuth
+        deleteGroupAuth,
+        fetchAllGroupsAuth
     },
     services: {
         createServiceAuth,

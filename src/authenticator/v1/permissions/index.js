@@ -11,14 +11,14 @@ const routes = require('../config');
  * 
  */
 
-exports.createPermission = async (name, description, serviceId, token) => {
+exports.createPermission = async (serviceId, name, description, token) => {
     let header = {
         Authorization: `Bearer ${token}`
     };
 
     let body = {
-        name,
-        description,
+        name: name,
+        description: description,
         service_id: serviceId
     };
 
@@ -28,8 +28,11 @@ exports.createPermission = async (name, description, serviceId, token) => {
         let create = await customFetch(routes.permissions.create.method, routes.permissions.create.path, header, body);
         return {
             name: create.response.name,
-            creator_id: create.response.creator_id,
-            id: create.response.id
+            subject_id: create.response.subject_id,
+            service_id: create.response.service_id,
+            descriptio: create.response.description,
+            created_at: create.response.created_at,
+            updated_at: create.response.updated_at
         };
 
     } catch (error) {

@@ -396,14 +396,14 @@ describe('identity', () => {
     });
 
     it('should return an object when the permissions is successfully created', async () => {
-        let permission = await createPermissionAuth(tempPermissionName, 'the permission description', service_id);
+        let permission = await createPermissionAuth(service_id, tempPermissionName, 'the permission description');
         permission_id = permission.id;
-        expect(permission).to.be.instanceOf(Object).and.have.property('creator_id').that.equals(permission.creator_id);
+        expect(permission).to.be.instanceOf(Object).and.have.property('subject_id');
     });
 
     it('should return an error when a duplicate entry occurs', async () => {
         try {
-            await createPermissionAuth(tempPermissionName, 'the permission description', service_id);
+            await createPermissionAuth(service_id, tempPermissionName, 'the permission description');
             throw 'can not craete a duplicate permission name';
         } catch (e) {
             expect(e.message).equals(`Duplicate entry ${tempPermissionName}`);
