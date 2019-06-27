@@ -23,7 +23,7 @@ const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = 
 const { createPermission, readPermission, updatePermission, deletePermission, fetchAllPermissions } = require('../src/authenticator/v1/permissions');
 const { createGroup, readGroup, readAllGroups, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
 const { createService, readService, updateService, deleteService, fetchAll } = require('../src/authenticator/v1/services');
-const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
+const { createPrivilege, readPrivilege, readAllPrivileges, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
 const identityRegisterAuth = async (name, password = null, id) => {
@@ -120,7 +120,7 @@ const createPrivilegeAuth = async (premissionId, groupId, scope) => {
 };
 
 const readPrivilegeAuth = async (privilegeId) => {
-    return await readprivilege(privilegeId, await generateToken());
+    return await readPrivilege(privilegeId, await generateToken());
 };
 
 const updatePrivilegeAuth = async (privilegeId, groupId, permissionId, scope) => {
@@ -129,6 +129,10 @@ const updatePrivilegeAuth = async (privilegeId, groupId, permissionId, scope) =>
 
 const deletePrivilegeAuth = async (privilegeId) => {
     return await deletePrivilege(privilegeId, await generateToken());
+};
+
+const fetchAllPrivilegesAuth = async () => {
+    return await readAllPrivileges(await generateToken());
 };
 
 //token validation
@@ -181,6 +185,7 @@ module.exports = {
         createPrivilegeAuth,
         readPrivilegeAuth,
         updatePrivilegeAuth,
-        deletePrivilegeAuth
+        deletePrivilegeAuth,
+        fetchAllPrivilegesAuth
     }
 };

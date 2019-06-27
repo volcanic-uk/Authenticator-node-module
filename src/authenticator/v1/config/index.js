@@ -110,6 +110,10 @@ module.exports = {
             },
             method: 'GET'
         },
+        readAll: {
+            path: '/api/v1/privileges',
+            method: 'GET'
+        },
         update: {
             path: (privilege_id) => {
                 return `/api/v1/privilege/${privilege_id}`;

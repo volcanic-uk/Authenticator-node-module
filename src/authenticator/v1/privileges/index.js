@@ -47,7 +47,7 @@ exports.createPrivilege = async (permissionId, groupId, scope, token) => {
  * 
  */
 
-exports.readprivilege = async (privilegeId, token) => {
+exports.readPrivilege = async (privilegeId, token) => {
     try {
         let header = {
             Authorization: `Bearer ${token}`
@@ -62,6 +62,23 @@ exports.readprivilege = async (privilegeId, token) => {
             created_at: read.response.created_at,
             updated_at: read.response.updated_at
         };
+    } catch (error) {
+        throw {
+            result: error.response.data.result,
+            type: error.response.data.reason.name,
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.errorCode
+        };
+    }
+};
+
+exports.readAllPrivileges = async (token) => {
+    try {
+        let header = {
+            Authorization: `Bearer ${token}`
+        };
+        let read = await customFetch(routes.privileges.readAll.method, routes.privileges.readAll.path, header);
+        return read.response;
     } catch (error) {
         throw {
             result: error.response.data.result,

@@ -12,7 +12,7 @@ const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/aut
 const { createGroupAuth, readGroupAuth, updateGroupAuth, deleteGroupAuth } = require('../v1/index').groups;
 const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
 const { createServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').services;
-const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
+const { createPrivilege, readPrivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { createPrivilegeAuth, readPrivilegeAuth, updatePrivilegeAuth, deletePrivilegeAuth } = require('../v1/index').privilege;
 
 describe('identity', () => {
@@ -499,7 +499,7 @@ describe('identity', () => {
     // read privilege 
     it('should return an error if there is not token in the header present', async () => {
         try {
-            await readprivilege(privilegeId, 'asdasd');
+            await readPrivilege(privilegeId, 'asdasd');
             throw 'can\'t create privilege with an invalid token';
         } catch (e) {
             expect(e.message).to.equal('Invalid JWT token');
