@@ -54,6 +54,10 @@ module.exports = {
             },
             method: 'GET'
         },
+        readAll: {
+            path: '/api/v1/permission/all',
+            method: 'GET'
+        },
         update: {
             path: (permission_id) => {
                 return `/api/v1/permission/update/${permission_id}`;

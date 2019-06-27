@@ -20,7 +20,7 @@
 
 const { identityLogin, identityRegister, remoteIdentityValidation, localIdentityValidation, identityLogout } = require('../src/authenticator/v1/identity');
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
-const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions');
+const { createPermission, readPermission, updatePermission, deletePermission, fetchAllPermissions } = require('../src/authenticator/v1/permissions');
 const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
 const { createService, readService, updateService, deleteService, fetchAll} = require('../src/authenticator/v1/services');
 const { createPrivilege, readprivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
@@ -55,6 +55,10 @@ const createPermissionAuth = async (name, description, serviceId) => {
 
 const readPermissionAuth = async (id) => {
     return await readPermission(id, await generateToken());
+};
+
+const fetchAllPermissionsAuth = async () => {
+    return fetchAllPermissions(await generateToken());
 };
 
 const updatePermissionAuth = async (id, name) => {
@@ -128,8 +132,6 @@ const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
 };
 
-fetchAllAuth();
-
 module.exports = {
     identity: {
         identityLogin,
@@ -154,7 +156,8 @@ module.exports = {
         createPermissionAuth,
         readPermissionAuth,
         updatePermissionAuth,
-        deletePermissionAuth
+        deletePermissionAuth,
+        fetchAllPermissionsAuth
     },
     groups: {
         createGroupAuth,

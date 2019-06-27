@@ -55,7 +55,7 @@ exports.createPermission = async (name, description, serviceId, token) => {
 exports.readPermission = async (permission_id, token) => {
     try {
         let header = {
-            Authorization: `Bearer ${token}` 
+            Authorization: `Bearer ${token}`
         };
         let read = await customFetch(routes.permissions.read.method, routes.permissions.read.path(permission_id), header);
         return {
@@ -67,6 +67,23 @@ exports.readPermission = async (permission_id, token) => {
             created_at: read.response.created_at,
             updated_at: read.response.updated_at
         };
+    } catch (error) {
+        throw {
+            result: error.response.data.result,
+            type: error.response.data.reason.name,
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.errorCode
+        };
+    }
+};
+
+exports.fetchAllPermissions = async (token) => {
+    try {
+        let header = {
+            Authorization: `Bearer ${token}`
+        };
+        let read = await customFetch(routes.permissions.readAll.method, routes.permissions.readAll.path, header);
+        return read.response;
     } catch (error) {
         throw {
             result: error.response.data.result,
@@ -138,7 +155,7 @@ exports.deletePermission = async (permission_id, token) => {
         };
 
     } catch (error) {
-        throw  {
+        throw {
             result: error.response.data.result,
             type: error.response.data.reason.name,
             message: error.response.data.reason.message,
