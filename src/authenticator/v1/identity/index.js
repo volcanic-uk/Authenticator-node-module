@@ -30,7 +30,8 @@ exports.identityLogin = async (identityName, identityPassword, audience) => {
         // cache the user's token
         await putToCache(result.response.token, result.response.token, thirdPartyTokenDuration);
         return {
-            token: result.response.token
+            token: result.response.token,
+            services: result.response.services
         };
     } catch (error) {
         throw {
