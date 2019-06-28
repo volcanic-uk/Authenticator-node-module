@@ -130,7 +130,7 @@ describe('identity', () => {
 
     // register
     it('should return a result ok and identity params as an object containing: secret, name, and an id OR a string when it is rejected', async () => {
-        identity = await identityRegisterAuth(tmpIdentityName, null, principal_id);
+        identity = await identityRegisterAuth(tmpIdentityName, null, principal_id, null);
         expect(identity).to.be.an('object');
     });
 
@@ -145,7 +145,12 @@ describe('identity', () => {
     });
 
     it('should return a string if the name added already exists', async () => {
-        await expect(identityRegisterAuth(identity.name)).to.be.rejectedWith(`Duplicate entry ${identity.name}`).and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1003);
+        try {
+            await identityRegisterAuth(identity.name);
+            throw 'can not create duplicates';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
     });
 
     // login
@@ -513,7 +518,7 @@ describe('identity', () => {
 
     it('should return an error if the privilege doesn\'t exist', async () => {
         try {
-            await await readPrivilegeAuth(privilegeId+123123);
+            await await readPrivilegeAuth(privilegeId + 123123);
             throw 'privilege does not exist';
         } catch (e) {
             expect(e.message).to.equal('privilege does not exist');

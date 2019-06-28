@@ -70,7 +70,9 @@ exports.identityRegister = async (identityName, identityPassword = null, princip
         return {
             id: user.response.id,
             name: user.response.name,
-            secret: user.response.secret
+            secret: user.response.secret,
+            principal_id: user.response.principal_id,
+            created_at: user.response.created_at
         };
 
     } catch (error) {

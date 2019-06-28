@@ -25,7 +25,9 @@ exports.createNewPrincipal = async (name, datasetID=null, token, privileges) => 
         return {
             name: create.response.name,
             dataset_id: create.response.dataset_id,
-            id: create.response.id
+            id: create.response.id,
+            updated_at: create.response.updated_at,
+            created_at: create.response.created_at
         };
     } catch (error) {
         throw {

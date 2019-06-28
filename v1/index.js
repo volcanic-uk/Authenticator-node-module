@@ -26,8 +26,8 @@ const { createService, readService, updateService, deleteService, fetchAll } = r
 const { createPrivilege, readPrivilege, readAllPrivileges, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
-const identityRegisterAuth = async (name, password = null, id) => {
-    return await identityRegister(name, password, id, await generateToken());
+const identityRegisterAuth = async (name, password = null, id, privileges) => {
+    return await identityRegister(name, password, id, await generateToken(), privileges);
 };
 
 // principal authorised functions
