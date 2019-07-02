@@ -32,8 +32,8 @@ const identityRegisterAuth = async (name, password = null, id, privileges) => {
 
 // principal authorised functions
 
-const createPrincipalAuth = async (name, datasetId) => {
-    return await createNewPrincipal(name, datasetId, await generateToken());
+const createPrincipalAuth = async (name, datasetId, privileges) => {
+    return await createNewPrincipal(name, datasetId, await generateToken(), privileges);
 };
 
 const deletePrincipalAuth = async (principalId) => {
