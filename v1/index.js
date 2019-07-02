@@ -152,17 +152,11 @@ module.exports = {
         localValidationAuth,
         identityLogout,
     },
-    principalWithAuth: {
+    principal: {
         createPrincipalAuth,
         deletePrincipalAuth,
         readPrincipalAuth,
-        updatePrincipalAuth
-    },
-    principal: {
-        createNewPrincipal,
-        deletePrincipal,
-        readPrincipal,
-        updatePrincipal,
+        updatePrincipalAuth,
         fetchAllPrincipalsAuth
     },
     permissions: {
