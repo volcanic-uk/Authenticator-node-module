@@ -30,6 +30,10 @@ module.exports = {
             },
             method: 'GET'
         },
+        readAll: {
+            path:  '/api/v1/principal/all',
+            method: 'GET'
+        },
         update: {
             path: (prinicpalID) => {
                 return `/api/v1/principal/update/${prinicpalID}`;

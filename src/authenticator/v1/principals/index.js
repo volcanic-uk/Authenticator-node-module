@@ -9,7 +9,7 @@ const routes = require('../config');
  * @param dataseID a number which represents the datasetID that represents the principal
  * 
  */
-exports.createNewPrincipal = async (name, datasetID=null, token, privileges) => {
+exports.createNewPrincipal = async (name, datasetID = null, token, privileges) => {
     let body = {
         name: name,
         dataset_id: datasetID,
@@ -51,7 +51,7 @@ exports.createNewPrincipal = async (name, datasetID=null, token, privileges) => 
 exports.readPrincipal = async (principalId, token) => {
     try {
         let header = {
-            Authorization: `Bearer ${token}` 
+            Authorization: `Bearer ${token}`
         };
         let read = await customFetch(routes.principal.read.method, routes.principal.read.path(principalId), header);
         return {
@@ -72,6 +72,24 @@ exports.readPrincipal = async (principalId, token) => {
         };
     }
 
+};
+
+exports.fetchAllPrincipals = async (token) => {
+    try {
+        let header = {
+            Authorization: `Bearer ${token}`
+        };
+
+        let fetch = await customFetch(routes.principal.readAll.method, routes.principal.readAll.path, header);
+        return fetch.response;
+    } catch (error) {
+        throw {
+            result: error.response.data.result,
+            type: error.response.data.reason.name,
+            message: error.response.data.reason.message,
+            code: error.response.data.reason.errorCode
+        };
+    }
 };
 
 /**

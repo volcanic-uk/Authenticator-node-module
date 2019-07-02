@@ -19,7 +19,7 @@
 // local dependencies & modules call 
 
 const { identityLogin, identityRegister, remoteIdentityValidation, localIdentityValidation, identityLogout } = require('../src/authenticator/v1/identity');
-const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
+const { createNewPrincipal, deletePrincipal, readPrincipal, fetchAllPrincipals, updatePrincipal } = require('../src/authenticator/v1/principals');
 const { createPermission, readPermission, updatePermission, deletePermission, fetchAllPermissions } = require('../src/authenticator/v1/permissions');
 const { createGroup, readGroup, readAllGroups, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
 const { createService, readService, updateService, deleteService, fetchAll } = require('../src/authenticator/v1/services');
@@ -46,6 +46,10 @@ const readPrincipalAuth = async (principalId) => {
 
 const updatePrincipalAuth = async (active, principalId) => {
     return await updatePrincipal(active, principalId, await generateToken());
+};
+
+const fetchAllPrincipalsAuth = async () => {
+    return await fetchAllPrincipals(await generateToken());
 };
 
 // permissions authorisation functions
@@ -158,7 +162,8 @@ module.exports = {
         createNewPrincipal,
         deletePrincipal,
         readPrincipal,
-        updatePrincipal
+        updatePrincipal,
+        fetchAllPrincipalsAuth
     },
     permissions: {
         createPermissionAuth,
