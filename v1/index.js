@@ -44,8 +44,8 @@ const readPrincipalAuth = async (principalId) => {
     return await readPrincipal(principalId, await generateToken());
 };
 
-const updatePrincipalAuth = async (active, principalId) => {
-    return await updatePrincipal(active, principalId, await generateToken());
+const updatePrincipalAuth = async (name, principalId) => {
+    return await updatePrincipal(name, principalId, await generateToken());
 };
 
 const fetchAllPrincipalsAuth = async () => {

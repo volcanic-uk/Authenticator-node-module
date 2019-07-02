@@ -101,13 +101,13 @@ exports.fetchAllPrincipals = async (token) => {
  * @param token which is the authorization token needed in the header to authorize the action
  * 
  */
-exports.updatePrincipal = async (active, principal_id, token) => {
+exports.updatePrincipal = async (name, principal_id, token) => {
     let header = {
         Authorization: `Bearer ${token}`
     };
 
     let body = {
-        active
+        name
     };
 
     try {

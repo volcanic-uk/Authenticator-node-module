@@ -85,7 +85,7 @@ describe('identity', () => {
     //update principal
     it('should return an error if the header has no auhtorization token or a malformed one', async () => {
         try {
-            await updatePrincipal(1, principal_id, 'asdasd');
+            await updatePrincipal(tempPrincipalName, principal_id, 'asdasd');
             throw 'can not read principal with malformed or no token';
         } catch (e) {
             expect(e.message).equals('Invalid JWT token');
@@ -94,7 +94,7 @@ describe('identity', () => {
 
     it('should return an error if the principal does not exist', async () => {
         try {
-            await updatePrincipalAuth(1, principal_id + 8686896668);
+            await updatePrincipalAuth(tempPrincipalName, principal_id + 8686896668);
             throw 'principal does not exist';
         } catch (e) {
             expect(e.message).equals('Principal does not exist');
@@ -102,7 +102,7 @@ describe('identity', () => {
     });
 
     it('should return an object having the new upfated status of the principal if they exist', async () => {
-        expect(updatePrincipalAuth(1, principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
+        expect(updatePrincipalAuth(tempPrincipalName, principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
     });
 
     // delete principal
