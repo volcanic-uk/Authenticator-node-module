@@ -31,9 +31,9 @@ exports.createGroup = async (name, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode,
-            name: error.response.data.reason.name
+            message: error.response.data.message,
+            code: error.response.data.errorCode,
+            name: error.response.data.name
         };
     }
 
@@ -67,9 +67,9 @@ exports.readGroup = async (group_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -85,9 +85,9 @@ exports.readAllGroups = async (token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -125,9 +125,9 @@ exports.updateGroup = async (group_id, name, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -155,9 +155,9 @@ exports.deleteGroup = async (group_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };

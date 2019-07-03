@@ -23,16 +23,15 @@ exports.createPrivilege = async (permissionId, groupId, scope, token) => {
     };
 
     try {
-
         let create = await customFetch(routes.privileges.create.method, routes.privileges.create.path, header, body);
         return create.response;
 
     } catch (error) {
         throw {
             result: error.response.data.result,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode,
-            name: error.response.data.reason.name
+            message: error.response.data.message,
+            code: error.response.data.errorCode,
+            name: error.response.data.name
         };
     }
 
@@ -65,9 +64,9 @@ exports.readPrivilege = async (privilegeId, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -82,9 +81,9 @@ exports.readAllPrivileges = async (token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -124,9 +123,9 @@ exports.updatePrivilege = async (privilegeId, groupId, permissionId, scope, toke
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.type,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.type,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -154,9 +153,9 @@ exports.deletePrivilege = async (privilegeId, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.type,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.type,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };

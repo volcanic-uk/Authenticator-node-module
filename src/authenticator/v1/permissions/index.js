@@ -27,6 +27,7 @@ exports.createPermission = async (serviceId, name, description, token) => {
 
         let create = await customFetch(routes.permissions.create.method, routes.permissions.create.path, header, body);
         return {
+            id: create.response.id,
             name: create.response.name,
             subject_id: create.response.subject_id,
             service_id: create.response.service_id,
@@ -38,9 +39,9 @@ exports.createPermission = async (serviceId, name, description, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode,
-            name: error.response.data.reason.name
+            message: error.response.data.message,
+            code: error.response.data.errorCode,
+            name: error.response.data.name
         };
     }
 
@@ -73,9 +74,9 @@ exports.readPermission = async (permission_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -90,9 +91,9 @@ exports.fetchAllPermissions = async (token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -130,9 +131,9 @@ exports.updatePermission = async (permission_id, name, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -160,9 +161,9 @@ exports.deletePermission = async (permission_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };

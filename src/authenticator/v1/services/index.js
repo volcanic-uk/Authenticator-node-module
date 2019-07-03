@@ -35,9 +35,9 @@ exports.createService = async (name, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode,
-            name: error.response.data.reason.name
+            message: error.response.data.message,
+            code: error.response.data.errorCode
+            // name: error.response.data.name
         };
     }
 
@@ -70,9 +70,9 @@ exports.readService = async (service_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -87,9 +87,9 @@ exports.fetchAll = async (token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -127,9 +127,9 @@ exports.updateService = async (service_id, name, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -157,9 +157,9 @@ exports.deleteService = async (service_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.type,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.type,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };

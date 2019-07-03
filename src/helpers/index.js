@@ -18,15 +18,25 @@ const jwt = require('jsonwebtoken');
 // define the custom fetch method as an async function
 exports.customFetch = async (methodType = 'get', path, headers, data) => {
     try {
+        if (!headers || headers === null) {
+            headers = null;
+        } else {
+            headers = {
+                ...headers
+            };
+        }
+        if (!data || data === null) {
+            data = null;
+        } else {
+            data = {
+                ...data
+            };
+        }
         let response = await axios({
             method: methodType,
             url: envVars.env.domain + path,
-            headers: {
-                ...headers
-            },
-            data: {
-                ...data
-            }
+            headers,
+            data
         });
         return response.data;
     }

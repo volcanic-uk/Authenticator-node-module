@@ -35,8 +35,8 @@ exports.identityLogin = async (identityName, identityPassword, audience) => {
         };
     } catch (error) {
         throw {
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -58,12 +58,22 @@ exports.identityLogin = async (identityName, identityPassword, audience) => {
  */
 exports.identityRegister = async (identityName, identityPassword = null, principalId, token, privileges) => {
     try {
-        let credential = {
-            name: identityName,
-            password: identityPassword,
-            principal_id: principalId,
-            privileges
-        };
+        let credential = {};
+        if (identityPassword === null || !identityPassword) {
+            credential = {
+                name: identityName,
+                principal_id: principalId,
+                privileges
+            };
+        } else {
+            credential = {
+                name: identityName,
+                secret: identityPassword,
+                principal_id: principalId,
+                privileges
+            };
+        }
+
         let header = {
             Authorization: `Bearer ${token}`
         };
@@ -78,8 +88,8 @@ exports.identityRegister = async (identityName, identityPassword = null, princip
 
     } catch (error) {
         throw {
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -151,14 +161,14 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
             await putToCache(decodedToken, pub, thirdPartyTokenDuration);
             let verify = await jwt.verify(tokenToValidate, pub);
             logger({
-                result: verify, 
+                result: verify,
                 message: 'token is valid'
             });
             return true;
         } else {
             let verify = await jwt.verify(tokenToValidate, cache);
             logger({
-                result: verify, 
+                result: verify,
                 message: 'token is valid'
             });
             return true;
@@ -166,7 +176,7 @@ exports.localIdentityValidation = async (tokenToValidate, headerToken) => {
 
     } catch (e) {
         logger({
-            internal_error: e, 
+            internal_error: e,
             request_error: e.resonse
         });
         return false;

@@ -32,9 +32,9 @@ exports.createNewPrincipal = async (name, datasetID = null, token, privileges) =
     } catch (error) {
         throw {
             result: error.response.data.result,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode,
-            name: error.response.data.reason.name
+            message: error.response.data.message,
+            code: error.response.data.errorCode,
+            name: error.response.data.name
         };
     }
 
@@ -53,7 +53,7 @@ exports.readPrincipal = async (principalId, token) => {
         let header = {
             Authorization: `Bearer ${token}`
         };
-        let read = await customFetch(routes.principal.read.method, routes.principal.read.path(principalId), header);
+        let read = await customFetch(routes.principal.read.method, routes.principal.read.path(principalId), header, '');
         return {
             id: read.response.id,
             name: read.response.name,
@@ -66,9 +66,9 @@ exports.readPrincipal = async (principalId, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.name,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 
@@ -101,13 +101,14 @@ exports.fetchAllPrincipals = async (token) => {
  * @param token which is the authorization token needed in the header to authorize the action
  * 
  */
-exports.updatePrincipal = async (name, principal_id, token) => {
+exports.updatePrincipal = async (name, principal_id, dataset_id, token) => {
     let header = {
         Authorization: `Bearer ${token}`
     };
 
     let body = {
-        name
+        name,
+        dataset_id
     };
 
     try {
@@ -124,9 +125,9 @@ exports.updatePrincipal = async (name, principal_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.name,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.type,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };
@@ -153,9 +154,9 @@ exports.deletePrincipal = async (principal_id, token) => {
     } catch (error) {
         throw {
             result: error.response.data.result,
-            type: error.response.data.reason.type,
-            message: error.response.data.reason.message,
-            code: error.response.data.reason.errorCode
+            type: error.response.data.type,
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 
