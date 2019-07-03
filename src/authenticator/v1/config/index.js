@@ -11,7 +11,7 @@ module.exports = {
             method: 'POST'
         },
         validation: {
-            path: '/api/v1/identity/validate',
+            path: '/api/v1/token/validate',
             method: 'POST'
         },
         logout: {
