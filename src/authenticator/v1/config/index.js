@@ -36,7 +36,7 @@ module.exports = {
         },
         update: {
             path: (prinicpalID) => {
-                return `/api/v1/principals/update/${prinicpalID}`;
+                return `/api/v1/principals/${prinicpalID}`;
             },
             method: 'POST'
         },
