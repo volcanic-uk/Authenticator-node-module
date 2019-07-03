@@ -206,7 +206,7 @@ exports.identityLogout = async (token) => {
         return logout.response.message;
     } catch (error) {
         throw {
-            message: error.response.data.reason.message
+            message: error.response.data.message
         };
     }
 };
