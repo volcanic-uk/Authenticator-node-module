@@ -96,7 +96,7 @@ describe('principals tests', () => {
 
     it('should not update a principal that does not exist hence an error is thrown', async () => {
         try {
-            await updatePrincipalAuth(tempPrincipalName, principal_id + '123123', null);
+            await updatePrincipalAuth(tempPrincipalName, 123123, null);
             throw 'should not reach this line because the principal requested does not exist';
         } catch (e) {
             expect(e.message).to.exist;
@@ -251,7 +251,7 @@ describe('groups test', () => {
 
     it('should not pass and it will throw an error when an id provided does not exist', async () => {
         try {
-            await readGroupAuth('testingPurposes++++++++');
+            await readGroupAuth(123123);
             throw 'shoudl not read this line because the id is not valid';
         } catch (e) {
             expect(e.message).equals('Group does not exist');
@@ -306,9 +306,9 @@ describe('groups test', () => {
         }
     });
 
-    it('should not and it will throw an error pass because the group does not exist', async () => {
+    it('should not pass and it will throw an error because the group does not exist', async () => {
         try {
-            await deleteGroupAuth('testingPurposes++++++++', tmpGroupName);
+            await deleteGroupAuth(1231231, tmpGroupName);
             throw 'should not read this line because the group does not exist';
         } catch (e) {
             expect(e.message).equals('Group does not exist');
@@ -359,7 +359,7 @@ describe('services tests', () => {
 
     it('should not pass and it will throw an error this test because the id provided is not valid', async () => {
         try {
-            await readServiceAuth('some wierd id for testing purposes');
+            await readServiceAuth(1231231);
             throw 'should not reach this line because the id doesnt exist';
         } catch (e) {
             expect(e.message).equals('Service does not exist');
@@ -384,7 +384,7 @@ describe('services tests', () => {
 
     it('should not pass and it will throw an error this test because the service id provided is invalid', async () => {
         try {
-            await await updateServiceAuth(service_id + '123123dkfjnkdjb488483', tmpServiceName);
+            await await updateServiceAuth(1231231, tmpServiceName);
             throw 'must not reach this line because the id is invalid';
         } catch (e) {
             expect(e.message).equals('Service does not exist');
@@ -417,7 +417,7 @@ describe('services tests', () => {
 
     it('should not pass this test and it will throw an error because the id provided does not exist in the database', async () => {
         try {
-            await await deleteServiceAuth(service_id + '123123dkfjnkdjb488483', tmpServiceName);
+            await await deleteServiceAuth(1233214, tmpServiceName);
             throw 'should not reach this line because the service id is invalid';
         } catch (e) {
             expect(e.message).equals('Service does not exist');
@@ -454,7 +454,7 @@ describe('permissions tests', () => {
     // read permissions
     it('should not pass this test and it will throw an error, for the id provided is invalid', async () => {
         try {
-            await readPermissionAuth(permission_id + '1231231231231232');
+            await readPermissionAuth(1231234);
             throw 'can not retrieve a permissions that does not exist';
         } catch (e) {
             expect(e.message).equals('Permission does not exist');
@@ -500,7 +500,7 @@ describe('permissions tests', () => {
     // delete permissions
     it('should not pass this test and throw an error when the id is invalid upon delete request', async () => {
         try {
-            await deletePermissionAuth(principal_id + 868689666813144);
+            await deletePermissionAuth(1231234);
             throw 'must not reach this line because the id does not exist';
         } catch (e) {
             expect(e.message).equals('Permission does not exist');
@@ -599,7 +599,7 @@ describe('privileges tests', () => {
 
     it('should not pass and it will throw an error because the id provided is invalid', async () => {
         try {
-            await deletePrivilegeAuth(privilegeId + 123123123123123);
+            await deletePrivilegeAuth(1231234);
             throw 'must not reach this line, the id is invalid';
         } catch (e) {
             expect(e.message).to.exist;
