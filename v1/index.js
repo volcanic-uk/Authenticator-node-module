@@ -145,46 +145,81 @@ const localValidationAuth = async (tokenToValidate) => {
 };
 
 module.exports = {
-    identity: {
+    identities: {
         identityLogin,
         identityRegisterAuth,
         remoteIdentityValidation,
         localValidationAuth,
         identityLogout,
     },
-    principal: {
+    principalsAuth: {
         createPrincipalAuth,
         deletePrincipalAuth,
         readPrincipalAuth,
         updatePrincipalAuth,
         fetchAllPrincipalsAuth
     },
-    permissions: {
+    principals: {
+        createNewPrincipal,
+        deletePrincipal,
+        readPrincipal,
+        fetchAllPrincipals,
+        updatePrincipal
+    },
+    permissionsAuth: {
         createPermissionAuth,
         readPermissionAuth,
         updatePermissionAuth,
         deletePermissionAuth,
         fetchAllPermissionsAuth
     },
-    groups: {
+    permissions: {
+        createPermission,
+        readPermission,
+        updatePermission,
+        deletePermission,
+        fetchAllPermissions
+    },
+    groupsAuth: {
         createGroupAuth,
         readGroupAuth,
         updateGroupAuth,
         deleteGroupAuth,
         fetchAllGroupsAuth
     },
-    services: {
+    groups: {
+        createGroup,
+        readGroup,
+        readAllGroups,
+        updateGroup,
+        deleteGroup
+    },
+    servicesAuth: {
         createServiceAuth,
         readServiceAuth,
         updateServiceAuth,
         deleteServiceAuth,
         fetchAllAuth
     },
-    privilege: {
+    services: {
+        createService,
+        readService,
+        updateService,
+        deleteService,
+        fetchAll
+    },
+    privilegesAuth: {
         createPrivilegeAuth,
         readPrivilegeAuth,
         updatePrivilegeAuth,
         deletePrivilegeAuth,
         fetchAllPrivilegesAuth
+    },
+    privileges: {
+        createPrivilege,
+        readPrivilege,
+        readAllPrivileges,
+        updatePrivilege,
+        deletePrivilege
     }
 };

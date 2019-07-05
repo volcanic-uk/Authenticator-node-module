@@ -3,17 +3,17 @@ const chaiAsPromised = require('chai-as-promised');
 
 const expect = chai.expect;
 chai.use(chaiAsPromised);
-const { identityLogin, identityRegisterAuth, remoteIdentityValidation, identityLogout } = require('../v1/index').identity;
-const { createPrincipalAuth, readPrincipalAuth, updatePrincipalAuth, deletePrincipalAuth } = require('../v1/index').principal;
+const { identityLogin, identityRegisterAuth, remoteIdentityValidation, identityLogout } = require('../v1/index').identities;
+const { createPrincipalAuth, readPrincipalAuth, updatePrincipalAuth, deletePrincipalAuth } = require('../v1/index').principalsAuth;
 const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals/index');
-const { createPermissionAuth, readPermissionAuth, updatePermissionAuth, deletePermissionAuth } = require('../v1/index').permissions;
+const { createPermissionAuth, readPermissionAuth, updatePermissionAuth, deletePermissionAuth } = require('../v1/index').permissionsAuth;
 const { createPermission, readPermission, updatePermission, deletePermission } = require('../src/authenticator/v1/permissions/index');
 const { createGroup, readGroup, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
-const { createGroupAuth, readGroupAuth, updateGroupAuth, deleteGroupAuth } = require('../v1/index').groups;
+const { createGroupAuth, readGroupAuth, updateGroupAuth, deleteGroupAuth } = require('../v1/index').groupsAuth;
 const { createService, readService, updateService, deleteService } = require('../src/authenticator/v1/services');
-const { createServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').services;
+const { createServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').servicesAuth;
 const { createPrivilege, readPrivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
-const { createPrivilegeAuth, readPrivilegeAuth, updatePrivilegeAuth, deletePrivilegeAuth } = require('../v1/index').privilege;
+const { createPrivilegeAuth, readPrivilegeAuth, updatePrivilegeAuth, deletePrivilegeAuth } = require('../v1/index').privilegesAuth;
 
 // test variables 
 
