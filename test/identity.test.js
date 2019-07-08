@@ -14,6 +14,8 @@ const { createService, readService, updateService, deleteService } = require('..
 const { createServiceAuth, readServiceAuth, updateServiceAuth, deleteServiceAuth } = require('../v1/index').servicesAuth;
 const { createPrivilege, readPrivilege, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
 const { createPrivilegeAuth, readPrivilegeAuth, updatePrivilegeAuth, deletePrivilegeAuth } = require('../v1/index').privilegesAuth;
+const { createRole, readRole, readAllRoles, updateRole, deleteRole } = require('../v1/index').roles;
+const { createRoleAuth, readRoleAuth, readAllRolesAuth, updateRoleAuth, deleteRoleAuth } = require('../v1/index').rolesAuth;
 
 // test variables 
 
@@ -33,6 +35,8 @@ let group_id = null;
 let tmpServiceName = 'Volcanic' + Math.floor(Math.random() * 10000);
 let service_id = null;
 let privilegeId = null;
+let tmpRoleName = 'VolcanicRole' + Math.floor(Math.random() * 10000);
+let roleId = null;
 
 
 describe('principals tests', () => {
@@ -140,7 +144,7 @@ describe('identities tests', () => {
         try {
             await identityRegisterAuth('V' + 1, tmpIdentityPassword, principal_id);
             throw 'it should not reach this line, because the name provided is too short';
-        } catch (e){
+        } catch (e) {
             expect(e.message).to.exist;
         }
     });
@@ -301,7 +305,7 @@ describe('groups test', () => {
         try {
             await deleteGroupAuth(group_id);
             throw 'should not read this line because the group is deleted already';
-        } catch (e){
+        } catch (e) {
             expect(e.message).to.exist;
         }
     });
@@ -575,7 +579,7 @@ describe('privileges tests', () => {
 
     it('should not pass this test becuase the provied id is invalid', async () => {
         try {
-            await updatePrivilegeAuth(privilegeId+123123123, group_id, permission_id, 'some new scope for testing');
+            await updatePrivilegeAuth(privilegeId + 123123123, group_id, permission_id, 'some new scope for testing');
             throw 'should not reach this line, because the id doesnt exist';
         } catch (e) {
             expect(e.message).to.exist;
@@ -610,4 +614,132 @@ describe('privileges tests', () => {
         let deletePrev = await deletePrivilegeAuth(privilegeId);
         expect(deletePrev.message).to.exist;
     });
+});
+
+describe('roles api tests', () => {
+
+    it('will fail the test as there is no auth header token present or it is just malformed', async () => {
+        try {
+            await createRole(tmpRoleName, service_id, [1, 2], 1, 'some token');
+            throw 'it will not pass because the token is invalid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will pass when the credentials are right and the token is valid when creating a new role', async () => {
+        let create = await createRoleAuth(tmpRoleName, service_id, [1, 2], 1);
+        roleId = create.id;
+        expect(create).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail the test as there is no auth header token present or it is just malformed', async () => {
+        try {
+            await createRoleAuth(tmpRoleName, service_id, [1, 2], 1, 'some token');
+            throw 'it will not pass because the name is redundant';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    // Get role by id API
+
+    it('will fail because the header auth token is not valid', async () => {
+        try {
+            await readRole(roleId, 'some token');
+            throw 'it will not pass because the name is redundant';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will fail because the header auth token is not valid', async () => {
+        let read = await readRoleAuth(roleId);
+        expect(read).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail because the requested id is not available', async () => {
+        try {
+            await readRoleAuth(123132);
+            throw 'it will not pass because the name does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    // get all roles
+
+    it('will fail, because the header token is invalid', async () => {
+        try {
+            await readAllRoles('token');
+            throw 'should not reach here becayse the token is not valid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will pass when the token provided is valid', async () => {
+        let read = readAllRolesAuth();
+        expect(read).to.be.instanceOf(Object);
+    });
+
+    // update roles api
+
+    it('will fail on roles update request, when the auth token in the header is malfomed', async () => {
+        try {
+            await updateRole(roleId, tmpRoleName + 'update', service_id, [1, 2], 'token');
+            throw 'should not reach this line, for the token is not valid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will pass on roles update request when the data provided are valid, and the token is too', async () => {
+        let update = await updateRoleAuth(roleId, tmpRoleName + 'update', service_id, [1, 2], 1);
+        expect(update).to.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail on roles update request, when the the id provided does not exist', async () => {
+        try {
+            await updateRole(roleId + 123132, tmpRoleName + 'update', service_id, [1, 2], 1);
+            throw 'should not reach this line, for the id does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    // delete roles API
+
+    it('will fail, because the token within the header is not valid', async () => {
+        try {
+            await deleteRole(roleId, 'token');
+            throw 'should not reach this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will pass, because the id is valid, and the token is valid too', async () => {
+        let deleteIt = await deleteRoleAuth(roleId);
+        expect(deleteIt.message).to.exist;
+    });
+
+    it('will fail, because the id provided is already deleted', async () => {
+        try {
+            await deleteRoleAuth(roleId);
+            throw 'should not reach this line because the id is gone';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will fail, because the id provided does not exist', async () => {
+        try {
+            await deleteRoleAuth(roleId+123132);
+            throw 'should not reach this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
 });
