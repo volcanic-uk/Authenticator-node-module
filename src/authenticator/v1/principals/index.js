@@ -22,19 +22,11 @@ exports.createNewPrincipal = async (name, datasetID = null, token, privileges) =
 
     try {
         let create = await customFetch(routes.principal.create.method, routes.principal.create.path, header, body);
-        return {
-            name: create.response.name,
-            dataset_id: create.response.dataset_id,
-            id: create.response.id,
-            updated_at: create.response.updated_at,
-            created_at: create.response.created_at
-        };
+        return create.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
             message: error.response.data.message,
             code: error.response.data.errorCode,
-            name: error.response.data.name
         };
     }
 
@@ -54,21 +46,11 @@ exports.readPrincipal = async (principalId, token) => {
             Authorization: `Bearer ${token}`
         };
         let read = await customFetch(routes.principal.read.method, routes.principal.read.path(principalId), header, '');
-        return {
-            id: read.response.id,
-            name: read.response.name,
-            dataset_id: read.response.dataset_id,
-            last_active_date: read.response.last_active_date,
-            active: read.response.active,
-            created_at: read.response.created_at,
-            updated_at: read.response.updated_at
-        };
+        return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 
@@ -84,10 +66,8 @@ exports.fetchAllPrincipals = async (token) => {
         return fetch.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -113,21 +93,11 @@ exports.updatePrincipal = async (name, principal_id, dataset_id, token) => {
 
     try {
         let update = await customFetch(routes.principal.update.method, routes.principal.update.path(principal_id), header, body);
-        return {
-            id: update.response.id,
-            name: update.response.name,
-            dataset_id: update.response.dataset_id,
-            last_active_date: update.response.last_active_date,
-            active: update.response.active,
-            created_at: update.response.created_at,
-            updated_at: update.response.updated_at
-        };
+        return update.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.type,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -153,10 +123,8 @@ exports.deletePrincipal = async (principal_id, token) => {
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.type,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 

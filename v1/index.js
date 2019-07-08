@@ -24,6 +24,7 @@ const { createPermission, readPermission, updatePermission, deletePermission, fe
 const { createGroup, readGroup, readAllGroups, updateGroup, deleteGroup } = require('../src/authenticator/v1/groups');
 const { createService, readService, updateService, deleteService, fetchAll } = require('../src/authenticator/v1/services');
 const { createPrivilege, readPrivilege, readAllPrivileges, updatePrivilege, deletePrivilege } = require('../src/authenticator/v1/privileges');
+const { createRole, readRole, readAllRoles, updateRole, deleteRole } = require('../src/authenticator/v1/roles');
 const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
 
 const identityRegisterAuth = async (name, password = null, id, privileges) => {
@@ -139,6 +140,27 @@ const fetchAllPrivilegesAuth = async () => {
     return await readAllPrivileges(await generateToken());
 };
 
+// Roles API
+const createRoleAuth = async (name, serviceId, privileges, subject_id) => {
+    return await createRole(name, serviceId, privileges, subject_id, await generateToken());
+};
+
+const readRoleAuth = async (id) => {
+    return await readRole(id, await generateToken());
+};
+
+const readAllRolesAuth = async () => {
+    return await readAllRoles(await generateToken());
+};
+
+const updateRoleAuth = async (id, name, serviceId, privileges, subId) => {
+    return await updateRole(id, name, serviceId, privileges, subId, await generateToken());
+};
+
+const deleteRoleAuth = async (id) => {
+    return await deleteRole(id, await generateToken());
+};
+
 //token validation
 const localValidationAuth = async (tokenToValidate) => {
     return await localIdentityValidation(tokenToValidate, await generateToken());
@@ -221,5 +243,19 @@ module.exports = {
         readAllPrivileges,
         updatePrivilege,
         deletePrivilege
+    },
+    roles: {
+        createRole,
+        readRole,
+        readAllRoles,
+        updateRole,
+        deleteRole
+    },
+    rolesAuth: {
+        createRoleAuth,
+        readRoleAuth,
+        readAllRolesAuth,
+        updateRoleAuth,
+        deleteRoleAuth
     }
 };

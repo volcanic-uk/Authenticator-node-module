@@ -26,22 +26,12 @@ exports.createPermission = async (serviceId, name, description, token) => {
     try {
 
         let create = await customFetch(routes.permissions.create.method, routes.permissions.create.path, header, body);
-        return {
-            id: create.response.id,
-            name: create.response.name,
-            subject_id: create.response.subject_id,
-            service_id: create.response.service_id,
-            descriptio: create.response.description,
-            created_at: create.response.created_at,
-            updated_at: create.response.updated_at
-        };
+        return create.response;
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
             message: error.response.data.message,
             code: error.response.data.errorCode,
-            name: error.response.data.name
         };
     }
 
@@ -62,21 +52,11 @@ exports.readPermission = async (permission_id, token) => {
             Authorization: `Bearer ${token}`
         };
         let read = await customFetch(routes.permissions.read.method, routes.permissions.read.path(permission_id), header);
-        return {
-            id: read.response.id,
-            name: read.response.name,
-            description: read.response.description,
-            creator_id: read.response.creator_id,
-            active: read.response.active,
-            created_at: read.response.created_at,
-            updated_at: read.response.updated_at
-        };
+        return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -90,10 +70,8 @@ exports.fetchAllPermissions = async (token) => {
         return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -119,21 +97,11 @@ exports.updatePermission = async (permission_id, name, token) => {
 
     try {
         let update = await customFetch(routes.permissions.update.method, routes.permissions.update.path(permission_id), header, body);
-        return {
-            id: update.response.id,
-            name: update.response.name,
-            creator_id: update.response.creator_id,
-            description: update.response.description,
-            active_status: update.response.active,
-            created_at: update.response.created_at,
-            updated_at: update.response.updated_at
-        };
+        return update.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -160,10 +128,8 @@ exports.deletePermission = async (permission_id, token) => {
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };

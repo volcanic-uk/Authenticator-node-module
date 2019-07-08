@@ -36,7 +36,7 @@ exports.identityLogin = async (identityName, identityPassword, audience) => {
     } catch (error) {
         throw {
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -78,18 +78,12 @@ exports.identityRegister = async (identityName, identityPassword = null, princip
             Authorization: `Bearer ${token}`
         };
         let user = await customFetch(routes.identity.register.method, routes.identity.register.path, header, credential);
-        return {
-            id: user.response.id,
-            name: user.response.name,
-            secret: user.response.secret,
-            principal_id: user.response.principal_id,
-            created_at: user.response.created_at
-        };
+        return user.response;
 
     } catch (error) {
         throw {
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -206,7 +200,8 @@ exports.identityLogout = async (token) => {
         return logout.response.message;
     } catch (error) {
         throw {
-            message: error.response.data.message
+            message: error.response.data.message,
+            code: error.response.data.errorCode,
         };
     }
 };

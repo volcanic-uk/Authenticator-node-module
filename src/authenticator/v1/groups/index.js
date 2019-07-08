@@ -20,20 +20,12 @@ exports.createGroup = async (name, token) => {
 
     try {
         let create = await customFetch(routes.groups.create.method, routes.groups.create.path, header, body);
-        return {
-            name: create.response.name,
-            creator_id: create.response.creator_id,
-            id: create.response.id,
-            updated_at: create.response.updated_at,
-            created_at: create.response.created_at
-        };
+        return create.response;
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
             message: error.response.data.message,
             code: error.response.data.errorCode,
-            name: error.response.data.name
         };
     }
 
@@ -55,21 +47,11 @@ exports.readGroup = async (group_id, token) => {
 
     try {
         let read = await customFetch(routes.groups.read.method, routes.groups.read.path(group_id), header);
-        return {
-            id: read.response.id,
-            name: read.response.name,
-            description: read.response.description,
-            creator_id: read.response.creator_id,
-            active: read.response.active,
-            created_at: read.response.created_at,
-            updated_at: read.response.updated_at
-        };
+        return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -84,10 +66,8 @@ exports.readAllGroups = async (token) => {
         return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -113,21 +93,11 @@ exports.updateGroup = async (group_id, name, token) => {
 
     try {
         let update = await customFetch(routes.groups.update.method, routes.groups.update.path(group_id), header, body);
-        return {
-            id: update.response.id,
-            name: update.response.name,
-            creator_id: update.response.creator_id,
-            description: update.response.description,
-            active_status: update.response.active,
-            created_at: update.response.created_at,
-            updated_at: update.response.updated_at
-        };
+        return update.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -154,10 +124,8 @@ exports.deleteGroup = async (group_id, token) => {
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };

@@ -28,10 +28,8 @@ exports.createPrivilege = async (permissionId, groupId, scope, token) => {
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
             message: error.response.data.message,
             code: error.response.data.errorCode,
-            name: error.response.data.name
         };
     }
 
@@ -52,21 +50,11 @@ exports.readPrivilege = async (privilegeId, token) => {
             Authorization: `Bearer ${token}`
         };
         let read = await customFetch(routes.privileges.read.method, routes.privileges.read.path(privilegeId), header);
-        return {
-            id: read.response.id,
-            scope: read.response.scope,
-            permission_id: read.response.permission_id,
-            group_id: read.response.group_id,
-            allow: read.response.allow,
-            created_at: read.response.created_at,
-            updated_at: read.response.updated_at
-        };
+        return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -80,10 +68,8 @@ exports.readAllPrivileges = async (token) => {
         return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -111,21 +97,11 @@ exports.updatePrivilege = async (privilegeId, groupId, permissionId, scope, toke
 
     try {
         let update = await customFetch(routes.privileges.update.method, routes.privileges.update.path(privilegeId), header, body);
-        return {
-            id: update.response.id,
-            scope: update.response.scope,
-            permission_id: update.response.permission_id,
-            group_id: update.response.group_id,
-            allow: update.response.allow,
-            created_at: update.response.created_at,
-            updated_at: update.response.updated_at
-        };
+        return update.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.type,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };
@@ -152,10 +128,8 @@ exports.deletePrivilege = async (privilegeId, token) => {
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.type,
             message: error.response.data.message,
-            code: error.response.data.errorCode
+            code: error.response.data.errorCode,
         };
     }
 };

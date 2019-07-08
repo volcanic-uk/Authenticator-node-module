@@ -159,6 +159,34 @@ module.exports = {
             method: 'DELETE'
         }
     },
+    roles: {
+        create: {
+            path: '/api/v1/roles',
+            method: 'POST'
+        },
+        read: {
+            path: (role_id) => {
+                return `/api/v1/roles/${role_id}`;
+            },
+            method: 'GET'
+        },
+        readAll: {
+            path: '/api/v1/roles',
+            method: 'GET'
+        },
+        update: {
+            path: (role_id) => {
+                return `/api/v1/roles/${role_id}`;
+            },
+            method: 'POST'
+        },
+        delete: {
+            path: (role_id) => {
+                return `/api/v1/roles/${role_id}`;
+            },
+            method: 'DELETE'
+        }
+    },
     env: {
         domain: envConfigs.server.domainName
     },
