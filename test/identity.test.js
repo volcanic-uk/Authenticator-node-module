@@ -52,7 +52,6 @@ describe('principals tests', () => {
 
     it('should be a success when passing valid data, hence it will return an object carrying the created principal data', async () => {
         let principal = await createPrincipalAuth(tempPrincipalName, tempPrincipalId, [1, 2]);
-        console.log('za brince', principal);
         principal_id = principal.id;
         expect(principal).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals(tempPrincipalId);
     });

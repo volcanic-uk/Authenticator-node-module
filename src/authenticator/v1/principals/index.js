@@ -22,7 +22,6 @@ exports.createNewPrincipal = async (name, datasetID = null, token, privileges) =
 
     try {
         let create = await customFetch(routes.principal.create.method, routes.principal.create.path, header, body);
-        console.log(create.response);
         return create.response;
     } catch (error) {
         throw {
