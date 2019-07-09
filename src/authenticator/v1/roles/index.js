@@ -84,7 +84,7 @@ exports.readAllRoles = async (token) => {
  * 
  */
 
-exports.updateRole = async (RoleId, name, serviceId, privileges, subject_id, token) => {
+exports.updateRole = async (roleId, name, serviceId, privileges, subject_id, token) => {
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -97,7 +97,7 @@ exports.updateRole = async (RoleId, name, serviceId, privileges, subject_id, tok
     };
 
     try {
-        let update = await customFetch(routes.roles.update.method, routes.roles.update.path(RoleId), header, body);
+        let update = await customFetch(routes.roles.update.method, routes.roles.update.path(roleId), header, body);
         return update.response;
     } catch (error) {
         throw {

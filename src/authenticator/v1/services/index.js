@@ -24,20 +24,12 @@ exports.createService = async (name, token) => {
     try {
 
         let create = await customFetch(routes.services.create.method, routes.services.create.path, header, body);
-        return {
-            name: create.response.name,
-            creator_id: create.response.creator_id,
-            id: create.response.id,
-            updated_at: create.response.updated_at,
-            created_at: create.response.created_at
-        };
+        return create.response;
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
             message: error.response.data.message,
             code: error.response.data.errorCode
-            // name: error.response.data.name
         };
     }
 
@@ -58,19 +50,9 @@ exports.readService = async (service_id, token) => {
             Authorization: `Bearer ${token}`
         };
         let read = await customFetch(routes.services.read.method, routes.services.read.path(service_id), header);
-        return {
-            id: read.response.id,
-            name: read.response.name,
-            description: read.response.description,
-            creator_id: read.response.creator_id,
-            active: read.response.active,
-            created_at: read.response.created_at,
-            updated_at: read.response.updated_at
-        };
+        return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
             code: error.response.data.errorCode
         };
@@ -86,8 +68,6 @@ exports.fetchAll = async (token) => {
         return read.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
             code: error.response.data.errorCode
         };
@@ -115,19 +95,9 @@ exports.updateService = async (service_id, name, token) => {
 
     try {
         let update = await customFetch(routes.services.update.method, routes.services.update.path(service_id), header, body);
-        return {
-            id: update.response.id,
-            name: update.response.name,
-            creator_id: update.response.creator_id,
-            description: update.response.description,
-            active_status: update.response.active,
-            created_at: update.response.created_at,
-            updated_at: update.response.updated_at
-        };
+        return update.response;
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.name,
             message: error.response.data.message,
             code: error.response.data.errorCode
         };
@@ -156,8 +126,6 @@ exports.deleteService = async (service_id, token) => {
 
     } catch (error) {
         throw {
-            result: error.response.data.result,
-            type: error.response.data.type,
             message: error.response.data.message,
             code: error.response.data.errorCode
         };
