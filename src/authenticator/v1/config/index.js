@@ -31,7 +31,7 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query = null, datasetId = null, page = null, pageSize = null) => {
+            path: (query = '', datasetId = '', page = '', pageSize = '') => {
                 return `/api/v1/principals?query=${query}&dataset_id=${datasetId}&page=${page}&page_size=${pageSize}`;
             },
             method: 'GET'
@@ -61,7 +61,7 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query = null, page = null, pageSize = null) => {
+            path: (query = '', page = '', pageSize = '') => {
                 return `api/v1/permissions?&query=${query}&page=${page}&page_size=${pageSize}`;
             },
             method: 'GET'
@@ -91,7 +91,7 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query = null, page = null, pageSize = null) => {
+            path: (query = '', page = '', pageSize = '') => {
                 return `/api/v1/groups?query=${query}&page=${page}&page_size=${pageSize}`;
             },
             method: 'GET'

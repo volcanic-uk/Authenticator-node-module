@@ -49,8 +49,8 @@ const updatePrincipalAuth = async (name, principalId, datasetId) => {
     return await updatePrincipal(name, principalId, datasetId, await generateToken());
 };
 
-const fetchAllPrincipalsAuth = async () => {
-    return await fetchAllPrincipals(await generateToken());
+const fetchAllPrincipalsAuth = async (query ,datasetId, page, pageSize) => {
+    return await fetchAllPrincipals(await generateToken(), query ,datasetId, page, pageSize);
 };
 
 // permissions authorisation functions

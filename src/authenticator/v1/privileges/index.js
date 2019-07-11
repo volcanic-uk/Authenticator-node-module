@@ -59,12 +59,12 @@ exports.readPrivilege = async (privilegeId, token) => {
     }
 };
 
-exports.readAllPrivileges = async (token) => {
+exports.readAllPrivileges = async (token, query, page, pageSize) => {
     try {
         let header = {
             Authorization: `Bearer ${token}`
         };
-        let read = await customFetch(routes.privileges.readAll.method, routes.privileges.readAll.path, header);
+        let read = await customFetch(routes.privileges.readAll.method, routes.privileges.readAll.path(query, page, pageSize), header);
         return read.response;
     } catch (error) {
         throw {

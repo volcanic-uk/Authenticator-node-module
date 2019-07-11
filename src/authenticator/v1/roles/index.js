@@ -59,12 +59,12 @@ exports.readRole = async (RoleId, token) => {
     }
 };
 
-exports.readAllRoles = async (token) => {
+exports.readAllRoles = async (token, query, page, pageSize) => {
     try {
         let header = {
             Authorization: `Bearer ${token}`
         };
-        let read = await customFetch(routes.roles.readAll.method, routes.roles.readAll.path, header);
+        let read = await customFetch(routes.roles.readAll.method, routes.roles.readAll.path(query, page, pageSize), header);
         return read.response;
     } catch (error) {
         throw {

@@ -61,12 +61,12 @@ exports.readPermission = async (permission_id, token) => {
     }
 };
 
-exports.fetchAllPermissions = async (token) => {
+exports.fetchAllPermissions = async (token, query, page, pageSize) => {
     try {
         let header = {
             Authorization: `Bearer ${token}`
         };
-        let read = await customFetch(routes.permissions.readAll.method, routes.permissions.readAll.path, header);
+        let read = await customFetch(routes.permissions.readAll.method, routes.permissions.readAll.path(query, page, pageSize), header);
         return read.response;
     } catch (error) {
         throw {
