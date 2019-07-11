@@ -1,7 +1,7 @@
 const envConfigs = require('../../../../config');
 
 module.exports = {
-    identity : {
+    identity: {
         login: {
             path: '/api/v1/identity/login',
             method: 'POST'
@@ -31,7 +31,9 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path:  '/api/v1/principals',
+            path: (query = null, datasetId = null, page = null, pageSize = null) => {
+                return `/api/v1/principals?query=${query}&dataset_id=${datasetId}&page=${page}&page_size=${pageSize}`;
+            },
             method: 'GET'
         },
         update: {
@@ -59,7 +61,9 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: '/api/v1/permissions',
+            path: (query = null, page = null, pageSize = null) => {
+                return `api/v1/permissions?&query=${query}&page=${page}&page_size=${pageSize}`;
+            },
             method: 'GET'
         },
         update: {
@@ -87,7 +91,9 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: '/api/v1/groups/all',
+            path: (query = null, page = null, pageSize = null) => {
+                return `/api/v1/groups?query=${query}&page=${page}&page_size=${pageSize}`;
+            },
             method: 'GET'
         },
         update: {
@@ -115,7 +121,9 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: '/api/v1/privileges',
+            path: (query, page, pageSize) => {
+                return `/api/v1/privileges?&query=${query}&page=${page}&page_size=${pageSize}`;
+            },
             method: 'GET'
         },
         update: {
@@ -143,7 +151,9 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: '/api/v1/services',
+            path: (query, page, pageSize) => {
+                return `/api/v1/services?query=${query}&page=${page}&page_size=${pageSize}`;
+            },
             method: 'GET'
         },
         update: {
@@ -171,7 +181,9 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: '/api/v1/roles',
+            path: (query, page, pageSize) => {
+                return `/api/v1/roles?&query=${query}&page=${page}&page_size=${pageSize}`;
+            },
             method: 'GET'
         },
         update: {
@@ -191,7 +203,7 @@ module.exports = {
         domain: envConfigs.server.domainName
     },
     key: {
-        getPublicKey :{
+        getPublicKey: {
             path: (kid) => {
                 return `/api/v1/key/${kid}`;
             },
