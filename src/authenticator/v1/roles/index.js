@@ -10,7 +10,7 @@ const routes = require('../config');
  * 
  */
 
-exports.createRole = async (name, serviceId, privileges, subject_id, token) => {
+exports.createRole = async (name, serviceId, privileges, token) => {
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -19,7 +19,6 @@ exports.createRole = async (name, serviceId, privileges, subject_id, token) => {
         name,
         service_id :serviceId,
         privileges,
-        subject_id
     };
 
     try {
@@ -84,7 +83,7 @@ exports.readAllRoles = async (token, query, page, pageSize) => {
  * 
  */
 
-exports.updateRole = async (roleId, name, serviceId, privileges, subject_id, token) => {
+exports.updateRole = async (roleId, name, serviceId, privileges, token) => {
     let header = {
         Authorization: `Bearer ${token}`
     };
@@ -92,8 +91,7 @@ exports.updateRole = async (roleId, name, serviceId, privileges, subject_id, tok
     let body = {
         name,
         service_id: serviceId,
-        privileges,
-        subject_id
+        privileges
     };
 
     try {

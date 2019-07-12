@@ -62,7 +62,7 @@ module.exports = {
         },
         readAll: {
             path: (query = '', page = '', pageSize = '') => {
-                return `api/v1/permissions?&query=${query}&page=${page}&page_size=${pageSize}`;
+                return `/api/v1/permissions?&query=${query}&page=${page}&page_size=${pageSize}`;
             },
             method: 'GET'
         },

@@ -49,8 +49,8 @@ const updatePrincipalAuth = async (name, principalId, datasetId) => {
     return await updatePrincipal(name, principalId, datasetId, await generateToken());
 };
 
-const fetchAllPrincipalsAuth = async (query ,datasetId, page, pageSize) => {
-    return await fetchAllPrincipals(await generateToken(), query ,datasetId, page, pageSize);
+const fetchAllPrincipalsAuth = async (query, datasetId, page, pageSize) => {
+    return await fetchAllPrincipals(await generateToken(), query, datasetId, page, pageSize);
 };
 
 // permissions authorisation functions
@@ -62,8 +62,8 @@ const readPermissionAuth = async (id) => {
     return await readPermission(id, await generateToken());
 };
 
-const fetchAllPermissionsAuth = async () => {
-    return fetchAllPermissions(await generateToken());
+const fetchAllPermissionsAuth = async (query, page, pageSize) => {
+    return fetchAllPermissions(await generateToken(), query, page, pageSize);
 };
 
 const updatePermissionAuth = async (id, name) => {
@@ -141,8 +141,8 @@ const fetchAllPrivilegesAuth = async () => {
 };
 
 // Roles API
-const createRoleAuth = async (name, serviceId, privileges, subject_id) => {
-    return await createRole(name, serviceId, privileges, subject_id, await generateToken());
+const createRoleAuth = async (name, serviceId, privileges) => {
+    return await createRole(name, serviceId, privileges, await generateToken());
 };
 
 const readRoleAuth = async (id) => {
@@ -153,8 +153,8 @@ const readAllRolesAuth = async () => {
     return await readAllRoles(await generateToken());
 };
 
-const updateRoleAuth = async (id, name, serviceId, privileges, subId) => {
-    return await updateRole(id, name, serviceId, privileges, subId, await generateToken());
+const updateRoleAuth = async (id, name, serviceId, privileges) => {
+    return await updateRole(id, name, serviceId, privileges, await generateToken());
 };
 
 const deleteRoleAuth = async (id) => {
