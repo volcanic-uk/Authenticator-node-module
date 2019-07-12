@@ -92,8 +92,8 @@ const deleteGroupAuth = async (groupId) => {
     return await deleteGroup(groupId, await generateToken());
 };
 
-const fetchAllGroupsAuth = async () => {
-    return await readAllGroups(await generateToken());
+const fetchAllGroupsAuth = async (query, page, pageSize) => {
+    return await readAllGroups(await generateToken(), query, page, pageSize);
 };
 
 // services authorization functions
@@ -114,8 +114,8 @@ const deleteServiceAuth = async (serviceId) => {
     return await deleteService(serviceId, await generateToken());
 };
 
-const fetchAllAuth = async () => {
-    return await fetchAll(await generateToken());
+const fetchAllAuth = async (query, page, pageSize) => {
+    return await fetchAll(await generateToken(), query, page, pageSize);
 };
 
 // privilege with auth functions
@@ -136,8 +136,8 @@ const deletePrivilegeAuth = async (privilegeId) => {
     return await deletePrivilege(privilegeId, await generateToken());
 };
 
-const fetchAllPrivilegesAuth = async () => {
-    return await readAllPrivileges(await generateToken());
+const fetchAllPrivilegesAuth = async (query, page, pageSize) => {
+    return await readAllPrivileges(await generateToken(), query, page, pageSize);
 };
 
 // Roles API
@@ -149,8 +149,8 @@ const readRoleAuth = async (id) => {
     return await readRole(id, await generateToken());
 };
 
-const readAllRolesAuth = async () => {
-    return await readAllRoles(await generateToken());
+const readAllRolesAuth = async (query, page, pageSize) => {
+    return await readAllRoles(await generateToken(), query, page, pageSize);
 };
 
 const updateRoleAuth = async (id, name, serviceId, privileges) => {
