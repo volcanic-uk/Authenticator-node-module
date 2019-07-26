@@ -29,7 +29,10 @@ exports.generateToken = async () => {
         }
     } else {
         try {
-            await remoteIdentityValidation(existingToken);
+            if (envConfigs.server.validation === true) {
+                await remoteIdentityValidation(existingToken);
+                return existingToken;
+            } 
             return existingToken;
         } catch (e) {
             existingToken = null;

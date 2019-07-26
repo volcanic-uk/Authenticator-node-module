@@ -4,6 +4,7 @@ require('dotenv').config(); // environement config file
 module.exports = {
     server: {
         domainName: process.env.AUTH_DOMAIN,
+        validation: process.env.SERVER_TOKEN_VALIDATION
     },
     cache: {
         moduleTokenDuration: process.env.MODULE_TOKEN_DURATION,

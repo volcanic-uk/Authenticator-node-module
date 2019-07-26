@@ -56,12 +56,12 @@ exports.readPrincipal = async (principalId, token) => {
 
 };
 
-exports.fetchAllPrincipals = async (token, query, datasetId, page, pageSize) => {
+exports.fetchAllPrincipals = async (token, query = null, datasetId = null, page = null, pageSize = null, sort = 'id', order = 'asc') => {
     try {
         let header = {
             Authorization: `Bearer ${token}`
         };
-        let fetch = await customFetch(routes.principal.readAll.method, routes.principal.readAll.path(query, datasetId, page, pageSize), header);
+        let fetch = await customFetch(routes.principal.readAll.method, routes.principal.readAll.path(query, datasetId, page, pageSize, sort, order), header);
         return fetch.response;
     } catch (error) {
         throw {

@@ -31,8 +31,8 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query = '', datasetId = '', page = '', pageSize = '') => {
-                return `/api/v1/principals?query=${query}&dataset_id=${datasetId}&page=${page}&page_size=${pageSize}`;
+            path: (query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
+                return `/api/v1/principals?query=${query}&dataset_id=${datasetId}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`;
             },
             method: 'GET'
         },
@@ -61,8 +61,8 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query = '', page = '', pageSize = '') => {
-                return `/api/v1/permissions?&query=${query}&page=${page}&page_size=${pageSize}`;
+            path: (query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
+                return `/api/v1/permissions?&query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`;
             },
             method: 'GET'
         },
@@ -91,8 +91,8 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query = '', page = '', pageSize = '') => {
-                return `/api/v1/groups?query=${query}&page=${page}&page_size=${pageSize}`;
+            path: (query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
+                return `/api/v1/groups?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`;
             },
             method: 'GET'
         },
@@ -121,8 +121,8 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query, page, pageSize) => {
-                return `/api/v1/privileges?&query=${query}&page=${page}&page_size=${pageSize}`;
+            path: (query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
+                return `/api/v1/privileges?&query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`;
             },
             method: 'GET'
         },
@@ -151,8 +151,8 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query, page, pageSize) => {
-                return `/api/v1/services?query=${query}&page=${page}&page_size=${pageSize}`;
+            path: (query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
+                return `/api/v1/services?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`;
             },
             method: 'GET'
         },
@@ -181,8 +181,8 @@ module.exports = {
             method: 'GET'
         },
         readAll: {
-            path: (query, page, pageSize) => {
-                return `/api/v1/roles?&query=${query}&page=${page}&page_size=${pageSize}`;
+            path: (query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
+                return `/api/v1/roles?&query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`;
             },
             method: 'GET'
         },

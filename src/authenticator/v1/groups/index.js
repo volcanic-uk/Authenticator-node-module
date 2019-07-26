@@ -56,13 +56,13 @@ exports.readGroup = async (group_id, token) => {
     }
 };
 
-exports.readAllGroups = async (token, query, page, pageSize) => {
+exports.readAllGroups = async (token, query = null, page = null, pageSize = null, sort = 'id', order = 'asc') => {
     let header = {
         Authorization: `Bearer ${token}`
     };
 
     try {
-        let read = await customFetch(routes.groups.readAll.method, routes.groups.readAll.path(query, page, pageSize), header);
+        let read = await customFetch(routes.groups.readAll.method, routes.groups.readAll.path(query, page, pageSize, sort, order), header);
         return read.response;
     } catch (error) {
         throw {

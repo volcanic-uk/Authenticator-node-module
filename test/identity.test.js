@@ -19,23 +19,27 @@ const { createRoleAuth, readRoleAuth, readAllRolesAuth, updateRoleAuth, deleteRo
 
 // test variables 
 
-let tmpIdentityName = 'Volcanic' + Math.floor(Math.random() * 10000);
-let tmpArray = [tmpIdentityName];
-let tmpIdentityPassword = 'Password' + Math.floor(Math.random() * 10000);
-let tempPrincipalName = 'Volcanic' + Math.floor(Math.random() * 10000);
-let tempPrincipalId = Math.floor(Math.random() * 10000);
-let tmpCreatorId = Math.floor(Math.random() * 10000);
-let tempPermissionName = 'Volcanic' + Math.floor(Math.random() * 10000);
+let currentTimeStamp = Math.floor(Date.now() / 1000);
+
+let tmpRoleName = 'role-test' + currentTimeStamp;
+let tmpIdentityName = 'identity-test' + currentTimeStamp;
+let tmpIdentityPassword = 'Password' +currentTimeStamp;
+let tempPrincipalName = 'principal-test' + currentTimeStamp;
+let tempPermissionName = 'permission-test' + currentTimeStamp;
+let tmpGroupName = 'group-test' + currentTimeStamp;
+let tmpServiceName = 'service-test' + currentTimeStamp;
+
+let tmpAudienceArray = [tmpIdentityName];
+let tempPrincipalId = currentTimeStamp;
+let tmpCreatorId = currentTimeStamp;
+
 let identity = null;
 let token = null;
 let principal_id = null;
 let permission_id = null;
-let tmpGroupName = 'Volcanic' + Math.floor(Math.random() * 10000);
-let group_id = null;
-let tmpServiceName = 'Volcanic' + Math.floor(Math.random() * 10000);
 let service_id = null;
 let privilegeId = null;
-let tmpRoleName = 'VolcanicRole' + Math.floor(Math.random() * 10000);
+let group_id = null;
 let roleId = null;
 
 
@@ -46,7 +50,7 @@ describe('principals tests', () => {
             await createNewPrincipal(tempPrincipalName, tempPrincipalId, 'asdasd');
             throw 'can not create principal with malformed or no token';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -61,7 +65,7 @@ describe('principals tests', () => {
             await createPrincipalAuth(tempPrincipalName, tempPrincipalId, [1, 2]);
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
-            expect(e.message).equals(`Duplicate entry ${tempPrincipalName}`);
+            expect(e.message).to.exist;
         }
     });
 
@@ -80,12 +84,13 @@ describe('principals tests', () => {
             await readPrincipal(principal_id, 'asddas');
             throw 'should not reach this line, because the read request has no token, or it is malformed';
         } catch (e) {
-            expect(e.message).to.be.equals('Invalid JWT token');
+            expect(e.message).to.be.equals('Forbidden');
         }
     });
 
     it('should return an object if the principal is found successfully whlile passing valid data', async () => {
-        expect(readPrincipalAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
+        let read = await readPrincipalAuth(principal_id);
+        expect(read.id).to.exist;
     });
 
     //update principal
@@ -108,7 +113,8 @@ describe('principals tests', () => {
     });
 
     it('should be a success when the principal is updated, thus it will return an object carrying the new attributes for the principal', async () => {
-        expect(updatePrincipalAuth(tempPrincipalName, principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPrincipalId);
+        let update = await updatePrincipalAuth(tempPrincipalName, principal_id);
+        expect(update.dataset_id).to.exist;
     });
 
     // delete principal
@@ -118,12 +124,13 @@ describe('principals tests', () => {
             await deletePrincipal(principal_id, 'asdasdasdasdsa');
             throw 'should not reach this line, because the token is not valid';
         } catch (e) {
-            expect(e.message).equals('Invalid JWT token');
+            expect(e.message).equals('Forbidden');
         }
     });
 
     it('should return a success message upon valid request of deleting the principal via ID', async () => {
-        expect(deletePrincipalAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.property('message', 'Successfully deleted');
+        let deleted = await deletePrincipalAuth(principal_id);
+        expect(deleted.message).to.exist;
     });
 });
 
@@ -137,13 +144,9 @@ describe('identities tests', () => {
     });
 
     it('should fail and it will throw an error if the request sent carries a duplicate name for the identity', async () => {
-        await expect(identityRegisterAuth(identity.name, null, principal_id)).to.be.rejectedWith(`Duplicate entry ${identity.name}`).and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1003);
-    });
-
-    it('should not pass and it will throw an error if the identity name provided is too short upon identity registration request', async () => {
         try {
-            await identityRegisterAuth('V' + 1, tmpIdentityPassword, principal_id);
-            throw 'it should not reach this line, because the name provided is too short';
+            await identityRegisterAuth(tmpIdentityName, null, principal_id);
+            throw 'should not pass this test, make sure your function is set up properly';
         } catch (e) {
             expect(e.message).to.exist;
         }
@@ -154,16 +157,6 @@ describe('identities tests', () => {
         let identitys = await identityRegisterAuth(tmpIdentityName + 1, tmpIdentityPassword, principal_id);
         expect(identitys).to.be.an('object');
     });
-
-    // it('should not pass if the password provided is too long', async () => {
-    //     try {
-    //         await identityRegisterAuth(tmpIdentityName + 123, 'mksdfkjbsdgkbdsgkbsdgkbsfgksbfgksbfgbsfgnkrgrksfgksgsaskdjbaskbasifbdafkbdsgkbsfgbsfjgsfjhgsfjg', principal_id);
-    //         throw 'should not reach this line because the password is not valid';
-    //     } catch (e) {
-    //         console.log('long pass', e);
-    //         expect(e.message).to.exist;
-    //     }
-    // });
 
     it('should not pass and it will throw an error upon identity registration if the identity already exists', async () => {
         try {
@@ -176,13 +169,18 @@ describe('identities tests', () => {
 
     // login
     it('should pass upon succesful login and an authentication token is issued', async () => {
-        let result = await identityLogin(identity.name, identity.secret, tmpArray);
+        let result = await identityLogin(identity.name, identity.secret, tmpAudienceArray);
         token = result.token;
         expect(result.token).to.exist;
     });
 
     it('should not pass and it will throw an error upon login with invalid login credentials', async () => {
-        await expect(identityLogin(identity.name, identity.secret + 'testing purposes *&^%$', tmpArray)).to.be.rejectedWith('invalid identity name or secret').and.be.instanceOf(Object).and.eventually.has.nested.property('code').that.equals(1001);
+        try {
+            await identityLogin(identity.name, identity.secret + 'testing purposes *&^%$', tmpAudienceArray);
+            throw 'should not login, make sure your code is correct, and params are right for this test';
+        } catch (e) {
+            expect(e.code).to.equal(1001);
+        }
     });
 
     // validation
@@ -193,7 +191,7 @@ describe('identities tests', () => {
 
     it('should not pass and it will throw an error and return a result false because the token is not valid', async () => {
         let reject = await remoteIdentityValidation(token + 'testing purposes *&^%$');
-        await expect(reject).to.be.a('boolean').that.equals(false);
+        expect(reject).to.be.a('boolean').that.equals(false);
     });
 
     // logout
@@ -219,7 +217,7 @@ describe('groups test', () => {
             await createGroup(tmpGroupName, 'asdasd');
             throw 'should not reach this line because the token is not valid';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -244,7 +242,7 @@ describe('groups test', () => {
             await readGroup(tmpGroupName, 'asdasd');
             throw 'should not reach this line because the token is not valid';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -268,7 +266,7 @@ describe('groups test', () => {
             await updateGroup(group_id, 'the new name', 'asdasd');
             throw 'should not read this line because the token is not valid';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -292,7 +290,7 @@ describe('groups test', () => {
             await deleteGroup(group_id, 'asdasd');
             throw 'should not read this line because the token provided is invalid';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -327,7 +325,7 @@ describe('services tests', () => {
             await createService(tmpServiceName, 'asdasd');
             throw 'sould not reach this line as the token is malformed';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -352,7 +350,7 @@ describe('services tests', () => {
             await readService(service_id, 'asdasd');
             throw 'should not reach this line because for the token is malformed';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -377,7 +375,7 @@ describe('services tests', () => {
             await updateService(service_id, tmpServiceName, 'asdasd');
             throw 'should not reach this line, because the auth token is corrupted';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -388,7 +386,7 @@ describe('services tests', () => {
 
     it('should not pass and it will throw an error this test because the service id provided is invalid', async () => {
         try {
-            await await updateServiceAuth(1231231, tmpServiceName);
+            await updateServiceAuth(1231231, tmpServiceName);
             throw 'must not reach this line because the id is invalid';
         } catch (e) {
             expect(e.message).equals('Service does not exist');
@@ -401,7 +399,7 @@ describe('services tests', () => {
             await deleteService(service_id, 'asdasd');
             throw 'should not reach this line, because th auth header token is invalid';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -421,7 +419,7 @@ describe('services tests', () => {
 
     it('should not pass this test and it will throw an error because the id provided does not exist in the database', async () => {
         try {
-            await await deleteServiceAuth(1233214, tmpServiceName);
+            await deleteServiceAuth(1233214, tmpServiceName);
             throw 'should not reach this line because the service id is invalid';
         } catch (e) {
             expect(e.message).equals('Service does not exist');
@@ -436,7 +434,7 @@ describe('permissions tests', () => {
             await createPermission(tempPermissionName, 'the permission description', service_id, 'asdasd');
             throw 'must not reach this line as the token provided is corrupted';
         } catch (e) {
-            expect(e.message).to.be.equal('Invalid JWT token');
+            expect(e.message).to.be.equal('Forbidden');
         }
     });
 
@@ -470,12 +468,13 @@ describe('permissions tests', () => {
             await readPermission(permission_id, 'this is a token');
             throw 'should not reach this line, because your token is malformed';
         } catch (e) {
-            expect(e.message).to.be.equals('Invalid JWT token');
+            expect(e.message).to.be.equals('Forbidden');
         }
     });
 
     it('it should pass the test and returns an object upon valid permission retreival', async () => {
-        expect(readPermissionAuth(permission_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(tempPermissionName);
+        let read = await readPermissionAuth(permission_id);
+        expect(read.service_id).to.exist;
     });
 
     //update permissions
@@ -484,7 +483,7 @@ describe('permissions tests', () => {
             await updatePermission(1, permission_id, 'asdasd');
             throw 'should not reach this line because the tokenis malformed';
         } catch (e) {
-            expect(e.message).equals('Invalid JWT token');
+            expect(e.message).equals('Forbidden');
         }
     });
 
@@ -498,7 +497,8 @@ describe('permissions tests', () => {
     });
 
     it('should pass this test and return an object with the updated info upon successul permission update request', async () => {
-        expect(updatePermissionAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.nested.property('dataset_id').that.equals(principal_id);
+        let update = await updatePermissionAuth(permission_id, 'newPerm' + currentTimeStamp);
+        expect(update.id).to.exist;
     });
 
     // delete permissions
@@ -516,12 +516,13 @@ describe('permissions tests', () => {
             await deletePermission(principal_id, 'asdasdasdasdsa');
             throw 'should not reach this line, for the token is invalid';
         } catch (e) {
-            expect(e.message).equals('Invalid JWT token');
+            expect(e.message).equals('Forbidden');
         }
     });
 
-    it('shuuld pass this test, and return a message saying that the permission has been deleted', async () => {
-        expect(deletePermissionAuth(principal_id)).to.be.instanceOf(Object).and.eventually.have.property('message', 'Successfully deleted');
+    it('should pass this test, and return a message saying that the permission has been deleted', async () => {
+        let deleted = await deletePermissionAuth(permission_id);
+        expect(deleted.message).to.exist;
     });
 });
 
@@ -533,7 +534,7 @@ describe('privileges tests', () => {
             await createPrivilege(permission_id, group_id, 'some scope for testing purposes', 'asdasdasdasda');
             throw 'must not reach this line because the token is invalid';
         } catch (e) {
-            expect(e.message).to.equal('Invalid JWT token');
+            expect(e.message).to.equal('Forbidden');
         }
     });
 
@@ -549,7 +550,7 @@ describe('privileges tests', () => {
             await readPrivilege(privilegeId, 'this is a token');
             throw 'must not reach this line because the token is invalid';
         } catch (e) {
-            expect(e.message).to.equal('Invalid JWT token');
+            expect(e.message).to.equal('Forbidden');
         }
     });
 
@@ -560,7 +561,7 @@ describe('privileges tests', () => {
 
     it('should not pass this test and it will throw an error because the id provided is invalid', async () => {
         try {
-            await await readPrivilegeAuth(privilegeId + 123123);
+            await readPrivilegeAuth(privilegeId + 123123);
             throw 'should not reach this line because privilege does not exist';
         } catch (e) {
             expect(e.message).to.equal('privilege does not exist');
@@ -573,7 +574,7 @@ describe('privileges tests', () => {
             await updatePrivilege(privilegeId, group_id, permission_id, 'some new scope for testing', 'asdasdsd');
             throw 'should not reach this line, because the token is malformed';
         } catch (e) {
-            expect(e.message).to.equal('Invalid JWT token');
+            expect(e.message).to.equal('Forbidden');
         }
     });
 
@@ -597,7 +598,7 @@ describe('privileges tests', () => {
             await deletePrivilege(privilegeId, 'asdasdsd');
             throw 'must not reach this line, because the token is invalid';
         } catch (e) {
-            expect(e.message).to.equal('Invalid JWT token');
+            expect(e.message).to.equal('Forbidden');
         }
     });
 
@@ -610,7 +611,7 @@ describe('privileges tests', () => {
         }
     });
 
-    it('should pass this test and ill return an object with a message property that says it has been deleted successfully', async () => {
+    it('should pass this test and will return an object with a message property that says it has been deleted successfully', async () => {
         let deletePrev = await deletePrivilegeAuth(privilegeId);
         expect(deletePrev.message).to.exist;
     });
@@ -678,8 +679,8 @@ describe('roles api tests', () => {
         }
     });
 
-    it('will pass when the token provided is valid', async () => {
-        let read = readAllRolesAuth();
+    it('will pass when the token provided is valid, upon getting the roles', async () => {
+        let read = await readAllRolesAuth('', '', '', 'id', 'asc');
         expect(read).to.be.instanceOf(Object);
     });
 
@@ -735,7 +736,7 @@ describe('roles api tests', () => {
 
     it('will fail, because the id provided does not exist', async () => {
         try {
-            await deleteRoleAuth(roleId+123132);
+            await deleteRoleAuth(roleId + 123132);
             throw 'should not reach this line because the id is not valid';
         } catch (e) {
             expect(e.message).to.exist;
