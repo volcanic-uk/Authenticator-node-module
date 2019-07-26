@@ -61,7 +61,7 @@ exports.readPermission = async (permission_id, token) => {
     }
 };
 
-exports.fetchAllPermissions = async (token, query = null, page = null, pageSize = null, sort = 'id', order = 'asc') => {
+exports.fetchAllPermissions = async (token, query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
     try {
         let header = {
             Authorization: `Bearer ${token}`

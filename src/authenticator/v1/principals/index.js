@@ -56,7 +56,7 @@ exports.readPrincipal = async (principalId, token) => {
 
 };
 
-exports.fetchAllPrincipals = async (token, query = null, datasetId = null, page = null, pageSize = null, sort = 'id', order = 'asc') => {
+exports.fetchAllPrincipals = async (token, query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
     try {
         let header = {
             Authorization: `Bearer ${token}`

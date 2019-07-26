@@ -58,7 +58,7 @@ exports.readRole = async (RoleId, token) => {
     }
 };
 
-exports.readAllRoles = async (token, query = null, page = null, pageSize = null, sort = 'id', order = 'asc') => {
+exports.readAllRoles = async (token, query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
     try {
         let header = {
             Authorization: `Bearer ${token}`

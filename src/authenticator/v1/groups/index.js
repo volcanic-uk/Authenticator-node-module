@@ -56,7 +56,7 @@ exports.readGroup = async (group_id, token) => {
     }
 };
 
-exports.readAllGroups = async (token, query = null, page = null, pageSize = null, sort = 'id', order = 'asc') => {
+exports.readAllGroups = async (token, query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
     let header = {
         Authorization: `Bearer ${token}`
     };

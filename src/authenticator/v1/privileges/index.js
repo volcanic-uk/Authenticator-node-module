@@ -59,7 +59,7 @@ exports.readPrivilege = async (privilegeId, token) => {
     }
 };
 
-exports.readAllPrivileges = async (token, query = null, page = null, pageSize = null, sort = 'id', order = 'asc') => {
+exports.readAllPrivileges = async (token, query = '', page = '', pageSize = '', sort = 'id', order = 'asc') => {
     try {
         let header = {
             Authorization: `Bearer ${token}`
