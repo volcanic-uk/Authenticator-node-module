@@ -201,7 +201,29 @@ exports.identityLogout = async (token) => {
     } catch (error) {
         throw {
             message: error.response.data.message,
-            code: error.response.data.errorCode,
+            code: error.response.data.errorCode
+        };
+    }
+};
+
+exports.resetSecret = async (token, name, secret) => {
+    try {
+        let header = {
+            Authorization: 'Bearer ' + token
+        };
+
+        let body = {
+            name,
+            secret
+        };
+
+        let reset = await customFetch(routes.identity.resetSecret.method, routes.identity.resetSecret.path, header, body);
+        return reset.response;
+
+    } catch (error) {
+        throw {
+            message: error.response.data.message,
+            code: error.response.data.errorCode
         };
     }
 };

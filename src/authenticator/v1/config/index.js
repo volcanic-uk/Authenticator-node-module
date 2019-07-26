@@ -17,6 +17,10 @@ module.exports = {
         logout: {
             path: '/api/v1/identity/logout',
             method: 'POST'
+        },
+        resetSecret: {
+            path: '/api/v1/identity/secret/reset',
+            method: 'POST'
         }
     },
     principal: {
