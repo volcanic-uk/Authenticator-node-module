@@ -17,13 +17,14 @@ const { putToCache, getFromCache } = require('../cache');
  * this function depends on the custom fetch fucntion in the helper folder.
  * 
  */
-exports.identityLogin = async (identityName, identityPassword, audience) => {
+exports.identityLogin = async (identityName, identityPassword, audience, principal_id) => {
     const thirdPartyTokenDuration = envConfigs.cache.thirdPartyTokenDuration;
     try {
         let credentials = {
             name: identityName,
             secret: identityPassword,
-            audience: [`${audience}`]
+            audience: [`${audience}`],
+            principal_id
         };
 
         let result = await customFetch(routes.identity.login.method, routes.identity.login.path, null, credentials);

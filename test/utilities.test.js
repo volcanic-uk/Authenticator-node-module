@@ -33,7 +33,8 @@ describe('custom fetch test', () => {
     it('should return the response if all data provided are valid', async () => {
         let result = await customFetch(identity.login.method, identity.login.path, null, {
             name: 'volcanic',
-            secret: 'volcanic!123'
+            secret: 'volcanic!123',
+            principal_id: 1
         });
         token = result.response.token;
         expect(result.response.token).to.exist;

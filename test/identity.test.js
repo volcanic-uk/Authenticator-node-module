@@ -169,14 +169,14 @@ describe('identities tests', () => {
 
     // login
     it('should pass upon succesful login and an authentication token is issued', async () => {
-        let result = await identityLogin(identity.name, identity.secret, tmpAudienceArray);
+        let result = await identityLogin(identity.name, identity.secret, tmpAudienceArray, principal_id);
         token = result.token;
         expect(result.token).to.exist;
     });
 
     it('should not pass and it will throw an error upon login with invalid login credentials', async () => {
         try {
-            await identityLogin(identity.name, identity.secret + 'testing purposes *&^%$', tmpAudienceArray);
+            await identityLogin(identity.name, identity.secret + 'testing purposes *&^%$', tmpAudienceArray, principal_id);
             throw 'should not login, make sure your code is correct, and params are right for this test';
         } catch (e) {
             expect(e.code).to.equal(1001);
@@ -531,7 +531,7 @@ describe('privileges tests', () => {
     // create privileges
     it('should not pass this test and it will throw an error because the auth header token is invalid', async () => {
         try {
-            await createPrivilege(permission_id, group_id, 'some scope for testing purposes', 'asdasdasdasda');
+            await createPrivilege(permission_id, group_id, 'vrn:{stack}:{dataset}:jobs/*', 'asdasdasdasda');
             throw 'must not reach this line because the token is invalid';
         } catch (e) {
             expect(e.message).to.equal('Forbidden');
@@ -539,7 +539,7 @@ describe('privileges tests', () => {
     });
 
     it('should pass this test and return an object having the data for the new privilege created', async () => {
-        let create = await createPrivilegeAuth(permission_id, group_id, 'some scope for testing purposes');
+        let create = await createPrivilegeAuth(permission_id, group_id, 'vrn:{stack}:{dataset}:jobs/*');
         privilegeId = create.id;
         expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
@@ -587,8 +587,8 @@ describe('privileges tests', () => {
         }
     });
 
-    it('should pass this test and will return an object upon successful update delete', async () => {
-        let update = await updatePrivilegeAuth(privilegeId, group_id, permission_id, 'some new scope for testing');
+    it('should pass this test and will return an object upon successful update', async () => {
+        let update = await updatePrivilegeAuth(privilegeId, group_id, permission_id, 'vrn:{stack}:{dataset}:blogs/*');
         expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
 
