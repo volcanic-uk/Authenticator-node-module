@@ -1,5 +1,5 @@
 const { customFetch } = require('../../helpers/index');
-const envConfigs = require('../../../../config');
+const envConfigs = require('../../../config');
 
 class V1Base {
     constructor() {
