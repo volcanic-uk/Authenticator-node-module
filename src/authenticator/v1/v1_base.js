@@ -17,6 +17,10 @@ class V1Base {
 
     }
 
+    withAuth() {
+        this.internalAuth = true;
+    }
+
     async login() {
         let loginData = {
             name: envConfigs.auth.authIdentity,
