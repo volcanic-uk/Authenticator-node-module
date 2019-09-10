@@ -4,14 +4,14 @@ const envConfigs = require('../../../../config');
 const { getFromCache } = require('../cache');
 
 /**
- * 
- * @function createNewPrincipal a function to create new principal on the authentication server, which takes 2 params 
- * 
+ *
+ * @function createNewPrincipal a function to create new principal on the authentication server, which takes 2 params
+ *
  * @param name a string whcih represents the principal name desired
  * @param dataseID a number which represents the datasetID that represents the principal
- * 
+ *
  */
-exports.createNewPrincipal = async (name, datasetID=null, token) => {
+exports.createNewPrincipal = async (name, datasetID = null, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
 
     let credentials = {
@@ -46,21 +46,21 @@ exports.createNewPrincipal = async (name, datasetID=null, token) => {
 };
 
 /**
- * 
+ *
  * @function readPrincipal a function made to fetch a principal data from the auth server, which takes 1 parameter
- * 
+ *
  * @param PrincipalId the principal id desired to get his info
  * @param token is the token needed to pass to the header to authorize the action which is not required in this case
- * 
+ *
  */
 exports.readPrincipal = async (principalId, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
     try {
-        if (!token){
+        if (!token) {
             token = await getFromCache(authIdentity);
         }
         let header = {
-            Authorization: `Bearer ${token}` 
+            Authorization: `Bearer ${token}`
         };
         let read = await customFetch(routes.principal.read.method, routes.principal.read.path(principalId), header);
         return {
@@ -84,18 +84,18 @@ exports.readPrincipal = async (principalId, token) => {
 };
 
 /**
- * 
+ *
  * @function updatePrincipal a function to update he active state of a principal in the authenticator API which takes 2 primary params
- * 
+ *
  * @param active a number which is either 1 or 0 active or inactive
- * @param principal_id a number that represents the principal id needed to update
+ * @param principalID a number that represents the principal id needed to update
  * @param token which is the authorization token needed in the header to authorize the action
- * 
+ *
  */
-exports.updatePrincipal = async (active, principal_id, token) => {
+exports.updatePrincipal = async (active, principalID, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
 
-    if (!token){
+    if (!token) {
         token = await getFromCache(authIdentity);
     }
     let header = {
@@ -107,7 +107,7 @@ exports.updatePrincipal = async (active, principal_id, token) => {
     };
 
     try {
-        let update = await customFetch(routes.principal.update.method, routes.principal.update.path(principal_id), header, data);
+        let update = await customFetch(routes.principal.update.method, routes.principal.update.path(principalID), header, data);
         return {
             id: update.response.id,
             name: update.response.name,
@@ -128,17 +128,17 @@ exports.updatePrincipal = async (active, principal_id, token) => {
 };
 
 /**
- * 
+ *
  * @function deletePrincipal a function made to delete a certain principal from the authentication server which takes 1 primary param
- * 
- * @param principal_id the id needed to delete a desired principal from the auth API
+ *
+ * @param principalID the id needed to delete a desired principal from the auth API
  * @param token hich is the authorization token needed in the header to authorize the action
- * 
+ *
  */
-exports.deletePrincipal = async (principal_id, token) => {
+exports.deletePrincipal = async (principalID, token) => {
     const authIdentity = envConfigs.auth.authIdentity;
 
-    if (!token){
+    if (!token) {
         token = await getFromCache(authIdentity);
     }
     let header = {
@@ -146,13 +146,13 @@ exports.deletePrincipal = async (principal_id, token) => {
     };
 
     try {
-        let deletePrincipal = await customFetch(routes.principal.delete.method, routes.principal.delete.path(principal_id), header);
+        let deletePrincipal = await customFetch(routes.principal.delete.method, routes.principal.delete.path(principalID), header);
         return {
             message: deletePrincipal.response.message
         };
 
     } catch (error) {
-        throw  {
+        throw {
             result: error.response.data.result,
             type: error.response.data.reason.name,
             message: error.response.data.reason.message,
