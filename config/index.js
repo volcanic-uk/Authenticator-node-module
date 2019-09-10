@@ -1,4 +1,4 @@
-require('dotenv').config(); // environement config file 
+require('dotenv').config(); // environement config file
 
 
 module.exports = {
@@ -13,6 +13,7 @@ module.exports = {
     auth: {
         authIdentity: process.env.IDENTITY,
         authSecret: process.env.SECRET,
+        principalID: process.env.PRINCIPAL_ID,
         audience: process.env.DEFAULT_AUDIENCE
     },
     logging: {
