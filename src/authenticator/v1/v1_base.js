@@ -6,10 +6,16 @@ class V1Base {
     constructor() {
         this.internalAuth = false;
         this.baseURL = '/api/v1/';
+        this.token = null;
+    }
+
+    setToken(token) {
+        this.token = token;
+        return this;
     }
 
     async fetch(methodType, path, headers, data) {
-        let _headers = headers;
+        let _headers = { ...headers, Authorization: this.token };
         if (this.internalAuth) {
             let token = await this.obtainToken();
             _headers = {
