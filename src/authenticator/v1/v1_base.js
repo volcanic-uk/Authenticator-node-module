@@ -15,7 +15,7 @@ class V1Base {
     }
 
     async fetch(methodType, path, headers, data) {
-        let _headers = { ...headers, Authorization: this.token };
+        let _headers = { ...headers, Authorization: `Bearer ${this.token}` };
         if (this.internalAuth) {
             let token = await this.obtainToken();
             _headers = {
