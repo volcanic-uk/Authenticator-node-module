@@ -5,15 +5,27 @@ const envConfigs = require('../../../config');
 class V1Base {
     constructor() {
         this.internalAuth = false;
+        this.baseURL = '/api/v1/';
     }
 
     async fetch(methodType, path, headers, data) {
+        let _headers = headers;
         if (this.internalAuth) {
             let token = await this.obtainToken();
-            return await customFetch(methodType, path, { ...headers, Authorization: `Bearer ${token}` }, data);
+            _headers = {
+                ...headers,
+                Authorization: `Bearer ${token}`
+            };
         }
-        return await customFetch(methodType, path, headers, data);
-
+        try {
+            return await customFetch(methodType, this.baseURL + path, _headers, data);
+        } catch (e) {
+            // console.log(e);
+            throw {
+                status: e.response.status,
+                ...e.response.data
+            };
+        }
     }
 
     withAuth() {
@@ -22,8 +34,7 @@ class V1Base {
     }
 
     async obtainToken() {
-        let token = null;
-        token = await getFromCache('internal_token');
+        let token = await getFromCache('internal_token');
         if (!token) {
             let loginResponse = await this.login();
             token = loginResponse.response.token;
