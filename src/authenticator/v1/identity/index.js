@@ -1,39 +1,25 @@
 // require the custom api fetch from the helpers module folder
-const routes = require('../config');
-const envConfigs = require('../../../../config');
-const { getFromCache } = require('../../cache');
 const V1Base = require('../v1_base');
-
 class Identity extends V1Base {
     constructor() {
         super();
     }
 
     //identity register method
-    async create(identityName, identityPassword = null, principalId, token) {
-        const authIdentity = envConfigs.auth.authIdentity;
+    async create(identityName, identitySecret = null, principalId, token) {
         try {
-            if (!token) {
-                token = await getFromCache(authIdentity);
-            }
-            let credential = {
+            let identity = {
                 name: identityName,
-                secret: identityPassword,
+                secret: identitySecret,
                 principal_id: principalId
             };
             let header = {
                 Authorization: `Bearer ${token}`
             };
-            let user = await super.fetch('post', 'identity', header, credential);
-            return {
-                id: user.response.id,
-                name: user.response.name,
-                secret: user.response.secret,
-                principal_id:principalId
-            };
+            return await super.fetch('post', 'identity', header, identity);
 
         } catch (error) {
-            throw error.response.data;
+            throw error;
         }
     }
 
@@ -118,17 +104,10 @@ class Identity extends V1Base {
             let header = {
                 Authorization: 'Bearer ' + token
             };
-
-            let logout = await super.fetch(routes.identity.logout.method, routes.identity.logout.path, header, null);
-            return logout.response.message;
-        } catch (error) {
-            throw {
-                message: error.response.data.reason.message
-            };
+            return await super.fetch('post', 'identity/logout', header, null);
+        } catch (e) {
+            throw e;
         }
     }
-
-
 }
-
 module.exports = Identity;

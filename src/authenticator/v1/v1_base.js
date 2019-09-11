@@ -18,11 +18,13 @@ class V1Base {
             };
         }
         try {
-            return await customFetch(methodType, this.baseURL + path, _headers, data);
+            let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
+            return { ...httpResponse, status: true };
         } catch (e) {
             // console.log(e);
             throw {
-                status: e.response.status,
+                statusCode: e.response.status,
+                status: false,
                 ...e.response.data
             };
         }
