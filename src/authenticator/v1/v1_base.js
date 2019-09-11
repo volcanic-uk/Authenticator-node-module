@@ -6,10 +6,16 @@ class V1Base {
     constructor() {
         this.internalAuth = false;
         this.baseURL = '/api/v1/';
+        this.token = null;
+    }
+
+    setToken(token) {
+        this.token = token;
+        return this;
     }
 
     async fetch(methodType, path, headers, data) {
-        let _headers = headers;
+        let _headers = { ...headers, Authorization: this.token };
         if (this.internalAuth) {
             let token = await this.obtainToken();
             _headers = {
@@ -18,11 +24,13 @@ class V1Base {
             };
         }
         try {
-            return await customFetch(methodType, this.baseURL + path, _headers, data);
+            let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
+            return { ...httpResponse, status: true };
         } catch (e) {
             // console.log(e);
             throw {
-                status: e.response.status,
+                statusCode: e.response.status,
+                status: false,
                 ...e.response.data
             };
         }
@@ -36,14 +44,14 @@ class V1Base {
     async obtainToken() {
         let token = await getFromCache('internal_token');
         if (!token) {
-            let loginResponse = await this.login();
+            let loginResponse = await this.internalLogin();
             token = loginResponse.response.token;
             await putToCache('internal_token', token);
         }
         return token;
     }
 
-    async login() {
+    async internalLogin() {
         let loginData = {
             name: envConfigs.auth.authIdentity,
             secret: envConfigs.auth.authSecret,
