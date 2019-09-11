@@ -8,6 +8,7 @@ let tmpIdentityName = `identity-${currentTimestampSecond}`;
 let tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`;
 let tmpIdentitySecret = `identity-password-${currentTimestampSecond}`;
 let tmpPrincipalID = 1;
+let identityCreation;
 require('dotenv').config();
 let loginToken;
 before(async () => {
@@ -48,7 +49,7 @@ describe('identity login tests', () => {
 describe('identity create tests', () => {
     describe('with auth', async () => {
         it('creating a new identity', async () => {
-            let identityCreation = await new Identity().withAuth().create(tmpIdentityName, null, tmpPrincipalID);
+            identityCreation = await new Identity().withAuth().create(tmpIdentityName, null, tmpPrincipalID);
             expect(identityCreation).to.be.an('object');
         });
         it('creating a new identity with secret', async () => {
@@ -126,6 +127,14 @@ describe('identity create tests', () => {
     });
     //register with auth
 
+});
+describe('identity update', async () => {
+    describe('with auth', async () => {
+        it('should update an identity', async () => {
+            let updatedIdentity = await new Identity().withAuth().update(`updated-name-${currentTimestampSecond}`, identityCreation.response.id);
+            expect(updatedIdentity.response.name).to.equal(`updated-name-${currentTimestampSecond}`);
+        });
+    });
 });
 describe('identity logout tests', async () => {
     describe('with auth', async () => {

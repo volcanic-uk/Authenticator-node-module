@@ -31,6 +31,13 @@ class Identity extends V1Base {
         return await super.fetch('post', 'identity', header, identity);
     }
 
+    async update(identityName, identityId, header) {
+        let identity = {
+            name: identityName
+        };
+        return await super.fetch('post', `identity/${identityId}`, header, identity);
+    }
+
     // async remoteValidation(token) {
     //     try {
     //         let data = {
