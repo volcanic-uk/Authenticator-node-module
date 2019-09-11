@@ -4,7 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect;
 chai.use(chaiAsPromised);
 
-const principalClass = require('../src/authenticator/v1/principals');
+const principalClass = require('../v1').Principal;
 
 // test variables
 let currentTimeStamp = Math.floor(Date.now() / 1000);
