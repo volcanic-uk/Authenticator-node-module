@@ -15,7 +15,7 @@ class V1Base {
     }
 
     async fetch(methodType, path, headers, data) {
-        let _headers = { ...headers, Authorization: this.token };
+        let _headers = { ...headers, Authorization: `Bearer ${this.token}` };
         if (this.internalAuth) {
             let token = await this.obtainToken();
             _headers = {
@@ -27,7 +27,6 @@ class V1Base {
             let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
             return { ...httpResponse, status: true };
         } catch (e) {
-            // console.log(e);
             throw {
                 statusCode: e.response.status,
                 status: false,
