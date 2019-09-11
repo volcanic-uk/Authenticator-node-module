@@ -28,7 +28,8 @@ class Identity extends V1Base {
             return {
                 id: user.response.id,
                 name: user.response.name,
-                secret: user.response.secret
+                secret: user.response.secret,
+                principal_id:principalId
             };
 
         } catch (error) {
