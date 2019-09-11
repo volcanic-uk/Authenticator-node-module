@@ -18,52 +18,7 @@
 
 // local dependencies & modules call
 
-const { identityLogin, identityRegister, remoteIdentityValidation, localIdentityValidation, identityLogout } = require('../src/authenticator/v1/identity');
-const { createNewPrincipal, deletePrincipal, readPrincipal, updatePrincipal } = require('../src/authenticator/v1/principals');
-const { generateToken } = require('../src/authenticator/v1/middlewares/midWithAuth');
-
-const identityRegisterAuth = async (name, password = null, id) => {
-    return await identityRegister(name, password, id, await generateToken());
-};
-
-const createPrincipalAuth = async (name, datasetID) => {
-    return await createNewPrincipal(name, datasetID, await generateToken());
-};
-
-const deletePrincipalAuth = async (principalId) => {
-    return await deletePrincipal(principalId, await generateToken());
-};
-
-const readPrincipalAuth = async (principalID) => {
-    return await readPrincipal(principalID, await generateToken());
-};
-
-const updatePrincipalAuth = async (active, principalID) => {
-    return await updatePrincipal(active, principalID, await generateToken());
-};
-
-const localValidationAuth = async (tokenToValidate) => {
-    return await localIdentityValidation(tokenToValidate, await generateToken());
-};
-
+const Identity = require('../src/authenticator/v1/identity');
 module.exports = {
-    identity: {
-        identityLogin,
-        identityRegisterAuth,
-        remoteIdentityValidation,
-        localValidationAuth,
-        identityLogout,
-    },
-    principalWithAuth: {
-        createPrincipalAuth,
-        deletePrincipalAuth,
-        readPrincipalAuth,
-        updatePrincipalAuth
-    },
-    principal: {
-        createNewPrincipal,
-        deletePrincipal,
-        readPrincipal,
-        updatePrincipal
-    }
+    Identity
 };

@@ -1,4 +1,4 @@
-const { putToCache, getFromCache } = require('../cache');
+const { putToCache, getFromCache } = require('../../cache');
 const { identityLogin, remoteIdentityValidation } = require('../identity');
 const envConfigs = require('../../../../config');
 

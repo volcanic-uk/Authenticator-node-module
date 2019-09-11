@@ -1,7 +1,7 @@
 const customFetch = require('../../../helpers').customFetch;
 const routes = require('../config');
 const envConfigs = require('../../../../config');
-const { getFromCache } = require('../cache');
+const { getFromCache } = require('../../cache');
 
 /**
  *

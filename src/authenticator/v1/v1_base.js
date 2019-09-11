@@ -19,6 +19,7 @@ class V1Base {
 
     withAuth() {
         this.internalAuth = true;
+        return this;
     }
 
     async login() {

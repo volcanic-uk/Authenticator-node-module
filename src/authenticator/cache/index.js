@@ -1,5 +1,5 @@
 const cache = require('memory-cache');
-const config = require('../../../../config');
+const config = require('../../../config');
 
 /**
  * @function addTokenToCache this is an asynchronous function that accepts 3 parameters the key for the token, the value which is the token itself, and then
