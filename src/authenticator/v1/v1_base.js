@@ -25,9 +25,8 @@ class V1Base {
         }
         try {
             let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
-            return { ...httpResponse, status: true };
+            return { ...httpResponse.response, status: true };
         } catch (e) {
-            // console.log(e);
             throw {
                 statusCode: e.response.status,
                 status: false,
