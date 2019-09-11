@@ -14,7 +14,7 @@ module.exports = {
         authIdentity: process.env.IDENTITY,
         authSecret: process.env.SECRET,
         principalID: process.env.PRINCIPAL_ID,
-        audience: process.env.DEFAULT_AUDIENCE
+        audience: [process.env.DEFAULT_AUDIENCE] || ['*']
     },
     logging: {
         logs: process.env.ENABLE_LOGGING
