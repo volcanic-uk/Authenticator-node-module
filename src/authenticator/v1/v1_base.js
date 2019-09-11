@@ -44,14 +44,14 @@ class V1Base {
     async obtainToken() {
         let token = await getFromCache('internal_token');
         if (!token) {
-            let loginResponse = await this.login();
+            let loginResponse = await this.internalLogin();
             token = loginResponse.response.token;
             await putToCache('internal_token', token);
         }
         return token;
     }
 
-    async login() {
+    async internalLogin() {
         let loginData = {
             name: envConfigs.auth.authIdentity,
             secret: envConfigs.auth.authSecret,
