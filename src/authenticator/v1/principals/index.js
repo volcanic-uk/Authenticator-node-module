@@ -10,12 +10,7 @@ class Principal extends V1Base {
             name: name,
             dataset_id: datasetID
         };
-
-        try {
-            return await super.fetch('post', 'principals', header, principal);
-        } catch (e) {
-            throw e;
-        }
+        return await super.fetch('post', 'principals', header, principal);
     }
 
     async getByID(id, header) {
@@ -23,12 +18,8 @@ class Principal extends V1Base {
     }
 
 
-    async getAll(header, query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
-        try {
-            return await super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&${pageSize}&sort=${sort}&order=${order}`, header);
-        } catch (e) {
-            throw e;
-        }
+    async getPrincipals(header, query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
+        return await super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&${pageSize}&sort=${sort}&order=${order}`, header);
     }
 
     async update(id, name = null, datasetId = null, header) {
@@ -36,20 +27,11 @@ class Principal extends V1Base {
             name,
             dataset_id: datasetId
         };
-
-        try {
-            return await super.fetch('post', `principals/${id}`, header, data);
-        } catch (e) {
-            throw e;
-        }
+        return await super.fetch('post', `principals/${id}`, header, data);
     }
 
     async delete(id, header) {
-        try {
-            return await super.fetch('delete', `principals/${id}`, header);
-        } catch (e) {
-            throw e;
-        }
+        return await super.fetch('delete', `principals/${id}`, header);
     }
 }
 

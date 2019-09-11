@@ -4,7 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect;
 chai.use(chaiAsPromised);
 
-const principalClass = require('../v1').Principal;
+const Principal = require('../v1').Principal;
 
 // test variables
 let currentTimeStamp = Math.floor(Date.now() / 1000);
@@ -27,10 +27,10 @@ let principalID = null;
 
 describe('principals tests', () => {
     // principal creation
-    let Principal = new principalClass();
+    let principal = new Principal();
     it('should fail if principal creation function is called without a valid token and it will throw an error', async () => {
         try {
-            await Principal.create(tempPrincipalName, tempDataSetID);
+            await principal.create(tempPrincipalName, tempDataSetID);
             throw 'can not create principal with malformed or no token';
         } catch (e) {
             expect(e.message).to.be.equal('Forbidden');
@@ -38,14 +38,14 @@ describe('principals tests', () => {
     });
 
     it('should be a success when passing valid data, hence it will return an object carrying the created principal data', async () => {
-        let principal = await Principal.withAuth().create(tempPrincipalName, tempDataSetID);
-        principalID = principal.id;
-        expect(principal).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals(tempDataSetID);
+        let create = await principal.withAuth().create(tempPrincipalName, tempDataSetID);
+        principalID = create.id;
+        expect(create).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals(tempDataSetID);
     });
 
     it('should not create a principal and it will throw an error if the name already exist', async () => {
         try {
-            await await Principal.withAuth().create(tempPrincipalName, tempDataSetID);
+            await await principal.withAuth().create(tempPrincipalName, tempDataSetID);
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
             expect(e.message).to.exist;
@@ -55,7 +55,7 @@ describe('principals tests', () => {
     // reading principal
     it('should not proceed if the principal does not exist upon read request, and it will throw an error', async () => {
         try {
-            await Principal.withAuth().getByID(principalID + 12);
+            await principal.withAuth().getByID(principalID + 12);
             throw 'can not retrieve a principal that does not exist';
         } catch (e) {
             expect(e.message).equals('Principal does not exist');
@@ -64,7 +64,7 @@ describe('principals tests', () => {
 
     it('should fail when requesting a read request when there is no token in the request header, and it will throw an error', async () => {
         try {
-            await new principalClass().getByID(principalID);
+            await new Principal().getByID(principalID);
             throw 'should not reach this line, because the read request has no token, or it is malformed';
         } catch (e) {
             expect(e.message).to.be.equals('Forbidden');
@@ -72,14 +72,14 @@ describe('principals tests', () => {
     });
 
     it('should return an object if the principal is found successfully whlile passing valid data', async () => {
-        let read = await Principal.getByID(principalID);
+        let read = await principal.getByID(principalID);
         expect(read.id).to.exist;
     });
 
     //update principal
     it('upon principal update, the request should not be completed if there is no authorization token in the request header, and it will throw an error', async () => {
         try {
-            await new principalClass().update(principalID, 'new name', 12);
+            await new Principal().update(principalID, 'new name', 12);
             throw 'should not read this line because the update request has no token, or it is malformed';
         } catch (e) {
             expect(e.message).to.exist;
@@ -88,7 +88,7 @@ describe('principals tests', () => {
 
     it('should not update a principal that does not exist hence an error is thrown', async () => {
         try {
-            await Principal.update(principalID + 12, 'new name', 12);
+            await principal.update(principalID + 12, 'new name', 12);
             throw 'should not reach this line because the principal requested does not exist';
         } catch (e) {
             expect(e.message).to.exist;
@@ -96,7 +96,7 @@ describe('principals tests', () => {
     });
 
     it('should be a success when the principal is updated, thus it will return an object carrying the new attributes for the principal', async () => {
-        let update = await Principal.withAuth().update(principalID, 'new name', 12);
+        let update = await principal.withAuth().update(principalID, 'new name', 12);
         expect(update.dataset_id).to.exist;
     });
 
@@ -104,7 +104,7 @@ describe('principals tests', () => {
 
     it('should not pass upon deleting because the header does not have a valid authorization token, and it will throw an error', async () => {
         try {
-            await new principalClass().delete(principalID);
+            await new Principal().delete(principalID);
             throw 'should not reach this line, because the token is not valid';
         } catch (e) {
             expect(e.message).equals('Forbidden');
@@ -112,7 +112,7 @@ describe('principals tests', () => {
     });
 
     it('should return a success message upon valid request of deleting the principal via ID', async () => {
-        let deleted = await Principal.withAuth().delete(principalID);
+        let deleted = await principal.withAuth().delete(principalID);
         expect(deleted.message).to.exist;
     });
 });

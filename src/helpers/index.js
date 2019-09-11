@@ -1,6 +1,5 @@
 // Third party modules includes here:
 const axios = require('axios');
-const envVars = require('../authenticator/v1/config');
 const envConfigs = require('../../config');
 const jwt = require('jsonwebtoken');
 
@@ -20,7 +19,7 @@ exports.customFetch = async (methodType = 'get', path, headers, data = null) => 
     try {
         let response = await axios({
             method: methodType,
-            url: envVars.env.domain + path,
+            url: envConfigs.server.domainName + path,
             headers: {
                 ...headers
             },
