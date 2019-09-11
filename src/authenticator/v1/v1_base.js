@@ -1,4 +1,5 @@
 const { customFetch } = require('../../helpers/index');
+const { getFromCache, putToCache } = require('../cache');
 const envConfigs = require('../../../config');
 
 class V1Base {
@@ -7,10 +8,8 @@ class V1Base {
     }
 
     async fetch(methodType, path, headers, data) {
-        let token = null;
         if (this.internalAuth) {
-            token = await this.login();
-            token = token.response.token;
+            let token = await this.obtainToken();
             return await customFetch(methodType, path, { ...headers, Authorization: `Bearer ${token}` }, data);
         }
         return await customFetch(methodType, path, headers, data);
@@ -19,6 +18,18 @@ class V1Base {
 
     withAuth() {
         this.internalAuth = true;
+        return this;
+    }
+
+    async obtainToken() {
+        let token = null;
+        token = await getFromCache('internal_token');
+        if (!token) {
+            let loginResponse = await this.login();
+            token = loginResponse.response.token;
+            await putToCache('internal_token', token);
+        }
+        return token;
     }
 
     async login() {

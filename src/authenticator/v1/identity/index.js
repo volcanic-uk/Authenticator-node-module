@@ -3,7 +3,7 @@ const { customFetch, logger } = require('../../../helpers/index');
 const routes = require('../config');
 const envConfigs = require('../../../../config');
 const jwt = require('jsonwebtoken');
-const { putToCache, getFromCache } = require('../cache');
+const { putToCache, getFromCache } = require('../../cache');
 
 /**
  *
