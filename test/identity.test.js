@@ -9,7 +9,8 @@ let tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`;
 let tmpIdentitySecret = `identity-password-${currentTimestampSecond}`;
 let tmpPrincipalID = 1;
 require('dotenv').config();
-describe('identity tests', () => {
+
+describe('identity  register tests', () => {
     //register with auth
     it('creating a new identity', async () => {
         let identityCreation = await new Identity().withAuth().create(tmpIdentityName, null, tmpPrincipalID);
@@ -50,6 +51,8 @@ describe('identity tests', () => {
     //     let token = await new Identity().withAuth().remoteValidation();
     //     expect(token).to.equal(true);
     // });
+});
+describe('identity logout tests', async () => {
     it('should logout an identity', async () => {
         let logout = await new Identity().withAuth().logout();
         expect(logout).to.be.an('object');
