@@ -1,5 +1,6 @@
 // require the custom api fetch from the helpers module folder
 const V1Base = require('../v1_base');
+
 class Identity extends V1Base {
     constructor() {
         super();
@@ -7,20 +8,16 @@ class Identity extends V1Base {
 
     //identity register method
     async create(identityName, identitySecret = null, principalId, token) {
-        try {
-            let identity = {
-                name: identityName,
-                secret: identitySecret,
-                principal_id: principalId
-            };
-            let header = {
-                Authorization: `Bearer ${token}`
-            };
-            return await super.fetch('post', 'identity', header, identity);
+        let identity = {
+            name: identityName,
+            secret: identitySecret,
+            principal_id: principalId
+        };
+        let header = {
+            Authorization: `Bearer ${token}`
+        };
+        return await super.fetch('post', 'identity', header, identity);
 
-        } catch (error) {
-            throw error;
-        }
     }
 
     // async remoteValidation(token) {
@@ -100,14 +97,10 @@ class Identity extends V1Base {
     // }
 
     async logout(token) {
-        try {
-            let header = {
-                Authorization: 'Bearer ' + token
-            };
-            return await super.fetch('post', 'identity/logout', header, null);
-        } catch (e) {
-            throw e;
-        }
+        let header = {
+            Authorization: 'Bearer ' + token
+        };
+        return await super.fetch('post', 'identity/logout', header, null);
     }
 }
 module.exports = Identity;
