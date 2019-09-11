@@ -1,25 +1,46 @@
 const { customFetch } = require('../../helpers/index');
+const { getFromCache, putToCache } = require('../cache');
 const envConfigs = require('../../../config');
 
 class V1Base {
     constructor() {
         this.internalAuth = false;
+        this.baseURL = '/api/v1/';
     }
 
     async fetch(methodType, path, headers, data) {
-        let token = null;
+        let _headers = headers;
         if (this.internalAuth) {
-            token = await this.login();
-            token = token.response.token;
-            return await customFetch(methodType, path, { ...headers, Authorization: `Bearer ${token}` }, data);
+            let token = await this.obtainToken();
+            _headers = {
+                ...headers,
+                Authorization: `Bearer ${token}`
+            };
         }
-        return await customFetch(methodType, path, headers, data);
-
+        try {
+            return await customFetch(methodType, this.baseURL + path, _headers, data);
+        } catch (e) {
+            // console.log(e);
+            throw {
+                status: e.response.status,
+                ...e.response.data
+            };
+        }
     }
 
     withAuth() {
         this.internalAuth = true;
         return this;
+    }
+
+    async obtainToken() {
+        let token = await getFromCache('internal_token');
+        if (!token) {
+            let loginResponse = await this.login();
+            token = loginResponse.response.token;
+            await putToCache('internal_token', token);
+        }
+        return token;
     }
 
     async login() {

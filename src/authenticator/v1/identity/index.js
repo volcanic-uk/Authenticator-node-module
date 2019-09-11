@@ -10,7 +10,7 @@ class Identity extends V1Base {
     }
 
     //identity register method
-    async register(identityName, identityPassword = null, principalId, token) {
+    async create(identityName, identityPassword = null, principalId, token) {
         const authIdentity = envConfigs.auth.authIdentity;
         try {
             if (!token) {
@@ -24,7 +24,7 @@ class Identity extends V1Base {
             let header = {
                 Authorization: `Bearer ${token}`
             };
-            let user = await super.fetch(routes.identity.register.method, routes.identity.register.path, header, credential);
+            let user = await super.fetch('post', 'identity', header, credential);
             return {
                 id: user.response.id,
                 name: user.response.name,
