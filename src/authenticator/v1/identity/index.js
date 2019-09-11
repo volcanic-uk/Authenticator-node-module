@@ -7,7 +7,7 @@ class Identity extends V1Base {
     }
 
     //identity login method
-    async login(identityName, identitySecret, audience,principalId) {
+    async login(identityName, identitySecret, audience, principalId) {
         let loginDetails = {
             name: identityName,
             secret: identitySecret,
@@ -28,7 +28,7 @@ class Identity extends V1Base {
             secret: identitySecret,
             principal_id: principalId
         };
-        return await super.fetch('post', 'identity',header, identity);
+        return await super.fetch('post', 'identity', header, identity);
     }
 
     // async remoteValidation(token) {

@@ -2,18 +2,22 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect;
 chai.use(chaiAsPromised);
+
 const Identity = require('../v1/index').Identity;
+
 let currentTimestampSecond = Math.floor(Date.now() / 1000);
 let tmpIdentityName = `identity-${currentTimestampSecond}`;
 let tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`;
 let tmpIdentitySecret = `identity-password-${currentTimestampSecond}`;
 let tmpPrincipalID = 1;
-require('dotenv').config();
+
+// require('dotenv').config();
 describe('identity login tests', () => {
     it('login identity', async () => {
         let identityLogin = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
         expect(identityLogin).to.be.an('object');
     });
+
     it('login identity without principal id', async () => {
         try {
             await new Identity().login('volcanic', 'volcanic!123', ['kratakao']);
@@ -22,6 +26,7 @@ describe('identity login tests', () => {
             expect(e).to.be.exist;
         }
     });
+
     it('login identity with invalid credentials (name)', async () => {
         try {
             await new Identity().login(`volcanic-invalid ${currentTimestampSecond}`, 'volcanic!123', ['kratakao'], 1);
@@ -30,25 +35,28 @@ describe('identity login tests', () => {
             expect(e).to.be.exist;
         }
     });
+
     it('login identity with invalid credentials (password)', async () => {
         try {
-            await new Identity().login(`volcanic`, `volcanic${currentTimestampSecond}`, ['kratakao'], 1);
+            await new Identity().login('volcanic', `volcanic${currentTimestampSecond}`, ['kratakao'], 1);
         } catch (e) {
             expect(e.errorCode).to.equal(1001);
             expect(e).to.be.exist;
         }
     });
-})
+});
 describe('identity create tests', () => {
     //register with auth
     it('creating a new identity', async () => {
         let identityCreation = await new Identity().withAuth().create(tmpIdentityName, null, tmpPrincipalID);
         expect(identityCreation).to.be.an('object');
     });
+
     it('creating a new identity with secret', async () => {
         let identityCreationWithSecret = await new Identity().withAuth().create(tmpIdentityNameWithSecret, tmpIdentitySecret, tmpPrincipalID);
         expect(identityCreationWithSecret).to.be.an('object');
     });
+
     it('should not create a duplicate identity record', async () => {
         try {
             await new Identity().withAuth().create(tmpIdentityNameWithSecret, tmpIdentitySecret, tmpPrincipalID);
@@ -58,6 +66,7 @@ describe('identity create tests', () => {
             expect(e).to.exist;
         }
     });
+
     it('creating an identity record without principal_id', async () => {
         try {
             await new Identity().withAuth().create(tmpIdentityNameWithSecret, tmpIdentitySecret, null);
@@ -67,6 +76,7 @@ describe('identity create tests', () => {
             expect(e).to.exist;
         }
     });
+
     it('creating an identity record without name', async () => {
         try {
             await new Identity().withAuth().create(null, tmpIdentitySecret, null);
@@ -76,16 +86,15 @@ describe('identity create tests', () => {
             expect(e).to.exist;
         }
     });
-    // it('should remote validate a token', async () => {
-    //     let token = await new Identity().withAuth().remoteValidation();
-    //     expect(token).to.equal(true);
-    // });
+
 });
+
 describe('identity logout tests', async () => {
     it('should logout an identity', async () => {
         let logout = await new Identity().withAuth().logout();
         expect(logout).to.be.an('object');
     });
+
     it('should not logout an already logged out identity', async () => {
         try {
             await new Identity().withAuth().logout();
@@ -95,6 +104,5 @@ describe('identity logout tests', async () => {
             expect(e.errorCode).to.equal(3001);
             expect(e).to.exist;
         }
-
     });
 });
