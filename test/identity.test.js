@@ -9,8 +9,37 @@ let tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`;
 let tmpIdentitySecret = `identity-password-${currentTimestampSecond}`;
 let tmpPrincipalID = 1;
 require('dotenv').config();
-
-describe('identity  register tests', () => {
+describe('identity login tests', () => {
+    it('login identity', async () => {
+        let identityLogin = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+        expect(identityLogin).to.be.an('object');
+    });
+    it('login identity without principal id', async () => {
+        try {
+            await new Identity().login('volcanic', 'volcanic!123', ['kratakao']);
+        } catch (e) {
+            expect(e.errorCode).to.equal(10001);
+            expect(e).to.be.exist;
+        }
+    });
+    it('login identity with invalid credentials (name)', async () => {
+        try {
+            await new Identity().login(`volcanic-invalid ${currentTimestampSecond}`, 'volcanic!123', ['kratakao'], 1);
+        } catch (e) {
+            expect(e.errorCode).to.equal(1001);
+            expect(e).to.be.exist;
+        }
+    });
+    it('login identity with invalid credentials (password)', async () => {
+        try {
+            await new Identity().login(`volcanic`, `volcanic${currentTimestampSecond}`, ['kratakao'], 1);
+        } catch (e) {
+            expect(e.errorCode).to.equal(1001);
+            expect(e).to.be.exist;
+        }
+    });
+})
+describe('identity create tests', () => {
     //register with auth
     it('creating a new identity', async () => {
         let identityCreation = await new Identity().withAuth().create(tmpIdentityName, null, tmpPrincipalID);

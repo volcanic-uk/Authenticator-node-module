@@ -6,18 +6,29 @@ class Identity extends V1Base {
         super();
     }
 
+    //identity login method
+    async login(identityName, identitySecret, audience,principalId) {
+        let loginDetails = {
+            name: identityName,
+            secret: identitySecret,
+            audience: audience,
+            principal_id:principalId
+        };
+
+        let result = await super.fetch('post', 'identity/login', null, loginDetails);
+        return {
+            token: result.response.token
+        };
+    }
+
     //identity register method
-    async create(identityName, identitySecret = null, principalId, token) {
+    async create(identityName, identitySecret = null, principalId, header) {
         let identity = {
             name: identityName,
             secret: identitySecret,
             principal_id: principalId
         };
-        let header = {
-            Authorization: `Bearer ${token}`
-        };
-        return await super.fetch('post', 'identity', header, identity);
-
+        return await super.fetch('post', 'identity',header, identity);
     }
 
     // async remoteValidation(token) {
