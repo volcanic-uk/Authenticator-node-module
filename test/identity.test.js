@@ -142,17 +142,6 @@ describe('identity logout tests', async () => {
             let logout = await new Identity().withAuth().logout();
             expect(logout).to.be.an('object');
         });
-        it('should not logout an already logged out identity', async () => {
-            try {
-                await new Identity().withAuth().logout();
-                throw Error('the code should not reach this scope as identity is already logged out');
-
-            } catch (e) {
-                expect(e.errorCode).to.equal(3001);
-                expect(e).to.exist;
-            }
-
-        });
     });
     describe('without auth and with setToken', async () => {
         it('should logout an identity', async () => {
