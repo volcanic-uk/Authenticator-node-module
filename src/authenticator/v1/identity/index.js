@@ -7,10 +7,10 @@ class Identity extends V1Base {
     }
 
     //identity login method
-    async login(identityName, identitySecret, audience = [], principalId) {
+    async login(name, secret, audience = [], principalId) {
         let loginDetails = {
-            name: identityName,
-            secret: identitySecret,
+            name: name,
+            secret: secret,
             audience: audience,
             principal_id: principalId
         };
@@ -22,37 +22,37 @@ class Identity extends V1Base {
     }
 
     //identity register method
-    async create(identityName, identitySecret = null, principalId) {
+    async create(name, secret = null, principalId) {
         let identity = {
-            name: identityName,
-            secret: identitySecret,
+            name: name,
+            secret: secret,
             principal_id: principalId
         };
         return await super.fetch('post', 'identity', null, identity);
     }
 
-    async update(identityName, identityId) {
+    async update(name, id) {
         let identity = {
-            name: identityName
+            name: name
         };
-        return await super.fetch('post', `identity/${identityId}`, null, identity);
+        return await super.fetch('post', `identity/${id}`, null, identity);
     }
 
-    async resetSecret(identitySecret = null, identityId) {
+    async resetSecret(secret = null, id) {
         let identity = {
-            secret: identitySecret
+            secret: secret
         };
-        return await super.fetch('post', `identity/secret/reset/${identityId}`, null, identity);
+        return await super.fetch('post', `identity/secret/reset/${id}`, null, identity);
     }
 
-    async deactivateIdentity(identityId) {
-        return await super.fetch('post', `identity/deactivate/${identityId}`, null);
+    async deactivateIdentity(id) {
+        return await super.fetch('post', `identity/deactivate/${id}`, null);
     }
 
-    async generateToken(identityId, audience = [], expiryDate, singleUse, nbf) {
+    async generateToken(id, audience = [], expiryDate, singleUse, nbf) {
         let identity = {
             identity: {
-                id: identityId
+                id: id
             },
             audience: audience,
             expiry_date: expiryDate,
