@@ -34,7 +34,7 @@ class Principal extends V1Base {
         return await super.fetch('delete', `principals/${id}`, null);
     }
 
-    async updatePricileges (id, privileges = []) {
+    async updatePrivileges (id, privileges = []) {
         return await super.fetch('post', `principals/${id}/privileges`, null, {
             privileges
         });
