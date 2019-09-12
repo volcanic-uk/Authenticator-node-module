@@ -5,33 +5,33 @@ class Principal extends V1Base {
         super();
     }
 
-    async create(name = null, datasetID = null, header = null) {
+    async create(name = null, datasetID = null) {
         let principal = {
             name: name,
             dataset_id: datasetID
         };
-        return await super.fetch('post', 'principals', header, principal);
+        return await super.fetch('post', 'principals', null, principal);
     }
 
-    async getByID(id, header) {
-        return await super.fetch('get', `principals/${id}`, header, null);
+    async getByID(id) {
+        return await super.fetch('get', `principals/${id}`, null, null);
     }
 
 
-    async getPrincipals(header, query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
-        return await super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&${pageSize}&sort=${sort}&order=${order}`, header);
+    async getPrincipals(query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
+        return await super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
-    async update(id, name = null, datasetId = null, header) {
+    async update(id, name = null, datasetId = null) {
         let data = {
             name,
             dataset_id: datasetId
         };
-        return await super.fetch('post', `principals/${id}`, header, data);
+        return await super.fetch('post', `principals/${id}`, null, data);
     }
 
-    async delete(id, header) {
-        return await super.fetch('delete', `principals/${id}`, header);
+    async delete(id) {
+        return await super.fetch('delete', `principals/${id}`, null);
     }
 }
 
