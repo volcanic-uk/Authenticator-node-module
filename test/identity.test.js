@@ -181,6 +181,58 @@ describe('reset identity secret', async () => {
         });
     });
 });
+describe('generate token for identity', async () => {
+    describe('with auth', async () => {
+        let today = new Date();
+        it('should generate token for identity', async () => {
+            let identity = await new Identity().withAuth().generateToken(identityCreation.response.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+            expect(identity.response.token).to.exist;
+
+        });
+        it('should generate token for identity when expiry date is in the past', async () => {
+            try {
+                await new Identity().withAuth().generateToken(identityCreation.response.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+            } catch (e) {
+                expect(e.errorCode).to.be.equal(1008);
+                expect(e.message).to.exist;
+            }
+        });
+        it('should generate token for identity when nbf is more than 4 weeks', async () => {
+            try {
+                await new Identity().withAuth().generateToken(identityCreation.response.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth() + 4, today.getDate()).getTime()));
+            } catch (e) {
+                expect(e.errorCode).to.be.equal(1009);
+                expect(e.message).to.exist;
+            }
+
+        });
+    });
+
+    describe('without auth and with setToken', async () => {
+        let today = new Date();
+        it('should generate token for identity', async () => {
+            let identity = await new Identity().setToken(loginToken).generateToken(identityCreation.response.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+            expect(identity.response.token).to.exist;
+        });
+        it('should generate token for identity when expiry date is in the past', async () => {
+            try {
+                await new Identity().setToken(loginToken).generateToken(identityCreation.response.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+            } catch (e) {
+                expect(e.errorCode).to.be.equal(1008);
+                expect(e.message).to.exist;
+            }
+        });
+        it('should generate token for identity when nbf is more than 4 weeks', async () => {
+            try {
+                await new Identity().setToken(loginToken).generateToken(identityCreation.response.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth() + 4, today.getDate()).getTime()));
+            } catch (e) {
+                expect(e.errorCode).to.be.equal(1009);
+                expect(e.message).to.exist;
+            }
+
+        });
+    });
+});
 describe('deactivate identity', async () => {
     describe('with auth', async () => {
         it('should deactivate identity', async () => {
@@ -203,7 +255,6 @@ describe('deactivate identity', async () => {
             newToken = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
             newToken = newToken.token;
             newIdentity = await new Identity().setToken(newToken).create(`new-identity-${currentTimestampSecond}`, 'new-secret', 1);
-
         });
         it('should deactivate identity', async () => {
             let deactivateIdentity = await new Identity().setToken(newToken).deactivateIdentity(newIdentity.response.id);

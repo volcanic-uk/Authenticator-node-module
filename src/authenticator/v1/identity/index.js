@@ -49,6 +49,19 @@ class Identity extends V1Base {
         return await super.fetch('post', `identity/deactivate/${identityId}`, null);
     }
 
+    async generateToken(identityId, audience, expiryDate, singleUse, nbf) {
+        let identity = {
+            identity: {
+                id: identityId
+            },
+            audience: audience,
+            expiry_date: expiryDate,
+            single_use: singleUse,
+            nbf: nbf
+        };
+        return await super.fetch('post', 'identity/token/generate', null, identity);
+    }
+
 
     // async remoteValidation(token) {
     //     try {
