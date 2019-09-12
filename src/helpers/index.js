@@ -2,6 +2,7 @@
 const axios = require('axios');
 const envConfigs = require('../../config');
 const jwt = require('jsonwebtoken');
+const { createHash } = require('crypto');
 
 /**
  *
@@ -65,4 +66,8 @@ exports.JWTValidator = async (token, publicKey) => {
         });
     });
     return await promise;
+};
+
+exports.md5Generator = (string) => {
+    return createHash('md5').update(string).digest('hex');
 };
