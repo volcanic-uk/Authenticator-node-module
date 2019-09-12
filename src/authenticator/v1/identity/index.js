@@ -7,7 +7,7 @@ class Identity extends V1Base {
     }
 
     //identity login method
-    async login(identityName, identitySecret, audience, principalId) {
+    async login(identityName, identitySecret, audience = [], principalId) {
         let loginDetails = {
             name: identityName,
             secret: identitySecret,
@@ -38,7 +38,7 @@ class Identity extends V1Base {
         return await super.fetch('post', `identity/${identityId}`, null, identity);
     }
 
-    async resetSecret(identitySecret, identityId) {
+    async resetSecret(identitySecret = null, identityId) {
         let identity = {
             secret: identitySecret
         };
@@ -49,7 +49,7 @@ class Identity extends V1Base {
         return await super.fetch('post', `identity/deactivate/${identityId}`, null);
     }
 
-    async generateToken(identityId, audience, expiryDate, singleUse, nbf) {
+    async generateToken(identityId, audience = [], expiryDate, singleUse, nbf) {
         let identity = {
             identity: {
                 id: identityId
