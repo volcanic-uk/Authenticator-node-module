@@ -33,6 +33,18 @@ class Principal extends V1Base {
     async delete(id) {
         return await super.fetch('delete', `principals/${id}`, null);
     }
+
+    async updatePricileges (id, privileges = []) {
+        return await super.fetch('post', `principals/${id}/privileges`, null, {
+            privileges
+        });
+    }
+
+    async updateRoles (id, roles = []) {
+        return await super.fetch('post', `principals/${id}/roles`, null, {
+            roles
+        });
+    }
 }
 
 module.exports = Principal;
