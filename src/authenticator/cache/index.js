@@ -13,13 +13,8 @@ const config = require('../../../config');
 
 exports.putToCache = async (key, value, duration = 60) => {
     if (config.cache.enableCaching) {
-        try {
-            let DurationInMillisecond = parseInt(duration) * 60 * 1000;
-            let cachedToken = await cache.put(key, value, DurationInMillisecond);
-            return cachedToken;
-        } catch (error) {
-            throw error;
-        }
+        let DurationInMillisecond = parseInt(duration) * 60 * 1000;
+        return await cache.put(key, value, DurationInMillisecond);
     }
 };
 
@@ -29,11 +24,10 @@ exports.putToCache = async (key, value, duration = 60) => {
  * @param key ideally a string containing the info for the token to be addressed to retrieve
  */
 
-exports.getFromCache = async (key) => {
-    try {
-        let cachedToken = await cache.get(key);
-        return cachedToken;
-    } catch (error) {
-        throw error;
-    }
+exports.getFromCache = (key) => {
+    return cache.get(key);
+};
+
+exports.deleteFromCache = (key) => {
+    return cache.del(key);
 };
