@@ -482,24 +482,24 @@ describe('groups test', () => {
     });
 
     it('should pass upon successful group creation, and returns an object', async () => {
-        let create = await group.withAuth().create(tmpGroupName);
+        let create = await group.withAuth().create(tmpGroupName, [], 'test group for module');
         groupID = create.id;
         expect(create).to.be.instanceOf(Object).and.have.property('id');
     });
 
     it('should not pass and it will throw an error because the group name provided is duplicated', async () => {
         try {
-            await group.withAuth().create(tmpGroupName);
+            await group.withAuth().create(tmpGroupName, [], 'test group for module');
             throw 'should not reach this line because the group name already exists';
         } catch (e) {
             expect(e.message).equals(`Duplicate entry ${tmpGroupName}`);
         }
     });
 
-    // read a group
+    // read a group by id
     it('should not pass and it will throw an error because the request header has an invalid token', async () => {
         try {
-            await new Group().setToken('asdasd').get(tmpGroupName);
+            await new Group().setToken('asdasd').get(groupID);
             throw 'should not reach this line because the token is not valid';
         } catch (e) {
             expect(e.message).to.be.equal('Forbidden');
@@ -514,7 +514,31 @@ describe('groups test', () => {
     it('should not pass and it will throw an error when an id provided does not exist', async () => {
         try {
             await group.withAuth().get(groupID + 12);
-            throw 'shoudl not read this line because the id is not valid';
+            throw 'should not read this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
+    });
+
+    // read a group by name
+    it('should fail as the header token is malformed', async () => {
+        try {
+            await new Group().setToken('asdasd').getByName(tmpGroupName);
+            throw 'should not reach this line because the token is not valid';
+        } catch (e) {
+            expect(e.message).to.be.equal('Forbidden');
+        }
+    });
+
+    it('should pass when the name, and header token are valid', async () => {
+        let read = await group.withAuth().getByName(tmpGroupName);
+        expect(read).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('fails when the name does not exist', async () => {
+        try {
+            await group.withAuth().getByName(tmpGroupName + 12);
+            throw 'should not read this line because the id is not valid';
         } catch (e) {
             expect(e.message).equals('Group does not exist');
         }

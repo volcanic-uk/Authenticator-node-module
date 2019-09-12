@@ -6,26 +6,33 @@ class Groups extends V1Base {
         super();
     }
 
-    async create(name) {
-        let body = {
-            name
+    async create(name, permissions = [], description = '') {
+        let group = {
+            name,
+            permissions,
+            description
         };
-        return await super.fetch('post', 'groups', null, body);
+        return await super.fetch('post', 'groups', null, group);
     }
 
     async get(id) {
         return await super.fetch('get', `groups/${id}`, null);
     }
 
+    async getByName(name) {
+        return await super.fetch('get', `groups/${name}`, null);
+    }
+
     async getGroups(query = '', page = null, pageSize = null, sort = 'id', order = 'asc') {
         return await super.fetch('get', `groups?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
-    async update(id, name) {
-        let body = {
-            name
+    async update(id, name = null, description = null) {
+        let group = {
+            name,
+            description
         };
-        return await super.fetch('post', `groups/${id}`, null, body);
+        return await super.fetch('post', `groups/${id}`, null, group);
     }
 
     async delete(id) {
