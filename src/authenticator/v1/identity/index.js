@@ -62,11 +62,8 @@ class Identity extends V1Base {
         return await super.fetch('post', 'identity/token/generate', null, identity);
     }
 
-    async logout(token) {
-        let header = {
-            Authorization: 'Bearer ' + token
-        };
-        return await super.fetch('post', 'identity/logout', header, null);
+    async logout() {
+        return await super.fetch('post', 'identity/logout', null, null);
     }
 }
 
