@@ -4,17 +4,20 @@ const chai = require('chai'),
 chai.use(chaiAsPromised);
 
 const Identity = require('../v1/index').Identity,
-    Principal = require('../v1').Principal;
+    Principal = require('../v1').Principal,
+    Group = require('../v1').Group;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
     tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`,
     tmpIdentitySecret = `identity-password-${currentTimestampSecond}`,
     tempPrincipalName = 'principal-test' + currentTimestampSecond,
+    tmpGroupName = 'group-test' + currentTimestampSecond,
 
     identityCreation,
     tempDataSetID = currentTimestampSecond,
     principalID = null,
+    groupID,
     token;
 
 
@@ -462,5 +465,115 @@ describe('identity logout tests', async () => {
             }
         });
 
+    });
+});
+
+
+describe('groups test', () => {
+    let group = new Group();
+
+    it('should not pass and it will throw an error if the request sent has no valid token', async () => {
+        try {
+            await group.setToken('asdasd').create(tmpGroupName);
+            throw 'should not reach this line because the token is not valid';
+        } catch (e) {
+            expect(e.message).to.be.equal('Forbidden');
+        }
+    });
+
+    it('should pass upon successful group creation, and returns an object', async () => {
+        let create = await group.withAuth().create(tmpGroupName);
+        groupID = create.id;
+        expect(create).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should not pass and it will throw an error because the group name provided is duplicated', async () => {
+        try {
+            await group.withAuth().create(tmpGroupName);
+            throw 'should not reach this line because the group name already exists';
+        } catch (e) {
+            expect(e.message).equals(`Duplicate entry ${tmpGroupName}`);
+        }
+    });
+
+    // read a group
+    it('should not pass and it will throw an error because the request header has an invalid token', async () => {
+        try {
+            await new Group().setToken('asdasd').get(tmpGroupName);
+            throw 'should not reach this line because the token is not valid';
+        } catch (e) {
+            expect(e.message).to.be.equal('Forbidden');
+        }
+    });
+
+    it('should pass and return an object with the passing a valid id for the group', async () => {
+        let read = await group.withAuth().get(groupID);
+        expect(read).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should not pass and it will throw an error when an id provided does not exist', async () => {
+        try {
+            await group.withAuth().get(groupID + 12);
+            throw 'shoudl not read this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
+    });
+
+    // group update
+    it('should not pass and it will throw an error because the token provided is not valid', async () => {
+        try {
+            await new Group().setToken('asdasd').update(groupID, tmpGroupName + 'updated');
+            throw 'should not read this line because the token is not valid';
+        } catch (e) {
+            expect(e.message).to.be.equal('Forbidden');
+        }
+    });
+
+    it('should pass when the request provided is valid, hence an object will be returned with new info', async () => {
+        let update = await group.withAuth().update(groupID, tmpGroupName + 'updated');
+        expect(update).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('should not pass and it will throw an error upon an update request with invalid data such as the id', async () => {
+        try {
+            await group.withAuth().update(groupID + 12, tmpGroupName + 'updated');
+            throw 'should not read this line, because the id is not valid';
+        } catch (e) {
+            expect(e.message).equals('Permission group does not exist');
+        }
+    });
+
+    //delete group
+    it('should not pass and it will throw an error if the request header on delete group has an invalid token', async () => {
+        try {
+            await new Group().setToken('asdasd').delete(groupID);
+            throw 'should not read this line because the token provided is invalid';
+        } catch (e) {
+            expect(e.message).to.be.equal('Forbidden');
+        }
+    });
+
+    it('should pass when the request sent has a valid token and a valid id', async () => {
+        let deleted = await group.withAuth().delete(groupID);
+        expect(deleted).to.be.instanceOf(Object).and.have.property('message').that.equals('Successfully deleted');
+    });
+
+    it('should pass when the request sent has a valid token and a valid id', async () => {
+        try {
+            await group.withAuth().delete(groupID);
+            throw 'should not read this line because the group is deleted already';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('should not pass and it will throw an error because the group does not exist', async () => {
+        try {
+            await group.withAuth().delete(groupID + 12);
+            throw 'should not read this line because the group does not exist';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
     });
 });
