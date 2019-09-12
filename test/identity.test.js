@@ -134,6 +134,90 @@ describe('identity update', async () => {
             let updatedIdentity = await new Identity().withAuth().update(`updated-name-${currentTimestampSecond}`, identityCreation.response.id);
             expect(updatedIdentity.response.name).to.equal(`updated-name-${currentTimestampSecond}`);
         });
+        it('it should not update a non existent identity', async () => {
+            try {
+                await new Identity().withAuth().update(`updated-name-${currentTimestampSecond}`, `${currentTimestampSecond}`);
+            } catch (e) {
+                expect(e.errorCode).to.be.equal(1004);
+                expect(e).to.exist;
+            }
+        });
+    });
+    describe('without auth and with setToken', async () => {
+        it('should update an identity', async () => {
+            let updatedIdentity = await new Identity().setToken(loginToken).update(`updated-name-${currentTimestampSecond}`, identityCreation.response.id);
+            expect(updatedIdentity.response.name).to.equal(`updated-name-${currentTimestampSecond}`);
+        });
+        it('it should not update a non existent identity', async () => {
+            try {
+                await new Identity().setToken(loginToken).update(`updated-name-${currentTimestampSecond}`, `${currentTimestampSecond}`);
+            } catch (e) {
+                expect(e.errorCode).to.be.equal(1004);
+                expect(e).to.exist;
+            }
+        });
+    });
+});
+describe('reset identity secret', async () => {
+    describe('with auth', async () => {
+        it('should reset identity secret', async () => {
+            let resetSecret = await new Identity().withAuth().resetSecret(`new-secret-${currentTimestampSecond}`, identityCreation.response.id);
+            expect(resetSecret.response.message).to.equal('Secret regenerated successfully');
+        });
+        it('should generate identity secret', async () => {
+            let generateSecret = await new Identity().withAuth().resetSecret(null, identityCreation.response.id);
+            expect(generateSecret.response.message).to.equal('Secret regenerated successfully');
+        });
+    });
+
+    describe('without auth and with setToken', async () => {
+        it('should reset identity secret', async () => {
+            let resetSecret = await new Identity().setToken(loginToken).resetSecret(`new-secret-${currentTimestampSecond}`, identityCreation.response.id);
+            expect(resetSecret.response.message).to.equal('Secret regenerated successfully');
+        });
+        it('should generate identity secret', async () => {
+            let generateSecret = await new Identity().setToken(loginToken).resetSecret(null, identityCreation.response.id);
+            expect(generateSecret.response.message).to.equal('Secret regenerated successfully');
+        });
+    });
+});
+describe('deactivate identity', async () => {
+    describe('with auth', async () => {
+        it('should deactivate identity', async () => {
+            let deactivateIdentity = await new Identity().withAuth().deactivateIdentity(identityCreation.response.id);
+            expect(deactivateIdentity.response.message).to.equal('Successfully deactivated identity');
+        });
+        it('should not deactivate already deactivated identity', async () => {
+            try {
+                await new Identity().withAuth().deactivateIdentity(identityCreation.response.id);
+                throw Error('The code should not reach this scope as identity already deactivated');
+            } catch (e) {
+                expect(e.errorCode).to.equal(1004);
+            }
+
+        });
+    });
+    describe('without auth and with setToken', async () => {
+        let newToken, newIdentity;
+        before(async () => {
+            newToken = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+            newToken = newToken.token;
+            newIdentity = await new Identity().setToken(newToken).create(`new-identity-${currentTimestampSecond}`, 'new-secret', 1);
+
+        });
+        it('should deactivate identity', async () => {
+            let deactivateIdentity = await new Identity().setToken(newToken).deactivateIdentity(newIdentity.response.id);
+            expect(deactivateIdentity.response.message).to.equal('Successfully deactivated identity');
+        });
+        it('should not deactivate already deactivated identity', async () => {
+            try {
+                await new Identity().setToken(newToken).deactivateIdentity(newIdentity.response.id);
+                throw Error('The code should not reach this scope as identity already deactivated');
+            } catch (e) {
+                expect(e.errorCode).to.equal(1004);
+            }
+
+        });
     });
 });
 describe('identity logout tests', async () => {

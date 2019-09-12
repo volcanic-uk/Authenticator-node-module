@@ -22,21 +22,33 @@ class Identity extends V1Base {
     }
 
     //identity register method
-    async create(identityName, identitySecret = null, principalId, header) {
+    async create(identityName, identitySecret = null, principalId) {
         let identity = {
             name: identityName,
             secret: identitySecret,
             principal_id: principalId
         };
-        return await super.fetch('post', 'identity', header, identity);
+        return await super.fetch('post', 'identity', null, identity);
     }
 
-    async update(identityName, identityId, header) {
+    async update(identityName, identityId) {
         let identity = {
             name: identityName
         };
-        return await super.fetch('post', `identity/${identityId}`, header, identity);
+        return await super.fetch('post', `identity/${identityId}`, null, identity);
     }
+
+    async resetSecret(identitySecret, identityId) {
+        let identity = {
+            secret: identitySecret
+        };
+        return await super.fetch('post', `identity/secret/reset/${identityId}`, null, identity);
+    }
+
+    async deactivateIdentity(identityId) {
+        return await super.fetch('post', `identity/deactivate/${identityId}`, null);
+    }
+
 
     // async remoteValidation(token) {
     //     try {
