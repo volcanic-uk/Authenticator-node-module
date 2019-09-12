@@ -35,8 +35,8 @@ class Token extends V1Base {
         try {
             await JWTValidator(token, publicKey);
             let cacheDuration = availableCacheDuration(decodedToken.payload.exp);
-            putToCache(tokenMD5, token, cacheDuration);
             //cache token if it is valid
+            cacheDuration > 0 && putToCache(tokenMD5, token, cacheDuration);
             return true;
         } catch (e) {
             return false;

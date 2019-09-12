@@ -4,7 +4,8 @@ const chai = require('chai'),
 chai.use(chaiAsPromised);
 
 const Identity = require('../v1/index').Identity,
-    Principal = require('../v1').Principal;
+    Principal = require('../v1').Principal,
+    Token = require('../v1').Token;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
@@ -384,6 +385,29 @@ describe('generate token for identity', async () => {
     });
 });
 
+describe('token validation tests', () => {
+    it('should validate a token remotely and return true', async () => {
+        let tokenValidationResponse = await new Token().setToken(token).remoteValidation();
+        expect(tokenValidationResponse).to.be.true;
+    });
+
+    it('should return false when the token is invalid', async () => {
+        let tokenValidationResponse = await new Token().setToken(token + '1').remoteValidation();
+        expect(tokenValidationResponse).to.be.false;
+    });
+
+    it('should validate a token locally via the node module and return true', async () => {
+        let tokenValidationResponse = await new Token().validate(token);
+        expect(tokenValidationResponse).to.be.true;
+    });
+
+    it('should validate a token locally via the node module and return false', async () => {
+        let invalidToken = token.substr(0, token.length - 2);
+        invalidToken += 'XX';
+        let tokenValidationResponse = await new Token().validate(invalidToken);
+        expect(tokenValidationResponse).to.be.false;
+    });
+});
 
 describe('deactivate identity', async () => {
 
