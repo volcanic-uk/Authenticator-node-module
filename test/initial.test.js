@@ -470,16 +470,18 @@ describe('identity logout tests', async () => {
 describe('privileges tests', () => {
     let privilege = new Privilege();
     // create privileges
-    it('should not pass this test and it will throw an error because the auth header token is invalid', async () => {
-        try {
-            await privilege.setToken('sometoken').create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
-            throw 'must not reach this line because the token is invalid';
-        } catch (e) {
-            expect(e.message).to.equal('Forbidden');
-        }
+    describe('with setToken', () => {
+        it('fails when the token is invalid', async () => {
+            try {
+                await privilege.setToken('sometoken').create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
+                throw 'must not reach this line because the token is invalid';
+            } catch (e) {
+                expect(e.message).to.equal('Forbidden');
+            }
+        });
     });
 
-    it('should pass this test and return an object having the data for the new privilege created', async () => {
+    it('creates a new privielge', async () => {
         let create = await privilege.withAuth().create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
         privilegeId = create.id;
         expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
@@ -487,14 +489,14 @@ describe('privileges tests', () => {
 
     // read privilege
 
-    it('should pass this test and it will return an object carrying all the data from the fetched privilege', async () => {
-        let read = await privilege.withAuth().get(privilegeId);
+    it('gets the new privielge', async () => {
+        let read = await privilege.withAuth().getById(privilegeId);
         expect(read).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
 
-    it('should not pass this test and it will throw an error because the id provided is invalid', async () => {
+    it('fails with non existing id', async () => {
         try {
-            await privilege.withAuth().get(privilegeId + 12);
+            await privilege.withAuth().getById(privilegeId + 12);
             throw 'should not reach this line because privilege does not exist';
         } catch (e) {
             expect(e.message).to.equal('privilege does not exist');
@@ -503,7 +505,7 @@ describe('privileges tests', () => {
 
     // update privilege
 
-    it('should not pass this test becuase the provied id is invalid', async () => {
+    it('fails updating a non existing ID', async () => {
         try {
             await privilege.withAuth().update(privilegeId + 12, 'vrn:{stack}:{dataset}:jobs/*', 1, 1);
             throw 'should not reach this line, because the id doesnt exist';
@@ -512,14 +514,14 @@ describe('privileges tests', () => {
         }
     });
 
-    it('should pass this test and will return an object upon successful update', async () => {
+    it('updates the specified privielge', async () => {
         let update = await privilege.withAuth().update(privilegeId, 'vrn:{stack}:{dataset}:jobs/*', 1, 1);
         expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
 
     // delete privilege
 
-    it('should not pass and it will throw an error because the id provided is invalid', async () => {
+    it('fails deleting a non existing id', async () => {
         try {
             await privilege.withAuth().delete(privilegeId + 12);
             throw 'must not reach this line, the id is invalid';
@@ -528,7 +530,7 @@ describe('privileges tests', () => {
         }
     });
 
-    it('should pass this test and will return an object with a message property that says it has been deleted successfully', async () => {
+    it('deletes the provided privilege', async () => {
         let deletePriv = await privilege.withAuth().delete(privilegeId);
         expect(deletePriv.message).to.exist;
     });

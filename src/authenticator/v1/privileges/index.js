@@ -15,7 +15,7 @@ class Privileges extends V1Base {
         return await super.fetch('post', 'privileges', null, privilege);
     }
 
-    async get(id) {
+    async getById(id) {
         return await super.fetch('get', `privileges/${id}`, null);
     }
 
