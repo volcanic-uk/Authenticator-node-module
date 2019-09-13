@@ -470,10 +470,12 @@ describe('Service tests', async () => {
     describe('with auth', async () => {
         let serviceId = null;
         let service = null;
+        let serviceName = null;
         describe('create service', async () => {
             it('should create a service', async () => {
                 service = await new Service().withAuth().create(`new-service-${currentTimestampSecond}`);
                 serviceId = service.id;
+                serviceName = service.name;
             });
             it('should not create duplicated service', async () => {
                 try {
@@ -494,12 +496,25 @@ describe('Service tests', async () => {
         });
         describe('should read created service', async () => {
             it('should read a service', async () => {
-                let serviceRead = await new Service().withAuth().get(serviceId);
+                let serviceRead = await new Service().withAuth().getByID(serviceId);
                 expect(serviceRead.id).to.exist;
             });
             it('should not read service with wrong id', async () => {
                 try {
-                    await new Service().withAuth().get(`${currentTimestampSecond}`);
+                    await new Service().withAuth().getByID(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6002);
+                    expect(e).to.exist;
+                }
+
+            });
+            it('should read a service by name', async () => {
+                let serviceRead = await new Service().withAuth().getByName(serviceName);
+                expect(serviceRead.id).to.exist;
+            });
+            it('should not read service with non existence name', async () => {
+                try {
+                    await new Service().withAuth().getByName(`read-${currentTimestampSecond}`);
                 } catch (e) {
                     expect(e.errorCode).to.equal(6002);
                     expect(e).to.exist;
@@ -516,6 +531,7 @@ describe('Service tests', async () => {
                 let servicesGetAll = await new Service().withAuth().getServices('', '', '', 'id', 'desc');
                 expect(servicesGetAll.data).to.be.descendingBy('id');
             });
+
         });
         describe('update a service', async () => {
             it('should update a service', async () => {
@@ -549,6 +565,7 @@ describe('Service tests', async () => {
     describe('without auth and with setToken', async () => {
         let serviceId = null;
         let service = null;
+        let serviceName = null;
         before(async () => {
             token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
             token = token.token;
@@ -557,6 +574,7 @@ describe('Service tests', async () => {
             it('should create a service', async () => {
                 service = await new Service().setToken(token).create(`new-service-${currentTimestampSecond}`);
                 serviceId = service.id;
+                serviceName = service.name;
             });
             it('should not create duplicated service', async () => {
                 try {
@@ -577,12 +595,25 @@ describe('Service tests', async () => {
         });
         describe('should read created service', async () => {
             it('should read a service', async () => {
-                let serviceRead = await new Service().setToken(token).get(serviceId);
+                let serviceRead = await new Service().setToken(token).getByID(serviceId);
                 expect(serviceRead.id).to.exist;
             });
             it('should not read service with wrong id', async () => {
                 try {
-                    await new Service().setToken(token).get(`${currentTimestampSecond}`);
+                    await new Service().setToken(token).getByID(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6002);
+                    expect(e).to.exist;
+                }
+
+            });
+            it('should read a service by name', async () => {
+                let serviceRead = await new Service().setToken(token).getByName(serviceName);
+                expect(serviceRead.id).to.exist;
+            });
+            it('should not read service with non existence name', async () => {
+                try {
+                    await new Service().setToken(token).getByName(`read-${currentTimestampSecond}`);
                 } catch (e) {
                     expect(e.errorCode).to.equal(6002);
                     expect(e).to.exist;
