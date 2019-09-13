@@ -6,8 +6,8 @@ class Permission extends V1Base {
         super();
     }
 
-    async create(name, description, id) {
-        let permission = { name, service_id: id, description };
+    async create(name, description, serviceId) {
+        let permission = { name, service_id: serviceId, description };
         return await super.fetch('post', 'permissions', null, permission);
 
     }
