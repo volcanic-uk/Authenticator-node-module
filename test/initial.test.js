@@ -1,11 +1,14 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
+    sorted = require('chai-sorted'),
     expect = chai.expect;
 chai.use(chaiAsPromised);
+chai.use(sorted);
 
 const Identity = require('../v1/index').Identity,
     Principal = require('../v1').Principal,
-    Token = require('../v1').Token;
+    Token = require('../v1').Token,
+    Permission = require('../v1').Permission;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
@@ -486,5 +489,170 @@ describe('identity logout tests', async () => {
             }
         });
 
+    });
+});
+
+describe('Permissions tests', async () => {
+    describe('with auth', async () => {
+        let permissionId = null;
+        let permission = null;
+        describe('create permission', async () => {
+            it('should create a permission', async () => {
+                permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 1);
+                permissionId = permission.id;
+            });
+            it('should not create duplicated permission', async () => {
+                try {
+                    permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 1);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5003);
+                    expect(e).to.exist;
+                }
+            });
+            it('should not create permission without name', async () => {
+                try {
+                    permission = await new Permission().withAuth().create(null);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(10001);
+                    expect(e).to.exist;
+                }
+            });
+        });
+        describe('should read created permission', async () => {
+            it('should read a permission', async () => {
+                let permissionRead = await new Permission().withAuth().get(permissionId);
+                expect(permissionRead.id).to.exist;
+            });
+            it('should not read permission with wrong id', async () => {
+                try {
+                    await new Permission().withAuth().get(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5002);
+                    expect(e).to.exist;
+                }
+
+            });
+        });
+        describe('should read all permissions', async () => {
+            it('should read all permissions in ascending order', async () => {
+                let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', '', 'id', 'asc');
+                expect(permissionsGetAll.data).to.be.ascendingBy('id');
+            });
+            it('should read all permissions in descending order', async () => {
+                let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', '', 'id', 'desc');
+                expect(permissionsGetAll.data).to.be.descendingBy('id');
+            });
+        });
+        describe('update a permission', async () => {
+            it('should update a permission', async () => {
+                let updatepermission = await new Permission().withAuth().update(permissionId, `permission-name-update-${currentTimestampSecond}`);
+                expect(updatepermission.name).to.equal(`permission-name-update-${currentTimestampSecond}`);
+            });
+            it('should not update a non-exist permission', async () => {
+                try {
+                    await new Permission().withAuth().update(`${currentTimestampSecond}`, `permission-name-update-${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5002);
+                    expect(e).to.exist;
+                }
+            });
+        });
+        describe('delete a permission', async () => {
+            it('should delete a permission', async () => {
+                let deletepermission = await new Permission().withAuth().delete(permissionId);
+                expect(deletepermission.message).to.exist;
+            });
+            it('should not delete a permission', async () => {
+                try {
+                    await new Permission().withAuth().delete(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5002);
+                    expect(e).to.exist;
+                }
+            });
+        });
+    });
+    describe('without auth and with setToken', async () => {
+        let permissionId = null;
+        let permission = null;
+        before(async () => {
+            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+            token = token.token;
+        });
+        describe('create permission', async () => {
+            it('should create a permission', async () => {
+                permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 1);
+                permissionId = permission.id;
+            });
+            it('should not create duplicated permission', async () => {
+                try {
+                    permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 1);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5003);
+                    expect(e).to.exist;
+                }
+            });
+            it('should not create permission without name', async () => {
+                try {
+                    permission = await new Permission().setToken(token).create(null);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(10001);
+                    expect(e).to.exist;
+                }
+            });
+        });
+        describe('should read created permission', async () => {
+            it('should read a permission', async () => {
+                let permissionRead = await new Permission().setToken(token).get(permissionId);
+                expect(permissionRead.id).to.exist;
+            });
+            it('should not read permission with wrong id', async () => {
+                try {
+                    await new Permission().setToken(token).get(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5002);
+                    expect(e).to.exist;
+                }
+
+            });
+        });
+        describe('should read all permissions', async () => {
+            it('should read all permissions in ascending order', async () => {
+                let permissionsGetAll = await new Permission().setToken(token).getPermissions('', '', '', 'id', 'asc');
+                expect(permissionsGetAll.data).to.be.ascendingBy('id');
+            });
+            it('should read all permissions in descending order', async () => {
+                let permissionsGetAll = await new Permission().setToken(token).getPermissions('', '', '', 'id', 'desc');
+                expect(permissionsGetAll.data).to.be.descendingBy('id');
+            });
+        });
+        describe('update a permission', async () => {
+            it('should update a permission', async () => {
+                let updatepermission = await new Permission().setToken(token).update(permissionId, `permission-name-update-without-auth${currentTimestampSecond}`);
+                expect(updatepermission.name).to.equal(`permission-name-update-without-auth${currentTimestampSecond}`);
+            });
+            it('should not update a non-exist permission', async () => {
+                try {
+                    await new Permission().setToken(token).update(`${currentTimestampSecond}`, `permission-name-update-without-auth${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5002);
+                    expect(e).to.exist;
+                }
+            });
+        });
+        describe('delete a permission', async () => {
+            it('should delete a permission', async () => {
+                let deletepermission = await new Permission().setToken(token).delete(permissionId);
+                expect(deletepermission.message).to.exist;
+            });
+            it('should not delete a permission', async () => {
+                try {
+                    await new Permission().setToken(token).delete(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(5002);
+                    expect(e).to.exist;
+                }
+            });
+        });
     });
 });

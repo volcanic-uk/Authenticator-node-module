@@ -1,0 +1,35 @@
+// require the custom api fetch from the helpers module folder
+const V1Base = require('../v1_base');
+
+class Permission extends V1Base {
+    constructor() {
+        super();
+    }
+
+    async create(name, id) {
+        let permission = { name, service_id: id };
+        return await super.fetch('post', 'permissions', null, permission);
+
+    }
+
+    async get(id) {
+        return await super.fetch('get', `permissions/${id}`, null);
+    }
+
+    async getPermissions(query = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
+        return await super.fetch('get', `permissions?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+    }
+
+    async update(id, name) {
+        let update = {
+            name
+        };
+        return await super.fetch('post', `permissions/${id}`, null, update);
+    }
+
+    async delete(id) {
+        return await super.fetch('delete', `permissions/${id}`, null);
+    }
+}
+
+module.exports = Permission;
