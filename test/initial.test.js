@@ -498,12 +498,12 @@ describe('Permissions tests', async () => {
         let permission = null;
         describe('create permission', async () => {
             it('should create a permission', async () => {
-                permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 1);
+                permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 'this is new permission', 1);
                 permissionId = permission.id;
             });
             it('should not create duplicated permission', async () => {
                 try {
-                    permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 1);
+                    permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 'description', 1);
                 } catch (e) {
                     expect(e.errorCode).to.equal(5003);
                     expect(e).to.exist;
@@ -581,12 +581,12 @@ describe('Permissions tests', async () => {
         });
         describe('create permission', async () => {
             it('should create a permission', async () => {
-                permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 1);
+                permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 'this is a new permission', 1);
                 permissionId = permission.id;
             });
             it('should not create duplicated permission', async () => {
                 try {
-                    permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 1);
+                    permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 'description', 1);
                 } catch (e) {
                     expect(e.errorCode).to.equal(5003);
                     expect(e).to.exist;

@@ -6,8 +6,8 @@ class Permission extends V1Base {
         super();
     }
 
-    async create(name, id) {
-        let permission = { name, service_id: id };
+    async create(name, description, id) {
+        let permission = { name, service_id: id, description };
         return await super.fetch('post', 'permissions', null, permission);
 
     }
@@ -20,9 +20,10 @@ class Permission extends V1Base {
         return await super.fetch('get', `permissions?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
-    async update(id, name) {
+    async update(id, name, description) {
         let update = {
-            name
+            name,
+            description
         };
         return await super.fetch('post', `permissions/${id}`, null, update);
     }
