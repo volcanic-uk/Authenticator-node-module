@@ -1,22 +1,37 @@
 require('dotenv').config(); // environement config file
 
+const ENV_VARS = process.env;
 
 module.exports = {
     server: {
-        domainName: process.env.AUTH_DOMAIN,
+        domainName: ENV_VARS.AUTH_DOMAIN,
     },
     cache: {
-        moduleTokenDuration: process.env.MODULE_TOKEN_DURATION,
-        thirdPartyTokenDuration: process.env.THIRD_PARTY_TOKEN_DURATION,
-        enableCaching: process.env.ENABLE_CACHING
+        moduleTokenDuration: ENV_VARS.MODULE_TOKEN_DURATION,
+        thirdPartyTokenDuration: ENV_VARS.THIRD_PARTY_TOKEN_DURATION,
+        enableCaching: ENV_VARS.ENABLE_CACHING
     },
     auth: {
-        authIdentity: process.env.IDENTITY,
-        authSecret: process.env.SECRET,
-        principalID: process.env.PRINCIPAL_ID,
-        audience: process.env.DEFAULT_AUDIENCE || ['*']
+        authIdentity: ENV_VARS.IDENTITY,
+        authSecret: ENV_VARS.SECRET,
+        principalID: ENV_VARS.PRINCIPAL_ID,
+        audience: ENV_VARS.DEFAULT_AUDIENCE || ['*'],
+        set: function (authConfig) {
+            this.authIdentity = authConfig.authIdentity;
+            this.authSecret = authConfig.authSecret;
+            this.principalID = authConfig.principalID;
+            this.audience = authConfig.audience;
+        },
+        get: function () {
+            return {
+                identityName: this.authIdentity,
+                secret: this.authSecret,
+                principalID: this.principalID,
+                audience: this.audience
+            };
+        }
     },
     logging: {
-        logs: process.env.ENABLE_LOGGING
+        logs: ENV_VARS.ENABLE_LOGGING
     }
 };
