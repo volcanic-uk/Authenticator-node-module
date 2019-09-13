@@ -1,6 +1,6 @@
 const { customFetch } = require('../../helpers/index');
 const { getFromCache, putToCache, deleteFromCache } = require('../cache');
-const envConfigs = require('../../../config');
+const config = require('../../../config');
 
 class V1Base {
     constructor() {
@@ -61,10 +61,10 @@ class V1Base {
 
     async internalLogin() {
         let loginData = {
-            name: envConfigs.auth.authIdentity,
-            secret: envConfigs.auth.authSecret,
-            principal_id: envConfigs.auth.principalID,
-            audience: envConfigs.auth.audience
+            name: config.auth.identity_name,
+            secret: config.auth.secret,
+            principal_id: config.auth.principal_id,
+            audience: config.auth.audience
         };
         return await customFetch('post', '/api/v1/identity/login', null, loginData);
     }

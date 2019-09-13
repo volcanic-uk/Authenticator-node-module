@@ -12,21 +12,21 @@ module.exports = {
         enableCaching: ENV_VARS.ENABLE_CACHING
     },
     auth: {
-        authIdentity: ENV_VARS.IDENTITY,
-        authSecret: ENV_VARS.SECRET,
-        principalID: ENV_VARS.PRINCIPAL_ID,
+        identity_name: ENV_VARS.IDENTITY,
+        secret: ENV_VARS.SECRET,
+        principal_id: ENV_VARS.PRINCIPAL_ID,
         audience: ENV_VARS.DEFAULT_AUDIENCE || ['*'],
         set: function (authConfig) {
-            this.authIdentity = authConfig.authIdentity;
-            this.authSecret = authConfig.authSecret;
-            this.principalID = authConfig.principalID;
+            this.identity_name = authConfig.identity_name;
+            this.secret = authConfig.secret;
+            this.principal_id = authConfig.principal_id;
             this.audience = authConfig.audience;
         },
         get: function () {
             return {
-                identityName: this.authIdentity,
-                secret: this.authSecret,
-                principalID: this.principalID,
+                identity_name: this.identity_name,
+                secret: this.secret,
+                principal_id: this.principal_id,
                 audience: this.audience
             };
         }
