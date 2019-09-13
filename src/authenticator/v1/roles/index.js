@@ -14,7 +14,7 @@ class Roles extends V1Base {
         return await super.fetch('post', 'roles', null, role);
     }
 
-    async get(id) {
+    async getById(id) {
         return await super.fetch('get', `roles/${id}`, null);
     }
 

@@ -18,6 +18,7 @@ let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tempDataSetID = currentTimestampSecond,
     principalID = null,
     roleId = null,
+    roleName = null,
     token;
 
 
@@ -471,18 +472,21 @@ describe('identity logout tests', async () => {
 describe('roles api tests', () => {
     let role = new Role();
 
-    it('will fail the test as there is no auth header token present or it is just malformed', async () => {
-        try {
-            await role.setToken('some token').create(tmpRoleName, 1, [1, 2]);
-            throw 'it will not pass because the token is invalid';
-        } catch (e) {
-            expect(e.message).to.exist;
-        }
+    describe('with setToken', () => {
+        it('fails on malformed token', async () => {
+            try {
+                await role.setToken('some token').create(tmpRoleName, 1, [1, 2]);
+                throw 'it will not pass because the token is invalid';
+            } catch (e) {
+                expect(e.message).to.exist;
+            }
+        });
     });
 
-    it('will pass when the credentials are right and the token is valid when creating a new role', async () => {
+    it('creates a new role', async () => {
         let create = await role.withAuth().create(tmpRoleName, 1, [1, 2]);
         roleId = create.id;
+        roleName = create.name;
         expect(create).to.be.instanceOf(Object).and.has.property('id');
     });
 
@@ -511,21 +515,35 @@ describe('roles api tests', () => {
         }
     });
 
+    it('gets the right role by its name', async () => {
+        let read = await role.withAuth().get(roleName);
+        expect(read).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail because the requested id is not available', async () => {
+        try {
+            await role.withAuth().get(roleName + 'test');
+            throw 'it will not pass because the name does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
     // get all roles
 
-    it('will pass when the token provided is valid, upon getting the roles', async () => {
+    it('gets the desired token', async () => {
         let read = await role.withAuth().getRoles(null, 1, 15, 'id', 'asc');
         expect(read.data).to.be.an('array');
     });
 
     // update roles api
 
-    it('will pass on roles update request when the data provided are valid, and the token is too', async () => {
+    it('updates the requested role', async () => {
         let update = await role.withAuth().update(roleId, tmpRoleName + 'update', 1, [1, 2]);
         expect(update).to.instanceOf(Object).and.has.property('id');
     });
 
-    it('will fail on roles update request, when the the id provided does not exist', async () => {
+    it('fails when getting a non-existing role', async () => {
         try {
             await role.withAuth().update(roleId + 12, tmpRoleName + 'update', 1, [1, 2]);
             throw 'should not reach this line, for the id does not exist';
@@ -536,12 +554,12 @@ describe('roles api tests', () => {
 
     // delete roles API
 
-    it('will pass, because the id is valid, and the token is valid too', async () => {
+    it('deletes the required role', async () => {
         let deleteIt = await role.withAuth().delete(roleId);
         expect(deleteIt.message).to.exist;
     });
 
-    it('will fail, because the id provided is already deleted', async () => {
+    it('fails deleting an already deleted role', async () => {
         try {
             await role.withAuth().delete(roleId);
             throw 'should not reach this line because the id is gone';
@@ -550,7 +568,7 @@ describe('roles api tests', () => {
         }
     });
 
-    it('will fail, because the id provided does not exist', async () => {
+    it('fails deleting a non existing role', async () => {
         try {
             await role.withAuth().delete(roleId + 123132);
             throw 'should not reach this line because the id is not valid';
