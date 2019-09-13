@@ -10,7 +10,8 @@ const Identity = require('../v1/index').Identity,
     Service = require('../v1').Service,
     Token = require('../v1').Token,
     Group = require('../v1').Group,
-    Role = require('../v1').Roles;
+    Role = require('../v1').Roles,
+    Privilege = require('../v1').Privilege;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
@@ -25,6 +26,7 @@ let currentTimestampSecond = Math.floor(Date.now() / 1000),
     groupID,
     roleId = null,
     roleName = null,
+    privilegeId = null,
     token;
 
 
@@ -901,4 +903,72 @@ describe('roles api tests', () => {
         }
     });
 
+});
+
+describe('privileges tests', () => {
+    // create privileges
+    describe('with setToken', () => {
+        it('fails when the token is invalid', async () => {
+            try {
+                await new Privilege().setToken('sometoken').create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
+                throw 'must not reach this line because the token is invalid';
+            } catch (e) {
+                expect(e.message).to.equal('Forbidden');
+            }
+        });
+    });
+
+    it('creates a new privielge', async () => {
+        let create = await new Privilege().withAuth().create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
+        privilegeId = create.id;
+        expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
+    });
+
+    // read privilege
+
+    it('gets the new privielge', async () => {
+        let read = await new Privilege().withAuth().getById(privilegeId);
+        expect(read).to.be.an.instanceOf(Object).and.have.property('group_id');
+    });
+
+    it('fails with non existing id', async () => {
+        try {
+            await new Privilege().withAuth().getById(privilegeId + 12);
+            throw 'should not reach this line because privilege does not exist';
+        } catch (e) {
+            expect(e.message).to.equal('privilege does not exist');
+        }
+    });
+
+    // update privilege
+
+    it('fails updating a non existing ID', async () => {
+        try {
+            await new Privilege().withAuth().update(privilegeId + 12, 'vrn:{stack}:{dataset}:jobs/*', 1, 1);
+            throw 'should not reach this line, because the id doesnt exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('updates the specified privielge', async () => {
+        let update = await new Privilege().withAuth().update(privilegeId, 'vrn:{stack}:{dataset}:jobs/*', 1, 1);
+        expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
+    });
+
+    // delete privilege
+
+    it('fails deleting a non existing id', async () => {
+        try {
+            await new Privilege().withAuth().delete(privilegeId + 12);
+            throw 'must not reach this line, the id is invalid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('deletes the provided privilege', async () => {
+        let deletePriv = await new Privilege().withAuth().delete(privilegeId);
+        expect(deletePriv.message).to.exist;
+    });
 });
