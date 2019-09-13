@@ -12,7 +12,7 @@ class Permission extends V1Base {
 
     }
 
-    async get(id) {
+    async getByID(id) {
         return await super.fetch('get', `permissions/${id}`, null);
     }
 

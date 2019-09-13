@@ -520,12 +520,12 @@ describe('Permissions tests', async () => {
         });
         describe('should read created permission', async () => {
             it('should read a permission', async () => {
-                let permissionRead = await new Permission().withAuth().get(permissionId);
+                let permissionRead = await new Permission().withAuth().getByID(permissionId);
                 expect(permissionRead.id).to.exist;
             });
             it('should not read permission with wrong id', async () => {
                 try {
-                    await new Permission().withAuth().get(`${currentTimestampSecond}`);
+                    await new Permission().withAuth().getByID(`${currentTimestampSecond}`);
                 } catch (e) {
                     expect(e.errorCode).to.equal(5002);
                     expect(e).to.exist;
@@ -603,12 +603,12 @@ describe('Permissions tests', async () => {
         });
         describe('should read created permission', async () => {
             it('should read a permission', async () => {
-                let permissionRead = await new Permission().setToken(token).get(permissionId);
+                let permissionRead = await new Permission().setToken(token).getByID(permissionId);
                 expect(permissionRead.id).to.exist;
             });
             it('should not read permission with wrong id', async () => {
                 try {
-                    await new Permission().setToken(token).get(`${currentTimestampSecond}`);
+                    await new Permission().setToken(token).getByID(`${currentTimestampSecond}`);
                 } catch (e) {
                     expect(e.errorCode).to.equal(5002);
                     expect(e).to.exist;
