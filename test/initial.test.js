@@ -8,16 +8,19 @@ chai.use(sorted);
 const Identity = require('../v1/index').Identity,
     Principal = require('../v1').Principal,
     Service = require('../v1').Service,
-    Token = require('../v1').Token;
+    Token = require('../v1').Token,
+    Group = require('../v1').Group;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
     tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`,
     tmpIdentitySecret = `identity-password-${currentTimestampSecond}`,
     tempPrincipalName = 'principal-test' + currentTimestampSecond,
+    tmpGroupName = 'group-test' + currentTimestampSecond,
     identityCreation,
     tempDataSetID = currentTimestampSecond,
     principalID = null,
+    groupID,
     token;
 
 
@@ -683,5 +686,106 @@ describe('Service tests', async () => {
                 }
             });
         });
+    });
+});
+
+
+describe('groups test', () => {
+
+    describe('with set token', () => {
+        it('will fail with an invalid token', async () => {
+            try {
+                await new Group().setToken('asdasd').create(tmpGroupName);
+                throw 'should not reach this line because the token is not valid';
+            } catch (e) {
+                expect(e.message).to.be.equal('Forbidden');
+            }
+        });
+    });
+
+    it('should create a new group', async () => {
+        let create = await new Group().withAuth().create(tmpGroupName, [], 'test group for module');
+        groupID = create.id;
+        expect(create).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('fails upon duplicate entry', async () => {
+        try {
+            await new Group().withAuth().create(tmpGroupName, [], 'test group for module');
+            throw 'should not reach this line because the group name already exists';
+        } catch (e) {
+            expect(e.message).equals(`Duplicate entry ${tmpGroupName}`);
+        }
+    });
+
+    // read a group by id
+    it('should ge the specified group', async () => {
+        let read = await new Group().withAuth().getById(groupID);
+        expect(read).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('fails upon fetching a non existing id', async () => {
+        try {
+            await new Group().withAuth().getById(groupID + 12);
+            throw 'should not read this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
+    });
+
+    // read a group by name
+    it('gets a group by its name', async () => {
+        let read = await new Group().withAuth().getByName(tmpGroupName);
+        expect(read).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('fails when the name doesnt exist', async () => {
+        try {
+            await new Group().withAuth().getByName(tmpGroupName + 12);
+            throw 'should not read this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
+    });
+
+    // group update
+
+    it('it updates the specified group info', async () => {
+        let update = await new Group().withAuth().update(groupID, tmpGroupName + 'updated');
+        expect(update).to.be.instanceOf(Object).and.have.property('id');
+    });
+
+    it('fails when passing an invalid id', async () => {
+        try {
+            await new Group().withAuth().update(groupID + 12, tmpGroupName + 'updated');
+            throw 'should not read this line, because the id is not valid';
+        } catch (e) {
+            expect(e.message).equals('Permission group does not exist');
+        }
+    });
+
+    //delete group
+
+    it('deletes the specified id', async () => {
+        let deleted = await new Group().withAuth().delete(groupID);
+        expect(deleted).to.be.instanceOf(Object).and.have.property('message').that.equals('Successfully deleted');
+    });
+
+    it('fails when the id is already deleted', async () => {
+        try {
+            await new Group().withAuth().delete(groupID);
+            throw 'should not read this line because the group is deleted already';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('fails when the id does not exist', async () => {
+        try {
+            await new Group().withAuth().delete(groupID + 12);
+            throw 'should not read this line because the group does not exist';
+        } catch (e) {
+            expect(e.message).equals('Group does not exist');
+        }
     });
 });
