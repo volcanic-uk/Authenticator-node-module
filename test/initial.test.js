@@ -4,17 +4,20 @@ const chai = require('chai'),
 chai.use(chaiAsPromised);
 
 const Identity = require('../v1/index').Identity,
-    Principal = require('../v1').Principal;
+    Principal = require('../v1').Principal,
+    Role = require('../v1').Roles;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
     tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`,
     tmpIdentitySecret = `identity-password-${currentTimestampSecond}`,
     tempPrincipalName = 'principal-test' + currentTimestampSecond,
+    tmpRoleName = 'role-test' + currentTimestampSecond,
 
     identityCreation,
     tempDataSetID = currentTimestampSecond,
     principalID = null,
+    roleId = null,
     token;
 
 
@@ -463,4 +466,97 @@ describe('identity logout tests', async () => {
         });
 
     });
+});
+
+describe('roles api tests', () => {
+    let role = new Role();
+
+    it('will fail the test as there is no auth header token present or it is just malformed', async () => {
+        try {
+            await role.setToken('some token').create(tmpRoleName, 1, [1, 2]);
+            throw 'it will not pass because the token is invalid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will pass when the credentials are right and the token is valid when creating a new role', async () => {
+        let create = await role.withAuth().create(tmpRoleName, 1, [1, 2]);
+        roleId = create.id;
+        expect(create).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('fails when privileges are not an array', async () => {
+        try {
+            await role.withAuth().create(tmpRoleName, 1, 1);
+            throw 'should not reach this line, privileges are not an array';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+
+    });
+
+    // Get role by id API
+    it('should return the right role', async () => {
+        let read = await role.withAuth().get(roleId);
+        expect(read).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail because the requested id is not available', async () => {
+        try {
+            await role.withAuth().get(roleId + 12);
+            throw 'it will not pass because the name does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    // get all roles
+
+    it('will pass when the token provided is valid, upon getting the roles', async () => {
+        let read = await role.withAuth().getRoles(null, 1, 15, 'id', 'asc');
+        expect(read.data).to.be.an('array');
+    });
+
+    // update roles api
+
+    it('will pass on roles update request when the data provided are valid, and the token is too', async () => {
+        let update = await role.withAuth().update(roleId, tmpRoleName + 'update', 1, [1, 2]);
+        expect(update).to.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail on roles update request, when the the id provided does not exist', async () => {
+        try {
+            await role.withAuth().update(roleId + 12, tmpRoleName + 'update', 1, [1, 2]);
+            throw 'should not reach this line, for the id does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    // delete roles API
+
+    it('will pass, because the id is valid, and the token is valid too', async () => {
+        let deleteIt = await role.withAuth().delete(roleId);
+        expect(deleteIt.message).to.exist;
+    });
+
+    it('will fail, because the id provided is already deleted', async () => {
+        try {
+            await role.withAuth().delete(roleId);
+            throw 'should not reach this line because the id is gone';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('will fail, because the id provided does not exist', async () => {
+        try {
+            await role.withAuth().delete(roleId + 123132);
+            throw 'should not reach this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
 });
