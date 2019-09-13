@@ -9,7 +9,8 @@ const Identity = require('../v1/index').Identity,
     Principal = require('../v1').Principal,
     Service = require('../v1').Service,
     Token = require('../v1').Token,
-    Group = require('../v1').Group;
+    Group = require('../v1').Group,
+    Role = require('../v1').Roles;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
@@ -17,10 +18,13 @@ let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentitySecret = `identity-password-${currentTimestampSecond}`,
     tempPrincipalName = 'principal-test' + currentTimestampSecond,
     tmpGroupName = 'group-test' + currentTimestampSecond,
+    tmpRoleName = 'role-test' + currentTimestampSecond,
     identityCreation,
     tempDataSetID = currentTimestampSecond,
     principalID = null,
     groupID,
+    roleId = null,
+    roleName = null,
     token;
 
 
@@ -788,4 +792,113 @@ describe('groups test', () => {
             expect(e.message).equals('Group does not exist');
         }
     });
+});
+
+describe('roles api tests', () => {
+
+    describe('with setToken', () => {
+        it('fails on malformed token', async () => {
+            try {
+                await new Role().setToken('some token').create(tmpRoleName, 1, [1, 2]);
+                throw 'it will not pass because the token is invalid';
+            } catch (e) {
+                expect(e.message).to.exist;
+            }
+        });
+    });
+
+    it('creates a new role', async () => {
+        let create = await new Role().withAuth().create(tmpRoleName, 1, [1, 2]);
+        roleId = create.id;
+        roleName = create.name;
+        expect(create).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('fails when privileges are not an array', async () => {
+        try {
+            await new Role().withAuth().create(tmpRoleName, 1, 1);
+            throw 'should not reach this line, privileges are not an array';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+
+    });
+
+    // Get role by id API
+    it('should return the right role', async () => {
+        let read = await new Role().withAuth().getById(roleId);
+        expect(read).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail because the requested id is not available', async () => {
+        try {
+            await new Role().withAuth().getById(roleId + 12);
+            throw 'it will not pass because the name does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('gets the right role by its name', async () => {
+        let read = await new Role().withAuth().getById(roleName);
+        expect(read).to.be.instanceOf(Object).and.has.property('id');
+    });
+
+    it('will fail because the requested id is not available', async () => {
+        try {
+            await new Role().withAuth().getById(roleName + 'test');
+            throw 'it will not pass because the name does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    // get all roles
+
+    it('gets the desired token', async () => {
+        let read = await new Role().withAuth().getRoles(null, 1, 15, 'id', 'asc');
+        expect(read.data).to.be.an('array');
+    });
+
+    // update roles api
+
+    it('updates the requested role', async () => {
+        let update = await new Role().withAuth().update(roleId, tmpRoleName + 'update', 1, [1, 2]);
+        expect(update).to.instanceOf(Object).and.has.property('id');
+    });
+
+    it('fails when getting a non-existing role', async () => {
+        try {
+            await new Role().withAuth().update(roleId + 12, tmpRoleName + 'update', 1, [1, 2]);
+            throw 'should not reach this line, for the id does not exist';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    // delete roles API
+
+    it('deletes the required role', async () => {
+        let deleteIt = await new Role().withAuth().delete(roleId);
+        expect(deleteIt.message).to.exist;
+    });
+
+    it('fails deleting an already deleted role', async () => {
+        try {
+            await new Role().withAuth().delete(roleId);
+            throw 'should not reach this line because the id is gone';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
+    it('fails deleting a non existing role', async () => {
+        try {
+            await new Role().withAuth().delete(roleId + 123132);
+            throw 'should not reach this line because the id is not valid';
+        } catch (e) {
+            expect(e.message).to.exist;
+        }
+    });
+
 });
