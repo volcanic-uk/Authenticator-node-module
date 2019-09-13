@@ -15,7 +15,7 @@ class Groups extends V1Base {
         return await super.fetch('post', 'groups', null, group);
     }
 
-    async get(id) {
+    async getById(id) {
         return await super.fetch('get', `groups/${id}`, null);
     }
 
