@@ -1,7 +1,8 @@
-const Principal = require('../src/authenticator/v1/principals');
-const Identity = require('../src/authenticator/v1/identity');
+const Principal = require('../src/authenticator/v1/principals'),
+    Identity = require('../src/authenticator/v1/identity'),
+    Services = require('../src/authenticator/v1/services');
 module.exports = {
     Principal,
-    Identity
-
+    Identity,
+    Services
 };

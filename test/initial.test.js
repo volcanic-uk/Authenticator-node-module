@@ -1,17 +1,19 @@
 const chai = require('chai'),
+    sorted = require('chai-sorted'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect;
 chai.use(chaiAsPromised);
+chai.use(sorted);
 
 const Identity = require('../v1/index').Identity,
-    Principal = require('../v1').Principal;
+    Principal = require('../v1').Principal,
+    Service = require('../v1').Services;
 
 let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpIdentityName = `identity-${currentTimestampSecond}`,
     tmpIdentityNameWithSecret = `identity-secret-${currentTimestampSecond}`,
     tmpIdentitySecret = `identity-password-${currentTimestampSecond}`,
     tempPrincipalName = 'principal-test' + currentTimestampSecond,
-
     identityCreation,
     tempDataSetID = currentTimestampSecond,
     principalID = null,
@@ -462,5 +464,174 @@ describe('identity logout tests', async () => {
             }
         });
 
+    });
+});
+describe('Service tests', async () => {
+    describe('with auth', async () => {
+        let serviceId = null;
+        let service = null;
+        describe('create service', async () => {
+            it('should create a service', async () => {
+                service = await new Service().withAuth().create(`new-service-${currentTimestampSecond}`);
+                serviceId = service.id;
+            });
+            it('should not create duplicated service', async () => {
+                try {
+                    service = await new Service().withAuth().create(`new-service-${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6001);
+                    expect(e).to.exist;
+                }
+            });
+            it('should not create service without name', async () => {
+                try {
+                    service = await new Service().withAuth().create(null);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(10001);
+                    expect(e).to.exist;
+                }
+            });
+        });
+        describe('should read created service', async () => {
+            it('should read a service', async () => {
+                let serviceRead = await new Service().withAuth().get(serviceId);
+                expect(serviceRead.id).to.exist;
+            });
+            it('should not read service with wrong id', async () => {
+                try {
+                    await new Service().withAuth().get(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6002);
+                    expect(e).to.exist;
+                }
+
+            });
+        });
+        describe('should read all services', async () => {
+            it('should read all services in ascending order', async () => {
+                let servicesGetAll = await new Service().withAuth().getServices('', '', '', 'id', 'asc');
+                expect(servicesGetAll.data).to.be.ascendingBy('id');
+            });
+            it('should read all services in descending order', async () => {
+                let servicesGetAll = await new Service().withAuth().getServices('', '', '', 'id', 'desc');
+                expect(servicesGetAll.data).to.be.descendingBy('id');
+            });
+        });
+        describe('update a service', async () => {
+            it('should update a service', async () => {
+                let updateService = await new Service().withAuth().update(serviceId, `service-name-update-${currentTimestampSecond}`);
+                expect(updateService.name).to.equal(`service-name-update-${currentTimestampSecond}`);
+            });
+            it('should not update a non-exist service', async () => {
+                try {
+                    await new Service().withAuth().update(`${currentTimestampSecond}`, `service-name-update-${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6002);
+                    expect(e).to.exist;
+                }
+            });
+        });
+        describe('delete a service', async () => {
+            it('should delete a service', async () => {
+                let deleteService = await new Service().withAuth().delete(serviceId);
+                expect(deleteService.message).to.exist;
+            });
+            it('should not delete a service', async () => {
+                try {
+                    await new Service().withAuth().delete(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6002);
+                    expect(e).to.exist;
+                }
+            });
+        });
+    });
+    describe('without auth and with setToken', async () => {
+        before(async () => {
+            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+            token = token.token;
+        });
+        let serviceId = null;
+        let service = null;
+        describe('create service', async () => {
+            it('should create a service', async () => {
+                service = await new Service().setToken(token).create(`new-service-${currentTimestampSecond}`);
+                serviceId = service.id;
+            });
+            it('should not create duplicated service', async () => {
+                try {
+                    await new Service().setToken(token).create(`new-service-${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6001);
+                    expect(e).to.exist;
+                }
+            });
+            it('should not create service without name', async () => {
+                try {
+                    await new Service().setToken(token).create(null);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(10001);
+                    expect(e).to.exist;
+                }
+            });
+        });
+        describe('should read created service', async () => {
+            it('should read a service', async () => {
+                let serviceRead = await new Service().setToken(token).get(serviceId);
+                expect(serviceRead.id).to.exist;
+            });
+            it('should not read service with wrong id', async () => {
+                try {
+                    await new Service().withAuth().get(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6002);
+                    expect(e).to.exist;
+                }
+
+            });
+        });
+        describe('should read all services', async () => {
+            it('should read all services in ascending order', async () => {
+                let servicesGetAll = await new Service().setToken(token).getServices('', '', '', 'id', 'asc');
+                expect(servicesGetAll.data).to.be.ascendingBy('id');
+            });
+            it('should read all services in descending order', async () => {
+                let servicesGetAll = await new Service().setToken(token).getServices('', '', '', 'id', 'desc');
+                expect(servicesGetAll.data).to.be.descendingBy('id');
+            });
+        });
+        // describe('update a service', async () => {
+        //     it('should update a service', async () => {
+        //         try {
+        //             let updateService = await new Service().withAuth().update(serviceId, `service-name-update-${currentTimestampSecond}`);
+        //             console.log('update service', updateService);
+        //             expect(updateService.name).to.equal(`service-name-update-${currentTimestampSecond}`);
+        //         } catch (e) {
+        //             console.log('catch the error', e);
+        //         }
+        //     });
+        //     it('should not update a non-exist service', async () => {
+        //         try {
+        //             await new Service().setToken(token).update(`${currentTimestampSecond}`, `service-name-update-1${currentTimestampSecond}`);
+        //         } catch (e) {
+        //             expect(e.errorCode).to.equal(6002);
+        //             expect(e).to.exist;
+        //         }
+        //     });
+        // });
+        describe('delete a service', async () => {
+            it('should delete a service', async () => {
+                let deleteService = await new Service().withAuth().delete(serviceId);
+                expect(deleteService.message).to.exist;
+            });
+            it('should not delete a service', async () => {
+                try {
+                    await new Service().setToken(token).delete(`${currentTimestampSecond}`);
+                } catch (e) {
+                    expect(e.errorCode).to.equal(6002);
+                    expect(e).to.exist;
+                }
+            });
+        });
     });
 });
