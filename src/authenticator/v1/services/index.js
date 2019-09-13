@@ -1,7 +1,7 @@
 // require the custom api fetch from the helpers module folder
 const V1Base = require('../v1_base');
 
-class Services extends V1Base {
+class Service extends V1Base {
     constructor() {
         super();
     }
@@ -32,4 +32,4 @@ class Services extends V1Base {
     }
 }
 
-module.exports = Services;
+module.exports = Service;
