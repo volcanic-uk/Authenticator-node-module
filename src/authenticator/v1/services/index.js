@@ -7,7 +7,7 @@ class Services extends V1Base {
     }
 
     async create(name) {
-        let service = { name: name };
+        let service = { name };
         return await super.fetch('post', 'services', null, service);
 
     }
@@ -19,6 +19,7 @@ class Services extends V1Base {
     async getServices(query = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
         return await super.fetch('get', `services?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
+
     async update(id, name) {
         let update = {
             name
