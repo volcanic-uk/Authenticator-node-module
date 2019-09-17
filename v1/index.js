@@ -1,12 +1,13 @@
-const Principal = require('../src/authenticator/v1/principals');
-const Identity = require('../src/authenticator/v1/identity');
-const Key = require('../src/authenticator/v1/key');
-const Token = require('../src/authenticator/v1/token');
-const Service = require('../src/authenticator/v1/service');
-const Config = require('../config');
-const Group = require('../src/authenticator/v1/groups');
-const Roles = require('../src/authenticator/v1/roles');
-const Privilege = require('../src/authenticator/v1/privileges');
+const Principal = require('../src/authenticator/v1/principals'),
+    Identity = require('../src/authenticator/v1/identity'),
+    Key = require('../src/authenticator/v1/key'),
+    Token = require('../src/authenticator/v1/token'),
+    Service = require('../src/authenticator/v1/service'),
+    Config = require('../config'),
+    Group = require('../src/authenticator/v1/groups'),
+    Roles = require('../src/authenticator/v1/roles'),
+    Privilege = require('../src/authenticator/v1/privileges'),
+    Permission = require('../src/authenticator/v1/permissions');
 module.exports = {
     Principal,
     Identity,
@@ -16,5 +17,6 @@ module.exports = {
     Service,
     Group,
     Roles,
-    Privilege
+    Privilege,
+    Permission
 };
