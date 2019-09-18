@@ -1,34 +1,3 @@
-# Authenticator Node Module
-
-This utility is used to request multiple functions and services from the authentication server on this repo: https://github.com/volcanic-uk/Authenticator
-
-## Getting started:
-1.  Install the node module to your project by adding the git link to your `package.json` file into the dependecies field.
-2.  Copy `.env.example` file to a new .env file in your main project directory, not the module itself
-3.  Fill in the required information about the server and services you need like the server route, token related info and  such.
-4.  Run `npm i` in your project directory from the terminal to install all dependencies.
-5.  Require the module and call the functions needed directly from v1, all the functions are structured into categories based on their role.
-
-## Classes within the Authenticator node package:
-* Principal
-* Identity
-* Service
-* Permission
-* Group
-* Privileges
-* Roles
-
-
-## How to use
-Methods for this node package documented below are available using an instance of the any of the classes above. For example:
-```javascript
-   const auth = require('auth-node-module/v1');
-   let login = new auth.Identity().login('username', 'password', ['audience'], 'exp-date');
-   //=>  {
-  token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NjkwMDUzNTgsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTY4Nzg5MzU4LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1Njg3ODkzNTgsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AXFEi1ogRN_BENdkdGYorh3Zku5Z0WZWvhkES_6ZkPUs0izbPJWVLcn4v9OUSYiFxcOAaGlAoZyJcL0Q11g11GcZAKdXkqkRmOKGdfHuw4-mqRG8zSscJfK4mvhq1egSkLeS7NmPKaumPnP0BPpfI8JD3dXknkCGB_AA-1p4wRykJKle'
-}
-
-```
 ## Classes
 ### Identities:
 ##### login(name, secret, audience, principalId)
@@ -75,8 +44,7 @@ Result :  ``` {
   created_at: '2019-09-18T07:56:37.748Z',
   updated_at: '2019-09-18T07:56:40.735Z',
   status: true
-}
-```
+}```
 ###### example
 ```javascript
    const auth = require('auth-node-module/v1');
