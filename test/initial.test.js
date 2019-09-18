@@ -700,12 +700,12 @@ describe('Permissions tests', async () => {
     describe('with auth', async () => {
         let permissionId = null;
         let permission = null;
-        describe('create permission', async () => {
-            it('should create a permission', async () => {
-                permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 'this is new permission', serviceId);
+        describe('create permissions', async () => {
+            it('should create a permissions', async () => {
+                permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 'this is new permissions', serviceId);
                 permissionId = permission.id;
             });
-            it('should not create duplicated permission', async () => {
+            it('should not create duplicated permissions', async () => {
                 try {
                     permission = await new Permission().withAuth().create(`new-permission-${currentTimestampSecond}`, 'description', serviceId);
                 } catch (e) {
@@ -713,7 +713,7 @@ describe('Permissions tests', async () => {
                     expect(e).to.exist;
                 }
             });
-            it('should not create permission without name', async () => {
+            it('should not create permissions without name', async () => {
                 try {
                     permission = await new Permission().withAuth().create(null);
                 } catch (e) {
@@ -722,12 +722,12 @@ describe('Permissions tests', async () => {
                 }
             });
         });
-        describe('should read created permission', async () => {
-            it('should read a permission', async () => {
+        describe('should read created permissions', async () => {
+            it('should read a permissions', async () => {
                 let permissionRead = await new Permission().withAuth().getByID(permissionId);
                 expect(permissionRead.id).to.exist;
             });
-            it('should not read permission with wrong id', async () => {
+            it('should not read permissions with wrong id', async () => {
                 try {
                     await new Permission().withAuth().getByID(`${currentTimestampSecond}`);
                 } catch (e) {
@@ -747,12 +747,12 @@ describe('Permissions tests', async () => {
                 expect(permissionsGetAll.data).to.be.descendingBy('id');
             });
         });
-        describe('update a permission', async () => {
-            it('should update a permission', async () => {
+        describe('update a permissions', async () => {
+            it('should update a permissions', async () => {
                 let updatepermission = await new Permission().withAuth().update(permissionId, `permission-name-update-${currentTimestampSecond}`);
                 expect(updatepermission.name).to.equal(`permission-name-update-${currentTimestampSecond}`);
             });
-            it('should not update a non-exist permission', async () => {
+            it('should not update a non-exist permissions', async () => {
                 try {
                     await new Permission().withAuth().update(`${currentTimestampSecond}`, `permission-name-update-${currentTimestampSecond}`);
                 } catch (e) {
@@ -761,12 +761,12 @@ describe('Permissions tests', async () => {
                 }
             });
         });
-        describe('delete a permission', async () => {
-            it('should delete a permission', async () => {
+        describe('delete a permissions', async () => {
+            it('should delete a permissions', async () => {
                 let deletepermission = await new Permission().withAuth().delete(permissionId);
                 expect(deletepermission.message).to.exist;
             });
-            it('should not delete a permission', async () => {
+            it('should not delete a permissions', async () => {
                 try {
                     await new Permission().withAuth().delete(`${currentTimestampSecond}`);
                 } catch (e) {
@@ -783,12 +783,12 @@ describe('Permissions tests', async () => {
             token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
             token = token.token;
         });
-        describe('create permission', async () => {
-            it('should create a permission', async () => {
-                permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 'this is a new permission', serviceId);
+        describe('create permissions', async () => {
+            it('should create a permissions', async () => {
+                permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 'this is a new permissions', serviceId);
                 permissionId = permission.id;
             });
-            it('should not create duplicated permission', async () => {
+            it('should not create duplicated permissions', async () => {
                 try {
                     permission = await new Permission().setToken(token).create(`new-permission-${currentTimestampSecond}`, 'description', serviceId);
                 } catch (e) {
@@ -796,7 +796,7 @@ describe('Permissions tests', async () => {
                     expect(e).to.exist;
                 }
             });
-            it('should not create permission without name', async () => {
+            it('should not create permissions without name', async () => {
                 try {
                     permission = await new Permission().setToken(token).create(null);
                 } catch (e) {
@@ -805,12 +805,12 @@ describe('Permissions tests', async () => {
                 }
             });
         });
-        describe('should read created permission', async () => {
-            it('should read a permission', async () => {
+        describe('should read created permissions', async () => {
+            it('should read a permissions', async () => {
                 let permissionRead = await new Permission().setToken(token).getByID(permissionId);
                 expect(permissionRead.id).to.exist;
             });
-            it('should not read permission with wrong id', async () => {
+            it('should not read permissions with wrong id', async () => {
                 try {
                     await new Permission().setToken(token).getByID(`${currentTimestampSecond}`);
                 } catch (e) {
@@ -830,12 +830,12 @@ describe('Permissions tests', async () => {
                 expect(permissionsGetAll.data).to.be.descendingBy('id');
             });
         });
-        describe('update a permission', async () => {
-            it('should update a permission', async () => {
+        describe('update a permissions', async () => {
+            it('should update a permissions', async () => {
                 let updatepermission = await new Permission().setToken(token).update(permissionId, `permission-name-update-without-auth${currentTimestampSecond}`);
                 expect(updatepermission.name).to.equal(`permission-name-update-without-auth${currentTimestampSecond}`);
             });
-            it('should not update a non-exist permission', async () => {
+            it('should not update a non-exist permissions', async () => {
                 try {
                     await new Permission().setToken(token).update(`${currentTimestampSecond}`, `permission-name-update-without-auth${currentTimestampSecond}`);
                 } catch (e) {
@@ -844,12 +844,12 @@ describe('Permissions tests', async () => {
                 }
             });
         });
-        describe('delete a permission', async () => {
-            it('should delete a permission', async () => {
+        describe('delete a permissions', async () => {
+            it('should delete a permissions', async () => {
                 let deletepermission = await new Permission().setToken(token).delete(permissionId);
                 expect(deletepermission.message).to.exist;
             });
-            it('should not delete a permission', async () => {
+            it('should not delete a permissions', async () => {
                 try {
                     await new Permission().setToken(token).delete(`${currentTimestampSecond}`);
                 } catch (e) {

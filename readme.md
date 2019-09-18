@@ -26,3 +26,17 @@ let login = new auth.withAuth().Identity().login('username', 'password', ['audie
 const auth = require('auth-node-module/v1');
 let login = new auth.setToken().Identity().login('username', 'password', ['audience'], 'exp-date');
 ```
+
+## detailed docs can be found here
+
+### groups
+https://github.com/volcanic-uk/Authenticator-node-module/tree/docs/src/authenticator/v1/groups
+
+### permissions
+https://github.com/volcanic-uk/Authenticator-node-module/tree/docs/src/authenticator/v1/permissions
+
+### roles
+https://github.com/volcanic-uk/Authenticator-node-module/tree/docs/src/authenticator/v1/roles
+
+### privileges
+https://github.com/volcanic-uk/Authenticator-node-module/tree/docs/src/authenticator/v1/privileges

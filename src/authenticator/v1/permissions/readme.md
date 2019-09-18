@@ -5,7 +5,7 @@ await new Permission().setToken(token).create(name[strnig], description[string],
 response:{ 
     name: 'n***********************1',
     service_id: 544,
-    description: 'this is new permission',
+    description: permissions,
     subject_id: '2',
     updated_at: '2019-09-18T07:46:59.057Z',
     created_at: '2019-09-18T07:46:59.057Z',
