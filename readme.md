@@ -32,7 +32,6 @@ Methods for this node package documented below are available using an instance o
 ## Classes
 ### Identities:
 ##### login(name, secret, audience, principalId)
-###### input
 ###### output
 Type : ```Object```
 
@@ -42,13 +41,8 @@ Result :  ``` {token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyN
 ```javascript
    const auth = require('auth-node-module/v1');
    let login = new auth.Identity().login('username', 'password', ['audience'], 'exp-date');
-   //=>  {
-  token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NjkwMDUzNTgsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTY4Nzg5MzU4LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1Njg3ODkzNTgsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AXFEi1ogRN_BENdkdGYorh3Zku5Z0WZWvhkES_6ZkPUs0izbPJWVLcn4v9OUSYiFxcOAaGlAoZyJcL0Q11g11GcZAKdXkqkRmOKGdfHuw4-mqRG8zSscJfK4mvhq1egSkLeS7NmPKaumPnP0BPpfI8JD3dXknkCGB_AA-1p4wRykJKle'
-}
-
 ```
 ##### create(name, secret, principalId)
-###### input
 ###### output
 Type : ```Object```
 
@@ -65,11 +59,9 @@ Result :  ``` {
 ###### example
 ```javascript
    const auth = require('auth-node-module/v1');
-   let login = new auth.Identity().create('username', 'secret', 'principalId');
-}
+   let create = new auth.Identity().create('username', 'secret', 'principalId');
 ```
 ##### update(name, id)
-###### input
 ###### output
 Type : ```Object```
 
@@ -88,6 +80,39 @@ Result :  ``` {
 ###### example
 ```javascript
    const auth = require('auth-node-module/v1');
-   let login = new auth.Identity().create('username', 'secret', 'principalId');
+   let login = new auth.Identity().update('username', 1);
+}
+```
+##### resetSecret(secret, id)
+###### output
+Type : ```Object```
+
+Result :  ```  { message: 'Secret regenerated successfully', status: true }```
+###### example
+```javascript
+   const auth = require('auth-node-module/v1');
+   let resetSecret = new auth.Identity().resetSecret('secret', 1);
+}
+```
+##### deactivateIdentity(id)
+###### output
+Type : ```Object```
+
+Result :  ```  { message: 'Sucessfully deactivated identity', status: true }```
+###### example
+```javascript
+   const auth = require('auth-node-module/v1');
+   let deactiveIdentity = new auth.Identity().deactiveIdentity(1);
+}
+```
+##### generateToken(id,audience = [], expiryDate, singleUse, nbf)
+###### output
+Type : ```Object```
+
+Result :  ```  { message: 'Sucessfully deactivated identity', status: true }```
+###### example
+```javascript
+   const auth = require('auth-node-module/v1');
+   let generateToken = new auth.Identity().generateToken(1, ['*'],1573488000 , false, 1568943952000));
 }
 ```
