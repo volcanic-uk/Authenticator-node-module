@@ -33,13 +33,6 @@ Methods for this node package documented below are available using an instance o
 ### Identities:
 ##### login(name, secret, audience, principalId)
 ###### input
-name : ```String```
-
-secret : ```String```
-
-audience : ```Array```
-
-principalId : ```Integer```
 ###### output
 Type : ```Object```
 
@@ -56,11 +49,6 @@ Result :  ``` {token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyN
 ```
 ##### create(name, secret, principalId)
 ###### input
-name : ```String```
-
-secret : ```String```
-
-principalId : ```Integer```
 ###### output
 Type : ```Object```
 
@@ -82,9 +70,6 @@ Result :  ``` {
 ```
 ##### update(name, id)
 ###### input
-name : ```String```
-
-id : ```Integer```
 ###### output
 Type : ```Object```
 
