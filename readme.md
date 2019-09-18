@@ -10,19 +10,19 @@ This node module is a utility used to facilitate API requests for the AUTH serve
     5- require the module and call the classes needed after instantiating, example below.
 
 ### basic usage
-```ecmascript 6
+```javascript
 const auth = require('auth-node-module/v1');
 let login = new auth.Identity().login('username', 'password', ['audience'], 'exp-date');
 ```
 
 ### withAuth
-```ecmascript 6
+```javascript
 const auth = require('auth-node-module/v1');
 let login = new auth.withAuth().Identity().login('username', 'password', ['audience'], 'exp-date');
 ```
 
 ### setToken
-```ecmascript 6
+```javascript
 const auth = require('auth-node-module/v1');
 let login = new auth.setToken().Identity().login('username', 'password', ['audience'], 'exp-date');
 ```
@@ -30,7 +30,7 @@ let login = new auth.setToken().Identity().login('username', 'password', ['audie
 ### permissions docs
 
 #### create new permission
-```ecmascript 6
+```javascript
 await new Permission().setToken(token).create(name[strnig], description[string], serviceId[number]);
 
 response:{ 
@@ -44,7 +44,7 @@ response:{
 } 
 ````
 #### get a permission by ID
-```ecmascript 6
+```javascript
 //get permission by id
 await new Permission().setToken(token).getById(id[number]);
 
@@ -60,7 +60,7 @@ response:{
 }
 ```
 #### get mmutiple permissions
-```ecmascript 6
+```javascript
 await new Permission().setToken(token).getPermissions(query[string], page[number], pageSize[number], sort[string], order[string]);
 
 response: { 
@@ -69,7 +69,7 @@ response: {
 }
 ```
 #### update a permission
-```ecmascript 6
+```javascript
 await new Permission().setToken(token).update(id[number], name[string], description[string]);
 
 response:{
@@ -84,7 +84,7 @@ response:{
 }
 ```
 #### deleting a permission
-```ecmascript 6
+```javascript
 await new Permission().setToken(token).update(id[number]);
 
 response:{
