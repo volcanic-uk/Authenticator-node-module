@@ -1,19 +1,31 @@
 # Authenticator Node Module
 
-This node module is a utility used to request multiple functions and services from the authentication server on this repo: https://github.com/volcanic-uk/Authenticator
-
-## Services Included:
-  - Identities( register, login, logout)
-  - Principals( create, read, update, delete)
-  - Tokens (validate)
-  - in memory caching service
-  - tokens decoding and subject claims retrieval 
+This node module is a utility used to facilitate API requests for the AUTH server 
 
 ## How to Use:
     1- install the node module to your project by adding the git link to your package.json file into the dependecies field
     2- copy .env.example file to a new .env file on your main project directory, not the module itself
-    3-  fill in the required information about the server and services you need
-    4- run npm i in your project directory from the terminal
-    5- require the module and call the functions needed directly from v1
+    3- fill in the required information about the server and services you need
+    4- run npm i in your project directory from the terminal to install needed dependencies
+    5- require the module and call the classes needed after instantiating, example below.
 
-for more information about the module and how to use it, checkout the example branch, it has an express server set up with full functionality.
+### basic usage
+```angular2
+const auth = require('auth-node-module/v1');
+
+let login = new auth.Identity().login('username', 'password', ['audience'], 'exp-date');
+```
+
+### withAuth
+```angular2
+const auth = require('auth-node-module/v1');
+
+let login = new auth.withAuth().Identity().login('username', 'password', ['audience'], 'exp-date');
+```
+
+### setToken
+```angular2
+const auth = require('auth-node-module/v1');
+
+let login = new auth.setToken().Identity().login('username', 'password', ['audience'], 'exp-date');
+```
