@@ -46,7 +46,7 @@ describe('principals creation tests', () => {
             await new Principal().withAuth().create(tempPrincipalName, tempDataSetID);
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.errorCode).to.equal(2001);
         }
     });
 
@@ -56,7 +56,7 @@ describe('principals creation tests', () => {
                 await new Principal().setToken('token').create(tempPrincipalName, tempDataSetID);
                 throw 'can not create principal with malformed or no token';
             } catch (e) {
-                expect(e.message).to.be.equal('Forbidden');
+                expect(e.errorCode).to.equal(3001);
             }
         });
     });
@@ -68,7 +68,7 @@ describe('reading principals', () => {
             await new Principal().withAuth().getByID(principalID + 12);
             throw 'can not retrieve a principal that does not exist';
         } catch (e) {
-            expect(e.message).equals('Principal does not exist');
+            expect(e.errorCode).equals(2002);
         }
     });
 
@@ -83,7 +83,7 @@ describe('reading principals', () => {
                 await new Principal().setToken('token').getByID(principalID);
                 throw 'should not reach this line, because the read request has no token, or it is malformed';
             } catch (e) {
-                expect(e.message).to.be.equals('Forbidden');
+                expect(e.errorCode).equals(3001);
             }
         });
     });
@@ -96,7 +96,7 @@ describe('updating principal', () => {
             await new Principal().update(principalID, 'new name', 12);
             throw 'should not read this line because the update request has no token, or it is malformed';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.errorCode).equals(3001);
         }
     });
 
@@ -105,7 +105,7 @@ describe('updating principal', () => {
             await new Principal().update(principalID + 12, 'new name', 12);
             throw 'should not reach this line because the principal requested does not exist';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.errorCode).equals(3001);
         }
     });
 
