@@ -1,6 +1,6 @@
 ### Principal
 
-#### create new principal
+#### create a new principal
 ```javascript
 await new Principal.setToken(token).create(name[string], dataset[integer]);
 
