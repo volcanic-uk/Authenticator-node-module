@@ -52,7 +52,7 @@ response: {
 
 #### get Groups
 ```javascript
-await new Group().withAuth().getGroups(query[string], page[number], pageSize[number], sor[stringt, order[string]);
+await new Group().withAuth().getGroups(query[string], page[number], pageSize[number], sor[string], order[string]);
 
 response: { 
     pagination: [Object], 
@@ -65,6 +65,6 @@ response: {
 await new Group().withAuth().delete(id[number]);
 
 response:{ 
-    message: 'Successfully deleted privilege'
+    message: 'Successfully deleted group'
 } 
 ```
