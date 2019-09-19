@@ -30,10 +30,10 @@ let login = new auth.setToken().Identity().login('username', 'password', ['audie
 ## detailed docs can be found here
 
 ### principal
-https://github.com/volcanic-uk/Authenticator-node-module/tree/docs/src/authenticator/v1/principals
+https://github.com/volcanic-uk/Authenticator-node-module/tree/api-documentation/src/authenticator/v1/principals
 
 ### identity
-https://github.com/volcanic-uk/Authenticator-node-module/tree/docs/src/authenticator/v1/identity
+https://github.com/volcanic-uk/Authenticator-node-module/tree/api-documentation/src/authenticator/v1/identity
 
 ### service
-https://github.com/volcanic-uk/Authenticator-node-module/tree/docs/src/authenticator/v1/services
+https://github.com/volcanic-uk/Authenticator-node-module/tree/api-documentation/src/authenticator/v1/service
