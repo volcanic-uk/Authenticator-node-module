@@ -56,7 +56,7 @@ response: {
 ```
 #### deleting a service
 ```javascript
-await new Principal().setToken(token).delete(id[integer]);
+await new Service().setToken(token).delete(id[integer]);
 
 response:{ message: 'Successfully deleted', status: true }
 ```
