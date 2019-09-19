@@ -1,6 +1,6 @@
 #### create new permission
 ```javascript
-await new Permission().setToken(token).create(name[strnig], description[string], serviceId[number]);
+await new Permission().setToken(token).create(name[string], description[string], serviceId[number]);
 
 response:{ 
     name: 'n***********************1',
@@ -27,7 +27,7 @@ response:{
     updated_at: '2019-09-18T07:46:59.057Z' 
 }
 ```
-#### get mmutiple permissions
+#### get all permissions
 ```javascript
 await new Permission().setToken(token).getPermissions(query[string], page[number], pageSize[number], sort[string], order[string]);
 
