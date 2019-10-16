@@ -22,11 +22,16 @@ class Identity extends V1Base {
     }
 
     //identity register method
-    async create(name, secret = null, principalId) {
+    async create(name, secret = null, principalId, roles, privileges, secretless, source, skipSecretEncryption) {
         let identity = {
             name: name,
             secret: secret,
-            principal_id: principalId
+            principal_id: principalId,
+            roles,
+            privileges,
+            secretless,
+            source,
+            skipSecretEncryption
         };
         return await super.fetch('post', 'identity', null, identity);
     }

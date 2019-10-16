@@ -1,0 +1,85 @@
+{
+  "7c3e96626fc53b900ebe7042d231890a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 90
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "489",
+        "etag": "W/\"1e9-m055xkYVXlIOtms7bNyHoRGDVF8\"",
+        "date": "Wed, 16 Oct 2019 05:51:17 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2NzcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDc3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDc3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AD_m9wqSZxQUlD9LqwyjAaA8h-1QrMy0HlFBWse-iemoPR9qmsxRCsBU9mw2p-TqV5cMQyfptXHax_D744A5JoENAR8hWuYauA9okGvDQ5o66NNnQYaGwf_0rBsJrBADLo1FpXPAKmBqrldKD9UZAQ8S1zO7QfoEAGaoR8Jprl9tzqYa"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 90
+        }
+      }
+    }
+  },
+  "534d4ffb63cf346e238e38698d26319b": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/deactivate/6",
+      "method": "post",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2NzcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDc3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDc3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AD_m9wqSZxQUlD9LqwyjAaA8h-1QrMy0HlFBWse-iemoPR9qmsxRCsBU9mw2p-TqV5cMQyfptXHax_D744A5JoENAR8hWuYauA9okGvDQ5o66NNnQYaGwf_0rBsJrBADLo1FpXPAKmBqrldKD9UZAQ8S1zO7QfoEAGaoR8Jprl9tzqYa",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 410,
+      "statusText": "Gone",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "59",
+        "etag": "W/\"3b-lhT8SSPMbaWrrhol2zNt+0mX1Fs\"",
+        "date": "Wed, 16 Oct 2019 05:51:17 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Identity already deactivated",
+        "errorCode": 1004
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/deactivate/6",
+        "method": "post",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2NzcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDc3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDc3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AD_m9wqSZxQUlD9LqwyjAaA8h-1QrMy0HlFBWse-iemoPR9qmsxRCsBU9mw2p-TqV5cMQyfptXHax_D744A5JoENAR8hWuYauA9okGvDQ5o66NNnQYaGwf_0rBsJrBADLo1FpXPAKmBqrldKD9UZAQ8S1zO7QfoEAGaoR8Jprl9tzqYa",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

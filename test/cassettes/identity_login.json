@@ -1,0 +1,90 @@
+{
+  "f196a62964977b4977ddf6995ba6ba8a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakao\"],\"principal_id\":1}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 84
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "484",
+        "etag": "W/\"1e4-idv8jBFwJyl4KoLOoCo8mlo/+3o\"",
+        "date": "Wed, 16 Oct 2019 05:51:09 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2NjksInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDY5LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzEyMDUwNjksImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AXhWNqWge9GXuUbdf2n-Pskreb1tsLQfBl7TpdaNl1-Y2Hl1Su3cTHWret0xldM2lLfgyLmtvPe1cT92Fxa8y1KFAYSi5xkYVztp01q59zlx62XTuq7ymo5hdv4cp8j8WkTfbHTPM69tom_6cJ96xoJqznWbA9yHCSwG276ZFo-tFAJK"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakao\"],\"principal_id\":1}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 84
+        }
+      }
+    }
+  },
+  "b2339a04f3176866c9730bc4462412ac": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"reset-identity-secretcreate-name\",\"secret\":\"reset-secret\",\"audience\":[\"kratakao\"],\"principal_id\":1}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 108
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "484",
+        "etag": "W/\"1e4-iaS/6nq5aBpbwU8ik0+s606hL9I\"",
+        "date": "Wed, 16 Oct 2019 05:51:19 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2NzksInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvOC85IiwibmJmIjoxNTcxMjA1MDc5LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzEyMDUwNzksImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AHRCfNDB5cOeQVXYgbrTIHvVzOIVbjl_m9s5OSWp7KqJQlfWWckMIocWNuUhPazUgUIDqQQtyWpTzn6LQSqkmExYAVZIlt4qePyAcKvojuRE_rOv39OnqlXzB1wP2jdNm_asCZexXrhn2m3-cJVbFFteMP3SiHofjHEcr70PQ9cJmxsL"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"reset-identity-secretcreate-name\",\"secret\":\"reset-secret\",\"audience\":[\"kratakao\"],\"principal_id\":1}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 108
+        }
+      }
+    }
+  }
+}

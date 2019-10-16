@@ -1,0 +1,661 @@
+{
+  "7c3e96626fc53b900ebe7042d231890a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 90
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "489",
+        "etag": "W/\"1e9-zCO866lEEZesNGyUq6fTnZOiOvY\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 90
+        }
+      }
+    }
+  },
+  "6f09a2fc0b49bf743c9a6244b7b2bbdc": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services",
+      "method": "post",
+      "data": "{\"name\":\"new-service-111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 26
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 400,
+      "statusText": "Bad Request",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "62",
+        "etag": "W/\"3e-EwdQNgKwEN0FOEJbZ14p4Xhe4Wk\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Duplicate entry new-service-111",
+        "errorCode": 6001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services",
+        "method": "post",
+        "data": "{\"name\":\"new-service-111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 26
+        }
+      }
+    }
+  },
+  "951fdddc5226edc7db3918563af7280a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services",
+      "method": "post",
+      "data": "{\"name\":null}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 13
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 422,
+      "statusText": "Unprocessable Entity",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "66",
+        "etag": "W/\"42-rHjA9HUw4wVywAZkENTG/NWxKdM\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": {
+          "name": "\"name\" must be a string"
+        },
+        "errorCode": 10001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services",
+        "method": "post",
+        "data": "{\"name\":null}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 13
+        }
+      }
+    }
+  },
+  "75374a4e97b4da4e9a35bceeb711912f": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/2",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "47",
+        "etag": "W/\"2f-REUfqpGQv2SoBluekYnXOWMWIII\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/2",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "530156fba19b7a0b7fcab0e241fed936": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/111",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": "Not Found",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "53",
+        "etag": "W/\"35-Q7QOibqxQTqtGpHR3Rj0UfrK4Qc\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Service does not exist",
+        "errorCode": 6002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/111",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "7c99deef82dfbc2d3e72ff0a9214867b": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services?query=&page=&page_size=&sort=id&order=asc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "914",
+        "etag": "W/\"392-FJdsTor4u7zL3C8X2rz9/W4KcZc\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "pagination": {
+            "page": 1,
+            "pageSize": 10,
+            "rowCount": 6,
+            "pageCount": 1
+          },
+          "data": [
+            {
+              "id": 1,
+              "name": "auth",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:04.624Z",
+              "updated_at": "2019-10-16T05:51:04.624Z"
+            },
+            {
+              "id": 3,
+              "name": "ats",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.275Z",
+              "updated_at": "2019-10-16T05:51:05.275Z"
+            },
+            {
+              "id": 4,
+              "name": "vault",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.327Z",
+              "updated_at": "2019-10-16T05:51:05.327Z"
+            },
+            {
+              "id": 5,
+              "name": "reporter",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.382Z",
+              "updated_at": "2019-10-16T05:51:05.382Z"
+            },
+            {
+              "id": 6,
+              "name": "xenolith",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.446Z",
+              "updated_at": "2019-10-16T05:51:05.446Z"
+            },
+            {
+              "id": 7,
+              "name": "new-service-111",
+              "active": true,
+              "subject_id": 2,
+              "created_at": "2019-10-16T05:51:36.365Z",
+              "updated_at": "2019-10-16T05:51:36.365Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services?query=&page=&page_size=&sort=id&order=asc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "7cfcdfee7a06e7904bba1e3c1291cf54": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services?query=&page=&page_size=&sort=id&order=desc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "914",
+        "etag": "W/\"392-Gsgmazrp1Sv18Cs4AekORPUd2oM\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "pagination": {
+            "page": 1,
+            "pageSize": 10,
+            "rowCount": 6,
+            "pageCount": 1
+          },
+          "data": [
+            {
+              "id": 7,
+              "name": "new-service-111",
+              "active": true,
+              "subject_id": 2,
+              "created_at": "2019-10-16T05:51:36.365Z",
+              "updated_at": "2019-10-16T05:51:36.365Z"
+            },
+            {
+              "id": 6,
+              "name": "xenolith",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.446Z",
+              "updated_at": "2019-10-16T05:51:05.446Z"
+            },
+            {
+              "id": 5,
+              "name": "reporter",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.382Z",
+              "updated_at": "2019-10-16T05:51:05.382Z"
+            },
+            {
+              "id": 4,
+              "name": "vault",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.327Z",
+              "updated_at": "2019-10-16T05:51:05.327Z"
+            },
+            {
+              "id": 3,
+              "name": "ats",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:05.275Z",
+              "updated_at": "2019-10-16T05:51:05.275Z"
+            },
+            {
+              "id": 1,
+              "name": "auth",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-16T05:51:04.624Z",
+              "updated_at": "2019-10-16T05:51:04.624Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services?query=&page=&page_size=&sort=id&order=desc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "6f639b18965aadb263fc4eb2a5ece303": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/1",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "147",
+        "etag": "W/\"93-v4oFBsL0kkYB8+VBD021ijTJXCg\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "id": 1,
+          "name": "auth",
+          "active": true,
+          "subject_id": null,
+          "created_at": "2019-10-16T05:51:04.624Z",
+          "updated_at": "2019-10-16T05:51:04.624Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/1",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "edbb01ac09f477e94338bd82d8f8e0bd": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/111",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": "Not Found",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "53",
+        "etag": "W/\"35-Q7QOibqxQTqtGpHR3Rj0UfrK4Qc\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Service does not exist",
+        "errorCode": 6002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/111",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "aae4b09582ba1260edc0d29e25265026": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/krakatoa",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "152",
+        "etag": "W/\"98-YY/mwiar0dFjX2ZtEf+ycqGAehA\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "krakatoa",
+          "id": 2,
+          "active": false,
+          "subject_id": null,
+          "created_at": "2019-10-16T05:51:05.226Z",
+          "updated_at": "2019-10-16T05:51:36.762Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/krakatoa",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "de545fac948f090c00b7ff9ac23e9773": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/read-111",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": "Not Found",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "53",
+        "etag": "W/\"35-Q7QOibqxQTqtGpHR3Rj0UfrK4Qc\"",
+        "date": "Wed, 16 Oct 2019 05:51:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Service does not exist",
+        "errorCode": 6002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/read-111",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "dad13109d261625bd31b1337474ece40": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/2",
+      "method": "post",
+      "data": "{\"name\":\"service-name-update-111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 34
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "167",
+        "etag": "W/\"a7-EzMF95XUIosIdDiRdsmSxWyoxik\"",
+        "date": "Wed, 16 Oct 2019 05:51:37 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "id": 2,
+          "name": "service-name-update-111",
+          "active": false,
+          "subject_id": null,
+          "created_at": "2019-10-16T05:51:05.226Z",
+          "updated_at": "2019-10-16T05:51:37.011Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/2",
+        "method": "post",
+        "data": "{\"name\":\"service-name-update-111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 34
+        }
+      }
+    }
+  },
+  "5a11a60b8cf3cb75e59fc39763f76989": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/111",
+      "method": "post",
+      "data": "{\"name\":\"service-name-update-111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 34
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": "Not Found",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "53",
+        "etag": "W/\"35-Q7QOibqxQTqtGpHR3Rj0UfrK4Qc\"",
+        "date": "Wed, 16 Oct 2019 05:51:37 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Service does not exist",
+        "errorCode": 6002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/111",
+        "method": "post",
+        "data": "{\"name\":\"service-name-update-111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk2LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk2LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AEdnNv43evQhPknVYLRHYb5-BUU7QrFWFTasqVIJK1ny2QPlk-kvkRaI0VDHlNuX8RAXk2J2F2Z2fGKHlndqiYjfAFl1OVGcked46heHcicVhpnTZMz6e2Ub2rVE4K-4J8MktPZSSDgGXWpgQWbwg2_w_vC_FhNijLGNvH6zCchqvMRx",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 34
+        }
+      }
+    }
+  }
+}

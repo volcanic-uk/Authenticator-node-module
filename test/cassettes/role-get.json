@@ -1,0 +1,89 @@
+{
+  "7c3e96626fc53b900ebe7042d231890a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 90
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "489",
+        "etag": "W/\"1e9-GkKj3X4FRgk8fwwk6k2Ng3nphDo\"",
+        "date": "Wed, 16 Oct 2019 05:51:34 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk0LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AMQdVgsOxsCrS15PNtte6_BMFe-9xrW5IaZtr_mCoGmmKU_dWbno2zfjGi6ec9tkgb4Xer8u5FY5LLiVheYaTVHkAScba8gR2OADjPg-NuBpHG4V0wL1aobuFXbU--Ciiu8V6iwhQ6DhjcVbNQaZbUCRcpU8OnCblAhN4_4C5RX4o_Pc"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 90
+        }
+      }
+    }
+  },
+  "4097774911e07f16396399a941984989": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/8",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk0LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AMQdVgsOxsCrS15PNtte6_BMFe-9xrW5IaZtr_mCoGmmKU_dWbno2zfjGi6ec9tkgb4Xer8u5FY5LLiVheYaTVHkAScba8gR2OADjPg-NuBpHG4V0wL1aobuFXbU--Ciiu8V6iwhQ6DhjcVbNQaZbUCRcpU8OnCblAhN4_4C5RX4o_Pc",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "151",
+        "etag": "W/\"97-osUCW5r8v7r1KP6HZi5mChdDn3s\"",
+        "date": "Wed, 16 Oct 2019 05:51:34 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "id": 8,
+          "name": "group-test",
+          "subject_id": 2,
+          "service_id": 2,
+          "created_at": "2019-10-16T05:51:33.953Z",
+          "updated_at": "2019-10-16T05:51:33.953Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/8",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk0LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AMQdVgsOxsCrS15PNtte6_BMFe-9xrW5IaZtr_mCoGmmKU_dWbno2zfjGi6ec9tkgb4Xer8u5FY5LLiVheYaTVHkAScba8gR2OADjPg-NuBpHG4V0wL1aobuFXbU--Ciiu8V6iwhQ6DhjcVbNQaZbUCRcpU8OnCblAhN4_4C5RX4o_Pc",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

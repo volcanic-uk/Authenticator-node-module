@@ -1,0 +1,45 @@
+{
+  "1cb6cf8d4a2a886ea70d77ac83122b46": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/5",
+      "method": "post",
+      "data": "{\"name\":\"new name\",\"dataset_id\":12}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 35
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "40",
+        "etag": "W/\"28-K4V9n4BzYE6B/puCSbb5ibAnaCY\"",
+        "date": "Wed, 16 Oct 2019 05:51:29 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/5",
+        "method": "post",
+        "data": "{\"name\":\"new name\",\"dataset_id\":12}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 35
+        }
+      }
+    }
+  }
+}

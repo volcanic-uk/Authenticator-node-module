@@ -1,0 +1,87 @@
+{
+  "7c3e96626fc53b900ebe7042d231890a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 90
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "489",
+        "etag": "W/\"1e9-wWzsnXs79dZEU8bbNYkfA9rwwt8\"",
+        "date": "Wed, 16 Oct 2019 05:51:23 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDgzLCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDgzLCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AZhZ0s7dE2pHAdxGulKsfYxZCKpyvThCkEPygPSBjSo_L6WxavsPrkCRDAyona6xCXwfmtmhb7H0vr9ibou03-OrAZqKaqE2ird7mK7ToM4OcR2cuhJDjL7NzKVUCFfdHe7T05qd74itHG03pbRKZDcMLLGHq_x9QaGv7VVFsXky-bWO"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 90
+        }
+      }
+    }
+  },
+  "10901a8ecf86742a4583781968830f6c": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/111",
+      "method": "post",
+      "data": "{\"name\":\"updated-name-111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDgzLCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDgzLCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AZhZ0s7dE2pHAdxGulKsfYxZCKpyvThCkEPygPSBjSo_L6WxavsPrkCRDAyona6xCXwfmtmhb7H0vr9ibou03-OrAZqKaqE2ird7mK7ToM4OcR2cuhJDjL7NzKVUCFfdHe7T05qd74itHG03pbRKZDcMLLGHq_x9QaGv7VVFsXky-bWO",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 27
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": "Not Found",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "54",
+        "etag": "W/\"36-b53VXmpRBTzVYdXy+QMnJ0OJOpA\"",
+        "date": "Wed, 16 Oct 2019 05:51:23 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Identity does not exist",
+        "errorCode": 1004
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/111",
+        "method": "post",
+        "data": "{\"name\":\"updated-name-111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDgzLCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDgzLCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AZhZ0s7dE2pHAdxGulKsfYxZCKpyvThCkEPygPSBjSo_L6WxavsPrkCRDAyona6xCXwfmtmhb7H0vr9ibou03-OrAZqKaqE2ird7mK7ToM4OcR2cuhJDjL7NzKVUCFfdHe7T05qd74itHG03pbRKZDcMLLGHq_x9QaGv7VVFsXky-bWO",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 27
+        }
+      }
+    }
+  }
+}

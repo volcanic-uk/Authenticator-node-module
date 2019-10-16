@@ -1,0 +1,338 @@
+{
+  "7c3e96626fc53b900ebe7042d231890a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 90
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "489",
+        "etag": "W/\"1e9-lt34QvoOjAEec6K7mWZ04dNp9Lg\"",
+        "date": "Wed, 16 Oct 2019 05:51:25 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODUsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg1LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg1LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AfjD-vGZhaKUT6o4hXZd8VdcLo0FCQNeOqlTwPoGK8GyUW8UAxfyYUsafrSV-FaQ5juIEVZszRBkK-e-qWzHguDpAWhtCrF8mpf3ZQZU_nNTdkHQw8AuWsw0ZEqh67IAUrlzvO96EcigJMd841xEX4lTLkEpByJvkMS9jrkbCWqU3RC_"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 90
+        }
+      }
+    }
+  },
+  "f5cb878e1d9c3f90f652c0a413ba6232": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/permissions?query=&page=&page_size=&sort=id&order=asc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODUsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg1LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg1LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AfjD-vGZhaKUT6o4hXZd8VdcLo0FCQNeOqlTwPoGK8GyUW8UAxfyYUsafrSV-FaQ5juIEVZszRBkK-e-qWzHguDpAWhtCrF8mpf3ZQZU_nNTdkHQw8AuWsw0ZEqh67IAUrlzvO96EcigJMd841xEX4lTLkEpByJvkMS9jrkbCWqU3RC_",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1916",
+        "etag": "W/\"77c-oF/ujgSye6VogpHDkMZCsh6g858\"",
+        "date": "Wed, 16 Oct 2019 05:51:25 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "pagination": {
+            "page": 1,
+            "pageSize": 10,
+            "rowCount": 60,
+            "pageCount": 6
+          },
+          "data": [
+            {
+              "id": 1,
+              "name": "identity:create",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.669Z",
+              "updated_at": "2019-10-16T05:51:04.669Z"
+            },
+            {
+              "id": 3,
+              "name": "identity:deactivate",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.685Z",
+              "updated_at": "2019-10-16T05:51:04.685Z"
+            },
+            {
+              "id": 4,
+              "name": "secret:reset",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.692Z",
+              "updated_at": "2019-10-16T05:51:04.692Z"
+            },
+            {
+              "id": 5,
+              "name": "identity:generate_token",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.699Z",
+              "updated_at": "2019-10-16T05:51:04.699Z"
+            },
+            {
+              "id": 6,
+              "name": "identity:update_roles",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.705Z",
+              "updated_at": "2019-10-16T05:51:04.705Z"
+            },
+            {
+              "id": 7,
+              "name": "identity:update_privileges",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.713Z",
+              "updated_at": "2019-10-16T05:51:04.713Z"
+            },
+            {
+              "id": 8,
+              "name": "principal:get",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.761Z",
+              "updated_at": "2019-10-16T05:51:04.761Z"
+            },
+            {
+              "id": 9,
+              "name": "principal:list",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.769Z",
+              "updated_at": "2019-10-16T05:51:04.769Z"
+            },
+            {
+              "id": 10,
+              "name": "principal:update",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.777Z",
+              "updated_at": "2019-10-16T05:51:04.777Z"
+            },
+            {
+              "id": 11,
+              "name": "principal:delete",
+              "description": null,
+              "subject_id": null,
+              "service_id": 1,
+              "active": true,
+              "created_at": "2019-10-16T05:51:04.784Z",
+              "updated_at": "2019-10-16T05:51:04.784Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/permissions?query=&page=&page_size=&sort=id&order=asc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODUsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg1LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg1LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AfjD-vGZhaKUT6o4hXZd8VdcLo0FCQNeOqlTwPoGK8GyUW8UAxfyYUsafrSV-FaQ5juIEVZszRBkK-e-qWzHguDpAWhtCrF8mpf3ZQZU_nNTdkHQw8AuWsw0ZEqh67IAUrlzvO96EcigJMd841xEX4lTLkEpByJvkMS9jrkbCWqU3RC_",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "3c9168c87853539a58e157a5c3973896": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/permissions?query=&page=&page_size=&sort=id&order=desc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODUsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg1LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg1LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AfjD-vGZhaKUT6o4hXZd8VdcLo0FCQNeOqlTwPoGK8GyUW8UAxfyYUsafrSV-FaQ5juIEVZszRBkK-e-qWzHguDpAWhtCrF8mpf3ZQZU_nNTdkHQw8AuWsw0ZEqh67IAUrlzvO96EcigJMd841xEX4lTLkEpByJvkMS9jrkbCWqU3RC_",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1907",
+        "etag": "W/\"773-fjLjLBIgzZG4VeJQA6FscWzW6NE\"",
+        "date": "Wed, 16 Oct 2019 05:51:25 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "pagination": {
+            "page": 1,
+            "pageSize": 10,
+            "rowCount": 60,
+            "pageCount": 6
+          },
+          "data": [
+            {
+              "id": 61,
+              "name": "new-permission-111",
+              "description": "this is new permission",
+              "subject_id": 2,
+              "service_id": 2,
+              "active": true,
+              "created_at": "2019-10-16T05:51:23.995Z",
+              "updated_at": "2019-10-16T05:51:23.995Z"
+            },
+            {
+              "id": 60,
+              "name": "integration:delete",
+              "description": null,
+              "subject_id": null,
+              "service_id": 6,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.473Z",
+              "updated_at": "2019-10-16T05:51:05.473Z"
+            },
+            {
+              "id": 59,
+              "name": "integration:update",
+              "description": null,
+              "subject_id": null,
+              "service_id": 6,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.465Z",
+              "updated_at": "2019-10-16T05:51:05.465Z"
+            },
+            {
+              "id": 58,
+              "name": "integration:create",
+              "description": null,
+              "subject_id": null,
+              "service_id": 6,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.456Z",
+              "updated_at": "2019-10-16T05:51:05.456Z"
+            },
+            {
+              "id": 57,
+              "name": "chart:delete",
+              "description": null,
+              "subject_id": null,
+              "service_id": 5,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.406Z",
+              "updated_at": "2019-10-16T05:51:05.406Z"
+            },
+            {
+              "id": 56,
+              "name": "chart:update",
+              "description": null,
+              "subject_id": null,
+              "service_id": 5,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.399Z",
+              "updated_at": "2019-10-16T05:51:05.399Z"
+            },
+            {
+              "id": 55,
+              "name": "chart:create",
+              "description": null,
+              "subject_id": null,
+              "service_id": 5,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.390Z",
+              "updated_at": "2019-10-16T05:51:05.390Z"
+            },
+            {
+              "id": 54,
+              "name": "blog:delete",
+              "description": null,
+              "subject_id": null,
+              "service_id": 4,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.352Z",
+              "updated_at": "2019-10-16T05:51:05.352Z"
+            },
+            {
+              "id": 53,
+              "name": "blog:update",
+              "description": null,
+              "subject_id": null,
+              "service_id": 4,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.344Z",
+              "updated_at": "2019-10-16T05:51:05.344Z"
+            },
+            {
+              "id": 52,
+              "name": "blog:create",
+              "description": null,
+              "subject_id": null,
+              "service_id": 4,
+              "active": true,
+              "created_at": "2019-10-16T05:51:05.335Z",
+              "updated_at": "2019-10-16T05:51:05.335Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/permissions?query=&page=&page_size=&sort=id&order=desc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODUsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg1LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg1LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AfjD-vGZhaKUT6o4hXZd8VdcLo0FCQNeOqlTwPoGK8GyUW8UAxfyYUsafrSV-FaQ5juIEVZszRBkK-e-qWzHguDpAWhtCrF8mpf3ZQZU_nNTdkHQw8AuWsw0ZEqh67IAUrlzvO96EcigJMd841xEX4lTLkEpByJvkMS9jrkbCWqU3RC_",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

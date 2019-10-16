@@ -1,0 +1,83 @@
+{
+  "7c3e96626fc53b900ebe7042d231890a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 90
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "489",
+        "etag": "W/\"1e9-mRYVM19ed7XYSGhKQimyi9GLPpw\"",
+        "date": "Wed, 16 Oct 2019 05:51:34 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk0LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AYohZXZ1_yPooRciGYsWHT4fxGRM1HXlxohPHXaJi-Wakqqy-z0jhbIGBd29xS6SDoICzGMnHbXUzgs_AoGOTyNPAAX8nhRYpHuMrOWqJXaKLW4n5ZXg4_q2CcHPT0soeD0fPffpfCJd2QdZA8o4sC5o8q4rrE9SK7sVsVyKTH7rRuix"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 90
+        }
+      }
+    }
+  },
+  "baf345e074b336eab27d372ca2c76ea4": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/20",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk0LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AYohZXZ1_yPooRciGYsWHT4fxGRM1HXlxohPHXaJi-Wakqqy-z0jhbIGBd29xS6SDoICzGMnHbXUzgs_AoGOTyNPAAX8nhRYpHuMrOWqJXaKLW4n5ZXg4_q2CcHPT0soeD0fPffpfCJd2QdZA8o4sC5o8q4rrE9SK7sVsVyKTH7rRuix",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": "Not Found",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "50",
+        "etag": "W/\"32-AqkqjBTsoURSLKqNaNmDA26xomU\"",
+        "date": "Wed, 16 Oct 2019 05:51:34 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "role does not exist",
+        "errorCode": 9001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/20",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2OTQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDk0LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDk0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AYohZXZ1_yPooRciGYsWHT4fxGRM1HXlxohPHXaJi-Wakqqy-z0jhbIGBd29xS6SDoICzGMnHbXUzgs_AoGOTyNPAAX8nhRYpHuMrOWqJXaKLW4n5ZXg4_q2CcHPT0soeD0fPffpfCJd2QdZA8o4sC5o8q4rrE9SK7sVsVyKTH7rRuix",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

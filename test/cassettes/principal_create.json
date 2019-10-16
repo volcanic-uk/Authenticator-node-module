@@ -1,0 +1,236 @@
+{
+  "7c3e96626fc53b900ebe7042d231890a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 90
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "489",
+        "etag": "W/\"1e9-bZQjV/9aGzeCw1ERjdwnRqbTwoM\"",
+        "date": "Wed, 16 Oct 2019 05:51:27 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"principal_id\":\"1\",\"audience\":\"[\\\"krakatou\\\"]\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 90
+        }
+      }
+    }
+  },
+  "70fd9a922d21cd5a59b6fb50e7fd2c80": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 42
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "142",
+        "etag": "W/\"8e-gSU8xtvGB4iRSP+nCd1o/DGy7ss\"",
+        "date": "Wed, 16 Oct 2019 05:51:27 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "principal-test",
+          "dataset_id": 111,
+          "updated_at": "2019-10-16T05:51:27.474Z",
+          "created_at": "2019-10-16T05:51:27.474Z",
+          "id": 2
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 42
+        }
+      }
+    }
+  },
+  "741c6228d2ad57004e7ac14926076282": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test-delete\",\"dataset_id\":111}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 49
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "149",
+        "etag": "W/\"95-3/nWZic4OX2oJsHUu6RlU5oetI0\"",
+        "date": "Wed, 16 Oct 2019 05:51:27 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "principal-test-delete",
+          "dataset_id": 111,
+          "updated_at": "2019-10-16T05:51:27.850Z",
+          "created_at": "2019-10-16T05:51:27.850Z",
+          "id": 3
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test-delete\",\"dataset_id\":111}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 49
+        }
+      }
+    }
+  },
+  "262a6a7494608b21112b27c5dfa5f8d5": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test-read\",\"dataset_id\":11}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 46
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "146",
+        "etag": "W/\"92-bbPT5N3tAbjDUkgHeWOO7CThVg4\"",
+        "date": "Wed, 16 Oct 2019 05:51:28 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "principal-test-read",
+          "dataset_id": 11,
+          "updated_at": "2019-10-16T05:51:28.325Z",
+          "created_at": "2019-10-16T05:51:28.325Z",
+          "id": 4
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test-read\",\"dataset_id\":11}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 46
+        }
+      }
+    }
+  },
+  "c56e6f31852e1af0707d167e5eee03c2": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test-one\",\"dataset_id\":111}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 46
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "146",
+        "etag": "W/\"92-YRKoPtrrRwbHFucG837LS1Z/ECM\"",
+        "date": "Wed, 16 Oct 2019 05:51:29 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "principal-test-one",
+          "dataset_id": 111,
+          "updated_at": "2019-10-16T05:51:29.050Z",
+          "created_at": "2019-10-16T05:51:29.050Z",
+          "id": 5
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test-one\",\"dataset_id\":111}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzEyMDg2ODcsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcxMjA1MDg3LCJhdWRpZW5jZSI6IltcImtyYWthdG91XCJdIiwiaWF0IjoxNTcxMjA1MDg3LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.ATJLJJU00CzG0zSwLi3TUS3JV_QwGVBm2tfHSyOAanQpgL5o3qtJp6GPAoJxyhYZdEJk7Iy117QhcNdV4t3BpEu3AefBGzMsYlcW9YVeosucB3KbVFxY7mCdJLyMI7Fp17ToPqm0U4eveeeMNywMWv9uted0L1KAc5RmhTEmpkzujp5v",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 46
+        }
+      }
+    }
+  }
+}
