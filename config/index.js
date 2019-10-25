@@ -14,7 +14,7 @@ module.exports = {
     auth: {
         identity_name: ENV_VARS.IDENTITY,
         secret: ENV_VARS.SECRET,
-        principal_id: ENV_VARS.PRINCIPAL_ID,
+        dataset_id: ENV_VARS.DATASET_ID,
         audience: ENV_VARS.DEFAULT_AUDIENCE || ['*'],
         set: function (authConfig) {
             this.identity_name = authConfig.identity_name;
