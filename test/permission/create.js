@@ -5,7 +5,7 @@ const chai = require('chai'),
     expect = chai.expect;
 chai.use(chaiAsPromised);
 chai.use(sorted);
-let currentTimestampSecond = 111,
+let currentTimestampSecond = '111',
     token;
 const Identity = require('../../v1/index').Identity,
     Permission = require('../../v1').Permission;
@@ -13,7 +13,7 @@ const Identity = require('../../v1/index').Identity,
 describe('create permission', async () => {
     before(async () => {
         axiosVCR.mountCassette('./test/cassettes/identity_login.json');
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
         token = token.token;
         axiosVCR.ejectCassette('./test/cassettes/identity_login.json');
     });

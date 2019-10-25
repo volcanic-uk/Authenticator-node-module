@@ -14,7 +14,7 @@ let currentTimestampSecond = 111,
 describe('delete a service', async () => {
     before(async () => {
         axiosVCR.mountCassette('./test/cassettes/identity_login.json');
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
         token = token.token;
         axiosVCR.ejectCassette('./test/cassettes/identity_login.json');
     });

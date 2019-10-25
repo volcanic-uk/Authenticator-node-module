@@ -9,7 +9,7 @@ let token;
 const Identity = require('../../v1/index').Identity;
 before(async () => {
     axiosVCR.mountCassette('./test/cassettes/identity_login.json');
-    token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+    token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
     token = token.token;
     axiosVCR.ejectCassette('./test/cassettes/identity_login.json');
 });
@@ -27,7 +27,7 @@ describe('logout the identity', () => {
     describe('without auth and with setToken', async () => {
         before(async () => {
             axiosVCR.mountCassette('./test/cassettes/identity_login.json');
-            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
             token = token.token;
             axiosVCR.ejectCassette('./test/cassettes/identity_login.json');
         });

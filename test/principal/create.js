@@ -7,7 +7,7 @@ chai.use(chaiAsPromised);
 chai.use(sorted);
 
 const Principal = require('../../v1').Principal;
-let currentTimestampSecond = 111,
+let currentTimestampSecond = '111',
     tempPrincipalName = 'principal-test',
     tempDataSetID = currentTimestampSecond;
 describe('principal create test', () => {

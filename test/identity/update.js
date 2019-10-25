@@ -17,20 +17,20 @@ let currentTimestampSecond = 111,
 describe('Identity update', () => {
     before(async () => {
         axiosVCR.mountCassette('./test/cassettes/identity_create_update.json');
-        await new Identity().withAuth().create(tmpIdentityName + 'update-name', tmpIdentitySecret, 1, [1]);
+        await new Identity().withAuth().create(tmpIdentityName + 'update-name', tmpIdentitySecret, 'volcanic', [1]);
         axiosVCR.ejectCassette('./test/cassettes/identity_create_update.json');
         axiosVCR.mountCassette('./test/cassettes/identity_login_.json');
-        token = await new Identity().login(tmpIdentityName + 'update-name', tmpIdentitySecret, ['kratakao'], 1);
+        token = await new Identity().login(tmpIdentityName + 'update-name', tmpIdentitySecret, ['kratakao'], '-1');
         token = token.token;
         axiosVCR.ejectCassette('./test/cassettes/identity_login_.json');
         axiosVCR.mountCassette('./test/cassettes/identity_create_update_2.json');
-        identityCreation = await new Identity().withAuth().create(tmpIdentityName + 'for-updation', null, 1);
+        identityCreation = await new Identity().withAuth().create(tmpIdentityName + 'for-updation', null, 'volcanic');
         axiosVCR.ejectCassette('./test/cassettes/identity_create_update_2.json');
     });
     describe('with auth', async () => {
         it('should update an identity', async () => {
             axiosVCR.mountCassette('./test/cassettes/identity_update.json');
-            let updatedIdentity = await new Identity().withAuth().update(`updated-name-${currentTimestampSecond}`, identityCreation.id); //check identity creation id here
+            let updatedIdentity = await new Identity().withAuth().update(`updated-name-${currentTimestampSecond}`, identityCreation.secure_id); //check identity creation id here
             axiosVCR.ejectCassette('./test/cassettes/identity_update.json');
             expect(updatedIdentity.name).to.equal(`updated-name-${currentTimestampSecond}`);
         });
@@ -51,7 +51,7 @@ describe('Identity update', () => {
     describe('without auth and with setToken', async () => {
         it('should update an identity', async () => {
             axiosVCR.mountCassette('./test/cassettes/identity_update_where.json');
-            let updatedIdentity = await new Identity().setToken(token).update(`updated-name-${currentTimestampSecond}-token`, identityCreation.id);
+            let updatedIdentity = await new Identity().setToken(token).update(`updated-name-${currentTimestampSecond}-token`, identityCreation.secure_id);
             axiosVCR.ejectCassette('./test/cassettes/identity_update_where.json');
             expect(updatedIdentity.name).to.equal(`updated-name-${currentTimestampSecond}-token`);
         });

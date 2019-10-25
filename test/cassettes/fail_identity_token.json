@@ -1,0 +1,41 @@
+{
+  "d3ed2ad99152419be682af85d4173a9b": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/6335d7abc6",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "40",
+        "etag": "W/\"28-K4V9n4BzYE6B/puCSbb5ibAnaCY\"",
+        "date": "Fri, 25 Oct 2019 09:15:11 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/6335d7abc6",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

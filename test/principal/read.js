@@ -10,7 +10,7 @@ const Principal = require('../../v1').Principal;
 
 let principalID = null,
     tempPrincipalName = 'principal-test-read',
-    tempDataSetID = 11;
+    tempDataSetID = '11';
 
 
 describe('Principal read', () => {
@@ -46,7 +46,7 @@ describe('Principal read', () => {
 
     it('should return an object if the principal is found successfully while passing valid data', async () => {
         axiosVCR.mountCassette('./test/cassettes/principal_read.json');
-        let read = await principal.withAuth().getByID(1);
+        let read = await principal.withAuth().getByID('volcanic');
         axiosVCR.ejectCassette('./test/cassettes/principal_read.json');
         expect(read.id).to.exist;
     });

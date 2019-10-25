@@ -8,19 +8,20 @@ chai.use(sorted);
 let token;
 const Principal = require('../../v1').Principal,
     Identity = require('../../v1').Identity;
-let currentTimestampSecond = 111,
+let currentTimestampSecond = '111',
     tempPrincipalName = 'principal-test-delete',
+    principalObject = null,
     tempDataSetID = currentTimestampSecond;
 describe('principal delete', async () => {
     let principal = new Principal();
     before(async () => {
 
         axiosVCR.mountCassette('./test/cassettes/identity_login.json');
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
         token = token.token;
         axiosVCR.ejectCassette('./test/cassettes/identity_login.json');
         axiosVCR.mountCassette('./test/cassettes/principal_create.json');
-        await principal.withAuth().create(tempPrincipalName, tempDataSetID);
+        principalObject = await principal.withAuth().create(tempPrincipalName, tempDataSetID);
         axiosVCR.ejectCassette('./test/cassettes/principal_create.json');
     });
     // delete principal
@@ -37,7 +38,7 @@ describe('principal delete', async () => {
 
     it('should return a success message upon valid request of deleting the principal via ID', async () => {
         axiosVCR.mountCassette('./test/cassettes/principal_delete.json');
-        let deleted = await principal.withAuth().delete(2);
+        let deleted = await principal.withAuth().delete(principalObject.secure_id);
         axiosVCR.ejectCassette('./test/cassettes/principal_delete.json');
         expect(deleted.message).to.exist;
     });

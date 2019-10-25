@@ -7,12 +7,12 @@ class Identity extends V1Base {
     }
 
     //identity login method
-    async login(name, secret, audience = [], principalId) {
+    async login(name, secret, audience = [], datasetId) {
         let loginDetails = {
             name: name,
             secret: secret,
             audience: audience,
-            principal_id: principalId
+            dataset_id: datasetId
         };
 
         let result = await super.fetch('post', 'identity/login', null, loginDetails);
@@ -42,6 +42,17 @@ class Identity extends V1Base {
         };
         return await super.fetch('post', `identity/${id}`, null, identity);
     }
+    async updatePrivileges (id, privileges = []) {
+        return await super.fetch('post', `identity/${id}/privileges`, null, {
+            privileges
+        });
+    }
+
+    async updateRoles (id, roles = []) {
+        return await super.fetch('post', `identity/${id}/roles`, null, {
+            roles
+        });
+    }
 
     async resetSecret(secret = null, id) {
         let identity = {
@@ -50,9 +61,18 @@ class Identity extends V1Base {
         return await super.fetch('post', `identity/secret/reset/${id}`, null, identity);
     }
 
-    async deactivateIdentity(id) {
-        return await super.fetch('post', `identity/deactivate/${id}`, null);
+    async getByID(secureID) {
+        return await super.fetch('get', `identity/${secureID}`, null, null);
     }
+
+    async delete(secureID) {
+        return await super.fetch('delete', `identity/${secureID}`, null);
+    }
+
+    async deactivateIdentity(secureID) {
+        return await super.fetch('post', `identity/${secureID}/deactivate`, null);
+    }
+
 
     async generateToken(id, audience = [], expiryDate, singleUse, nbf) {
         let identity = {

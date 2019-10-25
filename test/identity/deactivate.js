@@ -11,20 +11,20 @@ let newIdentity, tmpIdentityName = 'newIdentity', newIdentityWithToken, token;
 describe('Identity deactivate', () => {
     before(async () => {
         axiosVCR.mountCassette('./test/cassettes/identity_login.json');
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
         token = token.token;
         axiosVCR.ejectCassette('./test/cassettes/identity_login.json');
         axiosVCR.mountCassette('./test/cassettes/identity_create_duplicate.json');
-        newIdentity = await new Identity().withAuth().create(tmpIdentityName + 'dsd', null, 1);
-        newIdentityWithToken = await new Identity().withAuth().create(`${tmpIdentityName}-ewew`, null, 1);
+        newIdentity = await new Identity().withAuth().create(tmpIdentityName + 'dsdfdff', null, 'volcanic');
+        newIdentityWithToken = await new Identity().withAuth().create(`${tmpIdentityName}-ewewff`, null, 'volcanic');
         axiosVCR.ejectCassette('./test/cassettes/identity_create_duplicate.json');
     });
     describe('with auth', async () => {
 
         it('should deactivate identity', async () => {
-            axiosVCR.mountCassette('./test/cassettes/identity_deactivation.json');
-            let deactivateIdentity = await new Identity().withAuth().deactivateIdentity(newIdentity.id);
-            axiosVCR.ejectCassette('./test/cassettes/identity_deactivation.json');
+            axiosVCR.mountCassette('./test/cassettes/identity_deacitvation.json');
+            let deactivateIdentity = await new Identity().withAuth().deactivateIdentity(newIdentity.secure_id);
+            axiosVCR.ejectCassette('./test/cassettes/identity_deacitvation.json');
             expect(deactivateIdentity.message).to.equal('Successfully deactivated identity');
         });
 
@@ -45,7 +45,7 @@ describe('Identity deactivate', () => {
     describe('without auth and with setToken', async () => {
         it('should deactivate identity', async () => {
             axiosVCR.mountCassette('./test/cassettes/identity_deactivate.json');
-            let deactivateIdentity = await new Identity().setToken(token).deactivateIdentity(newIdentityWithToken.id);
+            let deactivateIdentity = await new Identity().setToken(token).deactivateIdentity(newIdentityWithToken.secure_id);
             axiosVCR.ejectCassette('./test/cassettes/identity_deactivate.json');
             expect(deactivateIdentity.message).to.equal('Successfully deactivated identity');
         });
