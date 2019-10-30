@@ -440,7 +440,6 @@ describe('deactivate identity', async () => {
     });
 
     describe('with auth', async () => {
-
         it('should deactivate identity', async () => {
             let deactivateIdentity = await new Identity().withAuth().deactivateIdentity(identityCreation.secure_id);
             expect(deactivateIdentity.message).to.equal('Successfully deactivated identity');

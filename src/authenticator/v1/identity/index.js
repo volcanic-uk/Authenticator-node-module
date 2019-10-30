@@ -46,7 +46,7 @@ class Identity extends V1Base {
     }
 
     async deactivateIdentity(id) {
-        return await super.fetch('post', `identity/${id}/deactivate`, null);
+        return await super.fetch('post', `identity/deactivate/${id}`, null);
     }
 
     async generateToken(id, audience = [], expiryDate, singleUse, nbf) {
