@@ -22,7 +22,7 @@ let currentTimestampSecond = Math.floor(Date.now() / 1000),
     tmpGroupName = 'group-test' + currentTimestampSecond,
     tmpRoleName = 'role-test' + currentTimestampSecond,
     identityCreation,
-    tempDataSetID = currentTimestampSecond,
+    tempDataSetID = currentTimestampSecond.toString(),
     principalID = null,
     groupID,
     serviceId = null,
@@ -46,7 +46,7 @@ describe('principals tests', () => {
 
     it('should be a success when passing valid data, hence it will return an object carrying the created principal data', async () => {
         let create = await principal.withAuth().create(tempPrincipalName, tempDataSetID);
-        principalID = create.id;
+        principalID = create.secure_id;
         expect(create).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals(tempDataSetID);
     });
 
@@ -103,7 +103,7 @@ describe('principals tests', () => {
     });
 
     it('should be a success when the principal is updated, thus it will return an object carrying the new attributes for the principal', async () => {
-        let update = await principal.withAuth().update(principalID, 'new name', 12);
+        let update = await principal.withAuth().update(principalID, 'new name', tempDataSetID + 'test');
         expect(update.dataset_id).to.exist;
     });
 
@@ -127,16 +127,16 @@ describe('principals tests', () => {
 describe('identity login tests', () => {
 
     before(async () => {
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
         token = token.token;
     });
 
     it('login identity', async () => {
-        let identityLogin = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+        let identityLogin = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
         expect(identityLogin).to.be.an('object');
     });
 
-    it('login identity without principal id', async () => {
+    it('login identity without dataset id', async () => {
         try {
             await new Identity().login('volcanic', 'volcanic!123', ['kratakao']);
         } catch (e) {
@@ -147,7 +147,7 @@ describe('identity login tests', () => {
 
     it('login identity with invalid credentials (name)', async () => {
         try {
-            await new Identity().login(`volcanic-invalid ${currentTimestampSecond}`, 'volcanic!123', ['kratakao'], 1);
+            await new Identity().login(`volcanic-invalid ${currentTimestampSecond}`, 'volcanic!123', ['kratakao'], tempDataSetID);
         } catch (e) {
             expect(e.errorCode).to.equal(1001);
             expect(e).to.be.exist;
@@ -156,7 +156,7 @@ describe('identity login tests', () => {
 
     it('login identity with invalid credentials (password)', async () => {
         try {
-            await new Identity().login('volcanic', `volcanic${currentTimestampSecond}`, ['kratakao'], 1);
+            await new Identity().login('volcanic', `volcanic${currentTimestampSecond}`, ['kratakao'], tempDataSetID);
         } catch (e) {
             expect(e.errorCode).to.equal(1001);
             expect(e).to.be.exist;
@@ -167,6 +167,13 @@ describe('identity login tests', () => {
 
 
 describe('identity create tests', () => {
+    let principalID;
+    let principal = new Principal();
+
+    before(async () => {
+        let create = await principal.withAuth().create(tempPrincipalName, tempDataSetID);
+        principalID = create.secure_id;
+    });
 
     describe('with auth', async () => {
 
@@ -220,7 +227,7 @@ describe('identity create tests', () => {
     describe('without auth and with setToken', async () => {
 
         it('creating a new identity', async () => {
-            let identityCreation = await new Identity().setToken(token).create(tmpIdentityName + '-withtoken', null, 1);
+            let identityCreation = await new Identity().setToken(token).create(tmpIdentityName + '-withtoken', null, principalID);
             expect(identityCreation).to.be.an('object');
         });
 
@@ -270,7 +277,7 @@ describe('identity update', async () => {
     describe('with auth', async () => {
 
         it('should update an identity', async () => {
-            let updatedIdentity = await new Identity().withAuth().update(`updated-name-${currentTimestampSecond}`, identityCreation.id);
+            let updatedIdentity = await new Identity().withAuth().update(`updated-name-${currentTimestampSecond}`, identityCreation.secure_id);
             expect(updatedIdentity.name).to.equal(`updated-name-${currentTimestampSecond}`);
         });
 
@@ -288,7 +295,7 @@ describe('identity update', async () => {
     describe('without auth and with setToken', async () => {
 
         it('should update an identity', async () => {
-            let updatedIdentity = await new Identity().setToken(token).update(`updated-name-${currentTimestampSecond}`, identityCreation.id);
+            let updatedIdentity = await new Identity().setToken(token).update(`updated-name-${currentTimestampSecond}`, identityCreation.secure_id);
             expect(updatedIdentity.name).to.equal(`updated-name-${currentTimestampSecond}`);
         });
 
@@ -310,12 +317,12 @@ describe('reset identity secret', async () => {
     describe('with auth', async () => {
 
         it('should reset identity secret', async () => {
-            let resetSecret = await new Identity().withAuth().resetSecret(`new-secret-${currentTimestampSecond}`, identityCreation.id);
+            let resetSecret = await new Identity().withAuth().resetSecret(`new-secret-${currentTimestampSecond}`, identityCreation.secure_id);
             expect(resetSecret.message).to.equal('Secret regenerated successfully');
         });
 
         it('should generate identity secret', async () => {
-            let generateSecret = await new Identity().withAuth().resetSecret(null, identityCreation.id);
+            let generateSecret = await new Identity().withAuth().resetSecret(null, identityCreation.secure_id);
             expect(generateSecret.message).to.equal('Secret regenerated successfully');
         });
 
@@ -325,12 +332,12 @@ describe('reset identity secret', async () => {
     describe('without auth and with setToken', async () => {
 
         it('should reset identity secret', async () => {
-            let resetSecret = await new Identity().setToken(token).resetSecret(`new-secret-${currentTimestampSecond}`, identityCreation.id);
+            let resetSecret = await new Identity().setToken(token).resetSecret(`new-secret-${currentTimestampSecond}`, identityCreation.secure_id);
             expect(resetSecret.message).to.equal('Secret regenerated successfully');
         });
 
         it('should generate identity secret', async () => {
-            let generateSecret = await new Identity().setToken(token).resetSecret(null, identityCreation.id);
+            let generateSecret = await new Identity().setToken(token).resetSecret(null, identityCreation.secure_id);
             expect(generateSecret.message).to.equal('Secret regenerated successfully');
         });
 
@@ -344,13 +351,13 @@ describe('generate token for identity', async () => {
         let today = new Date();
 
         it('should generate token for identity', async () => {
-            let identity = await new Identity().withAuth().generateToken(identityCreation.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+            let identity = await new Identity().withAuth().generateToken(identityCreation.secure_id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
             expect(identity.token).to.exist;
         });
 
         it('should generate token for identity when expiry date is in the past', async () => {
             try {
-                await new Identity().withAuth().generateToken(identityCreation.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+                await new Identity().withAuth().generateToken(identityCreation.secure_id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1008);
                 expect(e.message).to.exist;
@@ -359,7 +366,7 @@ describe('generate token for identity', async () => {
 
         it('should generate token for identity when nbf is more than 4 weeks', async () => {
             try {
-                await new Identity().withAuth().generateToken(identityCreation.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth() + 4, today.getDate()).getTime()));
+                await new Identity().withAuth().generateToken(identityCreation.secure_id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth() + 4, today.getDate()).getTime()));
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1009);
                 expect(e.message).to.exist;
@@ -373,13 +380,13 @@ describe('generate token for identity', async () => {
         let today = new Date();
 
         it('should generate token for identity', async () => {
-            let identity = await new Identity().setToken(token).generateToken(identityCreation.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+            let identity = await new Identity().setToken(token).generateToken(identityCreation.secure_id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
             expect(identity.token).to.exist;
         });
 
         it('should generate token for identity when expiry date is in the past', async () => {
             try {
-                await new Identity().setToken(token).generateToken(identityCreation.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
+                await new Identity().setToken(token).generateToken(identityCreation.secure_id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).getTime()));
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1008);
                 expect(e.message).to.exist;
@@ -388,7 +395,7 @@ describe('generate token for identity', async () => {
 
         it('should generate token for identity when nbf is more than 4 weeks', async () => {
             try {
-                await new Identity().setToken(token).generateToken(identityCreation.id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth() + 4, today.getDate()).getTime()));
+                await new Identity().setToken(token).generateToken(identityCreation.secure_id, ['*'], Math.round(new Date(today.getFullYear(), today.getMonth() + 2, today.getDate()).getTime()), false, Math.round(new Date(today.getFullYear(), today.getMonth() + 4, today.getDate()).getTime()));
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1009);
                 expect(e.message).to.exist;
@@ -423,17 +430,24 @@ describe('token validation tests', () => {
 });
 
 describe('deactivate identity', async () => {
+    let principalID, identityCreation;
+    let principal = new Principal();
+
+    before(async () => {
+        let create = await principal.withAuth().create(tempPrincipalName + 'deactivate', tempDataSetID);
+        principalID = create.secure_id;
+        identityCreation = await new Identity().withAuth().create(tmpIdentityName + 'test', null, principalID);
+    });
 
     describe('with auth', async () => {
-
         it('should deactivate identity', async () => {
-            let deactivateIdentity = await new Identity().withAuth().deactivateIdentity(identityCreation.id);
+            let deactivateIdentity = await new Identity().withAuth().deactivateIdentity(identityCreation.secure_id);
             expect(deactivateIdentity.message).to.equal('Successfully deactivated identity');
         });
 
         it('should not deactivate already deactivated identity', async () => {
             try {
-                await new Identity().withAuth().deactivateIdentity(identityCreation.id);
+                await new Identity().withAuth().deactivateIdentity(identityCreation.secure_id);
                 throw Error('The code should not reach this scope as identity already deactivated');
             } catch (e) {
                 expect(e.errorCode).to.equal(1004);
@@ -448,19 +462,19 @@ describe('deactivate identity', async () => {
         let newToken, newIdentity;
 
         before(async () => {
-            newToken = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+            newToken = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
             newToken = newToken.token;
-            newIdentity = await new Identity().setToken(newToken).create(`new-identity-${currentTimestampSecond}`, 'new-secret', 1);
+            newIdentity = await new Identity().setToken(newToken).create(`new-identity-${currentTimestampSecond}`, 'new-secret', principalID);
         });
 
         it('should deactivate identity', async () => {
-            let deactivateIdentity = await new Identity().setToken(newToken).deactivateIdentity(newIdentity.id);
+            let deactivateIdentity = await new Identity().setToken(newToken).deactivateIdentity(newIdentity.secure_id);
             expect(deactivateIdentity.message).to.equal('Successfully deactivated identity');
         });
 
         it('should not deactivate already deactivated identity', async () => {
             try {
-                await new Identity().setToken(newToken).deactivateIdentity(newIdentity.id);
+                await new Identity().setToken(newToken).deactivateIdentity(newIdentity.secure_id);
                 throw Error('The code should not reach this scope as identity already deactivated');
             } catch (e) {
                 expect(e.errorCode).to.equal(1004);
@@ -601,7 +615,7 @@ describe('Service tests', async () => {
         let service = null;
         let serviceName = null;
         before(async () => {
-            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
             token = token.token;
         });
         describe('create service', async () => {
@@ -780,7 +794,7 @@ describe('Permissions tests', async () => {
         let permissionId = null;
         let permission = null;
         before(async () => {
-            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], 1);
+            token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
             token = token.token;
         });
         describe('create permission', async () => {
