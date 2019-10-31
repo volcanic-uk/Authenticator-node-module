@@ -1,0 +1,137 @@
+{
+  "8f5795c207b96f494c7cb0a91c6e2d15": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakao\"],\"dataset_id\":\"-1\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 85
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "484",
+        "etag": "W/\"1e4-M2kMU4ww6PTtPW4oYytJ+AoLzAc\"",
+        "date": "Thu, 31 Oct 2019 02:03:24 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI0ODc0MDQsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AT2_NNtj42KGF81JxdQ9qIPXnL_VGsNTPJ7AN8g_E6EBzk6OxmVtzPDeo2lcCJrj7GuMZ-wLrstXtTcb46zODaYqASNXKGO8TahC_ti6fzGBQhAzy07KGm8_rtCayWn0y88lGTLA3sSwDFuczITVH9L2GINGYt_W3Sa0-LECNwgbYvtd"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakao\"],\"dataset_id\":\"-1\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 85
+        }
+      }
+    }
+  },
+  "42c6d0d742bb4ca48ffca418a1d3f2dc": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"reset-identity-secretcreate-name\",\"secret\":\"reset-secret\",\"audience\":[\"kratakao\"],\"dataset_id\":\"-1\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 109
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "485",
+        "etag": "W/\"1e5-nYTmLYFBOiZDOlIncT6/fPIEk5s\"",
+        "date": "Thu, 31 Oct 2019 02:03:30 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMTAsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvOS8xMCIsIm5iZiI6MTU3MjQ4NzQxMCwiYXVkaWVuY2UiOlsia3JhdGFrYW8iXSwiaWF0IjoxNTcyNDg3NDEwLCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AKd6sqire8RU8JNgFAGh5Bch0TXxAidK_SObBRuJzqalwYq-Kg2UncYE73Y-4NjKxOXZLxqtw-2320BCyCRovCMMABn-0aZL1i-Bt3BNNBgxJ0YqPPRt6emu4nLdlwGQDcfVpzvGLqmDVZ6jLduXru4jN1QLyuSthLfZQPit0VsAVYUd"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"reset-identity-secretcreate-name\",\"secret\":\"reset-secret\",\"audience\":[\"kratakao\"],\"dataset_id\":\"-1\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 109
+        }
+      }
+    }
+  },
+  "8ac97589e54adc3dd660188ed0bca78a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakoa\"],\"dataset_id\":\"-1\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 85
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "484",
+        "etag": "W/\"1e4-VdyMvoEBfZXJ9mOKVvp3svh4Oqw\"",
+        "date": "Thu, 31 Oct 2019 02:03:33 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMTMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDEzLCJhdWRpZW5jZSI6WyJrcmF0YWtvYSJdLCJpYXQiOjE1NzI0ODc0MTMsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AUC-K-Xy_xEBq6kKpbgfqIpHmPt6ZMt15Q-vHFkqvD2XiUgqor2vamZ0n-ByiV81LQZp_5AvV6ccCY2IX0D6MRlPAXGUupPgogO-7hgKEPIPf4oTdJ7NA_Y6-n4zk-vUCk8ALAPCX0h4wT_nHk2ednDxXIeRhWiBg1EwidHzoUl9RLw7"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakoa\"],\"dataset_id\":\"-1\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 85
+        }
+      }
+    }
+  }
+}

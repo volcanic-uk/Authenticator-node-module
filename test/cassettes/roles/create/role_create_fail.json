@@ -1,0 +1,45 @@
+{
+  "bad9dd689d6dcbdaa0d1b5285196af3d": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles",
+      "method": "post",
+      "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer some token",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 54
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "40",
+        "etag": "W/\"28-K4V9n4BzYE6B/puCSbb5ibAnaCY\"",
+        "date": "Thu, 31 Oct 2019 02:03:37 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles",
+        "method": "post",
+        "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer some token",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 54
+        }
+      }
+    }
+  }
+}
