@@ -1,0 +1,41 @@
+{
+  "d830cdbda0835ae0d88d42672f8cb2d7": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/14",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMTMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDEzLCJhdWRpZW5jZSI6WyJrcmF0YWtvYSJdLCJpYXQiOjE1NzI0ODc0MTMsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AUC-K-Xy_xEBq6kKpbgfqIpHmPt6ZMt15Q-vHFkqvD2XiUgqor2vamZ0n-ByiV81LQZp_5AvV6ccCY2IX0D6MRlPAXGUupPgogO-7hgKEPIPf4oTdJ7NA_Y6-n4zk-vUCk8ALAPCX0h4wT_nHk2ednDxXIeRhWiBg1EwidHzoUl9RLw7",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": "Not Found",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "54",
+        "etag": "W/\"36-b53VXmpRBTzVYdXy+QMnJ0OJOpA\"",
+        "date": "Thu, 31 Oct 2019 02:03:35 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Identity does not exist",
+        "errorCode": 1004
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/14",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMTMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDEzLCJhdWRpZW5jZSI6WyJrcmF0YWtvYSJdLCJpYXQiOjE1NzI0ODc0MTMsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AUC-K-Xy_xEBq6kKpbgfqIpHmPt6ZMt15Q-vHFkqvD2XiUgqor2vamZ0n-ByiV81LQZp_5AvV6ccCY2IX0D6MRlPAXGUupPgogO-7hgKEPIPf4oTdJ7NA_Y6-n4zk-vUCk8ALAPCX0h4wT_nHk2ednDxXIeRhWiBg1EwidHzoUl9RLw7",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

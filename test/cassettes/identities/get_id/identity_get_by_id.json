@@ -1,0 +1,54 @@
+{
+  "fb7c2be6f675be13cc6ec0480aefed89": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/68a2a9f00d",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "281",
+        "etag": "W/\"119-V5Ho2ppO5V71kNpw+giUa+kMw90\"",
+        "date": "Thu, 31 Oct 2019 02:03:27 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "secure_id": "68a2a9f00d",
+          "deleted_at": null,
+          "id": 2,
+          "principal_id": 1,
+          "name": "identity-111",
+          "dataset_id": "-1",
+          "source": null,
+          "last_active_date": null,
+          "last_used_ip_address": null,
+          "active": true,
+          "created_at": "2019-10-31T02:03:25.565Z",
+          "updated_at": "2019-10-31T02:03:25.565Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/68a2a9f00d",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

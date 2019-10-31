@@ -1,0 +1,45 @@
+{
+  "6144b6b9c531de13dd18e5b21a54ba1d": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges",
+      "method": "post",
+      "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer sometoken",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 84
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "40",
+        "etag": "W/\"28-K4V9n4BzYE6B/puCSbb5ibAnaCY\"",
+        "date": "Thu, 31 Oct 2019 02:03:36 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges",
+        "method": "post",
+        "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer sometoken",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 84
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "03bd77154f4fbf8401a68908b3312636": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/26590f235d",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMTMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDEzLCJhdWRpZW5jZSI6WyJrcmF0YWtvYSJdLCJpYXQiOjE1NzI0ODc0MTMsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AUC-K-Xy_xEBq6kKpbgfqIpHmPt6ZMt15Q-vHFkqvD2XiUgqor2vamZ0n-ByiV81LQZp_5AvV6ccCY2IX0D6MRlPAXGUupPgogO-7hgKEPIPf4oTdJ7NA_Y6-n4zk-vUCk8ALAPCX0h4wT_nHk2ednDxXIeRhWiBg1EwidHzoUl9RLw7",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "56",
+        "etag": "W/\"38-xZcTagqwOhQR9luunWi7AhCo7N8\"",
+        "date": "Thu, 31 Oct 2019 02:03:35 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted identity"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/26590f235d",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMTMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDEzLCJhdWRpZW5jZSI6WyJrcmF0YWtvYSJdLCJpYXQiOjE1NzI0ODc0MTMsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AUC-K-Xy_xEBq6kKpbgfqIpHmPt6ZMt15Q-vHFkqvD2XiUgqor2vamZ0n-ByiV81LQZp_5AvV6ccCY2IX0D6MRlPAXGUupPgogO-7hgKEPIPf4oTdJ7NA_Y6-n4zk-vUCk8ALAPCX0h4wT_nHk2ednDxXIeRhWiBg1EwidHzoUl9RLw7",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}
