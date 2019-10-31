@@ -7,12 +7,12 @@ class Identity extends V1Base {
     }
 
     //identity login method
-    async login(name, secret, audience = [], principalId) {
+    async login(name, secret, audience = [], datasetId) {
         let loginDetails = {
             name: name,
             secret: secret,
             audience: audience,
-            principal_id: principalId
+            dataset_id: datasetId
         };
 
         let result = await super.fetch('post', 'identity/login', null, loginDetails);
@@ -64,6 +64,24 @@ class Identity extends V1Base {
 
     async logout() {
         return await super.fetch('post', 'identity/logout', null, null);
+    }
+
+    async updatePrivileges(id = null, privileges = []) {
+        return await super.fetch('post', `identity/${id}/privileges`, null, {
+            id,
+            privileges
+        });
+    }
+
+    async updateRoles(id = null, roles = []) {
+        return await super.fetch('post', `identity/${id}/roles`, null, {
+            id,
+            roles
+        });
+    }
+
+    async getIdentityById(id) {
+        return await super.fetch('get', `identity/${id}`, null, null);
     }
 }
 
