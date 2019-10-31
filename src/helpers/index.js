@@ -73,12 +73,31 @@ exports.md5Generator = (string) => {
     return createHash('md5').update(string).digest('hex');
 };
 
-exports.nock = (path, body, response) => {
-    Nock('http://localhost:3003/api/v1')
-        .post(path, {
-            ...body
-        })
-        .reply(200, {
-            ...response
-        });
+exports.nock = (path, method, body, code, response) => {
+    if (method === 'post') {
+        Nock(envConfigs.server.domainName)
+            .post(path, {
+                ...body
+            })
+            .reply(code, {
+                ...response
+            });
+    }
+    if (method === 'get') {
+        Nock('http://localhost:3003/api/v1')
+            .get(path, {
+                ...body
+            })
+            .reply(code, {
+                ...response
+            });
+    } else {
+        Nock('http://localhost:3003/api/v1')
+            .delete(path, {
+                ...body
+            })
+            .reply(code, {
+                ...response
+            });
+    }
 };
