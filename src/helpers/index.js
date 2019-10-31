@@ -74,11 +74,30 @@ exports.md5Generator = (string) => {
 };
 
 exports.nock = (path, method, body, code, response) => {
-    Nock('http://localhost:3003/api/v1')
-        .method(path, {
-            ...body
-        })
-        .reply(code, {
-            ...response
-        });
+    if (method === 'post') {
+        Nock('http://localhost:3003/api/v1')
+            .post(path, {
+                ...body
+            })
+            .reply(code, {
+                ...response
+            });
+    }
+    if (method === 'get') {
+        Nock('http://localhost:3003/api/v1')
+            .get(path, {
+                ...body
+            })
+            .reply(code, {
+                ...response
+            });
+    } else {
+        Nock('http://localhost:3003/api/v1')
+            .delete(path, {
+                ...body
+            })
+            .reply(code, {
+                ...response
+            });
+    }
 };
