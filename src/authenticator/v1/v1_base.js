@@ -25,7 +25,7 @@ class V1Base {
             };
         }
         try {
-            let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
+            let httpResponse = await customFetch(methodType, path, _headers, data);
             this.loginAttempts = 0;
             return { ...httpResponse.response, status: true };
         } catch (e) {
@@ -66,7 +66,7 @@ class V1Base {
             dataset_id: config.auth.dataset_id,
             audience: config.auth.audience
         };
-        return await customFetch('post', '/api/v1/identity/login', null, loginData);
+        return await customFetch('post', '/identity/login', null, loginData);
     }
 }
 

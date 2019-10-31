@@ -75,7 +75,7 @@ exports.md5Generator = (string) => {
 
 exports.nock = (path, method, body, code, response) => {
     if (method === 'post') {
-        Nock('http://localhost:3003/api/v1')
+        Nock(envConfigs.server.domainName)
             .post(path, {
                 ...body
             })

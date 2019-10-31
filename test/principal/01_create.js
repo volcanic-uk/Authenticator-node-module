@@ -15,6 +15,19 @@ let currentTimestampSecond = '111',
 
 describe('principal create test', () => {
     let principal = new Principal();
+    nock('/identity/login', 'post', {
+        name: 'volcanic',
+        secret: 'volcanic!123',
+        dataset_id: '-1',
+        audience: '["volcanic"]'
+    }, 200, {
+        response: {
+            response: {
+                token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+            }
+        },
+        status: 200
+    });
     it('should fail if principal creation function is called without a valid token and it will throw an error', async () => {
         try {
             nock('/principals', 'post', {
@@ -36,20 +49,15 @@ describe('principal create test', () => {
             name: tempPrincipalName,
             dataset_id: tempDataSetID
         }, 201, {
-            name: 'p************t',
-            dataset_id: '111',
-            secure_id: '334e5b1dd2',
-            updated_at: '2019-10-31T04:33:06.089Z',
-            created_at: '2019-10-31T04:33:06.089Z',
-            id: 2
-        });
-        nock('/identity/login', 'post', {
-            name: 'volcanic',
-            audience: ['volcanic'],
-            secret: 'volcanic!123',
-            dataset_id: '-1'
-        }, 200, {
-            token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+            response: {
+                name: 'p************t',
+                dataset_id: '111',
+                secure_id: '334e5b1dd2',
+                updated_at: '2019-10-31T04:33:06.089Z',
+                created_at: '2019-10-31T04:33:06.089Z',
+                id: 2
+            },
+            status: 201
         });
         let create = await principal.withAuth().create(tempPrincipalName, tempDataSetID);
         expect(create).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals(tempDataSetID);
