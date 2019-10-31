@@ -3,6 +3,7 @@ const axios = require('axios');
 const envConfigs = require('../../config');
 const jwt = require('jsonwebtoken');
 const { createHash } = require('crypto');
+const Nock = require('nock');
 
 /**
  *
@@ -70,4 +71,14 @@ exports.JWTValidator = async (token, publicKey) => {
 
 exports.md5Generator = (string) => {
     return createHash('md5').update(string).digest('hex');
+};
+
+exports.nock = (path, body, response) => {
+    Nock('http://localhost:3003/api/v1')
+        .post(path, {
+            ...body
+        })
+        .reply(200, {
+            ...response
+        });
 };

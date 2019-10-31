@@ -7,12 +7,12 @@ class Identity extends V1Base {
     }
 
     //identity login method
-    async login(name, secret, audience = [], principalId) {
+    async login(name, secret, audience = [], datasetId) {
         let loginDetails = {
             name: name,
             secret: secret,
             audience: audience,
-            principal_id: principalId
+            dataset_id: datasetId
         };
 
         let result = await super.fetch('post', 'identity/login', null, loginDetails);
