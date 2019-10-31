@@ -1,0 +1,53 @@
+{
+  "68009751b1f16a4c527223e80037a6ba": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/groups/15",
+      "method": "post",
+      "data": "{\"name\":\"group-test-updated\",\"description\":null}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 48
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "183",
+        "etag": "W/\"b7-au3p54uTz+2LGeMoTPcU11RM828\"",
+        "date": "Thu, 31 Oct 2019 02:03:25 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "id": "15",
+          "name": "group-test-updated",
+          "description": null,
+          "subject_id": null,
+          "active": true,
+          "created_at": "2019-10-31T02:03:24.795Z",
+          "updated_at": "2019-10-31T02:03:25.245Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/groups/15",
+        "method": "post",
+        "data": "{\"name\":\"group-test-updated\",\"description\":null}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 48
+        }
+      }
+    }
+  }
+}

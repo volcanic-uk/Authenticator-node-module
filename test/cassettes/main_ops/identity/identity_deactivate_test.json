@@ -1,0 +1,108 @@
+{
+  "7016d9596857ef5fe0d1d0cacfe8bf1f": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity",
+      "method": "post",
+      "data": "{\"name\":\"identity-deactivate-test\",\"secret\":null,\"principal_id\":\"volcanic\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 75
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "262",
+        "etag": "W/\"106-JA0pF7OWIgno3LpGJFSCaQO4f8g\"",
+        "date": "Thu, 31 Oct 2019 02:03:32 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "identity-deactivate-test",
+          "principal_id": 1,
+          "secret": "8a693eda22e463e018469e54578d7efd263997cb",
+          "source": null,
+          "secure_id": "462bdd979d",
+          "dataset_id": "-1",
+          "updated_at": "2019-10-31T02:03:32.409Z",
+          "created_at": "2019-10-31T02:03:32.409Z",
+          "id": 11
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity",
+        "method": "post",
+        "data": "{\"name\":\"identity-deactivate-test\",\"secret\":null,\"principal_id\":\"volcanic\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 75
+        }
+      }
+    }
+  },
+  "c86d38711557e4725fd15d537a101254": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity",
+      "method": "post",
+      "data": "{\"name\":\"identity-deactivate-test-duplicate\",\"secret\":null,\"principal_id\":\"volcanic\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 85
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "272",
+        "etag": "W/\"110-Keafd1WI6hkjaXXA17LOmGeY3qY\"",
+        "date": "Thu, 31 Oct 2019 02:03:33 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "identity-deactivate-test-duplicate",
+          "principal_id": 1,
+          "secret": "975ece080ce89c7672e7c9ffba36806ececd062b",
+          "source": null,
+          "secure_id": "4349d47850",
+          "dataset_id": "-1",
+          "updated_at": "2019-10-31T02:03:32.779Z",
+          "created_at": "2019-10-31T02:03:32.779Z",
+          "id": 12
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity",
+        "method": "post",
+        "data": "{\"name\":\"identity-deactivate-test-duplicate\",\"secret\":null,\"principal_id\":\"volcanic\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTEwMDQsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDg3NDA0LCJhdWRpZW5jZSI6IltcInZvbGNhbmljXCJdIiwiaWF0IjoxNTcyNDg3NDA0LCJpc3MiOiJ2b2xjYW5pY19hdXRoX3NlcnZpY2VfYXAyIn0.AVIDduCigmH2MBdG-s8sHwH1H99HJ54xOEe_NHbcIhI92U-ZZY2qFBM3WAHg8wnEjhswiNON_8H4K-x5VO0UnnioAWoo399K8LnuI4XEERvG5i4MDT2bTyqLJC-_SWa7roJSu_cR0BBj_sq1Z5qPBLRoYZCw_UsUrsoRD4KvoJYjBB9K",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 85
+        }
+      }
+    }
+  }
+}

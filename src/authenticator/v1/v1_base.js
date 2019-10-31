@@ -63,7 +63,7 @@ class V1Base {
         let loginData = {
             name: config.auth.identity_name,
             secret: config.auth.secret,
-            principal_id: config.auth.principal_id,
+            dataset_id: config.auth.dataset_id,
             audience: config.auth.audience
         };
         return await customFetch('post', '/api/v1/identity/login', null, loginData);

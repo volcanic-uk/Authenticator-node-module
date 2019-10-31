@@ -13,8 +13,8 @@ class Principal extends V1Base {
         return await super.fetch('post', 'principals', null, principal);
     }
 
-    async getByID(id) {
-        return await super.fetch('get', `principals/${id}`, null, null);
+    async getByID(secureID) {
+        return await super.fetch('get', `principals/${secureID}`, null, null);
     }
 
 
@@ -22,10 +22,9 @@ class Principal extends V1Base {
         return await super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
-    async update(id, name = null, datasetId = null) {
+    async update(id, name = null) {
         let data = {
-            name,
-            dataset_id: datasetId
+            name
         };
         return await super.fetch('post', `principals/${id}`, null, data);
     }
