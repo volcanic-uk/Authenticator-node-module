@@ -73,12 +73,12 @@ exports.md5Generator = (string) => {
     return createHash('md5').update(string).digest('hex');
 };
 
-exports.nock = (path, body, response) => {
+exports.nock = (path, method, body, code, response) => {
     Nock('http://localhost:3003/api/v1')
-        .post(path, {
+        .method(path, {
             ...body
         })
-        .reply(200, {
+        .reply(code, {
             ...response
         });
 };
