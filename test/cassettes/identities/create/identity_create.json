@@ -1,0 +1,1193 @@
+{
+  "2306348711b3fd1925e69c318bbae459": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity",
+      "method": "post",
+      "data": "{\"name\":\"identity-111-withtoken1\",\"secret\":null,\"principal_id\":\"volcanic\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 74
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "260",
+        "etag": "W/\"104-PW6ew4yM7diCSM+JZoUk2oMnEmg\"",
+        "date": "Fri, 01 Nov 2019 07:23:27 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "identity-111-withtoken1",
+          "principal_id": 1,
+          "secret": "49b851d18e92c7ddf77c392bddd06ee64a0c151f",
+          "source": null,
+          "secure_id": "08c95b2c3f",
+          "dataset_id": "-1",
+          "updated_at": "2019-11-01T07:23:26.818Z",
+          "created_at": "2019-11-01T07:23:26.818Z",
+          "id": 2
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity",
+        "method": "post",
+        "data": "{\"name\":\"identity-111-withtoken1\",\"secret\":null,\"principal_id\":\"volcanic\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 74
+        }
+      }
+    }
+  },
+  "4c83bbb75e5df284fa0613d37838196b": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity",
+      "method": "post",
+      "data": "{\"name\":\"identity-secret-withtoken1\",\"secret\":\"identity-password\",\"principal_id\":\"volcanic\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 92
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "211",
+        "etag": "W/\"d3-mtFMogy0nhNTcWeHs5VhH3LvMOc\"",
+        "date": "Fri, 01 Nov 2019 07:23:27 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "identity-secret-withtoken1",
+          "principal_id": 1,
+          "source": null,
+          "secure_id": "3b5f7fa728",
+          "dataset_id": "-1",
+          "updated_at": "2019-11-01T07:23:27.225Z",
+          "created_at": "2019-11-01T07:23:27.225Z",
+          "id": 3
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity",
+        "method": "post",
+        "data": "{\"name\":\"identity-secret-withtoken1\",\"secret\":\"identity-password\",\"principal_id\":\"volcanic\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 92
+        }
+      }
+    }
+  },
+  "60c80a50faa36d0fb740c136343e1e48": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity",
+      "method": "post",
+      "data": "{\"name\":\"identity-secret\",\"secret\":\"identity-password\",\"principal_id\":\"volcanic\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 81
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": "Created",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "200",
+        "etag": "W/\"c8-l5n7HG4eI1veWqHqyk4C8SMoMTM\"",
+        "date": "Fri, 01 Nov 2019 07:23:27 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "name": "identity-secret",
+          "principal_id": 1,
+          "source": null,
+          "secure_id": "e0e4a79082",
+          "dataset_id": "-1",
+          "updated_at": "2019-11-01T07:23:27.612Z",
+          "created_at": "2019-11-01T07:23:27.612Z",
+          "id": 4
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity",
+        "method": "post",
+        "data": "{\"name\":\"identity-secret\",\"secret\":\"identity-password\",\"principal_id\":\"volcanic\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 81
+        }
+      }
+    }
+  },
+  "6636e54ac50636842cec302b7e88b56a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/logout",
+      "method": "post",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "46",
+        "etag": "W/\"2e-0t9DJ5nREjgEKKD2Af7j3Hm0GiA\"",
+        "date": "Fri, 01 Nov 2019 07:23:29 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "message": "logout successfully"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/logout",
+        "method": "post",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": "Bearer eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA2LCJhdWRpZW5jZSI6WyJrcmF0YWthbyJdLCJpYXQiOjE1NzI1OTMwMDYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALm_umYklcEP4p0qRPZOV0CQrC7mo395nRxKecUpQn6o1ZomZ96zqvYGOHNHO-Or-VdOYi4cFFCaalWmFPFXM92eAORcgvwVhtbUXdtyd69upVa6xQZEdieKtu95PQNCN9Yo9g8z1rdMyF8DQDMDhFca6ROYWqPtWtmpQdGtGj65Yvue",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "8ac97589e54adc3dd660188ed0bca78a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakoa\"],\"dataset_id\":\"-1\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 85
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "x-powered-by": "Express",
+        "x-auth-request-id": "undefined",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "484",
+        "etag": "W/\"1e4-3UHJED/lxzQPN1PplVbrrjDxKlQ\"",
+        "date": "Fri, 01 Nov 2019 07:23:29 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "response": {
+          "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI1OTY2MDksInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNTkzMDA5LCJhdWRpZW5jZSI6WyJrcmF0YWtvYSJdLCJpYXQiOjE1NzI1OTMwMDksImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AJT47Ni5ucZi6yFn2X1OEiRK69-_9onwIDxQQkJTvvIyGFj-Fs4GH1GN3wkD9WnOukrxI0k2GVGleoA1nqBMlMrDAURQYsS2gx07LGz5i2m3okmooo_vLCFuwhg_PkuhIz-ZFloH9VWBAjaqXYfGUYEEku_hzhdTzrNV58MXGRvmJZBA"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[\"kratakoa\"],\"dataset_id\":\"-1\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 85
+        }
+      }
+    }
+  },
+  "d4776c35344fa92da04ced9776a26f6e": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/identity/login",
+      "method": "post",
+      "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[],\"dataset_id\":\"-1\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 75
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB"
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/identity/login",
+        "method": "post",
+        "data": "{\"name\":\"volcanic\",\"secret\":\"volcanic!123\",\"audience\":[],\"dataset_id\":\"-1\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 75
+        }
+      }
+    }
+  },
+  "4ddbeff3a8659820423485aa6ca86b6b": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test\",\"dataset_id\":\"111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 44
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "p************t",
+          "dataset_id": "111",
+          "secure_id": "334e5b1dd2",
+          "updated_at": "2019-10-31T04:33:06.089Z",
+          "created_at": "2019-10-31T04:33:06.089Z",
+          "id": 2
+        },
+        "status": 201
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test\",\"dataset_id\":\"111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 44
+        }
+      }
+    }
+  },
+  "12a678ce341f7f66c6f38724ac423cdd": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/volcanic",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "secure_id": "volcanic",
+          "id": 1,
+          "name": "volcanic-principal",
+          "dataset_id": "-1",
+          "last_active_date": null,
+          "login_attempts": 0,
+          "active": true,
+          "created_at": "2019-10-31T04:32:57.678Z",
+          "updated_at": "2019-10-31T04:32:57.678Z",
+          "status": true
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/volcanic",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "0a4b73a886a81af82dae2d4aa8b06759": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+      "method": "post",
+      "data": "{\"name\":\"new name\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 19
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": "334e5b1dd2",
+          "name": "n******e",
+          "dataset_id": "111",
+          "last_active_date": null,
+          "login_attempts": 0,
+          "active": true,
+          "created_at": "2019-10-31T04:33:06.089Z",
+          "updated_at": "2019-10-31T08:36:16.906Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+        "method": "post",
+        "data": "{\"name\":\"new name\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 19
+        }
+      }
+    }
+  },
+  "86c779d8d48252b2352e24ad1438e272": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "59f013ae8a8c729ffb49e638d9f081ac": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges",
+      "method": "post",
+      "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 84
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "scope": "vrn:{stack}:{dataset}:jobs/*",
+          "permission_id": 1,
+          "group_id": 1,
+          "subject_id": "2",
+          "allow": true,
+          "updated_at": "2019-11-01T01:56:12.001Z",
+          "created_at": "2019-11-01T01:56:12.001Z",
+          "id": 15
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges",
+        "method": "post",
+        "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 84
+        }
+      }
+    }
+  },
+  "5922874bdfcf2878528f4f1214f6f214": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/2",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 2,
+          "scope": "vrn:{stack}:{dataset}:principal/*",
+          "permission_id": null,
+          "group_id": 2,
+          "allow": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.461Z",
+          "updated_at": "2019-10-31T09:33:20.461Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/2",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "186dcb6e74cef0d35e4873e59f9f5093": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/4",
+      "method": "post",
+      "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 71
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 4,
+          "scope": "vrn:{stack}:{dataset}:jobs/*",
+          "permission_id": 1,
+          "group_id": 1,
+          "allow": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.570Z",
+          "updated_at": "2019-11-01T03:14:25.349Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/4",
+        "method": "post",
+        "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 71
+        }
+      }
+    }
+  },
+  "3fa7dc4b6cc165dabf7a659aeafd4e78": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/4",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted privilege",
+          "errorCode": 8001
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/4",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "3b508376f10ff8b407d4ebf1fe259068": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles",
+      "method": "post",
+      "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 54
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "r*******t",
+          "subject_id": "2",
+          "service_id": 2,
+          "updated_at": "2019-11-01T03:53:46.332Z",
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "id": 7
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles",
+        "method": "post",
+        "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 54
+        }
+      }
+    }
+  },
+  "fd841d9133d3859c49e24bde067491a5": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/7",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 7,
+          "name": "r*******t",
+          "subject_id": 2,
+          "service_id": 2,
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "updated_at": "2019-11-01T03:53:46.332Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/7",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "9e07339db290e2c30f24398d48d2a8b1": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles?query=null&page=1&page_size=15&sort=id&order=asc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "pagination": [
+            null
+          ],
+          "data": [
+            {
+              "id": 7,
+              "name": "role-test",
+              "subject_id": 2,
+              "service_id": 2,
+              "created_at": "2019-11-01T03:53:46.332Z",
+              "updated_at": "2019-11-01T03:53:46.332Z"
+            },
+            {
+              "id": 8,
+              "name": "Role-157258149",
+              "subject_id": 2,
+              "service_id": 7,
+              "created_at": "2019-11-01T04:11:34.898Z",
+              "updated_at": "2019-11-01T04:11:34.898Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles?query=null&page=1&page_size=15&sort=id&order=asc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "e9a882b8e01bdea540a439460e42fe2c": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/role-test",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 7,
+          "name": "r*******t",
+          "subject_id": 2,
+          "service_id": 2,
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "updated_at": "2019-11-01T03:53:46.332Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/role-test",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "51f52fefba04c70d98d9fe378bcb7843": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/7",
+      "method": "post",
+      "data": "{\"name\":\"updated-name\",\"service_id\":2,\"privileges\":[1,2]}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 57
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 7,
+          "name": "u**********e",
+          "service_id": 2,
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "updated_at": "2019-11-01T06:19:34.255Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/7",
+        "method": "post",
+        "data": "{\"name\":\"updated-name\",\"service_id\":2,\"privileges\":[1,2]}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 57
+        }
+      }
+    }
+  },
+  "ed4a78c4aec7f8f3b58a70ff08c7df4d": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/7",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted role"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/7",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "4ed969fc1d06d3ad53d19ca8eebf3c9f": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services",
+      "method": "post",
+      "data": "{\"name\":\"service_for_test\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 27
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "s**************t",
+          "subject_id": "2",
+          "updated_at": "2019-11-01T06:39:30.615Z",
+          "created_at": "2019-11-01T06:39:30.615Z",
+          "id": 8
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services",
+        "method": "post",
+        "data": "{\"name\":\"service_for_test\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 27
+        }
+      }
+    }
+  },
+  "9852e343ee60668bbfc7cf753c0cdb91": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/8",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 1,
+          "name": "a**h",
+          "active": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.217Z",
+          "updated_at": "2019-10-31T09:33:20.217Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/8",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "e26c24379e73bf0f0dced2faa749c62e": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=asc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "pagination": [
+            null
+          ],
+          "data": [
+            {
+              "id": 1,
+              "name": "auth",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.217Z",
+              "updated_at": "2019-10-31T09:33:20.217Z"
+            },
+            {
+              "id": 2,
+              "name": "krakatoa",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.905Z",
+              "updated_at": "2019-10-31T09:33:20.905Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=asc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "127c845a668c0b8cfd2fe825505fe9ca": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=desc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "pagination": [
+            null
+          ],
+          "data": [
+            {
+              "id": 2,
+              "name": "krakatoa",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.905Z",
+              "updated_at": "2019-10-31T09:33:20.905Z"
+            },
+            {
+              "id": 1,
+              "name": "auth",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.217Z",
+              "updated_at": "2019-10-31T09:33:20.217Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=desc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "6a2fedf97e9672f89b0f0791e1d5ba5a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/service_for_test",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 1,
+          "name": "a**h",
+          "active": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.217Z",
+          "updated_at": "2019-10-31T09:33:20.217Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/service_for_test",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "4fa0cbff67c2b58ce42d1265749d5dcf": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/8",
+      "method": "post",
+      "data": "{\"name\":\"updated_service_name\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 31
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 8,
+          "name": "u******************e",
+          "active": true,
+          "subject_id": 2,
+          "created_at": "2019-11-01T06:39:30.615Z",
+          "updated_at": "2019-11-01T07:16:45.877Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/8",
+        "method": "post",
+        "data": "{\"name\":\"updated_service_name\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 31
+        }
+      }
+    }
+  },
+  "98e9294105b4243dbf2a4788fd1754c0": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/8",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/8",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

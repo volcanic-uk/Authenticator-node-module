@@ -1,0 +1,1799 @@
+{
+  "863f025af9bf558b061810e25a18704e": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/permissions/111",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "40",
+        "etag": "W/\"28-K4V9n4BzYE6B/puCSbb5ibAnaCY\"",
+        "date": "Fri, 01 Nov 2019 07:23:31 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/permissions/111",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "1ed0120d8a5682e7aad3db2fece5faa7": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test\",\"dataset_id\":\"111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 44
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test\",\"dataset_id\":\"111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 44
+        }
+      }
+    }
+  },
+  "4ddbeff3a8659820423485aa6ca86b6b": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test\",\"dataset_id\":\"111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 44
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "p************t",
+          "dataset_id": "111",
+          "secure_id": "334e5b1dd2",
+          "updated_at": "2019-10-31T04:33:06.089Z",
+          "created_at": "2019-10-31T04:33:06.089Z",
+          "id": 2
+        },
+        "status": 201
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test\",\"dataset_id\":\"111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 44
+        }
+      }
+    }
+  },
+  "6ff967bb68e0bb007ba52b93aaf95758": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/12",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Principal does not exist",
+        "errorCode": 2002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/12",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "aaf74b2a078388095f38a377f55859b9": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/asdasd",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "statusCode": 403,
+        "status": false,
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/asdasd",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "12a678ce341f7f66c6f38724ac423cdd": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/volcanic",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "secure_id": "volcanic",
+          "id": 1,
+          "name": "volcanic-principal",
+          "dataset_id": "-1",
+          "last_active_date": null,
+          "login_attempts": 0,
+          "active": true,
+          "created_at": "2019-10-31T04:32:57.678Z",
+          "updated_at": "2019-10-31T04:32:57.678Z",
+          "status": true
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/volcanic",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "3e61674479f33db39019ac7f52167837": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+      "method": "post",
+      "data": "{\"name\":\"new name\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 19
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+        "method": "post",
+        "data": "{\"name\":\"new name\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 19
+        }
+      }
+    }
+  },
+  "6696fc814a908b1314f087c3046adf09": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/12",
+      "method": "post",
+      "data": "{\"name\":\"new name\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 19
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Principal does not exist",
+        "errorCode": 2002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/12",
+        "method": "post",
+        "data": "{\"name\":\"new name\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 19
+        }
+      }
+    }
+  },
+  "0a4b73a886a81af82dae2d4aa8b06759": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+      "method": "post",
+      "data": "{\"name\":\"new name\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 19
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": "334e5b1dd2",
+          "name": "n******e",
+          "dataset_id": "111",
+          "last_active_date": null,
+          "login_attempts": 0,
+          "active": true,
+          "created_at": "2019-10-31T04:33:06.089Z",
+          "updated_at": "2019-10-31T08:36:16.906Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+        "method": "post",
+        "data": "{\"name\":\"new name\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 19
+        }
+      }
+    }
+  },
+  "1a9647225f21f6a746abd7fbfe0a9547": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "86c779d8d48252b2352e24ad1438e272": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals/334e5b1dd2",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "6144b6b9c531de13dd18e5b21a54ba1d": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges",
+      "method": "post",
+      "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer sometoken",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 84
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges",
+        "method": "post",
+        "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer sometoken",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 84
+        }
+      }
+    }
+  },
+  "59f013ae8a8c729ffb49e638d9f081ac": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges",
+      "method": "post",
+      "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 84
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "scope": "vrn:{stack}:{dataset}:jobs/*",
+          "permission_id": 1,
+          "group_id": 1,
+          "subject_id": "2",
+          "allow": true,
+          "updated_at": "2019-11-01T01:56:12.001Z",
+          "created_at": "2019-11-01T01:56:12.001Z",
+          "id": 15
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges",
+        "method": "post",
+        "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\",\"allow\":true}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 84
+        }
+      }
+    }
+  },
+  "5922874bdfcf2878528f4f1214f6f214": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/2",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 2,
+          "scope": "vrn:{stack}:{dataset}:principal/*",
+          "permission_id": null,
+          "group_id": 2,
+          "allow": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.461Z",
+          "updated_at": "2019-10-31T09:33:20.461Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/2",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "56228899e1195227c20d39f72ae692c3": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/123test",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "privilege does not exist",
+        "errorCode": 8001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/123test",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "e6fa97b77dfb7d6712faf299869a77dc": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/123412",
+      "method": "post",
+      "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 71
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Privilege does not exist",
+        "errorCode": 8001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/123412",
+        "method": "post",
+        "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 71
+        }
+      }
+    }
+  },
+  "186dcb6e74cef0d35e4873e59f9f5093": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/4",
+      "method": "post",
+      "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 71
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 4,
+          "scope": "vrn:{stack}:{dataset}:jobs/*",
+          "permission_id": 1,
+          "group_id": 1,
+          "allow": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.570Z",
+          "updated_at": "2019-11-01T03:14:25.349Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/4",
+        "method": "post",
+        "data": "{\"permission_id\":1,\"group_id\":1,\"scope\":\"vrn:{stack}:{dataset}:jobs/*\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 71
+        }
+      }
+    }
+  },
+  "8a5afcf4ad3aca6ad279564e8af131ab": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/432434",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 400,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Privilege does not exist",
+        "errorCode": 8001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/432434",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "3fa7dc4b6cc165dabf7a659aeafd4e78": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/privileges/4",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted privilege",
+          "errorCode": 8001
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/privileges/4",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "bad9dd689d6dcbdaa0d1b5285196af3d": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles",
+      "method": "post",
+      "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer some token",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 54
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles",
+        "method": "post",
+        "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer some token",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 54
+        }
+      }
+    }
+  },
+  "3b508376f10ff8b407d4ebf1fe259068": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles",
+      "method": "post",
+      "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 54
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "r*******t",
+          "subject_id": "2",
+          "service_id": 2,
+          "updated_at": "2019-11-01T03:53:46.332Z",
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "id": 7
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles",
+        "method": "post",
+        "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":[1,2]}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 54
+        }
+      }
+    }
+  },
+  "5a8f4472c11e6fc6dee16382de6e994f": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles",
+      "method": "post",
+      "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":1}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 50
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "40",
+        "etag": "W/\"28-K4V9n4BzYE6B/puCSbb5ibAnaCY\"",
+        "date": "Fri, 01 Nov 2019 07:23:32 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles",
+        "method": "post",
+        "data": "{\"name\":\"role-test\",\"service_id\":2,\"privileges\":1}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 50
+        }
+      }
+    }
+  },
+  "fd841d9133d3859c49e24bde067491a5": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/7",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 7,
+          "name": "r*******t",
+          "subject_id": 2,
+          "service_id": 2,
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "updated_at": "2019-11-01T03:53:46.332Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/7",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "b32c3cc266c167ffbede14cbbef0032d": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/NaN",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "40",
+        "etag": "W/\"28-K4V9n4BzYE6B/puCSbb5ibAnaCY\"",
+        "date": "Fri, 01 Nov 2019 07:23:33 GMT",
+        "connection": "close"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/NaN",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "9e07339db290e2c30f24398d48d2a8b1": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles?query=null&page=1&page_size=15&sort=id&order=asc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "pagination": [
+            null
+          ],
+          "data": [
+            {
+              "id": 7,
+              "name": "role-test",
+              "subject_id": 2,
+              "service_id": 2,
+              "created_at": "2019-11-01T03:53:46.332Z",
+              "updated_at": "2019-11-01T03:53:46.332Z"
+            },
+            {
+              "id": 8,
+              "name": "Role-157258149",
+              "subject_id": 2,
+              "service_id": 7,
+              "created_at": "2019-11-01T04:11:34.898Z",
+              "updated_at": "2019-11-01T04:11:34.898Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles?query=null&page=1&page_size=15&sort=id&order=asc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "e9a882b8e01bdea540a439460e42fe2c": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/role-test",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 7,
+          "name": "r*******t",
+          "subject_id": 2,
+          "service_id": 2,
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "updated_at": "2019-11-01T03:53:46.332Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/role-test",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "2fbd11868881a30d47b35853a7f42d81": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/no-proper-name",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "role does not exist",
+        "errorCode": 9001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/no-proper-name",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "51f52fefba04c70d98d9fe378bcb7843": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/7",
+      "method": "post",
+      "data": "{\"name\":\"updated-name\",\"service_id\":2,\"privileges\":[1,2]}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 57
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 7,
+          "name": "u**********e",
+          "service_id": 2,
+          "created_at": "2019-11-01T03:53:46.332Z",
+          "updated_at": "2019-11-01T06:19:34.255Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/7",
+        "method": "post",
+        "data": "{\"name\":\"updated-name\",\"service_id\":2,\"privileges\":[1,2]}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 57
+        }
+      }
+    }
+  },
+  "cd62f9c7a3a04ac5014144f72c65da54": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/123451",
+      "method": "post",
+      "data": "{\"name\":\"updated-name\",\"service_id\":2,\"privileges\":[1,2]}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 57
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Role does not exist",
+        "errorCode": 9001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/123451",
+        "method": "post",
+        "data": "{\"name\":\"updated-name\",\"service_id\":2,\"privileges\":[1,2]}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 57
+        }
+      }
+    }
+  },
+  "ed4a78c4aec7f8f3b58a70ff08c7df4d": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/7",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted role"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/7",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "c23a700ba0af6c722708f1e1698ec547": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/123132",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Role does not exist",
+        "errorCode": 9001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/123132",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "4ed969fc1d06d3ad53d19ca8eebf3c9f": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services",
+      "method": "post",
+      "data": "{\"name\":\"service_for_test\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 27
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "s**************t",
+          "subject_id": "2",
+          "updated_at": "2019-11-01T06:39:30.615Z",
+          "created_at": "2019-11-01T06:39:30.615Z",
+          "id": 8
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services",
+        "method": "post",
+        "data": "{\"name\":\"service_for_test\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 27
+        }
+      }
+    }
+  },
+  "de70deb005a7c2f6e94a1cafbaeb3f0f": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services",
+      "method": "post",
+      "data": "{\"name\":null}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 13
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 400,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": {
+          "name": "\"*********************g"
+        },
+        "errorCode": 10001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services",
+        "method": "post",
+        "data": "{\"name\":null}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 13
+        }
+      }
+    }
+  },
+  "9852e343ee60668bbfc7cf753c0cdb91": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/8",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 1,
+          "name": "a**h",
+          "active": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.217Z",
+          "updated_at": "2019-10-31T09:33:20.217Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/8",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "f0ab33345d37ea0adbd0868100e26df4": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/65758",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Service does not exist",
+        "errorCode": 6002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/65758",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "e26c24379e73bf0f0dced2faa749c62e": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=asc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "pagination": [
+            null
+          ],
+          "data": [
+            {
+              "id": 1,
+              "name": "auth",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.217Z",
+              "updated_at": "2019-10-31T09:33:20.217Z"
+            },
+            {
+              "id": 2,
+              "name": "krakatoa",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.905Z",
+              "updated_at": "2019-10-31T09:33:20.905Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=asc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "127c845a668c0b8cfd2fe825505fe9ca": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=desc",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "pagination": [
+            null
+          ],
+          "data": [
+            {
+              "id": 2,
+              "name": "krakatoa",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.905Z",
+              "updated_at": "2019-10-31T09:33:20.905Z"
+            },
+            {
+              "id": 1,
+              "name": "auth",
+              "active": true,
+              "subject_id": null,
+              "created_at": "2019-10-31T09:33:20.217Z",
+              "updated_at": "2019-10-31T09:33:20.217Z"
+            }
+          ]
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services?query=&page=1&page_size=15&sort=id&order=desc",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "6a2fedf97e9672f89b0f0791e1d5ba5a": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/service_for_test",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 1,
+          "name": "a**h",
+          "active": true,
+          "subject_id": null,
+          "created_at": "2019-10-31T09:33:20.217Z",
+          "updated_at": "2019-10-31T09:33:20.217Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/service_for_test",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "29cc36672a2783428c5cceb24bb7f8b0": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/MUJANNAD",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Service does not exist",
+        "errorCode": 6002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/MUJANNAD",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "4fa0cbff67c2b58ce42d1265749d5dcf": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/8",
+      "method": "post",
+      "data": "{\"name\":\"updated_service_name\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 31
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "id": 8,
+          "name": "u******************e",
+          "active": true,
+          "subject_id": 2,
+          "created_at": "2019-11-01T06:39:30.615Z",
+          "updated_at": "2019-11-01T07:16:45.877Z"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/8",
+        "method": "post",
+        "data": "{\"name\":\"updated_service_name\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 31
+        }
+      }
+    }
+  },
+  "07c701e77d81c843925098b68ef7e3bd": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/8773",
+      "method": "post",
+      "data": "{\"name\":\"updated_service_name\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 31
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Service does not exist",
+        "errorCode": 6002
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/8773",
+        "method": "post",
+        "data": "{\"name\":\"updated_service_name\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 31
+        }
+      }
+    }
+  },
+  "98e9294105b4243dbf2a4788fd1754c0": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services/8",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "message": "Successfully deleted"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services/8",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "9585ff1761c42b4b5a18d6c1a02767e4": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/services",
+      "method": "post",
+      "data": "{\"name\":\"service_for_tests\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 28
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 400,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Duplicate entry service_for_test",
+        "errorCode": 6001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/services",
+        "method": "post",
+        "data": "{\"name\":\"service_for_tests\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 28
+        }
+      }
+    }
+  },
+  "75caa616771d0aaaa69a29be71e5f5af": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/77",
+      "method": "delete",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Role does not exist",
+        "errorCode": 9001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/77",
+        "method": "delete",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "4663c24236a53ba198a2cb103af25b81": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test1\",\"dataset_id\":\"111\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 45
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 400,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "statusCode": 400,
+          "status": false,
+          "message": "Duplicate entry principal-test on dataset id 111",
+          "errorCode": 2001
+        },
+        "status": 201
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test1\",\"dataset_id\":\"111\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 45
+        }
+      }
+    }
+  }
+}

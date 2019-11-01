@@ -1,42 +1,66 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
-    axiosVCR = require('axios-vcr'),
+    nock = require('../../src/helpers').nock,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
-let token,
-    tmpRoleName = 'group-test',
-    roleId;
-const Identity = require('../../v1/index').Identity,
-    Role = require('../../v1').Roles;
-describe('get the roles by id', () => {
-    before(async () => {
-        axiosVCR.mountCassette('./test/cassettes/main_ops/identity_login.json');
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
-        token = token.token;
-        axiosVCR.ejectCassette('./test/cassettes/main_ops/identity_login.json');
+let roleId;
+const Role = require('../../v1').Roles;
 
-        axiosVCR.mountCassette('./test/cassettes/main_ops/roles/create_role_for_read.json', true);
-        let create = await new Role().withAuth().create(tmpRoleName, 2, [1, 2]);
-        roleId = create.id;
-        axiosVCR.ejectCassette('./test/cassettes/main_ops/roles/create_role_for_read.json');
-    });
+describe('get the roles by id', () => {
+
     it('should return the right role', async () => {
-        axiosVCR.mountCassette('./test/cassettes/roles/read_id/role_get_by_id.json');
-        let read = await new Role().withAuth().getById(roleId);
+        nock('/identity/login', 'post', {
+            name: 'volcanic',
+            secret: 'volcanic!123',
+            dataset_id: '-1',
+            audience: '["volcanic"]'
+        }, 200, {
+            response: {
+                response: {
+                    token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+                }
+            },
+            status: 200
+        });
+        nock('/roles/7', 'get', {}, 200, {
+            response: {
+                id: 7,
+                name: 'r*******t',
+                subject_id: 2,
+                service_id: 2,
+                created_at: '2019-11-01T03:53:46.332Z',
+                updated_at: '2019-11-01T03:53:46.332Z'
+            }
+        });
+        let read = await new Role().withAuth().getById(7);
         expect(read).to.be.instanceOf(Object).and.has.property('id');
-        axiosVCR.ejectCassette('./test/cassettes/roles/read_id/role_get_by_id.json');
     });
 
     it('will fail because the requested id is not available', async () => {
-        axiosVCR.mountCassette('./test/cassettes/roles/read_id/role_get_by_id_fail.json', true);
         try {
+            nock('/identity/login', 'post', {
+                name: 'volcanic',
+                secret: 'volcanic!123',
+                dataset_id: '-1',
+                audience: '["volcanic"]'
+            }, 200, {
+                response: {
+                    response: {
+                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+                    }
+                },
+                status: 200
+            });
+            nock('/roles/7', 'get', {}, 404, {
+                response: {
+                    message: 'role does not exist', errorCode: 9001
+                }
+            });
             await new Role().withAuth().getById(roleId + 12);
             throw 'it will not pass because the name does not exist';
         } catch (e) {
             expect(e.message).to.exist;
         }
-        axiosVCR.ejectCassette('./test/cassettes/roles/read_id/role_get_by_id_fail.json');
     });
+
 });

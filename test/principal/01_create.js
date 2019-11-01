@@ -66,19 +66,16 @@ describe('principal create test', () => {
     it('should not create a principal and it will throw an error if the name already exist', async () => {
         try {
             nock('/principals', 'post', {
-                name: tempPrincipalName,
+                name: tempPrincipalName + 1,
                 dataset_id: tempDataSetID
             }, 400, {
-                response: { statusCode: 400,
-                    status: false,
-                    message: 'Duplicate entry principal-test on dataset id 111',
-                    errorCode: 2001 },
-                status: 201
+                message: 'Duplicate entry principal-test on dataset id 111',
+                errorCode: 2001
             });
-            await principal.withAuth().create(tempPrincipalName, tempDataSetID);
+            await principal.withAuth().create(tempPrincipalName + 1, tempDataSetID);
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.response.message).to.exist;
         }
     });
 });
