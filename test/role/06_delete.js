@@ -51,6 +51,7 @@ describe('role delete', () => {
             throw 'should not reach this line because the id is gone';
         } catch (e) {
             expect(e.message).to.equal('Role does not exist');
+            expect(e.errorCode).to.equal(9001);
         }
     });
 
@@ -75,7 +76,8 @@ describe('role delete', () => {
             await new Role().withAuth().delete(123132);
             throw 'should not reach this line because the id is not valid';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.message).to.equal('Role does not exist');
+            expect(e.errorCode).to.equal(9001);
         }
     });
 });

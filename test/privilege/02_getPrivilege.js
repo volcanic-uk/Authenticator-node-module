@@ -61,6 +61,7 @@ describe('get privileges', () => {
             throw 'should not reach this line because privilege does not exist';
         } catch (e) {
             expect(e.message).to.equal('privilege does not exist');
+            expect(e.errorCode).to.equal(8001);
         }
     });
 

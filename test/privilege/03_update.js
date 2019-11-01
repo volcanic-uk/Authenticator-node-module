@@ -34,6 +34,7 @@ describe('Update privileges', () => {
             throw 'should not reach this line, because the id doesnt exist';
         } catch (e) {
             expect(e.message).to.equal('Privilege does not exist');
+            expect(e.errorCode).to.equal(8001);
         }
     });
 

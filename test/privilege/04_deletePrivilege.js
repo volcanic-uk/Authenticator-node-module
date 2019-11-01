@@ -31,13 +31,14 @@ describe('delete privileges', () => {
             throw 'must not reach this line, the id is invalid';
         } catch (e) {
             expect(e.message).to.equal('Privilege does not exist');
+            expect(e.errorCode).to.equal(8001);
         }
     });
 
     it('deletes the provided privilege', async () => {
         nock('/privileges/4', 'delete', {}, 200, {
             response: {
-                message: 'Successfully deleted privilege', errorCode: 8001
+                message: 'Successfully deleted privilege'
             }
         });
         nock('/identity/login', 'post', {

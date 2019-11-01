@@ -2903,5 +2903,199 @@
         }
       }
     }
+  },
+  "c5c346f1145406fce2bc42b27560670e": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer null",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 42
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 403,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Forbidden",
+        "errorCode": 3001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer null",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 42
+        }
+      }
+    }
+  },
+  "64a7feee46cc232b7a1b9b57a8082dc8": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 42
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "p************t",
+          "dataset_id": "111",
+          "secure_id": "334e5b1dd2",
+          "updated_at": "2019-10-31T04:33:06.089Z",
+          "created_at": "2019-10-31T04:33:06.089Z",
+          "id": 2
+        },
+        "status": 201
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 42
+        }
+      }
+    }
+  },
+  "7dd315e0b65c0b7994a431de00354dab": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-tests\",\"dataset_id\":111}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 43
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 400,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "Duplicate entry principal-test on dataset id 111",
+        "errorCode": 2001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-tests\",\"dataset_id\":111}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 43
+        }
+      }
+    }
+  },
+  "4f3655ec848db128280b9cea65a90cb6": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles/123412",
+      "method": "get",
+      "data": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 404,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": "role does not exist",
+        "errorCode": 9001
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles/123412",
+        "method": "get",
+        "data": null,
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "704046698aa00acab10459bccb9e89cf": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/roles",
+      "method": "post",
+      "data": "{\"name\":\"role-tests\",\"service_id\":2,\"privileges\":1}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 51
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 422,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "message": {
+          "privileges": "\"privileges\" must be an array"
+        }
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/roles",
+        "method": "post",
+        "data": "{\"name\":\"role-tests\",\"service_id\":2,\"privileges\":1}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 51
+        }
+      }
+    }
   }
 }

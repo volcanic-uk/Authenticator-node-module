@@ -944,5 +944,50 @@
         }
       }
     }
+  },
+  "64a7feee46cc232b7a1b9b57a8082dc8": {
+    "meta": {
+      "url": "http://localhost:3003/api/v1/principals",
+      "method": "post",
+      "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer undefined",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 42
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 201,
+      "statusText": null,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "data": {
+        "response": {
+          "name": "p************t",
+          "dataset_id": "111",
+          "secure_id": "334e5b1dd2",
+          "updated_at": "2019-10-31T04:33:06.089Z",
+          "created_at": "2019-10-31T04:33:06.089Z",
+          "id": 2
+        },
+        "status": 201
+      },
+      "config": {
+        "url": "http://localhost:3003/api/v1/principals",
+        "method": "post",
+        "data": "{\"name\":\"principal-test\",\"dataset_id\":111}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Bearer undefined",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 42
+        }
+      }
+    }
   }
 }

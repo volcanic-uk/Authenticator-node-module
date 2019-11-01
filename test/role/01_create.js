@@ -79,16 +79,14 @@ describe('role creates', () => {
                 status: 200
             });
             nock('/roles', 'post', {
-                name: 'role-test', service_id: 2, privileges: [1, 2]
+                name: 'role-tests', service_id: 2, privileges: 1
             }, 422, {
-                response: {
-                    message: { privileges: '"privileges" must be an array' }
-                }
+                message: { privileges: '"privileges" must be an array' }
             });
-            await new Role().withAuth().create('role-test', 2, 1);
+            await new Role().withAuth().create('role-tests', 2, 1);
             throw 'should not reach this line, privileges are not an array';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.message.privileges).to.equal('"privileges" must be an array');
         }
     });
 });

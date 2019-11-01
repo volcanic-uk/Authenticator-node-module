@@ -54,7 +54,8 @@ describe('role get by name', () => {
             await new Role().withAuth().getByName('no-proper-name');
             throw 'should not return a role as name doesnt exist';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.message).to.equal('role does not exist');
+            expect(e.errorCode).to.equal(9001);
         }
     });
 });

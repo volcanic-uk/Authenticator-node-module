@@ -3,7 +3,6 @@ const chai = require('chai'),
     nock = require('../../src/helpers').nock,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-let roleId;
 const Role = require('../../v1').Roles;
 
 describe('get the roles by id', () => {
@@ -51,15 +50,14 @@ describe('get the roles by id', () => {
                 },
                 status: 200
             });
-            nock('/roles/7', 'get', {}, 404, {
-                response: {
-                    message: 'role does not exist', errorCode: 9001
-                }
+            nock('/roles/123412', 'get', {}, 404, {
+                message: 'role does not exist', errorCode: 9001
             });
-            await new Role().withAuth().getById(roleId + 12);
+            await new Role().withAuth().getById(123412);
             throw 'it will not pass because the name does not exist';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.message).to.equal('role does not exist');
+            expect(e.errorCode).to.equal(9001);
         }
     });
 

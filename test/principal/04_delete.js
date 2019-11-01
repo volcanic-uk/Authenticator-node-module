@@ -20,6 +20,7 @@ describe('principal delete', async () => {
             throw 'should not reach this line, because the token is not valid';
         } catch (e) {
             expect(e.message).equals('Forbidden');
+            expect(e.errorCode).equals(3001);
         }
     });
 

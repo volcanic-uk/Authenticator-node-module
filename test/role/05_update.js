@@ -59,7 +59,8 @@ describe('Role update', async () => {
             await new Role().withAuth().update(123451, 'updated-name', 2, [1, 2]);
             throw 'should not reach this line, for the id does not exist';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.message).to.equal('Role does not exist');
+            expect(e.errorCode).to.equal(9001);
         }
     });
 });
