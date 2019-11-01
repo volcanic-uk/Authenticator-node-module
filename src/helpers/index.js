@@ -75,8 +75,8 @@ exports.md5Generator = (string) => {
 
 exports.nock = (path, method, body, code, response) => {
     if (method === 'post') {
-        Nock(envConfigs.server.domainName)
-            .post(path, {
+        Nock(envConfigs.server.domainName, { allowUnmocked: true })
+            .intercept(path, 'POST', {
                 ...body
             })
             .reply(code, {
@@ -84,16 +84,17 @@ exports.nock = (path, method, body, code, response) => {
             });
     }
     if (method === 'get') {
-        Nock('http://localhost:3003/api/v1')
-            .get(path, {
+        Nock(envConfigs.server.domainName)
+            .intercept(path, 'GET', {
                 ...body
             })
             .reply(code, {
                 ...response
             });
-    } else {
-        Nock('http://localhost:3003/api/v1')
-            .delete(path, {
+    }
+    if (method === 'delete') {
+        Nock(envConfigs.server.domainName)
+            .intercept(path, 'DELETE', {
                 ...body
             })
             .reply(code, {

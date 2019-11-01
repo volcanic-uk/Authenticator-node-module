@@ -10,7 +10,7 @@ class Principal extends V1Base {
             name: name,
             dataset_id: datasetID
         };
-        return await super.fetch('post', '/principals', null, principal);
+        return await super.fetch('post', 'principals', null, principal);
     }
 
     async getByID(secureID) {
