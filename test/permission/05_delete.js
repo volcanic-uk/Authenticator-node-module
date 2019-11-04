@@ -1,35 +1,79 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
-    axiosVCR = require('axios-vcr'),
+    nock = require('../../src/helpers').nock,
+    Permission = require('../../v1').Permission,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
-let currentTimestampSecond = '111',
-    token;
-const Identity = require('../../v1/index').Identity,
-    Permission = require('../../v1').Permission;
+
 describe('delete a permission', async () => {
-    before(async () => {
-        axiosVCR.mountCassette('./test/cassettes/main_ops/identity_login.json');
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
-        token = token.token;
-        axiosVCR.ejectCassette('./test/cassettes/main_ops/identity_login.json');
-    });
+
     it('should delete a permission', async () => {
-        axiosVCR.mountCassette('./test/cassettes/permissions/delete/permission_delete.json');
-        let deletepermission = await new Permission().withAuth().delete(2);
-        axiosVCR.ejectCassette('./test/cassettes/permissions/delete/permission_delete.json');
+        nock('/identity/login', 'post', {
+            name: 'volcanic',
+            secret: 'volcanic!123',
+            dataset_id: '-1',
+            audience: '["volcanic"]'
+        }, 200, {
+            response: {
+                response: {
+                    token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+                }
+            },
+            status: 200
+        });
+        nock('/permissions/64', 'delete', {}, 200, {
+            response: { message: 'Permission deleted successfully' }
+        });
+        let deletepermission = await new Permission().withAuth().delete(64);
         expect(deletepermission.message).to.exist;
     });
-    it('should not delete a permission', async () => {
-        axiosVCR.mountCassette('./test/cassettes/permissions/delete/permission_delete_fail.json', true);
+    it('should not delete a permission when it is already deleted', async () => {
         try {
-            await new Permission().withAuth().delete(`${currentTimestampSecond}`);
+            nock('/identity/login', 'post', {
+                name: 'volcanic',
+                secret: 'volcanic!123',
+                dataset_id: '-1',
+                audience: '["volcanic"]'
+            }, 200, {
+                response: {
+                    response: {
+                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+                    }
+                },
+                status: 200
+            });
+            nock('/permissions/64', 'delete', {}, 410, {
+                message: 'Permission already deleted', errorCode: 5002
+            });
+            await new Permission().withAuth().delete(64);
         } catch (e) {
             expect(e.errorCode).to.equal(5002);
-            expect(e).to.exist;
+            expect(e.message).to.equal('Permission already deleted');
         }
-        axiosVCR.ejectCassette('./test/cassettes/permissions/delete/permission_delete_fail.json');
+    });
+
+    it('should not delete a permission that does not exist', async () => {
+        try {
+            nock('/identity/login', 'post', {
+                name: 'volcanic',
+                secret: 'volcanic!123',
+                dataset_id: '-1',
+                audience: '["volcanic"]'
+            }, 200, {
+                response: {
+                    response: {
+                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+                    }
+                },
+                status: 200
+            });
+            nock('/permissions/1234231', 'delete', {}, 404, {
+                message: 'Permission does not exist', errorCode: 5002
+            });
+            await new Permission().withAuth().delete(1234231);
+        } catch (e) {
+            expect(e.errorCode).to.equal(5002);
+            expect(e.message).to.equal('Permission does not exist');
+        }
     });
 });
