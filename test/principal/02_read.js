@@ -1,10 +1,8 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
     expect = chai.expect,
     nock = require('../../src/helpers/index').nock;
 chai.use(chaiAsPromised);
-chai.use(sorted);
 
 const Principal = require('../../v1').Principal;
 
@@ -51,6 +49,7 @@ describe('Principal read', () => {
             throw 'should not reach this line, because the read request has no token, or it is malformed';
         } catch (e) {
             expect(e.message).to.be.equals('Forbidden');
+            expect(e.errorCode).to.be.equals(3001);
         }
     });
 

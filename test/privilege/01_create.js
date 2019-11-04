@@ -21,6 +21,7 @@ describe('creates privilege', () => {
             throw 'must not reach this line because the token is invalid';
         } catch (e) {
             expect(e.message).to.equal('Forbidden');
+            expect(e.errorCode).to.equal(3001);
         }
     });
     it('creates a new privilege', async () => {

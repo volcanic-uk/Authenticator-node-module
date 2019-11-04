@@ -1,10 +1,8 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
     { nock } = require('../../src/helpers'),
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
 
 const Principal = require('../../v1').Principal;
 describe('Principal updates', async () => {
@@ -32,7 +30,8 @@ describe('Principal updates', async () => {
             scope.done();
             throw 'should not read this line because the update request has no token, or it is malformed';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.message).to.equal('Forbidden');
+            expect(e.errorCode).to.equal(3001);
         }
     });
 

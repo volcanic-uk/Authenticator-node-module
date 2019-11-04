@@ -73,31 +73,11 @@ exports.md5Generator = (string) => {
     return createHash('md5').update(string).digest('hex');
 };
 exports.nock = (path, method, body, code, response) => {
-    if (method === 'post') {
-        Nock(envConfigs.server.domainName, { allowUnmocked: true })
-            .intercept(path, 'POST', {
-                ...body
-            })
-            .reply(code, {
-                ...response
-            });
-    }
-    if (method === 'get') {
-        Nock(envConfigs.server.domainName)
-            .intercept(path, 'GET', {
-                ...body
-            })
-            .reply(code, {
-                ...response
-            });
-    }
-    if (method === 'delete') {
-        Nock(envConfigs.server.domainName)
-            .intercept(path, 'DELETE', {
-                ...body
-            })
-            .reply(code, {
-                ...response
-            });
-    }
+    Nock(envConfigs.server.domainName, { allowUnmocked: true })
+        .intercept(path, method.toUpperCase(), {
+            ...body
+        })
+        .reply(code, {
+            ...response
+        });
 };

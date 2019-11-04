@@ -1,35 +1,61 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
-    axiosVCR = require('axios-vcr'),
+    nock = require('../../src/helpers').nock,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
-let token,
-    tmpRoleName = 'group-test';
-const Identity = require('../../v1/index').Identity,
-    Role = require('../../v1').Roles;
+
+const Role = require('../../v1').Roles;
 describe('role get by name', () => {
-    before(async () => {
-        axiosVCR.mountCassette('./test/cassettes/main_ops/identity_login.json');
-        token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
-        token = token.token;
-        axiosVCR.ejectCassette('./test/cassettes/main_ops/identity_login.json');
-    });
     it('gets the right role by its name', async () => {
-        axiosVCR.mountCassette('./test/cassettes/roles/read_name/get_role_by_name.json');
-        let read = await new Role().withAuth().getByName(tmpRoleName);
+        nock('/identity/login', 'post', {
+            name: 'volcanic',
+            secret: 'volcanic!123',
+            dataset_id: '-1',
+            audience: '["volcanic"]'
+        }, 200, {
+            response: {
+                response: {
+                    token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+                }
+            },
+            status: 200
+        });
+        nock('/roles/role-test', 'get', {}, 200, {
+            response: {
+                id: 7,
+                name: 'r*******t',
+                subject_id: 2,
+                service_id: 2,
+                created_at: '2019-11-01T03:53:46.332Z',
+                updated_at: '2019-11-01T03:53:46.332Z'
+            }
+        });
+        let read = await new Role().withAuth().getByName('role-test');
         expect(read).to.be.instanceOf(Object).and.has.property('id');
-        axiosVCR.ejectCassette('./test/cassettes/roles/read_name/get_role_by_name.json');
     });
     it('returns error if name doesnt exist', async () => {
-        axiosVCR.mountCassette('./test/cassettes/roles/read_name/get_role_by_name_fail.json', true);
         try {
+            nock('/identity/login', 'post', {
+                name: 'volcanic',
+                secret: 'volcanic!123',
+                dataset_id: '-1',
+                audience: '["volcanic"]'
+            }, 200, {
+                response: {
+                    response: {
+                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
+                    }
+                },
+                status: 200
+            });
+            nock('/roles/no-proper-name', 'get', {}, 404, {
+                message: 'role does not exist', errorCode: 9001
+            });
             await new Role().withAuth().getByName('no-proper-name');
             throw 'should not return a role as name doesnt exist';
         } catch (e) {
-            expect(e.message).to.exist;
+            expect(e.message).to.equal('role does not exist');
+            expect(e.errorCode).to.equal(9001);
         }
-        axiosVCR.ejectCassette('./test/cassettes/roles/read_name/get_role_by_name_fail.json');
     });
 });
