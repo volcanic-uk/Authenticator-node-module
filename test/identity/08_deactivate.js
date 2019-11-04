@@ -36,8 +36,9 @@ describe('Identity deactivate', () => {
                 },
                 status: 200
             });
-            nock('/identity/4683245189/deactivate', 'post', '', 200, {
-                message: 'Successfully deactivated identity'
+            nock('/identity/4683245189/deactivate', 'post', {}, 200, {
+                requestID: 'offline_awsRequestId_746253293370551',
+                response: { message: 'Successfully deactivated identity' }
             });
             let deactivateIdentity = await new Identity().withAuth().deactivateIdentity('4683245189');
             expect(deactivateIdentity.message).to.equal('Successfully deactivated identity');
@@ -58,8 +59,8 @@ describe('Identity deactivate', () => {
                     },
                     status: 200
                 });
-                nock('/identity/4683245189/deactivate', 'post', '', 200, {
-                    requestID: 'offline_awsRequestId_006449310684198073',
+                nock('/identity/4683245189/deactivate', 'post', {}, 410, {
+                    requestID: 'offline_awsRequestId_9899538118338027',
                     message: 'Identity already deactivated',
                     errorCode: 1004
                 });
@@ -89,7 +90,8 @@ describe('Identity deactivate', () => {
                 status: 200
             });
             nock('/identity/4683245189/deactivate', 'post', '', 200, {
-                message: 'Successfully deactivated identity'
+                requestID: 'offline_awsRequestId_746253293370551',
+                response: { message: 'Successfully deactivated identity' }
             });
             let deactivateIdentity = await new Identity().setToken(token).deactivateIdentity('4683245189');
             expect(deactivateIdentity.message).to.equal('Successfully deactivated identity');
@@ -110,7 +112,7 @@ describe('Identity deactivate', () => {
                     },
                     status: 200
                 });
-                nock('/identity/4683245189/deactivate', 'post', '', 200, {
+                nock('/identity/4683245189/deactivate', 'post', '', 410, {
                     requestID: 'offline_awsRequestId_006449310684198073',
                     message: 'Identity already deactivated',
                     errorCode: 1004
