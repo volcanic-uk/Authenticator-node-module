@@ -46,10 +46,10 @@ exports.JWTDecoder = async (token) => {
         // let decodedResult = decoded.payload.sub.split('/');
         return jwt.decode(token, { complete: true });
         // {
-        //     stack: decodedResult[2] || null,
-        //     dataset_id: decodedResult[3] || null,
-        //     principal: decodedResult[4] || null,
-        //     identity: decodedResult[5] || null
+        // stack: decodedResult[2] || null,
+        // dataset_id: decodedResult[3] || null,
+        // principal: decodedResult[4] || null,
+        // identity: decodedResult[5] || null
         // };
     } catch (error) {
         throw error;
@@ -72,7 +72,6 @@ exports.JWTValidator = async (token, publicKey) => {
 exports.md5Generator = (string) => {
     return createHash('md5').update(string).digest('hex');
 };
-
 exports.nock = (path, method, body, code, response) => {
     if (method === 'post') {
         Nock(envConfigs.server.domainName, { allowUnmocked: true })

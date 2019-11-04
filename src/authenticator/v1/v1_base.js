@@ -29,6 +29,7 @@ class V1Base {
             this.loginAttempts = 0;
             return { ...httpResponse.response, status: true };
         } catch (e) {
+            // console.log('show the error  here',e);
             if (this.internalAuth && e.response.status == 403) {
                 if (this.loginAttempts <= 5) {
                     this.loginAttempts++;
