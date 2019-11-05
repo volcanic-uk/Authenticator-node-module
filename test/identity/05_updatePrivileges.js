@@ -1,27 +1,12 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
     nock = require('../../src/helpers').nock,
+    Identity = require('../../v1/index').Identity,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
 
-const Identity = require('../../v1/index').Identity;
 describe('Identity Privileges update', () => {
-    // before(async () => {
-    //     axiosVCR.mountCassette('./test/cassettes/main_ops/identity_login.json');
-    //     token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
-    //     token = token.token;
-    //     axiosVCR.ejectCassette('./test/cassettes/main_ops/identity_login.json');
-    //
-    //     axiosVCR.mountCassette('./test/cassettes/identities/main_ops/identity/identity_update_test.json');
-    //     identityCreation = await new Identity().withAuth().create(tmpIdentityName, null, 'volcanic');
-    //     axiosVCR.ejectCassette('./test/cassettes/identities/main_ops/identity/identity_update_test.json');
-    //
-    //     axiosVCR.mountCassette('./test/cassettes/main_ops/identity/identity_privilege_update.json');
-    //     privilegeCreation = await new Privilege().withAuth().create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
-    //     axiosVCR.ejectCassette('./test/cassettes/main_ops/identity/identity_privilege_update.json');
-    // });
+
     describe('with auth', async () => {
         it('should update the privileges of the identity', async () => {
             nock('/identity/login', 'post', {

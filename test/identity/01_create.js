@@ -1,22 +1,12 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
+    nock = require('../../src/helpers').nock,
+    Identity = require('../../v1/index').Identity,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
-
-const Identity = require('../../v1/index').Identity,
-    nock = require('../../src/helpers').nock;
-let identityCreation,
-    token;
 
 describe('create identity', () => {
-    // before(async () => {
-    //     axiosVCR.mountCassette('./test/cassettes/main_ops/identity_login.json');
-    //     token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
-    //     token = token.token;
-    //     axiosVCR.ejectCassette('./test/cassettes/main_ops/identity_login.json');
-    // });
+
     describe('with auth', async () => {
         it('creating a new identity', async () => {
             nock('/identity/login', 'post', {
@@ -53,7 +43,7 @@ describe('create identity', () => {
                 },
                 status: 201
             });
-            identityCreation = await new Identity().withAuth().create('identity_create_new', null, 'volcanic');
+            let identityCreation = await new Identity().withAuth().create('identity_create_new', null, 'volcanic');
             expect(identityCreation).to.be.an('object');
         });
 
@@ -305,6 +295,7 @@ describe('create identity', () => {
                     errorCode: 1003
 
                 });
+                let token = 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzI1OTM3NzUsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTcyNTkwMTc1LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI1OTAxNzUsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AbrOkeHJLv4xIWu409MLMOZknAna14WJtsTTbgtmQlRZ8j4dQH6yS5cMqppkUvXRh0n222LcXZAGMEzEyPuHQoa7AEQQyoNNMateg-SiEnXfsdtn8INloscHyfRYOrexcDoOF4U7K0zrJsBlzteNI-bvFZUYhgrdPztjE0fIUp1nYbCc';
                 await new Identity().setToken(token).create('identity_with_password', 'volcanic!123', 'volcanic');
                 throw Error('The code should not reach this scope as it would be a duplicate identity record');
             } catch (e) {
@@ -338,6 +329,7 @@ describe('create identity', () => {
                     message: { principal_id: '"principal_id" must be a string' },
                     errorCode: 10001
                 });
+                let token = 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImE1ZjUzZmEyNWYyZjgyYTM4NDNjNGFmMTFiZDgwMWExIn0.eyJleHAiOjE1NzI1OTM3NzUsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTcyNTkwMTc1LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI1OTAxNzUsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AbrOkeHJLv4xIWu409MLMOZknAna14WJtsTTbgtmQlRZ8j4dQH6yS5cMqppkUvXRh0n222LcXZAGMEzEyPuHQoa7AEQQyoNNMateg-SiEnXfsdtn8INloscHyfRYOrexcDoOF4U7K0zrJsBlzteNI-bvFZUYhgrdPztjE0fIUp1nYbCc';
                 await new Identity().setToken(token).create('identity_with_password', 'volcanic!123', null);
                 throw Error('The code should not reach this scope as identity cannot be created without principal id');
             } catch (e) {

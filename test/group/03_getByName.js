@@ -1,12 +1,9 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
     nock = require('../../src/helpers').nock,
+    Group = require('../../v1').Group,
     expect = chai.expect;
-
 chai.use(chaiAsPromised);
-chai.use(sorted);
-const Group = require('../../v1').Group;
 
 describe('get group by name', () => {
     it('gets a group by its name', async () => {

@@ -1,25 +1,12 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
+    Group = require('../../v1').Group,
     nock = require('../../src/helpers').nock,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
 
-const Group = require('../../v1').Group;
 describe('group update', () => {
 
-    // before(async () => {
-    //     axiosVCR.mountCassette('./test/cassettes/main_ops/identity_login.json');
-    //     token = await new Identity().login('volcanic', 'volcanic!123', ['kratakao'], '-1');
-    //     token = token.token;
-    //     axiosVCR.ejectCassette('./test/cassettes/main_ops/identity_login.json');
-    //     axiosVCR.mountCassette('./test/cassettes/groups/get_name/get_group_by_name.json');
-    //     let read = await new Group().withAuth().getByName(tmpGroupName);
-    //     groupID = read.id;
-    //     axiosVCR.ejectCassette('./test/cassettes/groups/get_name/get_group_by_name.json');
-    // });
-    // group update
     it('it updates the specified group info', async () => {
         nock('/identity/login', 'post', {
             name: 'volcanic',

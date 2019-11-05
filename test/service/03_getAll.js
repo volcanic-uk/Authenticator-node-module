@@ -2,12 +2,10 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     sorted = require('chai-sorted'),
     nock = require('../../src/helpers').nock,
+    Service = require('../../v1').Service,
     expect = chai.expect;
 chai.use(chaiAsPromised);
 chai.use(sorted);
-///roles?query=null&page=1&page_size=15&sort=id&order=asc
-
-const Service = require('../../v1').Service;
 
 describe('should read all services', async () => {
 

@@ -1,12 +1,9 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
     nock = require('../../src/helpers').nock,
+    Privilege = require('../../v1').Privilege,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
-
-const Privilege = require('../../v1').Privilege;
 
 describe('delete privileges', () => {
     it('fails deleting a non existing id', async () => {

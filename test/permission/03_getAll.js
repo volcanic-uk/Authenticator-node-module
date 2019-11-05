@@ -2,10 +2,10 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     sorted = require('chai-sorted'),
     nock = require('../../src/helpers').nock,
+    Permission = require('../../v1').Permission,
     expect = chai.expect;
 chai.use(chaiAsPromised);
 chai.use(sorted);
-const Permission = require('../../v1').Permission;
 
 describe('should read all permissions', async () => {
     it('should read all permissions in ascending order', async () => {

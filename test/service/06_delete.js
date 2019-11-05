@@ -1,10 +1,9 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     nock = require('../../src/helpers').nock,
+    Service = require('../../v1').Service,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-
-const Service = require('../../v1').Service;
 
 describe('delete a service', async () => {
     it('should delete a service', async () => {

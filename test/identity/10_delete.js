@@ -1,13 +1,10 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     nock = require('../../src/helpers').nock,
-    sorted = require('chai-sorted'),
+    Identity = require('../../v1/index').Identity,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
 
-const Identity = require('../../v1/index').Identity;
-let token;
 describe('Identity delete', () => {
     describe('with auth', async () => {
 
@@ -83,6 +80,7 @@ describe('Identity delete', () => {
                 requestID: 'offline_awsRequestId_9275859723252489',
                 response: { message: 'Successfully deleted identity' }
             });
+            let token = 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB';
             let deactivateIdentity = await new Identity().setToken(token).delete('4683245189');
             expect(deactivateIdentity.message).to.equal('Successfully deleted identity');
         });
@@ -107,6 +105,7 @@ describe('Identity delete', () => {
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
+                let token = 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB';
                 await new Identity().setToken(token).delete('4683245189');
                 throw Error('The code should not reach this scope as identity already deactivated');
             } catch (e) {

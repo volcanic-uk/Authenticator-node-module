@@ -1,12 +1,10 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    sorted = require('chai-sorted'),
     nock = require('../../src/helpers').nock,
+    Principal = require('../../v1').Principal,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-chai.use(sorted);
 
-const Principal = require('../../v1').Principal;
 describe('principal delete', async () => {
     let principal = new Principal();
 

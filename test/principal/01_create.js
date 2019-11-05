@@ -1,10 +1,9 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
-    nock = require('../../src/helpers').nock;
+    nock = require('../../src/helpers').nock,
+    Principal = require('../../v1').Principal;
 chai.use(chaiAsPromised);
-
-const Principal = require('../../v1').Principal;
 
 describe('principal create test', () => {
     let principal = new Principal();

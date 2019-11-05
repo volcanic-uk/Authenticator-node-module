@@ -1,12 +1,9 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     nock = require('../../src/helpers').nock,
+    Group = require('../../v1').Group,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-
-const Group = require('../../v1').Group;
-
-let tmpGroupName = 'group-test';
 
 describe('Group create', () => {
     nock('/identity/login', 'post', {
@@ -38,7 +35,7 @@ describe('Group create', () => {
             status: 200
         });
         nock('/groups', 'post', {
-            name: tmpGroupName,
+            name: 'group_test',
             permissions: [],
             description: 'test group for module'
         }, 201, {
@@ -54,7 +51,7 @@ describe('Group create', () => {
             },
             status: 201
         });
-        let create = await new Group().withAuth().create(tmpGroupName, [], 'test group for module');
+        let create = await new Group().withAuth().create('group_test', [], 'test group for module');
         expect(create.response).to.be.instanceOf(Object).and.have.property('id');
 
     });
@@ -62,19 +59,19 @@ describe('Group create', () => {
     it('fails upon duplicate entry', async () => {
         try {
             nock('/groups', 'post', {
-                name: tmpGroupName,
+                name: 'group_test',
                 permissions: [],
                 description: 'test group for module'
             }, 400, {
 
                 requestID: 'offline_awsRequestId_2116179236304796',
-                message: 'Duplicate entry group-test',
+                message: 'Duplicate entry group_test',
                 errorCode: 4002
             });
-            await new Group().withAuth().create(tmpGroupName, [], 'test group for module');
+            await new Group().withAuth().create('group_test', [], 'test group for module');
             throw 'should not reach this line because the group name already exists';
         } catch (e) {
-            expect(e.message).equals(`Duplicate entry ${tmpGroupName}`);
+            expect(e.message).equals('Duplicate entry group_test');
         }
     });
 });

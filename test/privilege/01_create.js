@@ -1,10 +1,10 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
+    Privilege = require('../../v1/index').Privilege,
     nock = require('../../src/helpers').nock;
 chai.use(chaiAsPromised);
 
-const Privilege = require('../../v1/index').Privilege;
 // create privileges
 describe('creates privilege', () => {
     it('fails when the token is invalid', async () => {

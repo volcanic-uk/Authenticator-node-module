@@ -1,10 +1,9 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     nock = require('../../src/helpers').nock,
+    Role = require('../../v1').Roles,
     expect = chai.expect;
 chai.use(chaiAsPromised);
-
-const Role = require('../../v1').Roles;
 
 describe('role creates', () => {
     it('fails on malformed token', async () => {
