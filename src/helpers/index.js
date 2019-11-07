@@ -73,7 +73,7 @@ exports.md5Generator = (string) => {
     return createHash('md5').update(string).digest('hex');
 };
 exports.nock = (path, method, body, code, response) => {
-    Nock(envConfigs.server.domainName, { allowUnmocked: true })
+    Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
         .intercept(path, method.toUpperCase(), {
             ...body
         })

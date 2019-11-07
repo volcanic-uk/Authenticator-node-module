@@ -5,6 +5,7 @@ const ENV_VARS = process.env;
 module.exports = {
     server: {
         domainName: ENV_VARS.AUTH_DOMAIN,
+        v1Api: ENV_VARS.V1_API
     },
     cache: {
         moduleTokenDuration: ENV_VARS.MODULE_TOKEN_DURATION,
@@ -12,10 +13,10 @@ module.exports = {
         enableCaching: ENV_VARS.ENABLE_CACHING
     },
     auth: {
-        identity_name: ENV_VARS.IDENTITY,
-        secret: ENV_VARS.SECRET,
+        identity_name: ENV_VARS.AUTH_IDENTITY,
+        secret: ENV_VARS.AUTH_SECRET,
         principal_id: ENV_VARS.PRINCIPAL_ID,
-        dataset_id: ENV_VARS.DATASET_ID,
+        dataset_id: ENV_VARS.AUTH_DATASET_ID,
         audience: ENV_VARS.DEFAULT_AUDIENCE || ['*'],
         set: function (authConfig) {
             this.identity_name = authConfig.identity_name;
