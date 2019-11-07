@@ -1,0 +1,22 @@
+version: 0.2
+env:
+  variables:
+    AUTH_IDENTITY: "volcanic"
+    AUTH_SECRET: "volcanic!123"
+    AUTH_DATASET_ID: "-1"
+    ENABLE_CACHING: "false"
+    AUTH_DOMAIN: "http://localhost:3003"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - npm i -g mocha
+      - npm i -g eslint
+  pre_build:
+    commands:
+      - echo "using environment $NODE_ENV"
+      - npm install
+      - npm run lint
+      - npm test
+
