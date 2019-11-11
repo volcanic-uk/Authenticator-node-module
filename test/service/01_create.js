@@ -54,10 +54,10 @@ describe('create service', () => {
             nock('/services', 'post', {
                 name: 'service_for_tests'
             }, 400, {
-                message: 'Duplicate entry service_for_test', errorCode: 6001
+                message: 'Duplicate entry service_for_tests', errorCode: 6001
             });
             await new Service().withAuth().create('service_for_tests');
-            throw 'should not reach this line cuz the service is alerady there';
+            throw 'should not reach this line cuz the service is already there';
         } catch (e) {
             expect(e.errorCode).to.equal(6001);
             expect(e.message).to.equal('Duplicate entry service_for_tests');

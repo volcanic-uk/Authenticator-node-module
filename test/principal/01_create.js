@@ -52,7 +52,7 @@ describe('principal create test', () => {
         });
         nock('/principals', 'post', {
             name: 'principal_test',
-            dataset_id: 111
+            dataset_id: '111'
         }, 201, {
             response: {
                 name: 'p************t',
@@ -61,10 +61,10 @@ describe('principal create test', () => {
                 updated_at: '2019-10-31T04:33:06.089Z',
                 created_at: '2019-10-31T04:33:06.089Z',
                 id: 2
-            },
-            status: 201
+            }
         });
         let create = await principal.withAuth().create('principal_test', '111');
+        console.log(create);
         expect(create).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals('111');
     });
 
@@ -85,14 +85,15 @@ describe('principal create test', () => {
             });
             nock('/principals', 'post', {
                 name: 'principal-tests',
-                dataset_id: 111
+                dataset_id: '111'
             }, 400, {
-                message: 'Duplicate entry principal-test on dataset id 111',
+                message: 'Duplicate entry principal-tests on dataset id 111',
                 errorCode: 2001
             });
             await principal.withAuth().create('principal-tests', '111');
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
+            console.log(e);
             expect(e.message).to.exist;
             expect(e.errorCode).to.equal(2001);
         }

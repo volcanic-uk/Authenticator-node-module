@@ -21,10 +21,8 @@ describe('group delete', () => {
             status: 200
         });
         nock('/groups/4', 'delete', {}, 200, {
-            response: {
-                requestID: 'offline_awsRequestId_7617063816804721',
-                response: { message: 'Successfully deleted' }
-            }
+            requestID: 'offline_awsRequestId_7617063816804721',
+            response: { message: 'Successfully deleted' }
         });
         let deleted = await new Group().withAuth().delete(4);
         expect(deleted).to.be.instanceOf(Object).and.have.property('message').that.equals('Successfully deleted');
@@ -46,15 +44,14 @@ describe('group delete', () => {
                 status: 200
             });
             nock('/groups/4', 'delete', {}, 410, {
-                response: {
-                    requestID: 'offline_awsRequestId_7983799069828588',
-                    message: 'Group already deleted',
-                    errorCode: 4001
-                }
+                requestID: 'offline_awsRequestId_7983799069828588',
+                message: 'Group already deleted',
+                errorCode: 4001
             });
             await new Group().withAuth().delete(4);
             throw 'should not read this line because the group is deleted already';
         } catch (e) {
+            console.log(e);
             expect(e.message).to.exist;
         }
     });
@@ -76,11 +73,9 @@ describe('group delete', () => {
                 status: 200
             });
             nock('/groups/4342434', 'delete', {}, 404, {
-                response: {
-                    requestID: 'offline_awsRequestId_08531514194084266',
-                    message: 'Group does not exist',
-                    errorCode: 4001
-                }
+                requestID: 'offline_awsRequestId_08531514194084266',
+                message: 'Group does not exist',
+                errorCode: 4001
             });
             await new Group().withAuth().delete(4342434);
             throw 'should not read this line because the group does not exist';

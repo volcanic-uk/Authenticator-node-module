@@ -38,7 +38,7 @@ describe('get privileges', () => {
 
     it('fails with non existing id', async () => {
         try {
-            nock('/privileges/123test', 'get', {}, 404, {
+            nock('/privileges/12324', 'get', {}, 404, {
                 message: 'privilege does not exist', errorCode: 8001
             });
             nock('/identity/login', 'post', {

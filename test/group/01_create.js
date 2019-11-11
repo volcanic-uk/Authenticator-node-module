@@ -22,19 +22,17 @@ describe('Group create', () => {
             status: 200
         });
         nock('/groups', 'post', {
-            name: 'group_test',
+            name: 'group_testing',
             permissions: [],
             description: 'test group for module'
         }, 201, {
+            requestID: 'offline_awsRequestId_8442325613994397',
             response: {
-                requestID: 'offline_awsRequestId_8442325613994397',
-                response: {
-                    name: 'g********t',
-                    description: 'test group for module',
-                    updated_at: '2019-10-31T07:27:15.142Z',
-                    created_at: '2019-10-31T07:27:15.142Z',
-                    id: 15
-                }
+                name: 'g********t',
+                description: 'test group for module',
+                updated_at: '2019-10-31T07:27:15.142Z',
+                created_at: '2019-10-31T07:27:15.142Z',
+                id: 15
             },
             status: 201
         });
