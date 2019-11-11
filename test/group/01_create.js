@@ -38,8 +38,8 @@ describe('Group create', () => {
             },
             status: 201
         });
-        let create = await new Group().withAuth().create('group_test', [], 'test group for module');
-        expect(create.response).to.be.instanceOf(Object).and.have.property('id');
+        let create = await new Group().withAuth().create('group_testing', [], 'test group for module');
+        expect(create).to.be.instanceOf(Object).and.have.property('id');
 
     });
 
@@ -63,7 +63,6 @@ describe('Group create', () => {
                 permissions: [],
                 description: 'test group for module'
             }, 400, {
-
                 requestID: 'offline_awsRequestId_2116179236304796',
                 message: 'Duplicate entry group_test',
                 errorCode: 4002

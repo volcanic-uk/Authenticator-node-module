@@ -36,10 +36,10 @@ describe('principal delete', async () => {
             },
             status: 200
         });
-        nock('/principals/334e5b1dd2', 'delete', {}, 200, {
+        nock('/principals/8efa33dbf0', 'delete', {}, 200, {
             response: { message: 'Successfully deleted' }
         });
-        let deleted = await principal.withAuth().delete('334e5b1dd2');
+        let deleted = await principal.withAuth().delete('8efa33dbf0');
         expect(deleted.message).to.equal('Successfully deleted');
     });
 });

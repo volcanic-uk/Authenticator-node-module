@@ -54,7 +54,7 @@ describe('get privileges', () => {
                 },
                 status: 200
             });
-            await new Privilege().withAuth().getById(123 + 'test');
+            await new Privilege().withAuth().getById(12324);
             throw 'should not reach this line because privilege does not exist';
         } catch (e) {
             expect(e.message).to.equal('privilege does not exist');

@@ -33,7 +33,7 @@ describe('delete privileges', () => {
     });
 
     it('deletes the provided privilege', async () => {
-        nock('/privileges/4', 'delete', {}, 200, {
+        nock('/privileges/15', 'delete', {}, 200, {
             response: {
                 message: 'Successfully deleted privilege'
             }
@@ -51,7 +51,7 @@ describe('delete privileges', () => {
             },
             status: 200
         });
-        let deletePriv = await new Privilege().withAuth().delete(4);
+        let deletePriv = await new Privilege().withAuth().delete(15);
         expect(deletePriv.message).to.exist;
     });
 });

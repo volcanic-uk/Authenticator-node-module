@@ -51,7 +51,7 @@ describe('principal create test', () => {
             status: 200
         });
         nock('/principals', 'post', {
-            name: 'principal-test',
+            name: 'principal_test',
             dataset_id: 111
         }, 201, {
             response: {
@@ -64,7 +64,7 @@ describe('principal create test', () => {
             },
             status: 201
         });
-        let create = await principal.withAuth().create('principal-test', 111);
+        let create = await principal.withAuth().create('principal_test', '111');
         expect(create).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals('111');
     });
 
@@ -90,7 +90,7 @@ describe('principal create test', () => {
                 message: 'Duplicate entry principal-test on dataset id 111',
                 errorCode: 2001
             });
-            await principal.withAuth().create('principal-tests', 111);
+            await principal.withAuth().create('principal-tests', '111');
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
             expect(e.message).to.exist;

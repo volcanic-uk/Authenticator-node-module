@@ -22,13 +22,13 @@ describe('Identity Privileges update', () => {
                 },
                 status: 200
             });
-            nock('/identity/4683245189/privileges', 'post', {
+            nock('/identity/c12e86c0da/privileges', 'post', {
                 privileges: [12]
             }, 200, {
                 requestID: 'offline_awsRequestId_09282307247301747',
                 response: [[Object]]
             });
-            let updatedIdentityPrivilege = await new Identity().withAuth().updatePrivileges('4683245189', [12]); //check identity creation id here
+            let updatedIdentityPrivilege = await new Identity().withAuth().updatePrivileges('c12e86c0da', [12]); //check identity creation id here
             expect(updatedIdentityPrivilege).to.exist;
         });
 
@@ -47,14 +47,14 @@ describe('Identity Privileges update', () => {
                     },
                     status: 200
                 });
-                nock('/identity/46832451890999/privileges', 'post', {
+                nock('/identity/c12e86c0da/privileges', 'post', {
                     privileges: [12]
                 }, 200, {
                     requestID: 'offline_awsRequestId_25830663956307864',
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
-                await new Identity().withAuth().updatePrivileges('46832451890999', [12]);
+                await new Identity().withAuth().updatePrivileges('c12e86c0da', [12]);
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1004);
                 expect(e).to.exist;

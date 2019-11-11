@@ -22,13 +22,13 @@ describe('Identity Roles update', () => {
                 },
                 status: 200
             });
-            nock('/identity/4683245189/roles', 'post', {
+            nock('/identity/c12e86c0da/roles', 'post', {
                 roles: [1]
             }, 200, {
                 requestID: 'offline_awsRequestId_14548681360941473',
                 response: [[Object]]
             });
-            let updatedIdentityRole = await new Identity().withAuth().updateRoles('4683245189', [1]); //check identity creation id here
+            let updatedIdentityRole = await new Identity().withAuth().updateRoles('c12e86c0da', [1]); //check identity creation id here
             expect(updatedIdentityRole).to.exist;
 
 
@@ -49,14 +49,14 @@ describe('Identity Roles update', () => {
                     },
                     status: 200
                 });
-                nock('/identity/468324518954545/roles', 'post', {
+                nock('/identity/c12e86c0da/roles', 'post', {
                     roles: [1]
                 }, 404, {
                     requestID: 'offline_awsRequestId_5122381207197497',
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
-                await new Identity().withAuth().updateRoles('468324518954545', [1]);
+                await new Identity().withAuth().updateRoles('c12e86c0da', [1]);
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1004);
                 expect(e).to.exist;

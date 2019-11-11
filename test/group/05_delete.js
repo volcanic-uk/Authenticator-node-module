@@ -27,7 +27,7 @@ describe('group delete', () => {
             }
         });
         let deleted = await new Group().withAuth().delete(4);
-        expect(deleted.response).to.be.instanceOf(Object).and.have.property('message').that.equals('Successfully deleted');
+        expect(deleted).to.be.instanceOf(Object).and.have.property('message').that.equals('Successfully deleted');
     });
 
     it('fails when the id is already deleted', async () => {
@@ -55,7 +55,7 @@ describe('group delete', () => {
             await new Group().withAuth().delete(4);
             throw 'should not read this line because the group is deleted already';
         } catch (e) {
-            expect(e.response.message).to.exist;
+            expect(e.message).to.exist;
         }
     });
 
@@ -85,7 +85,7 @@ describe('group delete', () => {
             await new Group().withAuth().delete(4342434);
             throw 'should not read this line because the group does not exist';
         } catch (e) {
-            expect(e.response.message).equals('Group does not exist');
+            expect(e.message).equals('Group does not exist');
         }
 
     });

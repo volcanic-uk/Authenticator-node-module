@@ -60,7 +60,7 @@ describe('create service', () => {
             throw 'should not reach this line cuz the service is alerady there';
         } catch (e) {
             expect(e.errorCode).to.equal(6001);
-            expect(e.message).to.equal('Duplicate entry service_for_test');
+            expect(e.message).to.equal('Duplicate entry service_for_tests');
         }
     });
 

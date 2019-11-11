@@ -1,9 +1,11 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
+    sorted = require('chai-sorted'),
     nock = require('../../src/helpers').nock,
     Role = require('../../v1').Roles,
     expect = chai.expect;
 chai.use(chaiAsPromised);
+chai.use(sorted);
 
 describe('Get all roles', () => {
     // get all roles

@@ -76,7 +76,7 @@ describe('Principal updates', async () => {
             },
             status: 200
         });
-        nock('/principals/334e5b1dd2', 'post', { name: 'new name', }, 200, {
+        nock('/principals/8efa33dbf0', 'post', { name: 'new name', }, 200, {
             response: {
                 id: '334e5b1dd2',
                 name: 'n******e',
@@ -88,7 +88,7 @@ describe('Principal updates', async () => {
                 updated_at: '2019-10-31T08:36:16.906Z'
             }
         });
-        let update = await principal.withAuth().update('334e5b1dd2', 'new name');
+        let update = await principal.withAuth().update('8efa33dbf0', 'new name');
         expect(update.dataset_id).to.exist;
     });
 });
