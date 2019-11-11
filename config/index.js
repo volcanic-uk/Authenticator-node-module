@@ -5,7 +5,7 @@ const ENV_VARS = process.env;
 module.exports = {
     server: {
         domainName: ENV_VARS.AUTH_DOMAIN,
-        v1Api: ENV_VARS.V1_API
+        v1Api: '/api/v1'
     },
     cache: {
         moduleTokenDuration: ENV_VARS.MODULE_TOKEN_DURATION,

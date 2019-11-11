@@ -66,7 +66,6 @@ describe('group update', () => {
             await new Group().withAuth().update(49384, 'group-test', 'test group for module');
             throw 'should not read this line, because the id is not valid';
         } catch (e) {
-
             expect(e.message).equals('Permission group does not exist');
         }
     });
