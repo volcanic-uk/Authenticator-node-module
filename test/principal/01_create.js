@@ -64,7 +64,6 @@ describe('principal create test', () => {
             }
         });
         let create = await principal.withAuth().create('principal_test', '111');
-        console.log(create);
         expect(create).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals('111');
     });
 
@@ -93,7 +92,6 @@ describe('principal create test', () => {
             await principal.withAuth().create('principal-tests', '111');
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
-            console.log(e);
             expect(e.message).to.exist;
             expect(e.errorCode).to.equal(2001);
         }

@@ -51,7 +51,6 @@ describe('group delete', () => {
             await new Group().withAuth().delete(4);
             throw 'should not read this line because the group is deleted already';
         } catch (e) {
-            console.log(e);
             expect(e.message).to.exist;
         }
     });
