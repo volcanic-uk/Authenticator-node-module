@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    nock = require('../../src/helpers').nock,
+    { nock, nockLogin } = require('../../src/helpers'),
     Group = require('../../v1').Group,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -8,19 +8,7 @@ chai.use(chaiAsPromised);
 describe('Group create', () => {
 
     it('should create a new group', async () => {
-        nock('/identity/login', 'post', {
-            name: 'volcanic',
-            secret: 'volcanic!123',
-            dataset_id: '-1',
-            audience: '["volcanic"]'
-        }, 200, {
-            response: {
-                response: {
-                    token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
-                }
-            },
-            status: 200
-        });
+        nockLogin();
         nock('/groups', 'post', {
             name: 'group_testing',
             permissions: [],
@@ -43,19 +31,7 @@ describe('Group create', () => {
 
     it('fails upon duplicate entry', async () => {
         try {
-            nock('/identity/login', 'post', {
-                name: 'volcanic',
-                secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
-            }, 200, {
-                response: {
-                    response: {
-                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
-                    }
-                },
-                status: 200
-            });
+            nockLogin();
             nock('/groups', 'post', {
                 name: 'group_test',
                 permissions: [],

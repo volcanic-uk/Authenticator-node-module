@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    nock = require('../../src/helpers').nock,
+    { nock, nockLogin } = require('../../src/helpers'),
     Identity = require('../../v1/index').Identity,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -9,19 +9,7 @@ describe('create identity', () => {
 
     describe('with auth', async () => {
         it('creating a new identity', async () => {
-            nock('/identity/login', 'post', {
-                name: 'volcanic',
-                secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
-            }, 200, {
-                response: {
-                    response: {
-                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDQ2NzgsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxMDc4LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDEwNzgsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AP_9eTIPGj04ETHzaOvo4HtgscKk6HmY1RJg1AlhLUsLYZia9tfrXz-z_ukoqWow3N4a_ymfbnvBMrSxUv29nioQAMkQVGBp3BRhEzeKhsShiM5duPV4XIOpgwbwEr6rB5gAD0NYVd6aNG4N1a7fsJAUqoEVkkVDonesqIQhAX1CJskg'
-                    }
-                },
-                status: 200
-            });
+            nockLogin();
             nock('/identity', 'post', {
                 name: 'identity_create_new',
                 secret: null,
@@ -48,19 +36,7 @@ describe('create identity', () => {
         });
 
         it('creating a new identity with secret', async () => {
-            nock('/identity/login', 'post', {
-                name: 'volcanic',
-                secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
-            }, 200, {
-                response: {
-                    response: {
-                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDQ2NzgsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxMDc4LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDEwNzgsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AP_9eTIPGj04ETHzaOvo4HtgscKk6HmY1RJg1AlhLUsLYZia9tfrXz-z_ukoqWow3N4a_ymfbnvBMrSxUv29nioQAMkQVGBp3BRhEzeKhsShiM5duPV4XIOpgwbwEr6rB5gAD0NYVd6aNG4N1a7fsJAUqoEVkkVDonesqIQhAX1CJskg'
-                    }
-                },
-                status: 200
-            });
+            nockLogin();
             nock('/identity', 'post', {
                 name: 'identity_with_password',
                 secret: 'volcanic!123',
@@ -90,19 +66,7 @@ describe('create identity', () => {
         it('should not create a duplicate identity record', async () => {
 
             try {
-                nock('/identity/login', 'post', {
-                    name: 'volcanic',
-                    secret: 'volcanic!123',
-                    dataset_id: '-1',
-                    audience: '["volcanic"]'
-                }, 200, {
-                    response: {
-                        response: {
-                            token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDQ2NzgsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxMDc4LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDEwNzgsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AP_9eTIPGj04ETHzaOvo4HtgscKk6HmY1RJg1AlhLUsLYZia9tfrXz-z_ukoqWow3N4a_ymfbnvBMrSxUv29nioQAMkQVGBp3BRhEzeKhsShiM5duPV4XIOpgwbwEr6rB5gAD0NYVd6aNG4N1a7fsJAUqoEVkkVDonesqIQhAX1CJskg'
-                        }
-                    },
-                    status: 200
-                });
+                nockLogin();
                 nock('/identity', 'post', {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
@@ -124,19 +88,7 @@ describe('create identity', () => {
 
         it('creating an identity record without principal_id', async () => {
             try {
-                nock('/identity/login', 'post', {
-                    name: 'volcanic',
-                    secret: 'volcanic!123',
-                    dataset_id: '-1',
-                    audience: '["volcanic"]'
-                }, 200, {
-                    response: {
-                        response: {
-                            token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDQ2NzgsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxMDc4LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDEwNzgsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AP_9eTIPGj04ETHzaOvo4HtgscKk6HmY1RJg1AlhLUsLYZia9tfrXz-z_ukoqWow3N4a_ymfbnvBMrSxUv29nioQAMkQVGBp3BRhEzeKhsShiM5duPV4XIOpgwbwEr6rB5gAD0NYVd6aNG4N1a7fsJAUqoEVkkVDonesqIQhAX1CJskg'
-                        }
-                    },
-                    status: 200
-                });
+                nockLogin();
                 nock('/identity', 'post', {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
@@ -155,19 +107,7 @@ describe('create identity', () => {
         });
 
         it('creating an identity record without name', async () => {
-            nock('/identity/login', 'post', {
-                name: 'volcanic',
-                secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
-            }, 200, {
-                response: {
-                    response: {
-                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDQ2NzgsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxMDc4LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDEwNzgsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AP_9eTIPGj04ETHzaOvo4HtgscKk6HmY1RJg1AlhLUsLYZia9tfrXz-z_ukoqWow3N4a_ymfbnvBMrSxUv29nioQAMkQVGBp3BRhEzeKhsShiM5duPV4XIOpgwbwEr6rB5gAD0NYVd6aNG4N1a7fsJAUqoEVkkVDonesqIQhAX1CJskg'
-                    }
-                },
-                status: 200
-            });
+            nockLogin();
             nock('/identity', 'post', {
                 name: null,
                 secret: 'volcanic!123',
@@ -191,19 +131,7 @@ describe('create identity', () => {
 
     describe('without auth and with setToken', async () => {
         it('creating a new identity', async () => {
-            nock('/identity/login', 'post', {
-                name: 'volcanic',
-                secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
-            }, 200, {
-                response: {
-                    response: {
-                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDUwNjYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxNDY2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDE0NjYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AGMYvpoactwL7wW8FBfvm7mEhtUIiwqdiaO0XpXKZFhm6N8bDmCkg7QMuTJDYarp-AfdO0z4jWxRun4TWSD5h3l_AK-HrdssT6JgtJLY9y8uBSzHzIOvHtBwE9jfxO-T2ZT8qlu91PS1NqzJhD_Dm5th4OlSkNpp06qp4KXghUJdBM0Z'
-                    }
-                },
-                status: 200
-            });
+            nockLogin();
             nock('/identity', 'post', {
                 name: 'identity_create_new_auth',
                 secret: null,
@@ -230,19 +158,7 @@ describe('create identity', () => {
         });
 
         it('creating a new identity with secret', async () => {
-            nock('/identity/login', 'post', {
-                name: 'volcanic',
-                secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
-            }, 200, {
-                response: {
-                    response: {
-                        token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDUwNjYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxNDY2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDE0NjYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AGMYvpoactwL7wW8FBfvm7mEhtUIiwqdiaO0XpXKZFhm6N8bDmCkg7QMuTJDYarp-AfdO0z4jWxRun4TWSD5h3l_AK-HrdssT6JgtJLY9y8uBSzHzIOvHtBwE9jfxO-T2ZT8qlu91PS1NqzJhD_Dm5th4OlSkNpp06qp4KXghUJdBM0Z'
-                    }
-                },
-                status: 200
-            });
+            nockLogin();
             nock('/identity', 'post', {
                 name: 'identity_with_password_auth',
                 secret: 'volcanic!123',
@@ -271,19 +187,7 @@ describe('create identity', () => {
         it('should not create a duplicate identity record', async () => {
 
             try {
-                nock('/identity/login', 'post', {
-                    name: 'volcanic',
-                    secret: 'volcanic!123',
-                    dataset_id: '-1',
-                    audience: '["volcanic"]'
-                }, 200, {
-                    response: {
-                        response: {
-                            token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDUwNjYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxNDY2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDE0NjYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AGMYvpoactwL7wW8FBfvm7mEhtUIiwqdiaO0XpXKZFhm6N8bDmCkg7QMuTJDYarp-AfdO0z4jWxRun4TWSD5h3l_AK-HrdssT6JgtJLY9y8uBSzHzIOvHtBwE9jfxO-T2ZT8qlu91PS1NqzJhD_Dm5th4OlSkNpp06qp4KXghUJdBM0Z'
-                        }
-                    },
-                    status: 200
-                });
+                nockLogin();
                 nock('/identity', 'post', {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
@@ -307,19 +211,7 @@ describe('create identity', () => {
 
         it('creating an identity record without principal_id', async () => {
             try {
-                nock('/identity/login', 'post', {
-                    name: 'volcanic',
-                    secret: 'volcanic!123',
-                    dataset_id: '-1',
-                    audience: '["volcanic"]'
-                }, 200, {
-                    response: {
-                        response: {
-                            token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDUwNjYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxNDY2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDE0NjYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AGMYvpoactwL7wW8FBfvm7mEhtUIiwqdiaO0XpXKZFhm6N8bDmCkg7QMuTJDYarp-AfdO0z4jWxRun4TWSD5h3l_AK-HrdssT6JgtJLY9y8uBSzHzIOvHtBwE9jfxO-T2ZT8qlu91PS1NqzJhD_Dm5th4OlSkNpp06qp4KXghUJdBM0Z'
-                        }
-                    },
-                    status: 200
-                });
+                nockLogin();
                 nock('/identity', 'post', {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
@@ -340,19 +232,7 @@ describe('create identity', () => {
 
         it('creating an identity record without name', async () => {
             try {
-                nock('/identity/login', 'post', {
-                    name: 'volcanic',
-                    secret: 'volcanic!123',
-                    dataset_id: '-1',
-                    audience: '["volcanic"]'
-                }, 200, {
-                    response: {
-                        response: {
-                            token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDUwNjYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxNDY2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDE0NjYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AGMYvpoactwL7wW8FBfvm7mEhtUIiwqdiaO0XpXKZFhm6N8bDmCkg7QMuTJDYarp-AfdO0z4jWxRun4TWSD5h3l_AK-HrdssT6JgtJLY9y8uBSzHzIOvHtBwE9jfxO-T2ZT8qlu91PS1NqzJhD_Dm5th4OlSkNpp06qp4KXghUJdBM0Z'
-                        }
-                    },
-                    status: 200
-                });
+                nockLogin();
                 nock('/identity', 'post', {
                     name: null,
                     secret: 'volcanic!123',
