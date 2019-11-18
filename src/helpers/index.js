@@ -3,7 +3,6 @@ const axios = require('axios');
 const envConfigs = require('../../config');
 const jwt = require('jsonwebtoken');
 const { createHash } = require('crypto');
-const Nock = require('nock');
 
 /**
  *
@@ -71,31 +70,4 @@ exports.JWTValidator = async (token, publicKey) => {
 
 exports.md5Generator = (string) => {
     return createHash('md5').update(string).digest('hex');
-};
-exports.nock = (path, method, body, code, response) => {
-    Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
-        .intercept(path, method.toUpperCase(), {
-            ...body
-        })
-        .reply(code, {
-            ...response
-        });
-};
-
-exports.nockLogin = () => {
-    Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
-        .intercept('/identity/login', 'POST', {
-            name: 'volcanic',
-            secret: 'volcanic!123',
-            dataset_id: '-1',
-            audience: '["volcanic"]'
-        })
-        .reply(200, {
-            response: {
-                response: {
-                    token: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzI0OTYzNDIsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xLzEvMS8yIiwibmJmIjoxNTcyNDkyNzQyLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzI0OTI3NDIsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AIIsVxwqsYWg3DqusQhC8qeBbIX22Rk6fZHwY2iNgnU-ghOJDmK9QNMZbqJDul5hqTXfFyB7HVw0SBXjivPtFunDAOytU-JupKTl7qgveRiU0oVMdtrtEI7iSNXS30p2ulEu0bumUjibTEW4oig0K4LJYoNxht_rPosOx_NPqCxp1ljB'
-                }
-            },
-            status: 200
-        });
 };

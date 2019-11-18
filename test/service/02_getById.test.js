@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers'),
+    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
     Service = require('../../v1').Service,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -9,7 +9,7 @@ describe('should read created service', async () => {
 
     it('should read a service', async () => {
         nockLogin();
-        nock('/services/8', 'get', {}, 200, {
+        nock('/services/7', 'get', {}, 200, {
             response: {
                 id: 1,
                 name: 'a**h',
@@ -19,7 +19,7 @@ describe('should read created service', async () => {
                 updated_at: '2019-10-31T09:33:20.217Z'
             }
         });
-        let serviceRead = await new Service().withAuth().getByID(8);
+        let serviceRead = await new Service().withAuth().getByID(7);
         expect(serviceRead.id).to.exist;
     });
     it('should not read service with wrong id', async () => {

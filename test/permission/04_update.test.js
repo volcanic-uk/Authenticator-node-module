@@ -1,7 +1,7 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     Permission = require('../../v1').Permission,
-    { nock, nockLogin } = require('../../src/helpers'),
+    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
     expect = chai.expect;
 chai.use(chaiAsPromised);
 

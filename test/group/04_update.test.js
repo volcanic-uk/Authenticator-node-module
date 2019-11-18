@@ -1,7 +1,7 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     Group = require('../../v1').Group,
-    { nock, nockLogin } = require('../../src/helpers'),
+    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
     expect = chai.expect;
 chai.use(chaiAsPromised);
 
@@ -9,7 +9,7 @@ describe('group update', () => {
 
     it('it updates the specified group info', async () => {
         nockLogin();
-        nock('/groups/16', 'post', {
+        nock('/groups/15', 'post', {
             name: 'group-test-3', description: 'test group for module'
         }, 200, {
             requestID: 'offline_awsRequestId_33457864888791766',
@@ -24,7 +24,7 @@ describe('group update', () => {
             }
         });
 
-        let update = await new Group().withAuth().update(16, 'group-test-3', 'test group for module');
+        let update = await new Group().withAuth().update(15, 'group-test-3', 'test group for module');
         expect(update).to.be.instanceOf(Object).and.have.property('id');
     });
 

@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers'),
+    { nock, nockLogin, generateToken, generateIdentityOrPrincipal } = require('../../src/helpers/test_helpers'),
     Identity = require('../../v1/index').Identity,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -8,10 +8,14 @@ chai.use(chaiAsPromised);
 describe('Identity update', () => {
 
     describe('with auth', async () => {
+        let identityId;
+        before( async () => {
+            identityId = await generateIdentityOrPrincipal('identity', 'identityUpdate1');
+        });
         it('should update an identity', async () => {
             nockLogin();
-            nock('/identity/c12e86c0da', 'post', {
-                name: 'identity-updated-postman-test'
+            nock(`/identity/${identityId}`, 'post', {
+                name: 'new_identity_test_name'
             }, 200, {
                 requestID: 'offline_awsRequestId_6826035818110325',
                 response: {
@@ -19,7 +23,7 @@ describe('Identity update', () => {
                     deleted_at: null,
                     id: 2,
                     principal_id: 1,
-                    name: 'identity-updated-postman-test',
+                    name: 'new_identity_test_name',
                     dataset_id: '-1',
                     source: null,
                     last_active_date: null,
@@ -30,8 +34,8 @@ describe('Identity update', () => {
                 }
             });
 
-            let updatedIdentity = await new Identity().withAuth().update('identity-updated-postman-test', 'c12e86c0da'); //check identity creation id here
-            expect(updatedIdentity.name).to.equal('identity-updated-postman-test');
+            let updatedIdentity = await new Identity().withAuth().update('new_identity_test_name', identityId); //check identity creation id here
+            expect(updatedIdentity.name).to.equal('new_identity_test_name');
         });
 
         it('it should not update a non existent identity', async () => {
@@ -54,10 +58,16 @@ describe('Identity update', () => {
 
 
     describe('without auth and with setToken', async () => {
+        let token,
+            identityId;
+        before(async () => {
+            token = await generateToken();
+            identityId = await generateIdentityOrPrincipal('identity', 'identityUpdate1');
+        });
         it('should update an identity', async () => {
             nockLogin();
-            nock('/identity/c12e86c0da', 'post', {
-                name: 'identity-updated-postman-test'
+            nock(`/identity/${identityId}`, 'post', {
+                name: 'new_identity_test_name_updated'
             }, 200, {
                 requestID: 'offline_awsRequestId_6826035818110325',
                 response: {
@@ -65,7 +75,7 @@ describe('Identity update', () => {
                     deleted_at: null,
                     id: 2,
                     principal_id: 1,
-                    name: 'identity-updated-postman-test',
+                    name: 'new_identity_test_name_updated',
                     dataset_id: '-1',
                     source: null,
                     last_active_date: null,
@@ -75,9 +85,8 @@ describe('Identity update', () => {
                     updated_at: '2019-11-01T08:17:38.438Z'
                 }
             });
-            let token = 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDUwNjYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxNDY2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDE0NjYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AGMYvpoactwL7wW8FBfvm7mEhtUIiwqdiaO0XpXKZFhm6N8bDmCkg7QMuTJDYarp-AfdO0z4jWxRun4TWSD5h3l_AK-HrdssT6JgtJLY9y8uBSzHzIOvHtBwE9jfxO-T2ZT8qlu91PS1NqzJhD_Dm5th4OlSkNpp06qp4KXghUJdBM0Z';
-            let updatedIdentity = await new Identity().setToken(token).update('identity-updated-postman-test', 'c12e86c0da'); //check identity creation id here
-            expect(updatedIdentity.name).to.equal('identity-updated-postman-test');
+            let updatedIdentity = await new Identity().setToken(token).update('new_identity_test_name_updated', identityId); //check identity creation id here
+            expect(updatedIdentity.name).to.equal('new_identity_test_name_updated');
 
         });
 
@@ -92,7 +101,6 @@ describe('Identity update', () => {
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
-                let token = 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM0NDUwNjYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczNDQxNDY2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM0NDE0NjYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AGMYvpoactwL7wW8FBfvm7mEhtUIiwqdiaO0XpXKZFhm6N8bDmCkg7QMuTJDYarp-AfdO0z4jWxRun4TWSD5h3l_AK-HrdssT6JgtJLY9y8uBSzHzIOvHtBwE9jfxO-T2ZT8qlu91PS1NqzJhD_Dm5th4OlSkNpp06qp4KXghUJdBM0Z';
                 await new Identity().setToken(token).update('updated-name', 'ghjkld');
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1004);

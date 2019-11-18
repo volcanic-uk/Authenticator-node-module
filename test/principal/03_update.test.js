@@ -1,6 +1,7 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers'),
+    { nock, nockLogin, generateIdentityOrPrincipal } = require('../../src/helpers/test_helpers'),
+    timeStamp = Math.floor(Date.now() / 1000),
     Principal = require('../../v1').Principal,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -8,13 +9,17 @@ chai.use(chaiAsPromised);
 describe('Principal updates', async () => {
     let principal = new Principal();
     //update principal
+    let principalId;
+    before (async () => {
+        principalId = await generateIdentityOrPrincipal('principal', 'principal', timeStamp + '_test_update');
+    });
     it('upon principal update, the request should not be completed if there is no authorization token in the request header, and it will throw an error', async () => {
         try {
             nockLogin();
-            let scope = nock('/principals/334e5b1dd2', 'post', { name: 'new name', }, 403, {
+            let scope = nock(`/principals/${principalId}`, 'post', { name: 'new name', }, 403, {
                 message: 'Forbidden', errorCode: 3001
             });
-            await new Principal().update('334e5b1dd2', 'new name');
+            await new Principal().update(principalId, 'new name');
             scope.done();
             throw 'should not read this line because the update request has no token, or it is malformed';
         } catch (e) {
@@ -40,7 +45,7 @@ describe('Principal updates', async () => {
 
     it('should be a success when the principal is updated, thus it will return an object carrying the new attributes for the principal', async () => {
         nockLogin();
-        nock('/principals/8efa33dbf0', 'post', { name: 'new name', }, 200, {
+        nock(`/principals/${principalId}`, 'post', { name: 'new name', }, 200, {
             response: {
                 id: '334e5b1dd2',
                 name: 'n******e',
@@ -52,7 +57,7 @@ describe('Principal updates', async () => {
                 updated_at: '2019-10-31T08:36:16.906Z'
             }
         });
-        let update = await principal.withAuth().update('8efa33dbf0', 'new name');
+        let update = await principal.withAuth().update(principalId, 'new name');
         expect(update.dataset_id).to.exist;
     });
 });

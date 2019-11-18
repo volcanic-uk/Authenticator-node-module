@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers'),
+    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
     Group = require('../../v1').Group,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -33,18 +33,18 @@ describe('Group create', () => {
         try {
             nockLogin();
             nock('/groups', 'post', {
-                name: 'group_test',
+                name: 'group_testing',
                 permissions: [],
                 description: 'test group for module'
             }, 400, {
                 requestID: 'offline_awsRequestId_2116179236304796',
-                message: 'Duplicate entry group_test',
+                message: 'Duplicate entry group_testing',
                 errorCode: 4002
             });
-            await new Group().withAuth().create('group_test', [], 'test group for module');
+            await new Group().withAuth().create('group_testing', [], 'test group for module');
             throw 'should not reach this line because the group name already exists';
         } catch (e) {
-            expect(e.message).equals('Duplicate entry group_test');
+            expect(e.message).equals('Duplicate entry group_testing');
         }
     });
 });

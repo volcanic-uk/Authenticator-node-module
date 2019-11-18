@@ -2,7 +2,7 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
     Privilege = require('../../v1/index').Privilege,
-    { nock, nockLogin } = require('../../src/helpers');
+    { nock, nockLogin } = require('../../src/helpers/test_helpers');
 chai.use(chaiAsPromised);
 
 // create privileges

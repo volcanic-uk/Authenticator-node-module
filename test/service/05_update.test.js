@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers'),
+    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
     Service = require('../../v1').Service,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -9,11 +9,11 @@ describe('update a service', async () => {
 
     it('should update a service', async () => {
         nockLogin();
-        nock('/services/8', 'post', {
+        nock('/services/7', 'post', {
             name: 'updated_service_name'
         }, 200, {
             response: {
-                id: 8,
+                id: 7,
                 name: 'u******************e',
                 active: true,
                 subject_id: 2,
@@ -21,7 +21,7 @@ describe('update a service', async () => {
                 updated_at: '2019-11-01T07:16:45.877Z'
             }
         });
-        let updateService = await new Service().withAuth().update(8, 'updated_service_name');
+        let updateService = await new Service().withAuth().update(7, 'updated_service_name');
         expect(updateService).to.be.an('object').that.has.property('name');
     });
     it('should not update a non-exist service', async () => {
