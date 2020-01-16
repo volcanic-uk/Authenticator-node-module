@@ -1,17 +1,37 @@
 module.exports = {
     server: {
         domainName: 'http://localhost:8000',
-        v1Api: '/api/v1'
+        v1Api: '/api/v1',
+        set: function (serverConfig) {
+            this.domainName = serverConfig.domainName;
+        },
+        get: function () {
+            return {
+                domainName: this.domainName
+            };
+        }
     },
     cache: {
         moduleTokenDuration: '120',
         thirdPartyTokenDuration: '120',
-        enableCaching: false
+        enableCaching: false,
+        set: function (cacheConfig) {
+            this.moduleTokenDuration = cacheConfig.moduleTokenDuration;
+            this.thirdPartyTokenDuration = cacheConfig.thirdPartyTokenDuration;
+            this.enableCaching = cacheConfig.enableCaching;
+        },
+        get: function () {
+            return {
+                moduleTokenDuration: this.moduleTokenDuration,
+                thirdPartyTokenDuration: this.thirdPartyTokenDuration,
+                enableCaching: this.enableCaching
+            };
+        }
     },
     auth: {
         identity_name: 'volcanic',
         secret: 'secret',
-        dataset_id: 'datset_id',
+        dataset_id: 'dataset_id',
         audience: ['*'],
         set: function (authConfig) {
             this.identity_name = authConfig.identity_name;
@@ -29,6 +49,14 @@ module.exports = {
         }
     },
     logging: {
-        logs: false
+        logs: false,
+        set: function (logConfig) {
+            this.logs = logConfig.logs;
+        },
+        get: function () {
+            return {
+                logs: this.logs
+            };
+        }
     }
 };
