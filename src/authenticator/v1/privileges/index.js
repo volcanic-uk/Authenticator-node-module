@@ -23,7 +23,7 @@ class Privileges extends V1Base {
         return await super.fetch('get', `privileges/${serviceName}/${permissionName}`, null);
     }
 
-    async getByTokenClaims() {
+    async getByToken() {
         return await super.fetch('get', 'privileges/identity', null);
     }
 

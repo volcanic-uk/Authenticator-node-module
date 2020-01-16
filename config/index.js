@@ -1,23 +1,18 @@
-require('dotenv').config(); // environement config file
-
-const ENV_VARS = process.env;
-
 module.exports = {
     server: {
-        domainName: ENV_VARS.AUTH_DOMAIN,
+        domainName: 'http://localhost:8000',
         v1Api: '/api/v1'
     },
     cache: {
-        moduleTokenDuration: ENV_VARS.MODULE_TOKEN_DURATION,
-        thirdPartyTokenDuration: ENV_VARS.THIRD_PARTY_TOKEN_DURATION,
-        enableCaching: ENV_VARS.ENABLE_CACHING
+        moduleTokenDuration: '120',
+        thirdPartyTokenDuration: '120',
+        enableCaching: false
     },
     auth: {
-        nock: ENV_VARS.NOCK_OFF,
-        identity_name: ENV_VARS.AUTH_IDENTITY,
-        secret: ENV_VARS.AUTH_SECRET,
-        dataset_id: ENV_VARS.AUTH_DATASET_ID,
-        audience: ENV_VARS.AUTH_DEFAULT_AUDIENCE || ['*'],
+        identity_name: 'volcanic',
+        secret: 'secret',
+        dataset_id: 'datset_id',
+        audience: ['*'],
         set: function (authConfig) {
             this.identity_name = authConfig.identity_name;
             this.secret = authConfig.secret;
@@ -34,6 +29,6 @@ module.exports = {
         }
     },
     logging: {
-        logs: ENV_VARS.ENABLE_LOGGING
+        logs: false
     }
 };
