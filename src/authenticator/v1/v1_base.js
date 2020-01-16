@@ -66,7 +66,7 @@ class V1Base {
             dataset_id: config.auth.dataset_id,
             audience: config.auth.audience
         };
-        return await customFetch('post', '/api/v1/identity/login', null, loginData);
+        return await customFetch('post', this.baseURL + 'identity/login', null, loginData);
     }
 }
 

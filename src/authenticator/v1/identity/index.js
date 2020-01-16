@@ -22,11 +22,16 @@ class Identity extends V1Base {
     }
 
     //identity register method
-    async create(name, secret = null, principalId) {
+    async create(name, secret = null, principalId, roles, privileges, secretless, source, skipSecretEncryption) {
         let identity = {
             name: name,
             secret: secret,
-            principal_id: principalId
+            principal_id: principalId,
+            roles,
+            privileges,
+            secretless,
+            source,
+            skipSecretEncryption
         };
         return await super.fetch('post', 'identity', null, identity);
     }
@@ -38,6 +43,18 @@ class Identity extends V1Base {
         return await super.fetch('post', `identity/${id}`, null, identity);
     }
 
+    async updatePrivileges(id, privileges = []) {
+        return await super.fetch('post', `identity/${id}/privileges`, null, {
+            privileges
+        });
+    }
+
+    async updateRoles(id, roles = []) {
+        return await super.fetch('post', `identity/${id}/roles`, null, {
+            roles
+        });
+    }
+
     async resetSecret(secret = null, id) {
         let identity = {
             secret: secret
@@ -45,9 +62,18 @@ class Identity extends V1Base {
         return await super.fetch('post', `identity/secret/reset/${id}`, null, identity);
     }
 
-    async deactivateIdentity(id) {
-        return await super.fetch('post', `identity/deactivate/${id}`, null);
+    async getByID(secureID) {
+        return await super.fetch('get', `identity/${secureID}`, null, null);
     }
+
+    async delete(secureID) {
+        return await super.fetch('delete', `identity/${secureID}`, null);
+    }
+
+    async deactivateIdentity(secureID) {
+        return await super.fetch('post', `identity/${secureID}/deactivate`, null);
+    }
+
 
     async generateToken(id, audience = [], expiryDate, singleUse, nbf) {
         let identity = {
@@ -64,20 +90,6 @@ class Identity extends V1Base {
 
     async logout() {
         return await super.fetch('post', 'identity/logout', null, null);
-    }
-
-    async updatePrivileges(id = null, privileges = []) {
-        return await super.fetch('post', `identity/${id}/privileges`, null, {
-            id,
-            privileges
-        });
-    }
-
-    async updateRoles(id = null, roles = []) {
-        return await super.fetch('post', `identity/${id}/roles`, null, {
-            id,
-            roles
-        });
     }
 
     async getIdentityById(id) {

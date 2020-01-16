@@ -1,0 +1,35 @@
+version: 0.2
+env:
+  variables:
+    AUTH_DOMAIN: 'http://localhost:3003'
+    MODULE_TOKEN_DURATION: 60
+
+    THIRD_PARTY_TOKEN_DURATION: 60
+
+    AUTH_DATASET_ID: -1
+    AUTH_IDENTITY: 'volcanic'
+    AUTH_SECRET: 'volcanic!123'
+    DEFAULT_AUDIENCE: '["volcanic"]'
+    PRINCIPAL_ID: 1
+
+    ENABLE_LOGGING: false
+
+    ENABLE_CACHING: true
+
+    SERVER_TOKEN_VALIDATION: false
+
+    NOCK_OFF: false
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - npm i -g mocha
+      - npm i -g eslint
+  pre_build:
+    commands:
+      - echo "using environment $NODE_ENV"
+      - npm install
+      - npm run lint
+      - npm test
+
