@@ -16,10 +16,10 @@ describe('Identity delete', () => {
             nockLogin();
             nock(`/identity/${identityId}`, 'delete', '', 200, {
                 requestID: 'offline_awsRequestId_9275859723252489',
-                response: { message: 'Successfully deleted identity' }
+                response: { message: 'Identity deleted successfully' }
             });
             let deactivateIdentity = await new Identity().withAuth().delete(identityId);
-            expect(deactivateIdentity.message).to.equal('Successfully deleted identity');
+            expect(deactivateIdentity.message).to.equal('Identity deleted successfully');
         });
 
         it('should not delete already deleted identity', async () => {

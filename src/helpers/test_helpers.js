@@ -35,7 +35,7 @@ exports.nock = (path, method, body, code, response) => {
 };
 
 exports.nockLogin = async () => {
-    if (envConfigs.auth.nock === 'false') {
+    if (ENV_VARS.NOCK_OFF === 'false') {
         Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
             .intercept('/identity/login', 'POST', {
                 name: 'volcanic',
@@ -55,7 +55,7 @@ exports.nockLogin = async () => {
 };
 
 exports.generateToken = async () => {
-    if (envConfigs.auth.nock === 'true') {
+    if (ENV_VARS.NOCK_OFF === 'true') {
         let response = await customFetch('POST', '/api/v1/identity/login', {}, {
             name: 'volcanic',
             secret: 'volcanic!123',
@@ -69,7 +69,7 @@ exports.generateToken = async () => {
 };
 
 exports.generateIdentityOrPrincipal = async (type, name, timeStamp = null) => {
-    if (envConfigs.auth.nock === 'true') {
+    if (ENV_VARS.NOCK_OFF === 'true') {
         if (type === 'identity') {
             let response = await new Identity().withAuth().create(`identity_test_${timeStamp}`, null, 'volcanic');
             return response.secure_id;
