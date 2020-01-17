@@ -1,7 +1,10 @@
 const { customFetch } = require('./index');
 const envConfigs = require('../../config');
 const Nock = require('nock');
-const { Identity, Principal } = require('../../v1');
+const { Identity, Principal, Config } = require('../../v1');
+require('dotenv').config();
+
+const ENV_VARS = process.env;
 
 const constants = {
     baseToken: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM4MTMyNDMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczODA5NjQzLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM4MDk2NDMsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AICDREeOUTZ5chlFUnvv20Fg3TjwHhwnsGE1NAvA3JXkI9RfJr61ocQo_CsVKZ41WW-EEjTpI5eeoC_jh3FRumf5AUs6Hm5EWC0O8YFZDWG3DWo946zXawYpj9iw4VpONHEPXco4xKclv8hH8WQJSu7rnOXbgD21FtzM5NSaUysvmPtk',
@@ -11,8 +14,16 @@ const constants = {
     principal: '1b1c02dec1'
 };
 
+Config.auth.set({
+    identity_name: ENV_VARS.AUTH_IDENTITY,
+    secret: ENV_VARS.AUTH_SECRET,
+    dataset_id: ENV_VARS.AUTH_DATASET_ID,
+    audience: ENV_VARS.DEFAULT_AUDIENCE
+});
+
+
 exports.nock = (path, method, body, code, response) => {
-    if (envConfigs.auth.nock === 'false') {
+    if (ENV_VARS.NOCK_OFF === 'false') {
         Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
             .intercept(path, method.toUpperCase(), {
                 ...body

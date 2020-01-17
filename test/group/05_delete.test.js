@@ -13,7 +13,7 @@ describe('group delete', () => {
             response: { message: 'Successfully deleted' }
         });
         let deleted = await new Group().withAuth().delete(4);
-        expect(deleted).to.be.instanceOf(Object).and.have.property('message').that.equals('Successfully deleted');
+        expect(deleted).to.be.instanceOf(Object).and.have.property('message').equals('Successfully deleted');
     });
 
     it('fails when the id is already deleted', async () => {
