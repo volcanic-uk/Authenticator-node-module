@@ -10,7 +10,7 @@ describe('group delete', () => {
         nockLogin();
         nock('/groups/4', 'delete', {}, 200, {
             requestID: 'offline_awsRequestId_7617063816804721',
-            response: { message: 'Successfully deleted' }
+            response: { message: 'Group deleted successfully' }
         });
         let deleted = await new Group().withAuth().delete(4);
         expect(deleted).to.be.instanceOf(Object).and.have.property('message').equals('Group deleted successfully');

@@ -29,7 +29,7 @@ describe('principal delete', async () => {
     it('should return a success message upon valid request of deleting the principal via ID', async () => {
         nockLogin();
         nock(`/principals/${principalId}`, 'delete', {}, 200, {
-            response: { message: 'Successfully deleted' }
+            response: { message: 'Principa deleted successfully' }
         });
         let deleted = await principal.withAuth().delete(principalId);
         expect(deleted.message).to.equal('Principal deleted successfully');

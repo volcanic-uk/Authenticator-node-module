@@ -10,7 +10,7 @@ describe('role delete', () => {
         nockLogin();
         nock('/roles/7', 'delete', {}, 200, {
             response: {
-                message: 'Successfully deleted role'
+                message: 'Role deleted successfully'
             }
         });
         let deleteIt = await new Role().withAuth().delete(7);
