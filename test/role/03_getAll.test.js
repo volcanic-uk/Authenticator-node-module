@@ -1,7 +1,7 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     sorted = require('chai-sorted'),
-    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin } = require('../helpers'),
     Role = require('../../v1').Roles,
     expect = chai.expect;
 chai.use(chaiAsPromised);

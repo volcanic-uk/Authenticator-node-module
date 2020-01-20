@@ -1,11 +1,9 @@
-const { customFetch } = require('./index');
+const { customFetch } = require('../../src/helpers');
 const envConfigs = require('../../config');
 const Nock = require('nock');
 const { Identity, Principal, Config } = require('../../v1');
 require('dotenv').config();
-
 const ENV_VARS = process.env;
-
 const constants = {
     baseToken: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM4MTMyNDMsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczODA5NjQzLCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM4MDk2NDMsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.AICDREeOUTZ5chlFUnvv20Fg3TjwHhwnsGE1NAvA3JXkI9RfJr61ocQo_CsVKZ41WW-EEjTpI5eeoC_jh3FRumf5AUs6Hm5EWC0O8YFZDWG3DWo946zXawYpj9iw4VpONHEPXco4xKclv8hH8WQJSu7rnOXbgD21FtzM5NSaUysvmPtk',
     secondToken: 'eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjljYjg1YTc3YTllNWU0MTU3ODMyYTFlYTgzOTI3MDZhIn0.eyJleHAiOjE1NzM4MTMyNTYsInN1YiI6InVzZXI6Ly9zYW5kYm94Ly0xL3ZvbGNhbmljL3ZvbGNhbmljIiwibmJmIjoxNTczODA5NjU2LCJhdWRpZW5jZSI6WyJrcmFrYXRvYWV1IiwiLSJdLCJpYXQiOjE1NzM4MDk2NTYsImlzcyI6InZvbGNhbmljX2F1dGhfc2VydmljZV9hcDIifQ.ALK-kF2CuHYT4zYP7ZgXXj__szoAmlPUOG--EjMK8qeHLED0VjzyaCJh59h9nGEDPiUvIpdA-GqYD5eqFLcpMhNbAS97fhnJKws3gzBbs-2zgPgePj2LU2vJiFd2imB4g3HtqsfoEo-MMkR5L6jjAVjx35bOZjxepSca53qI8-yiUUjf',

@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin, generateIdentityOrPrincipal } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin, generateIdentityOrPrincipal } = require('../helpers'),
     timeStamp = Math.floor(Date.now() / 1000),
     Principal = require('../../v1').Principal,
     expect = chai.expect;
@@ -32,6 +32,6 @@ describe('principal delete', async () => {
             response: { message: 'Successfully deleted' }
         });
         let deleted = await principal.withAuth().delete(principalId);
-        expect(deleted.message).to.equal('Successfully deleted');
+        expect(deleted.message).to.equal('Principal deleted successfully');
     });
 });

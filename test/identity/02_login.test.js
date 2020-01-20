@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock } = require('../../src/helpers/test_helpers'),
+    { nock } = require('../helpers'),
     expect = chai.expect,
     token = require('../../config').auth.BaseToken,
     Identity = require('../../v1/index').Identity;

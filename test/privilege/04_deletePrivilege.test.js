@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin } = require('../helpers'),
     Privilege = require('../../v1').Privilege,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -21,13 +21,13 @@ describe('delete privileges', () => {
     });
 
     it('deletes the provided privilege', async () => {
-        nock('/privileges/15', 'delete', {}, 200, {
+        nock('/privileges/16', 'delete', {}, 200, {
             response: {
-                message: 'Successfully deleted privilege'
+                message: 'Privilege deleted successfully'
             }
         });
         nockLogin();
-        let deletePriv = await new Privilege().withAuth().delete(15);
+        let deletePriv = await new Privilege().withAuth().delete(16);
         expect(deletePriv.message).to.exist;
     });
 });

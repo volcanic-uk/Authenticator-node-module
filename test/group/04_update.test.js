@@ -1,7 +1,7 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     Group = require('../../v1').Group,
-    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin } = require('../helpers'),
     expect = chai.expect;
 chai.use(chaiAsPromised);
 
