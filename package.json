@@ -1,5 +1,5 @@
 {
-  "name": "authenticator-node-module",
+  "name": "@volcanic-uk/auth-module",
   "version": "1.0.0",
   "description": "a node module meant to authorize communication to various volcanic services",
   "main": "index.js",
