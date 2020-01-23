@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin } = require('../helpers'),
     Group = require('../../v1').Group,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -10,10 +10,10 @@ describe('group delete', () => {
         nockLogin();
         nock('/groups/4', 'delete', {}, 200, {
             requestID: 'offline_awsRequestId_7617063816804721',
-            response: { message: 'Successfully deleted' }
+            response: { message: 'Group deleted successfully' }
         });
         let deleted = await new Group().withAuth().delete(4);
-        expect(deleted).to.be.instanceOf(Object).and.have.property('message').equals('Successfully deleted');
+        expect(deleted).to.be.instanceOf(Object).and.have.property('message').equals('Group deleted successfully');
     });
 
     it('fails when the id is already deleted', async () => {

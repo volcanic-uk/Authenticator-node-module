@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin } = require('../helpers'),
     Role = require('../../v1').Roles,
     expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -10,11 +10,11 @@ describe('role delete', () => {
         nockLogin();
         nock('/roles/7', 'delete', {}, 200, {
             response: {
-                message: 'Successfully deleted role'
+                message: 'Role deleted successfully'
             }
         });
         let deleteIt = await new Role().withAuth().delete(7);
-        expect(deleteIt.message).to.equal('Successfully deleted role');
+        expect(deleteIt.message).to.equal('Role deleted successfully');
     });
 
     it('fails deleting an already deleted role', async () => {

@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin, generateToken, generateIdentityOrPrincipal } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin, generateToken, generateIdentityOrPrincipal } = require('../helpers'),
     Identity = require('../../v1/index').Identity,
     timeStamp = Math.floor(Date.now() / 1000),
     expect = chai.expect;

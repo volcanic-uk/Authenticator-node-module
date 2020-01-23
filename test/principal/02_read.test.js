@@ -2,7 +2,7 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
     Principal = require('../../v1').Principal,
-    { nock, nockLogin } = require('../../src/helpers/test_helpers');
+    { nock, nockLogin } = require('../helpers');
 chai.use(chaiAsPromised);
 
 describe('Principal read', () => {

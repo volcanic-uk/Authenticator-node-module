@@ -1,6 +1,6 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
-    { nock, nockLogin, generateIdentityOrPrincipal } = require('../../src/helpers/test_helpers'),
+    { nock, nockLogin, generateIdentityOrPrincipal } = require('../helpers'),
     timeStamp = Math.floor(Date.now() / 1000),
     Principal = require('../../v1').Principal,
     expect = chai.expect;
@@ -29,9 +29,9 @@ describe('principal delete', async () => {
     it('should return a success message upon valid request of deleting the principal via ID', async () => {
         nockLogin();
         nock(`/principals/${principalId}`, 'delete', {}, 200, {
-            response: { message: 'Successfully deleted' }
+            response: { message: 'Principal deleted successfully' }
         });
         let deleted = await principal.withAuth().delete(principalId);
-        expect(deleted.message).to.equal('Successfully deleted');
+        expect(deleted.message).to.equal('Principal deleted successfully');
     });
 });

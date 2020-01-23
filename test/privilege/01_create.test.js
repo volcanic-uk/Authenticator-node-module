@@ -2,7 +2,7 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
     Privilege = require('../../v1/index').Privilege,
-    { nock, nockLogin } = require('../../src/helpers/test_helpers');
+    { nock, nockLogin } = require('../helpers');
 chai.use(chaiAsPromised);
 
 // create privileges
@@ -41,6 +41,28 @@ describe('creates privilege', () => {
                 updated_at: '2019-11-01T01:56:12.001Z',
                 created_at: '2019-11-01T01:56:12.001Z',
                 id: 15
+            }
+        });
+        let create = await new Privilege().withAuth().create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
+        expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
+    });
+    it('creates a new privilege', async () => {
+        nockLogin();
+        nock('/privileges', 'post', {
+            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            permission_id: 1,
+            group_id: 1,
+            allow: true
+        }, 201, {
+            response: {
+                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                permission_id: 1,
+                group_id: 1,
+                subject_id: '2',
+                allow: true,
+                updated_at: '2019-11-01T01:56:12.001Z',
+                created_at: '2019-11-01T01:56:12.001Z',
+                id: 16
             }
         });
         let create = await new Privilege().withAuth().create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
