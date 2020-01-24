@@ -6,11 +6,12 @@ const V1Base = require('../v1_base'),
 class Token extends V1Base {
     constructor() {
         super();
+        this.decoded = {};
     }
 
     async remoteValidation() {
         try {
-            await this.fetch('post', 'token/validate');
+            this.decoded = await this.fetch('post', 'token/validate');
             return true;
         } catch (e) {
             return false;
@@ -41,6 +42,25 @@ class Token extends V1Base {
         } catch (e) {
             return false;
         }
+    }
+
+    async isSingleUser(token) {
+        let decodedToken = await JWTDecoder(token);
+        return !!decodedToken.payload.jti;
+    }
+
+    parseSubject() {
+        if (this.decoded) {
+            let spiltSubject = this.decoded.sub.split('/');
+            return {
+                actor: spiltSubject[0],
+                stack_id: spiltSubject[2],
+                dataset_id: spiltSubject[3],
+                principal_id: spiltSubject[4],
+                identity_id: spiltSubject[5]
+            };
+        }
+        return null;
     }
 }
 

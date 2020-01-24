@@ -8,7 +8,7 @@ describe('Config setter test', () => {
         Config.auth.set({
             identity_name: 'test',
             secret: 'test',
-            principal_id: 1,
+            dataset_id: 1,
             audience: ['*']
         });
         let updatedConfig = Config.auth.get();
@@ -16,7 +16,7 @@ describe('Config setter test', () => {
         expect(updatedConfig).to.deep.include({
             identity_name: 'test',
             secret: 'test',
-            principal_id: 1,
+            dataset_id: 1,
             audience: ['*']
         });
     });
