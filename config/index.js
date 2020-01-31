@@ -1,6 +1,6 @@
 module.exports = {
     server: {
-        domainName: 'http://localhost:8000',
+        domainName: 'http://localhost:3003',
         v1Api: '/api/v1',
         set: function (serverConfig) {
             this.domainName = serverConfig.domainName;
