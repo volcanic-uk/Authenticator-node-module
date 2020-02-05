@@ -32,14 +32,14 @@ exports.nock = (path, method, body, code, response) => {
     }
 };
 
-exports.nockLogin = async () => {
+exports.nockLogin = () => {
     if (ENV_VARS.NOCK_OFF === 'false') {
         Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
             .intercept('/identity/login', 'POST', {
                 name: 'volcanic',
                 secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
+                dataset_id: '-1'
+                // audience: '["volcanic"]' unneeded because the requests sent by default dont have an audience
             })
             .reply(200, {
                 response: {
