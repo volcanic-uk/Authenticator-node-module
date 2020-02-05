@@ -1,0 +1,39 @@
+const chai = require('chai'),
+    chaiAsPromised = require('chai-as-promised'),
+    { nock, nockLogin } = require('../helpers'),
+    expect = chai.expect;
+chai.use(chaiAsPromised);
+
+const Permission = require('../../v1').Permission;
+
+describe('permission get by name', async () => {
+    it('should get a permission by name', async () => {
+        nockLogin();
+        nock('/permissions/new_permission_test', 'get', {}, 200, {
+            response: {
+                id: 64,
+                name: 'n****************1',
+                description: 'this is new permission',
+                subject_id: 2,
+                service_id: 2,
+                active: true,
+                created_at: '2019-11-04T01:43:33.854Z',
+                updated_at: '2019-11-04T01:43:33.854Z'
+            }
+        });
+        let permissionRead = await new Permission().withAuth().getByName('new_permission_test');
+        expect(permissionRead.id).to.exist;
+    });
+    it('should not get it when the name does not exist', async () => {
+        try {
+            nockLogin();
+            nock('/permissions/meow-ident', 'get', {}, 404, {
+                message: 'Permission does not exist', errorCode: 5002
+            });
+            await new Permission().withAuth().getByName('meow-ident');
+        } catch (e) {
+            expect(e.errorCode).to.equal(5002);
+            expect(e).to.exist;
+        }
+    });
+});
