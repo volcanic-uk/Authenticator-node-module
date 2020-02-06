@@ -30,8 +30,8 @@ module.exports = {
     },
     auth: {
         identity_name: 'volcanic',
-        secret: 'secret',
-        dataset_id: 'dataset_id',
+        secret: 'volcanic!123',
+        dataset_id: '-1',
         audience: ['*'],
         set: function (authConfig) {
             this.identity_name = authConfig.identity_name;
