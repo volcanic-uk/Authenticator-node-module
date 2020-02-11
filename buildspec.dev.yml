@@ -10,7 +10,7 @@ env:
     AUTH_IDENTITY: 'volcanic'
     AUTH_SECRET: 'volcanic!123'
     DEFAULT_AUDIENCE: '["volcanic"]'
-    PRINCIPAL_ID: 'volcanic'
+    PRINCIPAL_ID: 1
 
     ENABLE_LOGGING: false
 
