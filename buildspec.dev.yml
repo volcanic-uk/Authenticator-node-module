@@ -16,7 +16,7 @@ env:
     AUTH_DATASET_ID: -1
     AUTH_IDENTITY: volcanic
     AUTH_SECRET: volcanic!123
-    DEFAULT_AUDIENCE: '["volcanic"]'
+    AUTH_DEFAULT_AUDIENCE: '["volcanic"]'
     PRINCIPAL_ID: 1
 
     #enable the logging function
