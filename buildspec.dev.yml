@@ -20,10 +20,10 @@ env:
     PRINCIPAL_ID: 1
 
     #enable the logging function
-    ENABLE_LOGGIN: boolean
+    ENABLE_LOGGIN: false
 
     #enable the caching service
-    ENABLE_CACHING: boolean
+    ENABLE_CACHING: true
 
     #Auth will validate the token on each request
     SERVER_TOKEN_VALIDATION: false

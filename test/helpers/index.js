@@ -39,7 +39,6 @@ exports.nockLogin = () => {
                 name: 'volcanic',
                 secret: 'volcanic!123',
                 dataset_id: '-1'
-                // audience: '["volcanic"]' unneeded because the requests sent by default dont have an audience
             })
             .reply(200, {
                 response: {
