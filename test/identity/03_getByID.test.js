@@ -27,8 +27,8 @@ describe('get identity by id', () => {
                     updated_at: '2019-11-01T07:43:19.674Z'
                 }
             });
-            await new Identity().withAuth().getByID('volcanic');
-
+            let get = await new Identity().withAuth().getByID('volcanic');
+            expect(get).to.be.instanceOf(Object).and.has.property('id');
         });
 
         it('should not proceed if the identity does not exist upon read request, and it will throw an error', async () => {
