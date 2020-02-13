@@ -16,14 +16,13 @@ env:
     AUTH_DATASET_ID: -1
     AUTH_IDENTITY: volcanic
     AUTH_SECRET: volcanic!123
-    AUTH_DEFAULT_AUDIENCE: '["volcanic"]'
-    PRINCIPAL_ID: 1
+    #AUTH_DEFAULT_AUDIENCE: '["volcanic"]'
 
     #enable the logging function
     ENABLE_LOGGIN: false
 
     #enable the caching service
-    ENABLE_CACHING: true
+    ENABLE_CACHING: false
 
     #Auth will validate the token on each request
     SERVER_TOKEN_VALIDATION: false
