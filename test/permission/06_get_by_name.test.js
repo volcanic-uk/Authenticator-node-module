@@ -12,7 +12,7 @@ describe('permission get by name', async () => {
         nock('/permissions/new_permission_test', 'get', {}, 200, {
             response: {
                 id: 64,
-                name: 'n****************1',
+                name: 'new_permission_test',
                 description: 'this is new permission',
                 subject_id: 2,
                 service_id: 2,

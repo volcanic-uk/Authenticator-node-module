@@ -1,6 +1,6 @@
 module.exports = {
     server: {
-        domainName: 'http://localhost:3003',
+        domainName: 'http://localhost:8000',
         v1Api: '/api/v1',
         set: function (serverConfig) {
             this.domainName = serverConfig.domainName;
@@ -29,9 +29,9 @@ module.exports = {
         }
     },
     auth: {
-        identity_name: 'volcanic',
-        secret: 'volcanic!123',
-        dataset_id: '-1',
+        identity_name: 'AUTH_IDENTITY',
+        secret: 'AUTH_SECRET',
+        dataset_id: 'AUTH_DATASET_ID',
         audience: ['*'],
         set: function (authConfig) {
             this.identity_name = authConfig.identity_name;
