@@ -5,11 +5,11 @@ class Principal extends V1Base {
         super();
     }
 
-    async create(name = null, datasetID = null, permissions = null, roles = null) {
+    async create(name = null, datasetID = null, privileges = [], roles = []) {
         let principal = {
             name,
             dataset_id: datasetID,
-            permissions,
+            privileges,
             roles
         };
         return await super.fetch('post', 'principals', null, principal);
