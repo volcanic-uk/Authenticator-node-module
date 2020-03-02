@@ -19,15 +19,4 @@ describe('delete privileges', () => {
             expect(e.errorCode).to.equal(8001);
         }
     });
-
-    it('deletes the provided privilege', async () => {
-        nock('/privileges/16', 'delete', {}, 200, {
-            response: {
-                message: 'Privilege deleted successfully'
-            }
-        });
-        nockLogin();
-        let deletePriv = await new Privilege().withAuth().delete(16);
-        expect(deletePriv.message).to.exist;
-    });
 });
