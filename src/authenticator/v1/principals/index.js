@@ -5,10 +5,12 @@ class Principal extends V1Base {
         super();
     }
 
-    async create(name = null, datasetID = null) {
+    async create(name = null, datasetID = null, permissions = null, roles = null) {
         let principal = {
-            name: name,
-            dataset_id: datasetID
+            name,
+            dataset_id: datasetID,
+            permissions,
+            roles
         };
         return await super.fetch('post', 'principals', null, principal);
     }
@@ -19,7 +21,7 @@ class Principal extends V1Base {
 
 
     async getPrincipals(query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
-        return await super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&${pageSize}&sort=${sort}&order=${order}`, null);
+        return await super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
     async update(id, name = null) {
@@ -46,11 +48,11 @@ class Principal extends V1Base {
     }
 
     async deactivatePrincipal (id) {
-        return await super.fetch('post', `principal/${id}/deactivate`, null, {});
+        return await super.fetch('post', `principals/${id}/deactivate`, null, {});
     }
 
     async activatePrincipal (id) {
-        return await super.fetch('post', `principal/${id}/activate`, null, {});
+        return await super.fetch('post', `principals/${id}/activate`, null, {});
     }
 
     async getIdentities (page = 1, pageSize = 10, query = null, name = null, source = null, datasetId = null, sort = 'id', order = 'asc', id = null) {

@@ -27,7 +27,7 @@ class Privileges extends V1Base {
         return await super.fetch('get', 'privileges/identity', null);
     }
 
-    async getPrivileges(token, query = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
+    async getPrivileges(query = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
         return await super.fetch('get', `privileges?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 

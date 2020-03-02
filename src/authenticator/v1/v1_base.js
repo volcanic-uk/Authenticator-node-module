@@ -8,11 +8,42 @@ class V1Base {
         this.baseURL = '/api/v1/';
         this.token = null;
         this.loginAttempts = 0;
+        this.requestID = null;
+        this.errorMessage = null;
+        this.errorCode = null;
     }
 
     setToken(token) {
         this.token = token;
         return this;
+    }
+
+    getToken() {
+        return this.token;
+    }
+
+    setErrorMessage(errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
+    }
+
+    setErrorCode(errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    getErrorCode() {
+        return this.errorCode;
+    }
+
+    setRequestID(requestID) {
+        this.requestID = requestID;
+    }
+
+    getRequestID() {
+        return this.requestID;
     }
 
     async fetch(methodType, path, headers, data) {
@@ -27,15 +58,19 @@ class V1Base {
         try {
             let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
             this.loginAttempts = 0;
+            this.setRequestID(httpResponse.requestID);
             return { ...httpResponse.response, status: true };
         } catch (e) {
-            if (this.internalAuth && e.response.status == 403) {
+            if (this.internalAuth && e.response.status === 403) {
                 if (this.loginAttempts <= 5) {
                     this.loginAttempts++;
                     deleteFromCache('internal_token');
                     return await this.fetch(methodType, path, headers, data);
                 }
             }
+            this.setRequestID(e.response.requestID);
+            this.setErrorMessage(e.response.message);
+            this.setErrorCode(e.response.errorCode);
             throw {
                 statusCode: e.response.status,
                 status: false,
