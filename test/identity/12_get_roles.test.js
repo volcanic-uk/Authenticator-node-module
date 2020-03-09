@@ -11,11 +11,17 @@ describe('get identity roles', () => {
     describe('with auth', async () => {
         it('gets identities as requested', async () => {
             nockLogin();
-            nock('identity/volcanic/roles', 'get', {}, 200, {
-                response: []
+            nock('/identity/volcanic/roles', 'get', {}, 200, {
+                response: {
+                    data: [
+                        {
+                            id: 1
+                        }
+                    ]
+                }
             });
             let getAll = await new Identity().withAuth().getRoles('volcanic');
-            expect(getAll[0].id).to.exist;
+            expect(getAll.data[0].id).to.exist;
         });
 
         it('fails if the name does not exist', async () => {
@@ -26,12 +32,8 @@ describe('get identity roles', () => {
                     errorCode: 1004
                 }
             });
-            try {
-                await new Identity().withAuth().getRoles('something');
-                throw 'should no reach this line of code';
-            } catch (e) {
-                expect(e.errorCode).to.equal(1004);
-            }
+            let result = await new Identity().withAuth().getRoles('something');
+            expect(result.errorCode).to.equal(1004);
         });
 
     });
