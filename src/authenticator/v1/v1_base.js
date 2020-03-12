@@ -59,11 +59,9 @@ class V1Base {
             let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
             this.loginAttempts = 0;
             this.setRequestID(httpResponse.requestID);
-            console.log(httpResponse);
             if (Array.isArray(httpResponse.response))
                 return httpResponse.response;
             const processed = { ...httpResponse.response, status: true };
-            console.log(processed);
             return processed;
             // return { ...httpResponse.response, status: true };
         } catch (e) {

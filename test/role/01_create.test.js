@@ -11,13 +11,13 @@ describe('role creates', () => {
             nockLogin();
             nock('/roles', 'post', {
                 name: 'role-test', privileges: [1, 2]
-            }, 403, {
-                message: 'Forbidden', errorCode: 3001
+            }, 401, {
+                message: 'UNAUTHORIZED', errorCode: 3001
             });
             await new Role().setToken('some token').create('role-test', [1, 2]);
             throw 'it will not pass because the token is invalid';
         } catch (e) {
-            expect(e.message).to.equal('Forbidden');
+            expect(e.message).to.equal('UNAUTHORIZED');
             expect(e.errorCode).to.equal(3001);
         }
     });

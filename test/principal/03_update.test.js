@@ -16,14 +16,14 @@ describe('Principal updates', async () => {
     it('upon principal update, the request should not be completed if there is no authorization token in the request header, and it will throw an error', async () => {
         try {
             nockLogin();
-            let scope = nock(`/principals/${principalId}`, 'post', { name: 'new name', }, 403, {
-                message: 'Forbidden', errorCode: 3001
+            let scope = nock(`/principals/${principalId}`, 'post', { name: 'new name', }, 401, {
+                message: 'UNAUTHORIZED', errorCode: 3001
             });
             await new Principal().update(principalId, 'new name');
             scope.done();
             throw 'should not read this line because the update request has no token, or it is malformed';
         } catch (e) {
-            expect(e.message).to.equal('Forbidden');
+            expect(e.message).to.equal('UNAUTHORIZED');
             expect(e.errorCode).to.equal(3001);
         }
     });

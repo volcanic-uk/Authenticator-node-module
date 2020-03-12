@@ -104,9 +104,7 @@ class Identity extends V1Base {
     }
 
     async getRoles (id) {
-        const tt = await super.fetch('get', `identity/${id}/roles`, null, null);
-        console.log(tt);
-        return tt
+        return await super.fetch('get', `identity/${id}/roles`, null, null);
     }
 }
 
