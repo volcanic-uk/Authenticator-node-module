@@ -21,19 +21,22 @@ describe('get identity roles', () => {
                 }
             });
             let getAll = await new Identity().withAuth().getRoles('volcanic');
-            expect(getAll.data[0].id).to.exist;
+            expect(getAll[0].id).to.exist;
         });
 
         it('fails if the name does not exist', async () => {
             nockLogin();
-            nock('/identity/something/roles', 'get', {}, 200, {
+            nock('/identity/something/roles', 'get', {}, 404, {
                 response: {
                     message: 'Identity does not exist',
                     errorCode: 1004
                 }
             });
-            let result = await new Identity().withAuth().getRoles('something');
-            expect(result.errorCode).to.equal(1004);
+            try {
+                await new Identity().withAuth().getRoles('something');
+            } catch (e) {
+                expect(e.errorCode).to.equal(1004);
+            }
         });
 
     });

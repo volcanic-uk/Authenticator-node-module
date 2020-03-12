@@ -59,7 +59,7 @@ describe('get identity by id', () => {
                 await new Identity().getByID('volcanic');
                 throw 'should not reach this line, because the read request has no token, or it is malformed';
             } catch (e) {
-                expect(e.message).to.be.equals('Forbidden');
+                expect(e.message).to.be.equals('UNAUTHORIZED');
             }
         });
 
