@@ -34,7 +34,7 @@ describe('get identities', () => {
                     ]
                 }
             });
-            let getAll = await new Identity().withAuth().getIdentities();
+            let getAll = await new Identity().withAuth().getIdentities('1', '10', '', 'volcanic', 'password', '', 'created_at', 'asc', 'volcanic',);
             expect(getAll.data).to.be.a('array');
         });
 
@@ -51,7 +51,7 @@ describe('get identities', () => {
                     data: []
                 }
             });
-            let getAll = await new Identity().withAuth().getIdentities(1, 10, '', 'meow');
+            let getAll = await new Identity().withAuth().getIdentities(1, 10, '', 'meow', 'password', '', 'created_at', 'asc', 'volcanic');
             expect(getAll.data.length).to.equal(0);
         });
 

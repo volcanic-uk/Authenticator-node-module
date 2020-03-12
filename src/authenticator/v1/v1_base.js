@@ -59,7 +59,11 @@ class V1Base {
             let httpResponse = await customFetch(methodType, this.baseURL + path, _headers, data);
             this.loginAttempts = 0;
             this.setRequestID(httpResponse.requestID);
-            return { ...httpResponse.response, status: true };
+            if (Array.isArray(httpResponse.response))
+                return httpResponse.response;
+            const processed = { ...httpResponse.response, status: true };
+            return processed;
+            // return { ...httpResponse.response, status: true };
         } catch (e) {
             if (this.internalAuth && e.response.status === 403) {
                 if (this.loginAttempts <= 5) {

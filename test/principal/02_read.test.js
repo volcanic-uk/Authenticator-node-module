@@ -25,17 +25,17 @@ describe('Principal read', () => {
 
     it('should fail when requesting a read request when there is no token in the request header, and it will throw an error', async () => {
         try {
-            let scope = nock('/principals/asdasd', 'get', {}, 403, {
-                statusCode: 403,
+            let scope = nock('/principals/asdasd', 'get', {}, 401, {
+                statusCode: 401,
                 status: false,
-                message: 'Forbidden',
+                message: 'UNAUTHORIZED',
                 errorCode: 3001
             });
             await new Principal().getByID('asdasd');
             scope.done();
             throw 'should not reach this line, because the read request has no token, or it is malformed';
         } catch (e) {
-            expect(e.message).to.be.equals('Forbidden');
+            expect(e.message).to.be.equals('UNAUTHORIZED');
             expect(e.errorCode).to.be.equals(3001);
         }
     });

@@ -5,11 +5,11 @@ class Principal extends V1Base {
         super();
     }
 
-    async create(name = null, datasetID = null, permissions = null, roles = null) {
+    async create(name = null, datasetID = null, privileges = [], roles = []) {
         let principal = {
             name,
             dataset_id: datasetID,
-            permissions,
+            privileges,
             roles
         };
         return await super.fetch('post', 'principals', null, principal);
@@ -57,6 +57,10 @@ class Principal extends V1Base {
 
     async getIdentities (page = 1, pageSize = 10, query = null, name = null, source = null, datasetId = null, sort = 'id', order = 'asc', id = null) {
         return await super.fetch('post', `principals/${id}/identities?query=${query}&dataset_id=${datasetId}&page=${page}&${pageSize}&sort=${sort}&order=${order}&name=${name}&source=${source}`, null, {});
+    }
+
+    async getRoles (id) {
+        return await super.fetch('get', `principals/${id}/roles`, null, {});
     }
 }
 
