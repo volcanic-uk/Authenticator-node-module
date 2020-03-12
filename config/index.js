@@ -29,9 +29,9 @@ module.exports = {
         }
     },
     auth: {
-        identity_name: 'volcanic',
-        secret: 'secret',
-        dataset_id: 'dataset_id',
+        identity_name: 'AUTH_IDENTITY',
+        secret: 'AUTH_SECRET',
+        dataset_id: 'AUTH_DATASET_ID',
         audience: ['*'],
         set: function (authConfig) {
             this.identity_name = authConfig.identity_name;

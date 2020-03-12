@@ -15,13 +15,13 @@ describe('principal delete', async () => {
     // delete principal
     it('should not pass upon deleting because the header does not have a valid authorization token, and it will throw an error', async () => {
         try {
-            nock(`/principals/${principalId}`, 'delete', {}, 403, {
-                message: 'Forbidden', errorCode: 3001
+            nock(`/principals/${principalId}`, 'delete', {}, 401, {
+                message: 'UNAUTHORIZED', errorCode: 3001
             });
             await new Principal().setToken('123').delete(principalId);
             throw 'should not reach this line, because the token is not valid';
         } catch (e) {
-            expect(e.message).equals('Forbidden');
+            expect(e.message).equals('UNAUTHORIZED');
             expect(e.errorCode).equals(3001);
         }
     });

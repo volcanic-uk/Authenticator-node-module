@@ -12,15 +12,18 @@ describe('principal create test', () => {
         try {
             nock('/principals', 'post', {
                 name: 'principal-test',
-                dataset_id: 111
+                dataset_id: 111,
+                privileges: [],
+                roles: []
             }, 403, {
+                requestID: 'offline_awsRequestId_9242174757496147',
                 message: 'Forbidden',
                 errorCode: 3001
             });
-            await principal.create('principal-test', 111);
+            await principal.create('principal-test', 111, [], []);
             throw 'can not create principal with malformed or no token';
         } catch (e) {
-            expect(e.message).to.be.equal('Forbidden');
+            expect(e.errorCode).to.be.equal(3001);
         }
     });
 
@@ -28,7 +31,9 @@ describe('principal create test', () => {
         nockLogin();
         nock('/principals', 'post', {
             name: 'principal_tests',
-            dataset_id: '111'
+            dataset_id: '111',
+            privileges: [],
+            roles: []
         }, 201, {
             response: {
                 name: 'p************t',
@@ -48,7 +53,9 @@ describe('principal create test', () => {
             nockLogin();
             nock('/principals', 'post', {
                 name: 'principal_tests',
-                dataset_id: '111'
+                dataset_id: '111',
+                privileges: [],
+                roles: []
             }, 400, {
                 message: 'Duplicate entry principal-tests on dataset id 111',
                 errorCode: 2001

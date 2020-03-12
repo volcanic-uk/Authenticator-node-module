@@ -32,14 +32,13 @@ exports.nock = (path, method, body, code, response) => {
     }
 };
 
-exports.nockLogin = async () => {
+exports.nockLogin = () => {
     if (ENV_VARS.NOCK_OFF === 'false') {
         Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
             .intercept('/identity/login', 'POST', {
                 name: 'volcanic',
                 secret: 'volcanic!123',
-                dataset_id: '-1',
-                audience: '["volcanic"]'
+                dataset_id: '-1'
             })
             .reply(200, {
                 response: {
@@ -70,11 +69,11 @@ exports.generateIdentityOrPrincipal = async (type, name, timeStamp = null) => {
     if (ENV_VARS.NOCK_OFF === 'true') {
         if (type === 'identity') {
             let response = await new Identity().withAuth().create(`identity_test_${timeStamp}`, null, 'volcanic');
-            return response.secure_id;
+            return response.id;
         }
         if (type === 'principal') {
             let response = await new Principal().withAuth().create(`principal_test_${timeStamp}`, '111');
-            return response.secure_id;
+            return response.id;
         }
     } else {
         return constants[name];

@@ -9,17 +9,16 @@ describe('get the roles by id', () => {
 
     it('should return the right role', async () => {
         nockLogin();
-        nock('/roles/7', 'get', {}, 200, {
+        nock('/roles/1', 'get', {}, 200, {
             response: {
-                id: 7,
+                id: 1,
                 name: 'r*******t',
                 subject_id: 2,
-                service_id: 2,
                 created_at: '2019-11-01T03:53:46.332Z',
                 updated_at: '2019-11-01T03:53:46.332Z'
             }
         });
-        let read = await new Role().withAuth().getById(7);
+        let read = await new Role().withAuth().getById(1);
         expect(read).to.be.instanceOf(Object).and.has.property('id');
     });
 
