@@ -1,17 +1,17 @@
 const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     { nock, nockLogin } = require('../helpers'),
-    Identity = require('../../v1/index').Identity,
+    Principal = require('../../v1/index').Principal,
     expect = chai.expect;
 chai.use(chaiAsPromised);
 
 
-describe('get identity roles', () => {
+describe('get principal roles', () => {
 
     describe('with auth', async () => {
         it('gets roles as requested', async () => {
             nockLogin();
-            nock('/identity/volcanic/roles', 'get', {}, 200, {
+            nock('/principals/volcanic/roles', 'get', {}, 200, {
                 response: [
                     {
                         id: 1,
@@ -25,20 +25,20 @@ describe('get identity roles', () => {
                     }
                 ]
             });
-            let getAll = await new Identity().withAuth().getRoles('volcanic');
+            let getAll = await new Principal().withAuth().getRoles('volcanic');
             expect(getAll).to.be.an('array');
         });
 
         it('fails if the name does not exist', async () => {
             nockLogin();
-            nock('/identity/something/roles', 'get', {}, 404, {
-                message: 'Identity does not exist',
-                errorCode: 1004
+            nock('/principals/something/roles', 'get', {}, 404, {
+                message: 'Principal does not exist',
+                errorCode: 2002
             });
             try {
-                await new Identity().withAuth().getRoles('something');
+                await new Principal().withAuth().getRoles('something');
             } catch (e) {
-                expect(e.errorCode).to.equal(1004);
+                expect(e.errorCode).to.equal(2002);
             }
         });
 
