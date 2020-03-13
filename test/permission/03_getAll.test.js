@@ -10,7 +10,7 @@ chai.use(sorted);
 describe('should read all permissions', async () => {
     it('should read all permissions in ascending order', async () => {
         nockLogin();
-        nock('/permissions?query=&page=&page_size=&sort=id&order=asc', 'get', {}, 200, {
+        nock('/permissions?&page=&page_size=&sort=id&order=asc', 'get', {}, 200, {
             response: {
                 pagination: [Object], data: [
                     {
@@ -36,12 +36,12 @@ describe('should read all permissions', async () => {
                 ]
             }
         });
-        let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', '', 'id', 'asc');
+        let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', 'id', 'asc');
         expect(permissionsGetAll.data).to.be.ascendingBy('id');
     });
     it('should read all permissions in descending order', async () => {
         nockLogin();
-        nock('/permissions?query=&page=&page_size=&sort=id&order=desc', 'get', {}, 200, {
+        nock('/permissions?&page=&page_size=&sort=id&order=desc', 'get', {}, 200, {
             response: {
                 pagination: [Object], data: [
                     {
@@ -67,7 +67,7 @@ describe('should read all permissions', async () => {
                 ]
             }
         });
-        let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', '', 'id', 'desc');
+        let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', 'id', 'desc');
         expect(permissionsGetAll.data).to.be.descendingBy('id');
     });
 });
