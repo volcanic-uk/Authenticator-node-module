@@ -29,6 +29,7 @@ class Privileges extends V1Base {
 
     async getPrivileges(page = '', pageSize = '', sort = 'id', order = 'asc') {
         return await super.fetch('get', `privileges?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+
     }
 
     async update(id, scope, permissionID, groupID, allow) {
