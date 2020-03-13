@@ -20,8 +20,8 @@ class Service extends V1Base {
         return await super.fetch('get', `services/${name}`, null);
     }
 
-    async getServices(query = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
-        return await super.fetch('get', `services?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+    async getServices(page = '', pageSize = '', sort = 'id', order = 'asc') {
+        return await super.fetch('get', `services?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
     async update(id, name) {

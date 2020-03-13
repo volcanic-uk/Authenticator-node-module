@@ -11,7 +11,7 @@ describe('Get all roles', () => {
     // get all roles
     it('should return the right role', async () => {
         nockLogin();
-        nock('/roles?query=null&page=1&page_size=15&sort=id&order=asc', 'get', {}, 200, {
+        nock('/roles?page=1&page_size=15&sort=id&order=asc', 'get', {}, 200, {
             response: {
                 pagination: [Object],
                 data: [
@@ -34,7 +34,7 @@ describe('Get all roles', () => {
                 ]
             }
         });
-        let read = await new Role().withAuth().getRoles(null, 1, 15, 'id', 'asc');
+        let read = await new Role().withAuth().getRoles(1, 15, 'id', 'asc');
         expect(read.data).to.be.ascendingBy('id');
     });
 });

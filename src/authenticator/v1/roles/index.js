@@ -17,8 +17,8 @@ class Roles extends V1Base {
         return await super.fetch('get', `roles/${id}`, null);
     }
 
-    async getRoles(query = '', page = '', pageSize = '', sort = 'id', order = 'asc') {
-        return await super.fetch('get', `roles?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+    async getRoles(page = '', pageSize = '', sort = 'id', order = 'asc') {
+        return await super.fetch('get', `roles?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
     async update(id, name, privileges) {
