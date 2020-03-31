@@ -61,7 +61,7 @@ exports.generateToken = async () => {
         });
         return response.response.token;
     } else {
-        return envConfigs.auth.BaseToken;
+        return constants.baseToken;
     }
 };
 

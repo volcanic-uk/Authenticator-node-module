@@ -2,7 +2,7 @@ module.exports = {
     server: {
         domainName: 'http://localhost:8000',
         v1Api: '/api/v1',
-        stack_id: 'local',
+        stack_id: 'sandbox',
         set: function (serverConfig) {
             this.domainName = serverConfig.domainName;
             this.stack_id = serverConfig.stack_id;
