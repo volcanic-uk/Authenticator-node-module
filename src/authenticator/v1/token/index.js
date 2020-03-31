@@ -1,7 +1,7 @@
 const V1Base = require('../v1_base'),
     Key = require('../key'),
     { JWTDecoder, JWTValidator, md5Generator } = require('../../../helpers'),
-    { putToCache, getFromCache } = require('../../cache');
+    { put, get } = require('../../cache');
 
 class Token extends V1Base {
     constructor() {
@@ -21,7 +21,7 @@ class Token extends V1Base {
     async validate(token) {
         let tokenMD5 = md5Generator(token);
         //check if token is cached
-        if (getFromCache(tokenMD5)) {
+        if (get(tokenMD5)) {
             return true;
         }
         let decodedToken = await JWTDecoder(token);
@@ -37,7 +37,7 @@ class Token extends V1Base {
             await JWTValidator(token, publicKey);
             let cacheDuration = availableCacheDuration(decodedToken.payload.exp);
             //cache token if it is valid
-            cacheDuration > 0 && putToCache(tokenMD5, token, cacheDuration);
+            cacheDuration > 0 && put(tokenMD5, token, cacheDuration);
             return true;
         } catch (e) {
             return false;
