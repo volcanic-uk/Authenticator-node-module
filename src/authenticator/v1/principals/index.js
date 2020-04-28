@@ -62,6 +62,10 @@ class Principal extends V1Base {
     async getRoles (id) {
         return await super.fetch('get', `principals/${id}/roles`, null, {});
     }
+
+    async unblock (id) {
+        return await super.fetch('post', `principals/${id}/unblock`, null, {});
+    }
 }
 
 

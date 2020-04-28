@@ -22,7 +22,7 @@ Config.auth.set({
 
 exports.nock = (path, method, body, code, response) => {
     if (ENV_VARS.NOCK_OFF === 'false') {
-        Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
+        return Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
             .intercept(path, method.toUpperCase(), {
                 ...body
             })
