@@ -32,6 +32,10 @@ class Roles extends V1Base {
     async delete(id) {
         return await super.fetch('delete', `roles/${id}`, null);
     }
+
+    async getByName(name) {
+        return await super.fetch('get', `roles/${name}`, null);
+    }
 }
 
 module.exports = Roles;
