@@ -3,14 +3,9 @@ env:
   variables:
     #Authentiaction server primary domain
     AUTH_DOMAIN: http://localhost:8000
+    STACK_ID: local
     #Auth api link
-    V1_API: /api/v1
 
-    #The the default memory caching expiry time for internal Authentiaction token
-    MODULE_TOKEN_DURATION: 60
-
-    #The third party tokens generated memory caching expiry time
-    THIRD_PARTY_TOKEN_DURATION: 60
 
     #The default identity and secret to generate tokens whenever an authentication needed by passing a token
     AUTH_DATASET_ID: -1
@@ -18,14 +13,9 @@ env:
     AUTH_SECRET: volcanic!123
     #AUTH_DEFAULT_AUDIENCE: '["volcanic"]'
 
-    #enable the logging function
-    ENABLE_LOGGIN: false
 
     #enable the caching service
     ENABLE_CACHING: false
-
-    #Auth will validate the token on each request
-    SERVER_TOKEN_VALIDATION: false
 
     #shuts down the API HTTP mocking
     NOCK_OFF: false
