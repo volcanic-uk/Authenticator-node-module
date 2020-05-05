@@ -23,7 +23,7 @@ describe('Authorization tests', function () {
                             'privileges': [
                                 {
                                     'id': 1,
-                                    'scope': 'vrn:sandbox:-1:identity/*',
+                                    'scope': 'vrn:local:-1:identity/*',
                                     'allow': true
                                 }
                             ]
