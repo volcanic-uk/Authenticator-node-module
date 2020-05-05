@@ -1,7 +1,6 @@
 module.exports = {
     server: {
         domainName: 'http://localhost:8000',
-        v1Api: '/api/v1',
         stack_id: 'sandbox',
         set: function (serverConfig) {
             this.domainName = serverConfig.domainName;
@@ -45,15 +44,4 @@ module.exports = {
             };
         }
     },
-    logging: {
-        logs: false,
-        set: function (logConfig) {
-            this.logs = logConfig.logs;
-        },
-        get: function () {
-            return {
-                logs: this.logs
-            };
-        }
-    }
 };

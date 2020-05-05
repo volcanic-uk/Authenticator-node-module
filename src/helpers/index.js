@@ -29,11 +29,9 @@ exports.customFetch = async (methodType = 'get', path, headers, data = null) => 
 };
 
 exports.logger = (data) => {
-    if (envConfigs.logging.logs === 'true') {
-        /* eslint-disable no-console */
-        console.log(data);
-        /* eslint-enable no-console */
-    }
+    /* eslint-disable no-console */
+    console.log(data);
+    /* eslint-enable no-console */
 };
 
 exports.JWTDecoder = async (token) => {

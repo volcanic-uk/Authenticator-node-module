@@ -1,5 +1,5 @@
 const { customFetch } = require('../../src/helpers');
-const envConfigs = require('../../config');
+const ModuleConfig = require('../../config');
 const Nock = require('nock');
 const { Identity, Principal, Config } = require('../../v1');
 require('dotenv').config();
@@ -22,7 +22,7 @@ Config.auth.set({
 
 exports.nock = (path, method, body, code, response) => {
     if (ENV_VARS.NOCK_OFF === 'false') {
-        Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
+        Nock(`${ModuleConfig.server.domainName}/api/v1`)
             .intercept(path, method.toUpperCase(), {
                 ...body
             })
@@ -34,7 +34,7 @@ exports.nock = (path, method, body, code, response) => {
 
 exports.nockLogin = () => {
     if (ENV_VARS.NOCK_OFF === 'false') {
-        Nock(envConfigs.server.domainName + envConfigs.server.v1Api)
+        Nock(`${ModuleConfig.server.domainName}/api/v1`)
             .intercept('/identity/login', 'POST', {
                 name: 'volcanic',
                 secret: 'volcanic!123',
@@ -43,7 +43,7 @@ exports.nockLogin = () => {
             .reply(200, {
                 response: {
                     response: {
-                        token: envConfigs.auth.token
+                        token: ModuleConfig.auth.token
                     }
                 },
                 status: 200
