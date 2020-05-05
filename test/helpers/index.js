@@ -18,6 +18,10 @@ Config.auth.set({
     dataset_id: ENV_VARS.AUTH_DATASET_ID,
     audience: ENV_VARS.DEFAULT_AUDIENCE
 });
+Config.server.set({
+    domainName: ENV_VARS.AUTH_DOMAIN,
+    stack_id: ENV_VARS.STACK_ID
+});
 
 
 exports.nock = (path, method, body, code, response) => {
