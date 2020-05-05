@@ -1,5 +1,5 @@
 const { customFetch } = require('../../helpers/index');
-const { getFromCache, putToCache, deleteFromCache } = require('../cache');
+const Cache = require('../cache');
 const config = require('../../../config');
 
 class V1Base {
@@ -61,14 +61,12 @@ class V1Base {
             this.setRequestID(httpResponse.requestID);
             if (Array.isArray(httpResponse.response))
                 return httpResponse.response;
-            const processed = { ...httpResponse.response, status: true };
-            return processed;
-            // return { ...httpResponse.response, status: true };
+            return { ...httpResponse.response, status: true };
         } catch (e) {
-            if (this.internalAuth && e.response.status === 403) {
+            if (this.internalAuth && e.response.status === 401) {
                 if (this.loginAttempts <= 5) {
                     this.loginAttempts++;
-                    deleteFromCache('internal_token');
+                    Cache.del('internal_token');
                     return await this.fetch(methodType, path, headers, data);
                 }
             }
@@ -89,11 +87,11 @@ class V1Base {
     }
 
     async obtainToken() {
-        let token = await getFromCache('internal_token');
+        let token = await Cache.get('internal_token');
         if (!token) {
             let loginResponse = await this.internalLogin();
             token = loginResponse.response.token;
-            await putToCache('internal_token', token);
+            await Cache.put('internal_token', token);
         }
         return token;
     }

@@ -17,19 +17,15 @@ const { createHash } = require('crypto');
 
 // define the custom fetch method as an async function
 exports.customFetch = async (methodType = 'get', path, headers, data = null) => {
-    try {
-        let response = await axios({
-            method: methodType,
-            url: envConfigs.server.domainName + path,
-            headers: {
-                ...headers
-            },
-            data: data
-        });
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+    let response = await axios({
+        method: methodType,
+        url: envConfigs.server.domainName + path,
+        headers: {
+            ...headers
+        },
+        data: data
+    });
+    return response.data;
 };
 
 exports.logger = (data) => {
@@ -41,18 +37,14 @@ exports.logger = (data) => {
 };
 
 exports.JWTDecoder = async (token) => {
-    try {
-        // let decodedResult = decoded.payload.sub.split('/');
-        return jwt.decode(token, { complete: true });
-        // {
-        // stack: decodedResult[2] || null,
-        // dataset_id: decodedResult[3] || null,
-        // principal: decodedResult[4] || null,
-        // identity: decodedResult[5] || null
-        // };
-    } catch (error) {
-        throw error;
-    }
+    // let decodedResult = decoded.payload.sub.split('/');
+    return jwt.decode(token, { complete: true });
+    // {
+    // stack: decodedResult[2] || null,
+    // dataset_id: decodedResult[3] || null,
+    // principal: decodedResult[4] || null,
+    // identity: decodedResult[5] || null
+    // };
 };
 
 exports.JWTValidator = async (token, publicKey) => {

@@ -2,28 +2,25 @@ module.exports = {
     server: {
         domainName: 'http://localhost:8000',
         v1Api: '/api/v1',
+        stack_id: 'sandbox',
         set: function (serverConfig) {
             this.domainName = serverConfig.domainName;
+            this.stack_id = serverConfig.stack_id;
         },
         get: function () {
             return {
-                domainName: this.domainName
+                domainName: this.domainName,
+                stack_id: this.stack_id
             };
         }
     },
     cache: {
-        moduleTokenDuration: '120',
-        thirdPartyTokenDuration: '120',
-        enableCaching: false,
+        enableCaching: true,
         set: function (cacheConfig) {
-            this.moduleTokenDuration = cacheConfig.moduleTokenDuration;
-            this.thirdPartyTokenDuration = cacheConfig.thirdPartyTokenDuration;
             this.enableCaching = cacheConfig.enableCaching;
         },
         get: function () {
             return {
-                moduleTokenDuration: this.moduleTokenDuration,
-                thirdPartyTokenDuration: this.thirdPartyTokenDuration,
                 enableCaching: this.enableCaching
             };
         }
