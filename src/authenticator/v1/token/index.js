@@ -29,7 +29,7 @@ class Token extends V1Base {
         if (decodedToken.payload.jti) {
             //the token is a single use token, and should be validated by server
             this.setToken(token);
-            return await this.remoteValidation();
+            return this.remoteValidation();
         }
         let keyResponse = await new Key().withAuth().getByID(keyID);
         let publicKey = keyResponse.public_key;

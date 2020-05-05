@@ -10,15 +10,15 @@ class Roles extends V1Base {
             name,
             privileges,
         };
-        return await super.fetch('post', 'roles', null, role);
+        return super.fetch('post', 'roles', null, role);
     }
 
     async getById(id) {
-        return await super.fetch('get', `roles/${id}`, null);
+        return super.fetch('get', `roles/${id}`, null);
     }
 
     async getRoles(page = '', pageSize = '', sort = 'id', order = 'asc') {
-        return await super.fetch('get', `roles?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+        return super.fetch('get', `roles?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
     async update(id, name, privileges) {
@@ -26,11 +26,11 @@ class Roles extends V1Base {
             name,
             privileges
         };
-        return await super.fetch('post', `roles/${id}`, null, role);
+        return super.fetch('post', `roles/${id}`, null, role);
     }
 
     async delete(id) {
-        return await super.fetch('delete', `roles/${id}`, null);
+        return super.fetch('delete', `roles/${id}`, null);
     }
 }
 

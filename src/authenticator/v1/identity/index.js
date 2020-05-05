@@ -15,7 +15,7 @@ class Identity extends V1Base {
             dataset_id: datasetId
         };
 
-        let result = await super.fetch('post', 'identity/login', null, loginDetails);
+        let result = super.fetch('post', 'identity/login', null, loginDetails);
         return {
             token: result.token
         };
@@ -33,24 +33,24 @@ class Identity extends V1Base {
             source,
             skipSecretEncryption
         };
-        return await super.fetch('post', 'identity', null, identity);
+        return super.fetch('post', 'identity', null, identity);
     }
 
     async update(name, id) {
         let identity = {
             name: name
         };
-        return await super.fetch('post', `identity/${id}`, null, identity);
+        return super.fetch('post', `identity/${id}`, null, identity);
     }
 
     async updatePrivileges(id, privileges = []) {
-        return await super.fetch('post', `identity/${id}/privileges`, null, {
+        return super.fetch('post', `identity/${id}/privileges`, null, {
             privileges
         });
     }
 
     async updateRoles(id, roles = []) {
-        return await super.fetch('post', `identity/${id}/roles`, null, {
+        return super.fetch('post', `identity/${id}/roles`, null, {
             roles
         });
     }
@@ -59,23 +59,23 @@ class Identity extends V1Base {
         let identity = {
             secret: secret
         };
-        return await super.fetch('post', `identity/secret/reset/${id}`, null, identity);
+        return super.fetch('post', `identity/secret/reset/${id}`, null, identity);
     }
 
     async getByID(secureID) {
-        return await super.fetch('get', `identity/${secureID}`, null, null);
+        return super.fetch('get', `identity/${secureID}`, null, null);
     }
 
     async delete(secureID) {
-        return await super.fetch('delete', `identity/${secureID}`, null);
+        return super.fetch('delete', `identity/${secureID}`, null);
     }
 
     async deactivateIdentity(secureID) {
-        return await super.fetch('post', `identity/${secureID}/deactivate`, null);
+        return super.fetch('post', `identity/${secureID}/deactivate`, null);
     }
 
     async activateIdentity(secureID) {
-        return await super.fetch('post', `identity/${secureID}/activate`, null);
+        return super.fetch('post', `identity/${secureID}/activate`, null);
     }
 
     async generateToken(id, audience = [], expiryDate, singleUse, nbf) {
@@ -88,23 +88,23 @@ class Identity extends V1Base {
             single_use: singleUse,
             nbf: nbf
         };
-        return await super.fetch('post', 'identity/token/generate', null, identity);
+        return super.fetch('post', 'identity/token/generate', null, identity);
     }
 
     async logout() {
-        return await super.fetch('post', 'identity/logout', null, null);
+        return super.fetch('post', 'identity/logout', null, null);
     }
 
     async getIdentityById(id) {
-        return await super.fetch('get', `identity/${id}`, null, null);
+        return super.fetch('get', `identity/${id}`, null, null);
     }
 
     async getIdentities(page = 1, pageSize = 10, query = '', name = 'volcanic', source = 'password', datasetID = '', sort = 'created_at', order = 'asc', principalId = '') {
-        return await super.fetch('get', `identity?query=${query}&page=${page}&page_size=${pageSize}&name=${name}&source=${source}&dataset_id=${datasetID}&sort=${sort}&order=${order}&principal_id=${principalId}`, null, null);
+        return super.fetch('get', `identity?query=${query}&page=${page}&page_size=${pageSize}&name=${name}&source=${source}&dataset_id=${datasetID}&sort=${sort}&order=${order}&principal_id=${principalId}`, null, null);
     }
 
-    async getRoles (id) {
-        return await super.fetch('get', `identity/${id}/roles`, null, null);
+    async getRoles(id) {
+        return super.fetch('get', `identity/${id}/roles`, null, null);
     }
 }
 

@@ -12,19 +12,19 @@ class Groups extends V1Base {
             permissions,
             description
         };
-        return await super.fetch('post', 'groups', null, group);
+        return super.fetch('post', 'groups', null, group);
     }
 
     async getById(id) {
-        return await super.fetch('get', `groups/${id}`, null);
+        return super.fetch('get', `groups/${id}`, null);
     }
 
     async getByName(name) {
-        return await super.fetch('get', `groups/${name}`, null);
+        return super.fetch('get', `groups/${name}`, null);
     }
 
     async getGroups(query = '', page = null, pageSize = null, sort = 'id', order = 'asc') {
-        return await super.fetch('get', `groups?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+        return super.fetch('get', `groups?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
     async update(id, name = null, description = null) {
@@ -32,11 +32,11 @@ class Groups extends V1Base {
             name,
             description
         };
-        return await super.fetch('post', `groups/${id}`, null, group);
+        return super.fetch('post', `groups/${id}`, null, group);
     }
 
     async delete(id) {
-        return await super.fetch('delete', `groups/${id}`, null);
+        return super.fetch('delete', `groups/${id}`, null);
     }
 }
 

@@ -67,7 +67,7 @@ class V1Base {
                 if (this.loginAttempts <= 5) {
                     this.loginAttempts++;
                     Cache.del('internal_token');
-                    return await this.fetch(methodType, path, headers, data);
+                    return this.fetch(methodType, path, headers, data);
                 }
             }
             this.setRequestID(e.response.requestID);
@@ -103,7 +103,7 @@ class V1Base {
             dataset_id: config.auth.dataset_id,
             audience: config.auth.audience
         };
-        return await customFetch('post', this.baseURL + 'identity/login', null, loginData);
+        return customFetch('post', this.baseURL + 'identity/login', null, loginData);
     }
 }
 

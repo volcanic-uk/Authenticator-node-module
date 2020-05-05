@@ -8,20 +8,20 @@ class Permission extends V1Base {
 
     async create(name, description, serviceId) {
         let permission = { name, service_id: serviceId, description };
-        return await super.fetch('post', 'permissions', null, permission);
+        return super.fetch('post', 'permissions', null, permission);
 
     }
 
     async getByID(id) {
-        return await super.fetch('get', `permissions/${id}`, null);
+        return super.fetch('get', `permissions/${id}`, null);
     }
 
     async getByName(name) {
-        return await super.fetch('get', `permissions/${name}`, null);
+        return super.fetch('get', `permissions/${name}`, null);
     }
 
     async getPermissions(page = '', pageSize = '', sort = 'id', order = 'asc') {
-        return await super.fetch('get', `permissions?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+        return super.fetch('get', `permissions?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
     async update(id, name, description) {
@@ -29,11 +29,11 @@ class Permission extends V1Base {
             name,
             description
         };
-        return await super.fetch('post', `permissions/${id}`, null, update);
+        return super.fetch('post', `permissions/${id}`, null, update);
     }
 
     async delete(id) {
-        return await super.fetch('delete', `permissions/${id}`, null);
+        return super.fetch('delete', `permissions/${id}`, null);
     }
 }
 

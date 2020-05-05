@@ -57,7 +57,7 @@ exports.JWTValidator = async (token, publicKey) => {
             }
         });
     });
-    return await promise;
+    return promise;
 };
 
 exports.md5Generator = (string) => {

@@ -8,31 +8,31 @@ class Service extends V1Base {
 
     async create(name) {
         let service = { name };
-        return await super.fetch('post', 'services', null, service);
+        return super.fetch('post', 'services', null, service);
 
     }
 
     async getByID(id) {
-        return await super.fetch('get', `services/${id}`, null);
+        return super.fetch('get', `services/${id}`, null);
     }
 
     async getByName(name) {
-        return await super.fetch('get', `services/${name}`, null);
+        return super.fetch('get', `services/${name}`, null);
     }
 
     async getServices(page = '', pageSize = '', sort = 'id', order = 'asc') {
-        return await super.fetch('get', `services?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+        return super.fetch('get', `services?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
     async update(id, name) {
         let update = {
             name
         };
-        return await super.fetch('post', `services/${id}`, null, update);
+        return super.fetch('post', `services/${id}`, null, update);
     }
 
     async delete(id) {
-        return await super.fetch('delete', `services/${id}`, null);
+        return super.fetch('delete', `services/${id}`, null);
     }
 }
 
