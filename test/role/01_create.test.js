@@ -6,6 +6,7 @@ const chai = require('chai'),
 chai.use(chaiAsPromised);
 
 describe('role creates', () => {
+    let createRole;
     it('fails on malformed token', async () => {
         try {
             nockLogin();
@@ -34,9 +35,28 @@ describe('role creates', () => {
                 id: 7
             }
         });
-        let create = await new Role().withAuth().create('role-test', [1, 2]);
-        expect(create).to.be.instanceOf(Object).and.has.property('id');
+        createRole = await new Role().withAuth().create('role-test', [1, 2]);
+        expect(createRole).to.be.instanceOf(Object).and.has.property('id');
     });
+    it('creates a new role with principal id', async () => {
+        nockLogin();
+        nock('/roles', 'post', {
+            name: 'role-test', privileges: [1, 2], parent_id: createRole.id
+        }, 201, {
+            response: {
+                name: 'Role-159125678',
+                subject_id: null,
+                parent_id: createRole.id,
+                updated_at: '2020-06-04T07:46:23.390Z',
+                created_at: '2020-06-04T07:46:23.390Z',
+                id: 8
+            }
+        });
+        createRole = await new Role().withAuth().create('role-test', [1, 2], createRole.id);
+        expect(createRole).to.be.instanceOf(Object).and.has.property('id');
+        expect(createRole).to.be.instanceOf(Object).and.has.property('parent_id');
+    });
+
     it('fails when privileges are not an array', async () => {
         try {
             nockLogin();
