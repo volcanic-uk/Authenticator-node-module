@@ -36,7 +36,6 @@ describe('role creates', () => {
             }
         });
         createRole = await new Role().withAuth().create('role-test', [1, 2]);
-        console.log('show create role', createRole);
         expect(createRole).to.be.instanceOf(Object).and.has.property('id');
     });
     it('creates a new role with principal id', async () => {

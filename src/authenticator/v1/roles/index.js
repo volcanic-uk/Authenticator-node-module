@@ -23,10 +23,11 @@ class Roles extends V1Base {
         return super.fetch('get', `roles?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
     }
 
-    async update(id, name, privileges) {
+    async update(id, name, privileges, parentId) {
         let role = {
             name,
-            privileges
+            privileges,
+            parent_id: parentId
         };
         return super.fetch('post', `roles/${id}`, null, role);
     }
