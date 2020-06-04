@@ -28,6 +28,8 @@ exports.customFetch = async (methodType = 'get', path, headers, data = null) => 
     return response.data;
 };
 
+exports.httpClient = axios;
+
 exports.logger = (data) => {
     /* eslint-disable no-console */
     console.log(data);
