@@ -5,10 +5,12 @@ class Roles extends V1Base {
         super();
     }
 
-    async create(name, privileges = []) {
+    async create(name, privileges = [], parentId) {
         let role = {
             name,
             privileges,
+            parent_id: parentId
+
         };
         return super.fetch('post', 'roles', null, role);
     }
