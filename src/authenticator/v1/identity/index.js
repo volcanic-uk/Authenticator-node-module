@@ -31,7 +31,7 @@ class Identity extends V1Base {
             privileges,
             secretless,
             source,
-            skipSecretEncryption
+            skip_secret_encryption: skipSecretEncryption
         };
         return super.fetch('post', 'identity', null, identity);
     }
