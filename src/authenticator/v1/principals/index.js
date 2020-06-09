@@ -20,7 +20,7 @@ class Principal extends V1Base {
     }
 
 
-    async getPrincipals(query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc', name, ids) {
+    async getPrincipals(query = '', datasetId = '', page = '', pageSize = '', sort = 'id', order = 'asc', name = '', ids = '') {
         return super.fetch('get', `principals?query=${query}&dataset_id=${datasetId}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}&name=${name}&ids=${ids}`, null);
     }
 

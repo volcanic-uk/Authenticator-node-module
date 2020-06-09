@@ -20,7 +20,7 @@ class Permission extends V1Base {
         return super.fetch('get', `permissions/${name}`, null);
     }
 
-    async getPermissions(page = '', pageSize = '', sort = 'id', order = 'asc', ids) {
+    async getPermissions(page = '', pageSize = '', sort = 'id', order = 'asc', ids = '') {
         return super.fetch('get', `permissions?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}&ids=${ids}`, null);
     }
 
