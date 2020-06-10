@@ -17,7 +17,12 @@ describe('creates privilege', () => {
             }, 401, {
                 message: 'UNAUTHORIZED', errorCode: 3001
             });
-            await new Privilege().setToken('sometoken').create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
+            await new Privilege().setToken('sometoken').create({
+                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                permission_id: 1,
+                group_id: 1,
+                allow: true
+            });
             throw 'must not reach this line because the token is invalid';
         } catch (e) {
             expect(e.message).to.equal('UNAUTHORIZED');
@@ -43,7 +48,12 @@ describe('creates privilege', () => {
                 id: 15
             }
         });
-        let create = await new Privilege().withAuth().create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
+        let create = await new Privilege().withAuth().create({
+            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            permission_id: 1,
+            group_id: 1,
+            allow: true
+        });
         expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
     it('creates a new privilege', async () => {
@@ -65,7 +75,12 @@ describe('creates privilege', () => {
                 id: 16
             }
         });
-        let create = await new Privilege().withAuth().create('vrn:{stack}:{dataset}:jobs/*', 1, 1, true);
+        let create = await new Privilege().withAuth().create({
+            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            permission_id: 1,
+            group_id: 1,
+            allow: true
+        });
         expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
 });

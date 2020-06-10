@@ -16,7 +16,12 @@ describe('Update privileges', () => {
                 message: 'Privilege does not exist', errorCode: 8001
             });
             nockLogin();
-            await new Privilege().withAuth().update(123412, 'vrn:{stack}:{dataset}:jobs/*', 1, 1);
+            await new Privilege().withAuth().update({
+                id: 123412,
+                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                permission_id: 1,
+                group_id: 1
+            });
             throw 'should not reach this line, because the id doesnt exist';
         } catch (e) {
             expect(e.message).to.equal('Privilege does not exist');
@@ -42,7 +47,12 @@ describe('Update privileges', () => {
             }
         });
         nockLogin();
-        let update = await new Privilege().withAuth().update(4, 'vrn:{stack}:{dataset}:jobs/*', 1, 1);
+        let update = await new Privilege().withAuth().update({
+            id: 4,
+            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            permission_id: 1,
+            group_id: 1
+        });
         expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
 });
