@@ -24,7 +24,11 @@ describe('Group create', () => {
             },
             status: 201
         });
-        let create = await new Group().withAuth().create('group_testing', [], 'test group for module');
+        let create = await new Group().withAuth().create({
+            name: 'group_testing',
+            permissions: [],
+            description: 'test group for module'
+        });
         expect(create).to.be.instanceOf(Object).and.have.property('id');
 
     });
@@ -41,7 +45,11 @@ describe('Group create', () => {
                 message: 'Duplicate entry group_testing',
                 errorCode: 4002
             });
-            await new Group().withAuth().create('group_testing', [], 'test group for module');
+            await new Group().withAuth().create({
+                name: 'group_testing',
+                permissions: [],
+                description: 'test group for module'
+            });
             throw 'should not reach this line because the group name already exists';
         } catch (e) {
             expect(e.message).equals('Duplicate entry group_testing');

@@ -10,7 +10,9 @@ describe('group update', () => {
     it('it updates the specified group info', async () => {
         nockLogin();
         nock('/groups/15', 'post', {
-            name: 'group-test-3', description: 'test group for module'
+            name: 'group-test-3',
+            description: 'test group for module',
+            permissions: [1, 2, 3]
         }, 200, {
             requestID: 'offline_awsRequestId_33457864888791766',
             response: {
@@ -24,14 +26,21 @@ describe('group update', () => {
             }
         });
 
-        let update = await new Group().withAuth().update(15, 'group-test-3', 'test group for module');
+        let update = await new Group().withAuth().update({
+            id: 15,
+            name: 'group-test-3',
+            description: 'test group for module',
+            permissions: [1, 2, 3]
+        });
         expect(update).to.be.instanceOf(Object).and.have.property('id');
     });
 
     it('fails when passing an invalid id', async () => {
         nockLogin();
         nock('/groups/49384', 'post', {
-            name: 'group-test', description: 'test group for module'
+            name: 'group-test',
+            description: 'test group for module',
+            permissions: []
         }, 404, {
             requestID: 'offline_awsRequestId_4486227769442046',
             message: 'Permission group does not exist',
@@ -39,7 +48,12 @@ describe('group update', () => {
 
         });
         try {
-            await new Group().withAuth().update(49384, 'group-test', 'test group for module');
+            await new Group().withAuth().update({
+                id: 49384,
+                name: 'group-test',
+                description: 'test group for module',
+                permissions: []
+            });
             throw 'should not read this line, because the id is not valid';
         } catch (e) {
             expect(e.message).equals('Permission group does not exist');

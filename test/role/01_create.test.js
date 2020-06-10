@@ -38,10 +38,10 @@ describe('role creates', () => {
         createRole = await new Role().withAuth().create('role-test', [1, 2]);
         expect(createRole).to.be.instanceOf(Object).and.has.property('id');
     });
-    it('creates a new role with principal id', async () => {
+    it('creates a new role with parent role id', async () => {
         nockLogin();
         nock('/roles', 'post', {
-            name: 'role-test', privileges: [1, 2], parent_id: createRole.id
+            name: 'role-test', privileges: [1, 2], parent_role_id: createRole.id
         }, 201, {
             response: {
                 name: 'Role-159125678',
