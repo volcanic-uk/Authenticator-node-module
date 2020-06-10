@@ -33,7 +33,16 @@ describe('get principals', () => {
                     ]
                 }
             });
-            let getAll = await new Principal().withAuth().getPrincipals('', '', 1, 10, 'created_at', 'asc', 'volcanic-principal', 'volcanic');
+            let getAll = await new Principal().withAuth().getPrincipals({
+                query: '',
+                dataset_id: '',
+                page: 1,
+                page_size: 10,
+                sort: 'created_at',
+                order: 'asc',
+                name: 'volcanic-principal',
+                ids: 'volcanic'
+            });
             console.log('show get all', getAll);
             expect(getAll.data).to.be.a('array');
         });
@@ -51,7 +60,16 @@ describe('get principals', () => {
                     data: []
                 }
             });
-            let getAll = await new Principal().withAuth().getPrincipals('', '', 1, 10, 'created_at', 'asc', 'incorrect-name', 'volcanic');
+            let getAll = await new Principal().withAuth().getPrincipals({
+                query: '',
+                dataset_id: '',
+                page: 1,
+                page_size: 10,
+                sort: 'created_at',
+                order: 'asc',
+                name: 'incorrect-name',
+                ids: 'volcanic'
+            });
 
             expect(getAll.data.length).to.equal(0);
         });
