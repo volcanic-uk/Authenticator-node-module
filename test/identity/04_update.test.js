@@ -9,13 +9,15 @@ describe('Identity update', () => {
 
     describe('with auth', async () => {
         let identityId;
-        before( async () => {
+        before(async () => {
             identityId = await generateIdentityOrPrincipal('identity', 'identityUpdate1');
         });
         it('should update an identity', async () => {
             nockLogin();
             nock(`/identity/${identityId}`, 'post', {
-                name: 'new_identity_test_name'
+                name: 'new_identity_test_name',
+                roles: [],
+                privileges: []
             }, 200, {
                 requestID: 'offline_awsRequestId_6826035818110325',
                 response: {
@@ -34,7 +36,12 @@ describe('Identity update', () => {
                 }
             });
 
-            let updatedIdentity = await new Identity().withAuth().update('new_identity_test_name', identityId); //check identity creation id here
+            let updatedIdentity = await new Identity().withAuth().update({
+                name: 'new_identity_test_name',
+                id: identityId
+            })
+
+            ; //check identity creation id here
             expect(updatedIdentity.name).to.equal('new_identity_test_name');
         });
 
@@ -42,13 +49,15 @@ describe('Identity update', () => {
             try {
                 nockLogin();
                 nock('/identity/ghjkld', 'post', {
-                    name: 'updated-name'
+                    name: 'updated-name',
+                    roles: [],
+                    privileges: []
                 }, 200, {
                     requestID: 'offline_awsRequestId_6388752831170976',
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
-                await new Identity().withAuth().update('updated-name', 'ghjkld');
+                await new Identity().withAuth().update({ name: 'updated-name', id: 'ghjkld' });
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1004);
                 expect(e).to.exist;
@@ -67,7 +76,9 @@ describe('Identity update', () => {
         it('should update an identity', async () => {
             nockLogin();
             nock(`/identity/${identityId}`, 'post', {
-                name: 'new_identity_test_name_updated'
+                name: 'new_identity_test_name_updated',
+                roles: [],
+                privileges: []
             }, 200, {
                 requestID: 'offline_awsRequestId_6826035818110325',
                 response: {
@@ -85,7 +96,10 @@ describe('Identity update', () => {
                     updated_at: '2019-11-01T08:17:38.438Z'
                 }
             });
-            let updatedIdentity = await new Identity().setToken(token).update('new_identity_test_name_updated', identityId); //check identity creation id here
+            let updatedIdentity = await new Identity().setToken(token).update({
+                name: 'new_identity_test_name_updated',
+                id: identityId
+            }); //check identity creation id here
             expect(updatedIdentity.name).to.equal('new_identity_test_name_updated');
 
         });
@@ -95,13 +109,15 @@ describe('Identity update', () => {
             try {
                 nockLogin();
                 nock('/identity/ghjkld', 'post', {
-                    name: 'updated-name'
+                    name: 'updated-name',
+                    roles: [],
+                    privileges: []
                 }, 200, {
                     requestID: 'offline_awsRequestId_6388752831170976',
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
-                await new Identity().setToken(token).update('updated-name', 'ghjkld');
+                await new Identity().setToken(token).update({ name: 'updated-name', id: 'ghjkld' });
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1004);
                 expect(e).to.exist;

@@ -21,7 +21,7 @@ describe('Identity Roles update', () => {
                 requestID: 'offline_awsRequestId_14548681360941473',
                 response: [[Object]]
             });
-            let updatedIdentityRole = await new Identity().withAuth().updateRoles(identityId, [1]); //check identity creation id here
+            let updatedIdentityRole = await new Identity().withAuth().updateRoles({ id: identityId, roles: [1] }); //check identity creation id here
             expect(updatedIdentityRole).to.exist;
         });
 
@@ -35,7 +35,7 @@ describe('Identity Roles update', () => {
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
-                await new Identity().withAuth().updateRoles('9i9i9i', [1]);
+                await new Identity().withAuth().updateRoles({ id: '9i9i9i', roles: [1] });
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1004);
                 expect(e).to.exist;

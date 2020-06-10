@@ -13,7 +13,12 @@ describe('create identity', () => {
             nock('/identity', 'post', {
                 name: 'identity_create_new',
                 secret: null,
-                principal_id: 'volcanic'
+                principal_id: 'volcanic',
+                roles: [],
+                privileges: [],
+                secretless: false,
+                source: 'password',
+                skip_secret_encryption: false
             }, 201, {
                 response: {
                     requestID: 'offline_awsRequestId_8442325613994397',
@@ -31,7 +36,16 @@ describe('create identity', () => {
                 },
                 status: 201
             });
-            let identityCreation = await new Identity().withAuth().create('identity_create_new', null, 'volcanic');
+            let identityCreation = await new Identity().withAuth().create({
+                name: 'identity_create_new',
+                secret: null,
+                principal_id: 'volcanic',
+                roles: [],
+                privileges: [],
+                secretless: false,
+                source: 'password',
+                skip_secret_encryption: false
+            });
             expect(identityCreation).to.be.an('object');
         });
 
@@ -40,7 +54,12 @@ describe('create identity', () => {
             nock('/identity', 'post', {
                 name: 'identity_with_password',
                 secret: 'volcanic!123',
-                principal_id: 'volcanic'
+                principal_id: 'volcanic',
+                roles: [],
+                privileges: [],
+                secretless: false,
+                source: 'password',
+                skip_secret_encryption: false
             }, 201, {
                 response: {
                     requestID: 'offline_awsRequestId_8442325613994397',
@@ -58,7 +77,16 @@ describe('create identity', () => {
                 },
                 status: 201
             });
-            let identityCreationWithSecret = await new Identity().withAuth().create('identity_with_password', 'volcanic!123', 'volcanic');
+            let identityCreationWithSecret = await new Identity().withAuth().create({
+                name: 'identity_with_password',
+                secret: 'volcanic!123',
+                principal_id: 'volcanic',
+                roles: [],
+                privileges: [],
+                secretless: false,
+                source: 'password',
+                skip_secret_encryption: false
+            });
             expect(identityCreationWithSecret).to.be.an('object');
 
         });
@@ -71,6 +99,11 @@ describe('create identity', () => {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
                     principal_id: 'volcanic',
+                    roles: [],
+                    privileges: [],
+                    secretless: false,
+                    source: 'password',
+                    skip_secret_encryption: false
                 }, 400, {
 
                     requestID: 'offline_awsRequestId_24697166768011525',
@@ -78,7 +111,11 @@ describe('create identity', () => {
                     errorCode: 1003
 
                 });
-                await new Identity().withAuth().create('identity_with_password', 'volcanic!123', 'volcanic');
+                await new Identity().withAuth().create({
+                    name: 'identity_with_password',
+                    secret: 'volcanic!123',
+                    principal_id: 'volcanic'
+                });
                 throw Error('The code should not reach this scope as it would be a duplicate identity record');
             } catch (e) {
                 expect(e.errorCode).to.equal(1003);
@@ -92,13 +129,22 @@ describe('create identity', () => {
                 nock('/identity', 'post', {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
-                    principal_id: null
+                    principal_id: null,
+                    roles: [],
+                    privileges: [],
+                    secretless: false,
+                    source: 'password',
+                    skip_secret_encryption: false
                 }, 422, {
                     requestID: 'offline_awsRequestId_4570424539864406',
                     message: { principal_id: '"principal_id" must be a string' },
                     errorCode: 10001
                 });
-                await new Identity().withAuth().create('identity_with_password', 'volcanic!123', null);
+                await new Identity().withAuth().create({
+                    name: 'identity_with_password',
+                    secret: 'volcanic!123',
+                    principal_id: null
+                });
                 throw Error('The code should not reach this scope as identity cannot be created without principal id');
             } catch (e) {
                 expect(e.errorCode).to.equal(10001);
@@ -112,13 +158,22 @@ describe('create identity', () => {
                 name: null,
                 secret: 'volcanic!123',
                 principal_id: 'volcanic',
+                roles: [],
+                privileges: [],
+                secretless: false,
+                source: 'password',
+                skip_secret_encryption: false
             }, 400, {
                 requestID: 'offline_awsRequestId_5997535176835269',
                 message: { name: '"*********************g' },
                 errorCode: 10001
             });
             try {
-                await new Identity().withAuth().create(null, 'volcanic!123', 'volcanic');
+                await new Identity().withAuth().create({
+                    name: null,
+                    secret: 'volcanic!123',
+                    principal_id: 'volcanic'
+                });
                 throw Error('The code should not reach this scope as identity cannot be created without identity name');
             } catch (e) {
                 expect(e.errorCode).to.equal(10001);
@@ -139,7 +194,12 @@ describe('create identity', () => {
             nock('/identity', 'post', {
                 name: 'identity_create_new_auth',
                 secret: null,
-                principal_id: 'volcanic'
+                principal_id: 'volcanic',
+                roles: [],
+                privileges: [],
+                secretless: false,
+                source: 'password',
+                skip_secret_encryption: false
             }, 201, {
                 response: {
                     requestID: 'offline_awsRequestId_8442325613994397',
@@ -156,7 +216,11 @@ describe('create identity', () => {
                     }
                 }
             });
-            let identityCreation = await new Identity().setToken(token).create('identity_create_new_auth', null, 'volcanic');
+            let identityCreation = await new Identity().setToken(token).create({
+                name: 'identity_create_new_auth',
+                secret: null,
+                principal_id: 'volcanic'
+            });
             expect(identityCreation).to.be.an('object');
         });
 
@@ -165,7 +229,12 @@ describe('create identity', () => {
             nock('/identity', 'post', {
                 name: 'identity_with_password_auth',
                 secret: 'volcanic!123',
-                principal_id: 'volcanic'
+                principal_id: 'volcanic',
+                roles: [],
+                privileges: [],
+                secretless: false,
+                source: 'password',
+                skip_secret_encryption: false
             }, 201, {
                 response: {
                     requestID: 'offline_awsRequestId_8442325613994397',
@@ -181,7 +250,11 @@ describe('create identity', () => {
                     }
                 }
             });
-            let identityCreationWithSecret = await new Identity().setToken(token).create('identity_with_password_auth', 'volcanic!123', 'volcanic');
+            let identityCreationWithSecret = await new Identity().setToken(token).create({
+                name: 'identity_with_password_auth',
+                secret: 'volcanic!123',
+                principal_id: 'volcanic'
+            });
             expect(identityCreationWithSecret).to.be.an('object');
 
         });
@@ -194,6 +267,11 @@ describe('create identity', () => {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
                     principal_id: 'volcanic',
+                    roles: [],
+                    privileges: [],
+                    secretless: false,
+                    source: 'password',
+                    skip_secret_encryption: false
                 }, 400, {
 
                     requestID: 'offline_awsRequestId_24697166768011525',
@@ -201,7 +279,11 @@ describe('create identity', () => {
                     errorCode: 1003
 
                 });
-                await new Identity().setToken(token).create('identity_with_password', 'volcanic!123', 'volcanic');
+                await new Identity().setToken(token).create({
+                    name: 'identity_with_password',
+                    secret: 'volcanic!123',
+                    principal_id: 'volcanic'
+                });
                 throw Error('The code should not reach this scope as it would be a duplicate identity record');
             } catch (e) {
                 expect(e.errorCode).to.equal(1003);
@@ -216,13 +298,22 @@ describe('create identity', () => {
                 nock('/identity', 'post', {
                     name: 'identity_with_password',
                     secret: 'volcanic!123',
-                    principal_id: null
+                    principal_id: null,
+                    roles: [],
+                    privileges: [],
+                    secretless: false,
+                    source: 'password',
+                    skip_secret_encryption: false
                 }, 422, {
                     requestID: 'offline_awsRequestId_4570424539864406',
                     message: { principal_id: '"principal_id" must be a string' },
                     errorCode: 10001
                 });
-                await new Identity().setToken(token).create('identity_with_password', 'volcanic!123', null);
+                await new Identity().setToken(token).create({
+                    name: 'identity_with_password',
+                    secret: 'volcanic!123',
+                    principal_id: null
+                });
                 throw Error('The code should not reach this scope as identity cannot be created without principal id');
             } catch (e) {
                 expect(e.errorCode).to.equal(10001);
@@ -237,12 +328,21 @@ describe('create identity', () => {
                     name: null,
                     secret: 'volcanic!123',
                     principal_id: 'volcanic',
+                    roles: [],
+                    privileges: [],
+                    secretless: false,
+                    source: 'password',
+                    skip_secret_encryption: false
                 }, 400, {
                     requestID: 'offline_awsRequestId_5997535176835269',
                     message: { name: '"*********************g' },
                     errorCode: 10001
                 });
-                await new Identity().setToken(token).create(null, 'volcanic!123', 'volcanic');
+                await new Identity().setToken(token).create({
+                    name: null,
+                    secret: 'volcanic!123',
+                    principal_id: 'volcanic'
+                });
                 throw Error('The code should not reach this scope as identity cannot be created without identity name');
             } catch (e) {
                 expect(e.errorCode).to.equal(10001);

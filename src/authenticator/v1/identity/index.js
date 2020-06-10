@@ -22,40 +22,42 @@ class Identity extends V1Base {
     }
 
     //identity register method
-    async create(name, secret = null, principalId, roles, privileges, secretless, source, skipSecretEncryption) {
+    async create({ name, secret = null, principal_id, roles = [], privileges = [], secretless = false, source = 'password', skip_secret_encryption = false }) {
         let identity = {
-            name: name,
-            secret: secret,
-            principal_id: principalId,
+            name,
+            secret,
+            principal_id,
             roles,
             privileges,
             secretless,
             source,
-            skip_secret_encryption: skipSecretEncryption
+            skip_secret_encryption
         };
         return super.fetch('post', 'identity', null, identity);
     }
 
-    async update(name, id) {
+    async update({ name = null, id, roles = [], privileges = [] }) {
         let identity = {
-            name: name
+            name: name,
+            roles,
+            privileges
         };
         return super.fetch('post', `identity/${id}`, null, identity);
     }
 
-    async updatePrivileges(id, privileges = []) {
+    async updatePrivileges({ id, privileges = [] }) {
         return super.fetch('post', `identity/${id}/privileges`, null, {
             privileges
         });
     }
 
-    async updateRoles(id, roles = []) {
+    async updateRoles({ id, roles = [] }) {
         return super.fetch('post', `identity/${id}/roles`, null, {
             roles
         });
     }
 
-    async resetSecret(secret = null, id) {
+    async resetSecret({ secret = null, id }) {
         let identity = {
             secret: secret
         };
@@ -78,14 +80,14 @@ class Identity extends V1Base {
         return super.fetch('post', `identity/${secureID}/activate`, null);
     }
 
-    async generateToken(id, audience = [], expiryDate, singleUse, nbf) {
+    async generateToken({ id, audience = [], expiry_date, single_use, nbf }) {
         let identity = {
             identity: {
                 id: id
             },
             audience: audience,
-            expiry_date: expiryDate,
-            single_use: singleUse,
+            expiry_date,
+            single_use,
             nbf: nbf
         };
         return super.fetch('post', 'identity/token/generate', null, identity);
@@ -99,8 +101,8 @@ class Identity extends V1Base {
         return super.fetch('get', `identity/${id}`, null, null);
     }
 
-    async getIdentities(page = 1, pageSize = 10, query = '', name = 'volcanic', source = 'password', datasetID = '', sort = 'created_at', order = 'asc', principalId = '') {
-        return super.fetch('get', `identity?query=${query}&page=${page}&page_size=${pageSize}&name=${name}&source=${source}&dataset_id=${datasetID}&sort=${sort}&order=${order}&principal_id=${principalId}`, null, null);
+    async getIdentities({ page = 1, pageSize = 10, query = '', name = 'volcanic', source = 'password', dataset_id = '', sort = 'created_at', order = 'asc', principal_id = '' }) {
+        return super.fetch('get', `identity?query=${query}&page=${page}&page_size=${pageSize}&name=${name}&source=${source}&dataset_id=${dataset_id}&sort=${sort}&order=${order}&principal_id=${principal_id}`, null, null);
     }
 
     async getRoles(id) {

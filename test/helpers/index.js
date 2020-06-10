@@ -32,7 +32,7 @@ exports.nock = (path, method, body, code, response) => {
             })
             .reply(code, {
                 ...response
-            });
+            }).log(console.log);
     }
 };
 
