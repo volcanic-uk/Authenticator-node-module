@@ -34,7 +34,14 @@ describe('should read all services', async () => {
                 ]
             }
         });
-        let servicesGetAll = await new Service().withAuth().getServices(1, 15, '', 'id', 'asc', '1,2');
+        let servicesGetAll = await new Service().withAuth().getServices({
+            page: 1,
+            pageSize: 15,
+            name: '',
+            sort: 'id',
+            order: 'asc',
+            ids: '1,2'
+        });
         expect(servicesGetAll.data).to.be.ascendingBy('id');
     });
 
@@ -63,7 +70,14 @@ describe('should read all services', async () => {
                 ]
             }
         });
-        let servicesGetAll = await new Service().withAuth().getServices(1, 15, '', 'id', 'desc', '1,2');
+        let servicesGetAll = await new Service().withAuth().getServices({
+            page: 1,
+            pageSize: 15,
+            name: '',
+            sort: 'id',
+            order: 'desc',
+            ids: '1,2'
+        });
         expect(servicesGetAll.data).to.be.descendingBy('id');
     });
 });
