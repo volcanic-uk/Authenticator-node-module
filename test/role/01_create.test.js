@@ -11,11 +11,15 @@ describe('role creates', () => {
         try {
             nockLogin();
             nock('/roles', 'post', {
-                name: 'role-test', privileges: [1, 2]
+                name: 'role-test', privileges: [1, 2], parent_role_id: null
             }, 401, {
                 message: 'UNAUTHORIZED', errorCode: 3001
             });
-            await new Role().setToken('some token').create({ name: 'role-test', privileges: [1, 2] });
+            await new Role().setToken('some token').create({
+                name: 'role-test',
+                privileges: [1, 2],
+                parent_role_id: null
+            });
             throw 'it will not pass because the token is invalid';
         } catch (e) {
             expect(e.message).to.equal('UNAUTHORIZED');
@@ -25,7 +29,7 @@ describe('role creates', () => {
     it('creates a new role', async () => {
         nockLogin();
         nock('/roles', 'post', {
-            name: 'role-test', privileges: [1, 2]
+            name: 'role-test', privileges: [1, 2], parent_role_id: null
         }, 201, {
             response: {
                 name: 'role_test',
@@ -41,7 +45,7 @@ describe('role creates', () => {
     it('creates a new role with parent role id', async () => {
         nockLogin();
         nock('/roles', 'post', {
-            name: 'role-test', privileges: [1, 2]
+            name: 'role-test', privileges: [1, 2], parent_role_id: null
         }, 201, {
             response: {
                 name: 'role_test',
@@ -51,7 +55,11 @@ describe('role creates', () => {
                 id: 7
             }
         });
-        createRole = await new Role().withAuth().create({ name: 'role-test', privileges: [1, 2] });
+        createRole = await new Role().withAuth().create({
+            name: 'role-test',
+            privileges: [1, 2],
+            parent_role_id: null
+        });
         nockLogin();
         console.log('show nock login');
         nock('/roles', 'post', {
@@ -80,11 +88,11 @@ describe('role creates', () => {
         try {
             nockLogin();
             nock('/roles', 'post', {
-                name: 'role-tests', privileges: 1
+                name: 'role-tests', privileges: 1, parent_role_id: null
             }, 422, {
                 message: { privileges: '"privileges" must be an array' }
             });
-            await new Role().withAuth().create({ name: 'role-tests', privileges: 1 });
+            await new Role().withAuth().create({ name: 'role-tests', privileges: 1, parent_role_id: null });
             throw 'should not reach this line, privileges are not an array';
         } catch (e) {
             expect(e.message.privileges).to.equal('"privileges" must be an array');

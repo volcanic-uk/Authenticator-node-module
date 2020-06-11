@@ -9,7 +9,7 @@ describe('Role update', async () => {
     it('updates the requested role', async () => {
         nockLogin();
         nock('/roles/7', 'post', {
-            name: 'updated-name', privileges: [1, 2]
+            name: 'updated-name', privileges: [1, 2], parent_id: null
         }, 200, {
             response: {
                 id: 7,
@@ -19,7 +19,13 @@ describe('Role update', async () => {
                 updated_at: '2019-11-01T06:19:34.255Z'
             }
         });
-        updateRole = await new Role().withAuth().update({ id: 7, name: 'updated-name', privileges: [1, 2] });
+        updateRole = await new Role().withAuth().update({
+            id: 7,
+            name: 'updated-name',
+            privileges: [1, 2],
+            parent_id: null
+        });
+        console.log('show update role', updateRole);
         expect(updateRole).to.instanceOf(Object).and.has.property('id');
     });
     it('updates the parent_id of requested role', async () => {
@@ -48,11 +54,16 @@ describe('Role update', async () => {
         try {
             nockLogin();
             nock('/roles/123451', 'post', {
-                name: 'updated-name', privileges: [1, 2]
+                name: 'updated-name', privileges: [1, 2], parent_id: null
             }, 404, {
                 message: 'Role does not exist', errorCode: 9001
             });
-            await new Role().withAuth().update({ id: 123451, name: 'updated-name', privileges: [1, 2] });
+            await new Role().withAuth().update({
+                id: 123451,
+                name: 'updated-name',
+                privileges: [1, 2],
+                parent_id: null
+            });
             throw 'should not reach this line, for the id does not exist';
         } catch (e) {
             expect(e.message).to.equal('Role does not exist');
