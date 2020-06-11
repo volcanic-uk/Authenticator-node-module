@@ -5,7 +5,7 @@ class Privileges extends V1Base {
         super();
     }
 
-    async create({ scope, permission_id, group_id, allow }) {
+    async create({ scope, permission_id = null, group_id = null, allow = true }) {
         let privilege = {
             permission_id: permission_id,
             group_id: group_id,
@@ -32,7 +32,7 @@ class Privileges extends V1Base {
 
     }
 
-    async update({ id, scope, permission_id, group_id, allow }) {
+    async update({ id, scope, permission_id = null, group_id = null, allow = true }) {
         let body = {
             permission_id: permission_id,
             group_id: group_id,
