@@ -23,8 +23,8 @@ class Groups extends V1Base {
         return super.fetch('get', `groups/${name}`, null);
     }
 
-    async getGroups({ query = '', page = 1, page_size = 10, sort = 'id', order = 'asc' }) {
-        return super.fetch('get', `groups?query=${query}&page=${page}&page_size=${page_size}&sort=${sort}&order=${order}`, null);
+    async getGroups({ query = '', page = 1, name = '', page_size = 10, sort = 'id', order = 'asc' }) {
+        return super.fetch('get', `groups?query=${query}&page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}`, null);
     }
 
     async update({ id, name = '', permissions = [], description = '' }) {
