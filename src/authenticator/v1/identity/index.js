@@ -101,8 +101,8 @@ class Identity extends V1Base {
         return super.fetch('get', `identity/${id}`, null, null);
     }
 
-    async getIdentities({ page = 1, pageSize = 10, query = '', name = 'volcanic', source = 'password', dataset_id = '', sort = 'created_at', order = 'asc', principal_id = '' }) {
-        return super.fetch('get', `identity?query=${query}&page=${page}&page_size=${pageSize}&name=${name}&source=${source}&dataset_id=${dataset_id}&sort=${sort}&order=${order}&principal_id=${principal_id}`, null, null);
+    async getIdentities({ page = 1, page_size = 10, query = '', name = 'volcanic', source = 'password', dataset_id = '', sort = 'created_at', order = 'asc', principal_id = '' }) {
+        return super.fetch('get', `identity?query=${query}&page=${page}&page_size=${page_size}&name=${name}&source=${source}&dataset_id=${dataset_id}&sort=${sort}&order=${order}&principal_id=${principal_id}`, null, null);
     }
 
     async getRoles(id) {

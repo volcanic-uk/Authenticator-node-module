@@ -125,8 +125,8 @@ class Principal extends V1Base {
      * @param id the id of the principal
      * @returns {Promise<*|{status}|undefined>}
      */
-    async getIdentities({ page = 1, pageSize = 10, query = null, name = null, source = null, dataset_id = null, sort = 'id', order = 'asc', id = null }) {
-        return super.fetch('post', `principals/${id}/identities?query=${query}&dataset_id=${dataset_id}&page=${page}&${pageSize}&sort=${sort}&order=${order}&name=${name}&source=${source}`, null, {});
+    async getIdentities({ page = 1, page_size = 10, query = null, name = null, source = null, dataset_id = null, sort = 'id', order = 'asc', id = null }) {
+        return super.fetch('post', `principals/${id}/identities?query=${query}&dataset_id=${dataset_id}&page=${page}&${page_size}&sort=${sort}&order=${order}&name=${name}&source=${source}`, null, {});
     }
 
     /**

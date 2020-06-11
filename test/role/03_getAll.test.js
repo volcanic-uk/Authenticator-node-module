@@ -36,7 +36,7 @@ describe('Get all roles', () => {
         });
         let read = await new Role().withAuth().getRoles({
             page: 1,
-            pageSize:15,
+            page_size:15,
             name: '',
             sort: 'id',
             order: 'asc',

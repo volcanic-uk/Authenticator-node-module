@@ -36,7 +36,7 @@ describe('should read all services', async () => {
         });
         let servicesGetAll = await new Service().withAuth().getServices({
             page: 1,
-            pageSize: 15,
+            page_size: 15,
             name: '',
             sort: 'id',
             order: 'asc',
@@ -72,7 +72,7 @@ describe('should read all services', async () => {
         });
         let servicesGetAll = await new Service().withAuth().getServices({
             page: 1,
-            pageSize: 15,
+            page_size: 15,
             name: '',
             sort: 'id',
             order: 'desc',
