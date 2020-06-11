@@ -8,11 +8,11 @@ describe('Role update', async () => {
     let updateRole;
     it('updates the requested role', async () => {
         nockLogin();
-        nock('/roles/7', 'post', {
-            name: 'updated-name', privileges: [1, 2], parent_id: null
+        nock('/roles/8', 'post', {
+            name: 'updated-name', privileges: [1, 2], parent_role_id: null
         }, 200, {
             response: {
-                id: 7,
+                id: 8,
                 name: 'updated-name',
                 service_id: 2,
                 created_at: '2019-11-01T03:53:46.332Z',
@@ -20,7 +20,7 @@ describe('Role update', async () => {
             }
         });
         updateRole = await new Role().withAuth().update({
-            id: 7,
+            id: 8,
             name: 'updated-name',
             privileges: [1, 2],
             parent_id: null
@@ -31,22 +31,24 @@ describe('Role update', async () => {
     it('updates the parent_id of requested role', async () => {
         nockLogin();
         nock('/roles/7', 'post', {
-            name: 'updated-name', privileges: [1, 2], parent_id: updateRole.id
+            name: 'updated-name', privileges: [1, 2], parent_role_id: updateRole.id
         }, 200, {
             response: {
                 id: 7,
-                name: 'u**********e',
+                name: 'updated-name',
                 service_id: 2,
                 created_at: '2019-11-01T03:53:46.332Z',
                 updated_at: '2019-11-01T06:19:34.255Z'
             }
         });
+        console.log('see the update', updateRole);
         let update = await new Role().withAuth().update({
             id: 7,
             name: 'updated-name',
             privileges: [1, 2],
             parent_id: updateRole.id
         });
+        console.log('see the update 2', update);
         expect(update).to.instanceOf(Object).and.has.property('id');
     });
 
@@ -54,7 +56,7 @@ describe('Role update', async () => {
         try {
             nockLogin();
             nock('/roles/123451', 'post', {
-                name: 'updated-name', privileges: [1, 2], parent_id: null
+                name: 'updated-name', privileges: [1, 2], parent_role_id: null
             }, 404, {
                 message: 'Role does not exist', errorCode: 9001
             });
@@ -62,7 +64,7 @@ describe('Role update', async () => {
                 id: 123451,
                 name: 'updated-name',
                 privileges: [1, 2],
-                parent_id: null
+                parent_role_id: null
             });
             throw 'should not reach this line, for the id does not exist';
         } catch (e) {

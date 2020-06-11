@@ -27,7 +27,7 @@ class Roles extends V1Base {
         let role = {
             name,
             privileges,
-            parent_id: parent_id
+            parent_role_id: parent_id
         };
         return super.fetch('post', `roles/${id}`, null, role);
     }
