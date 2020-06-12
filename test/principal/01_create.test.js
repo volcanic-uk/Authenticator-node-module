@@ -20,7 +20,7 @@ describe('principal create test', () => {
                 message: 'Forbidden',
                 errorCode: 3001
             });
-            await principal.create('principal-test', 111, [], []);
+            await principal.create({ name: 'principal-test', dataset_id: 111, roles: [], privileges: [] });
             throw 'can not create principal with malformed or no token';
         } catch (e) {
             expect(e.errorCode).to.be.equal(3001);
@@ -44,7 +44,7 @@ describe('principal create test', () => {
                 id: 2
             }
         });
-        let create = await principal.withAuth().create('principal_tests', '111');
+        let create = await principal.withAuth().create({ name: 'principal_tests', dataset_id: '111' });
         expect(create).to.be.instanceOf(Object).and.have.property('dataset_id').that.equals('111');
     });
 
@@ -60,7 +60,7 @@ describe('principal create test', () => {
                 message: 'Duplicate entry principal-tests on dataset id 111',
                 errorCode: 2001
             });
-            await principal.withAuth().create('principal_tests', '111');
+            await principal.withAuth().create({ name: 'principal_tests', dataset_id: '111' });
             throw 'should not reach this line, as the name is duplicated';
         } catch (e) {
             expect(e.message).to.exist;

@@ -9,7 +9,7 @@ describe('Identity Privileges update', () => {
 
     describe('with auth', async () => {
         let identityId;
-        before (async () => {
+        before(async () => {
             identityId = await generateIdentityOrPrincipal('identity', 'identityUpdate1');
         });
         it('should update the privileges of the identity', async () => {
@@ -20,7 +20,10 @@ describe('Identity Privileges update', () => {
                 requestID: 'offline_awsRequestId_09282307247301747',
                 response: [[Object]]
             });
-            let updatedIdentityPrivilege = await new Identity().withAuth().updatePrivileges(identityId, [12]); //check identity creation id here
+            let updatedIdentityPrivilege = await new Identity().withAuth().updatePrivileges({
+                id: identityId,
+                privileges: [12]
+            }); //check identity creation id here
             expect(updatedIdentityPrivilege).to.exist;
         });
 
@@ -34,7 +37,7 @@ describe('Identity Privileges update', () => {
                     message: 'Identity does not exist',
                     errorCode: 1004
                 });
-                await new Identity().withAuth().updatePrivileges('1u8u8u8u8u', [12]);
+                await new Identity().withAuth().updatePrivileges({ id: '1u8u8u8u8u', privileges: [12] });
             } catch (e) {
                 expect(e.errorCode).to.be.equal(1004);
                 expect(e).to.exist;

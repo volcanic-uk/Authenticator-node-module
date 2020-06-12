@@ -6,8 +6,8 @@ class Permission extends V1Base {
         super();
     }
 
-    async create(name, description, serviceId) {
-        let permission = { name, service_id: serviceId, description };
+    async create({ name, description = '', service_id }) {
+        let permission = { name, service_id, description };
         return super.fetch('post', 'permissions', null, permission);
 
     }
@@ -16,15 +16,11 @@ class Permission extends V1Base {
         return super.fetch('get', `permissions/${id}`, null);
     }
 
-    async getByName(name) {
-        return super.fetch('get', `permissions/${name}`, null);
+    async getPermissions(page = '', page_size = '', name = '', sort = 'id', order = 'asc', ids = '') {
+        return super.fetch('get', `permissions?page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}&ids=${ids}`, null);
     }
 
-    async getPermissions(page = '', pageSize = '', sort = 'id', order = 'asc', ids = '') {
-        return super.fetch('get', `permissions?page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}&ids=${ids}`, null);
-    }
-
-    async update(id, name, description) {
+    async update({ id, name, description }) {
         let update = {
             name,
             description

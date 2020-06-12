@@ -6,7 +6,7 @@ class Groups extends V1Base {
         super();
     }
 
-    async create(name, permissions = [], description = '') {
+    async create({ name = '', permissions = [], description = '' }) {
         let group = {
             name,
             permissions,
@@ -23,14 +23,15 @@ class Groups extends V1Base {
         return super.fetch('get', `groups/${name}`, null);
     }
 
-    async getGroups(query = '', page = null, pageSize = null, sort = 'id', order = 'asc') {
-        return super.fetch('get', `groups?query=${query}&page=${page}&page_size=${pageSize}&sort=${sort}&order=${order}`, null);
+    async getGroups({ query = '', page = 1, name = '', page_size = 10, sort = 'id', order = 'asc' }) {
+        return super.fetch('get', `groups?query=${query}&page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}`, null);
     }
 
-    async update(id, name = null, description = null) {
+    async update({ id, name = '', permissions = [], description = '' }) {
         let group = {
             name,
-            description
+            description,
+            permissions
         };
         return super.fetch('post', `groups/${id}`, null, group);
     }

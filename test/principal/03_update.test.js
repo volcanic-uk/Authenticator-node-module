@@ -10,16 +10,20 @@ describe('Principal updates', async () => {
     let principal = new Principal();
     //update principal
     let principalId;
-    before (async () => {
+    before(async () => {
         principalId = await generateIdentityOrPrincipal('principal', 'principal', timeStamp + '_test_update');
     });
     it('upon principal update, the request should not be completed if there is no authorization token in the request header, and it will throw an error', async () => {
         try {
             nockLogin();
-            let scope = nock(`/principals/${principalId}`, 'post', { name: 'new name', }, 401, {
+            let scope = nock(`/principals/${principalId}`, 'post', {
+                name: 'new name',
+                roles: [],
+                privileges: []
+            }, 401, {
                 message: 'UNAUTHORIZED', errorCode: 3001
             });
-            await new Principal().update(principalId, 'new name');
+            await new Principal().update({ id: principalId, name: 'new name' });
             scope.done();
             throw 'should not read this line because the update request has no token, or it is malformed';
         } catch (e) {
@@ -31,10 +35,14 @@ describe('Principal updates', async () => {
     it('should not update a principal that does not exist hence an error is thrown', async () => {
         try {
             nockLogin();
-            let scope = nock('/principals/12', 'post', { name: 'new name', }, 404, {
+            let scope = nock('/principals/12', 'post', {
+                name: 'new name',
+                roles: [],
+                privileges: []
+            }, 404, {
                 message: 'Principal does not exist', errorCode: 2002
             });
-            await principal.withAuth().update(12, 'new name');
+            await principal.withAuth().update({ id: 12, name: 'new name' });
             scope.done();
             throw 'should not reach this line because the principal requested does not exist';
         } catch (e) {
@@ -45,7 +53,11 @@ describe('Principal updates', async () => {
 
     it('should be a success when the principal is updated, thus it will return an object carrying the new attributes for the principal', async () => {
         nockLogin();
-        nock(`/principals/${principalId}`, 'post', { name: 'new name', }, 200, {
+        nock(`/principals/${principalId}`, 'post', {
+            name: 'new name',
+            roles: [],
+            privileges: []
+        }, 200, {
             response: {
                 id: '334e5b1dd2',
                 name: 'n******e',
@@ -57,7 +69,7 @@ describe('Principal updates', async () => {
                 updated_at: '2019-10-31T08:36:16.906Z'
             }
         });
-        let update = await principal.withAuth().update(principalId, 'new name');
+        let update = await principal.withAuth().update({ id: principalId, name: 'new name' });
         expect(update.dataset_id).to.exist;
     });
 });

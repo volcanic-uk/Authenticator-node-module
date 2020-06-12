@@ -23,7 +23,11 @@ describe('create permission', async () => {
                 id: 64
             }
         });
-        await new Permission().withAuth().create('new_permission_test', 'this is a new permission test', 2);
+        await new Permission().withAuth().create({
+            name: 'new_permission_test',
+            description: 'this is a new permission test',
+            service_id: 2
+        });
     });
     it('should not create duplicated permission', async () => {
         try {
@@ -36,7 +40,11 @@ describe('create permission', async () => {
                 message: 'Duplicate entry new_permission_test',
                 errorCode: 5003
             });
-            await new Permission().withAuth().create('new_permission_test', 'this is a new permission test', 2);
+            await new Permission().withAuth().create({
+                name: 'new_permission_test',
+                description: 'this is a new permission test',
+                service_id: 2
+            });
         } catch (e) {
             expect(e.errorCode).to.equal(5003);
             expect(e).to.exist;
@@ -46,7 +54,8 @@ describe('create permission', async () => {
         try {
             nockLogin();
             nock('/permissions', 'post', {
-                name: null
+                name: null,
+                description: ''
             }, 422, {
                 message: {
                     name: '"*********************g',
@@ -54,7 +63,7 @@ describe('create permission', async () => {
                 },
                 errorCode: 10001
             });
-            await new Permission().withAuth().create(null);
+            await new Permission().withAuth().create({ name: null });
         } catch (e) {
             expect(e.errorCode).to.equal(10001);
             expect(e).to.exist;

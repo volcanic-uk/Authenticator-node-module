@@ -34,7 +34,14 @@ describe('Get all roles', () => {
                 ]
             }
         });
-        let read = await new Role().withAuth().getRoles(1, 15, '', 'id', 'asc', '7,8');
+        let read = await new Role().withAuth().getRoles({
+            page: 1,
+            page_size:15,
+            name: '',
+            sort: 'id',
+            order: 'asc',
+            ids: '7,8'
+        });
         expect(read.data).to.be.ascendingBy('id');
     });
 });
