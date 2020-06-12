@@ -108,6 +108,10 @@ class Identity extends V1Base {
     async getRoles(id) {
         return super.fetch('get', `identity/${id}/roles`, null, null);
     }
+
+    async getPrivileges(id) {
+        return super.fetch('get', `identity/${id}/privileges`, null, null);
+    }
 }
 
 module.exports = Identity;
