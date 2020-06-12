@@ -36,7 +36,14 @@ describe('should read all permissions', async () => {
                 ]
             }
         });
-        let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', '', 'id', 'asc', '1,2');
+        let permissionsGetAll = await new Permission().withAuth().getPermissions({
+            page: '',
+            page_size: '',
+            name: '',
+            sort: 'id',
+            order: 'asc',
+            ids: '1,2'
+        });
         expect(permissionsGetAll.data).to.be.ascendingBy('id');
     });
     it('should read all permissions in descending order', async () => {
@@ -67,7 +74,14 @@ describe('should read all permissions', async () => {
                 ]
             }
         });
-        let permissionsGetAll = await new Permission().withAuth().getPermissions('', '', '', 'id', 'desc', '2,1');
+        let permissionsGetAll = await new Permission().withAuth().getPermissions({
+            page: '',
+            page_size: '',
+            name: '',
+            sort: 'id',
+            order: 'desc',
+            ids: '2,1'
+        });
         expect(permissionsGetAll.data).to.be.descendingBy('id');
     });
 });
