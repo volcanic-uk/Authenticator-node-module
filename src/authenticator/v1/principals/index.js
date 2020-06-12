@@ -137,6 +137,10 @@ class Principal extends V1Base {
     async getRoles(id) {
         return super.fetch('get', `principals/${id}/roles`, null, {});
     }
+
+    async getPrivileges(id) {
+        return super.fetch('get', `principals/${id}/privileges`, null, {});
+    }
 }
 
 
