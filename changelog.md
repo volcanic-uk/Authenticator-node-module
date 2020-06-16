@@ -1,7 +1,11 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
-## [1.1.0] - Set Date
+
+## [1.1.1] - 12-06-2020
+### Changes
+- Fix Get Identities for a principal
+## [1.1.0] - 12-06-2020
 ### Changes
 - Update the way to call the interface to be object
 - Add search by name param to permissions
