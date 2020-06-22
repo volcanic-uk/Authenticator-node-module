@@ -4,6 +4,7 @@ const Key = require('../src/authenticator/v1/key');
 const Token = require('../src/authenticator/v1/token');
 const Service = require('../src/authenticator/v1/service');
 const Permission = require('../src/authenticator/v1/permission');
+const Subject = require('../src/authenticator/v1/subject');
 const Config = require('../config');
 const Group = require('../src/authenticator/v1/groups');
 const Roles = require('../src/authenticator/v1/roles');
@@ -14,6 +15,7 @@ module.exports = {
     Identity,
     Key,
     Permission,
+    Subject,
     Token,
     Config,
     Service,
