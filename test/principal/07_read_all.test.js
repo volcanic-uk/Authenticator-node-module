@@ -43,7 +43,6 @@ describe('get principals', () => {
                 name: 'volcanic-principal',
                 ids: 'volcanic'
             });
-            console.log('show get all', getAll);
             expect(getAll.data).to.be.a('array');
         });
 

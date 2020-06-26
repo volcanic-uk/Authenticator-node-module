@@ -25,7 +25,6 @@ describe('Role update', async () => {
             privileges: [1, 2],
             parent_id: null
         });
-        console.log('show update role', updateRole);
         expect(updateRole).to.instanceOf(Object).and.has.property('id');
     });
     it('updates the parent_id of requested role', async () => {
@@ -41,14 +40,12 @@ describe('Role update', async () => {
                 updated_at: '2019-11-01T06:19:34.255Z'
             }
         });
-        console.log('see the update', updateRole);
         let update = await new Role().withAuth().update({
             id: 7,
             name: 'updated-name',
             privileges: [1, 2],
             parent_id: updateRole.id
         });
-        console.log('see the update 2', update);
         expect(update).to.instanceOf(Object).and.has.property('id');
     });
 
