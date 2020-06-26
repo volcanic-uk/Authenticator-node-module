@@ -61,7 +61,6 @@ describe('role creates', () => {
             parent_role_id: null
         });
         nockLogin();
-        console.log('show nock login');
         nock('/roles', 'post', {
             name: 'role-test', privileges: [1, 2], parent_role_id: createRole.id
         }, 201, {
@@ -79,7 +78,6 @@ describe('role creates', () => {
             privileges: [1, 2],
             parent_id: createRole.id
         });
-        console.log('show the create role', createRole2);
         expect(createRole2).to.be.instanceOf(Object).and.has.property('id');
         expect(createRole2).to.be.instanceOf(Object).and.has.property('parent_id');
     });
