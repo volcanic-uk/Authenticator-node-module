@@ -5,7 +5,7 @@ class Roles extends V1Base {
         super();
     }
 
-    async create({ name, privileges = [], parent_id =null }) {
+    async create({ name, privileges = [], parent_id = null }) {
         let role = {
             name,
             privileges,
@@ -19,8 +19,8 @@ class Roles extends V1Base {
         return super.fetch('get', `roles/${id}`, null);
     }
 
-    async getRoles({ page = '', page_size = '', name = '', sort = 'id', order = 'asc', ids = '' }) {
-        return super.fetch('get', `roles?page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}&ids=${ids}`, null);
+    async getRoles({ page = '', page_size = '', name = '', sort = 'id', order = 'asc', ids = '', query = '' }) {
+        return super.fetch('get', `roles?page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}&ids=${ids}&query=${query}`, null);
     }
 
     async update({ id, name = '', privileges = [], parent_id = null }) {

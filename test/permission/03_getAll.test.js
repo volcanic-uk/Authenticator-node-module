@@ -10,7 +10,7 @@ chai.use(sorted);
 describe('should read all permissions', async () => {
     it('should read all permissions in ascending order', async () => {
         nockLogin();
-        nock('/permissions?&page=&page_size=&name=&sort=id&order=asc&ids=1,2', 'get', {}, 200, {
+        nock('/permissions?&page=&page_size=&name=&query=&sort=id&order=asc&ids=1,2', 'get', {}, 200, {
             response: {
                 pagination: [Object], data: [
                     {
@@ -40,6 +40,7 @@ describe('should read all permissions', async () => {
             page: '',
             page_size: '',
             name: '',
+            query:'',
             sort: 'id',
             order: 'asc',
             ids: '1,2'
@@ -48,7 +49,7 @@ describe('should read all permissions', async () => {
     });
     it('should read all permissions in descending order', async () => {
         nockLogin();
-        nock('/permissions?&page=&page_size=&name=&sort=id&order=desc&ids=2,1', 'get', {}, 200, {
+        nock('/permissions?&page=&page_size=&name=&query=&sort=id&order=desc&ids=2,1', 'get', {}, 200, {
             response: {
                 pagination: [Object], data: [
                     {
@@ -78,6 +79,7 @@ describe('should read all permissions', async () => {
             page: '',
             page_size: '',
             name: '',
+            query:'',
             sort: 'id',
             order: 'desc',
             ids: '2,1'

@@ -16,8 +16,8 @@ class Permission extends V1Base {
         return super.fetch('get', `permissions/${id}`, null);
     }
 
-    async getPermissions({ page = '', page_size = '', name = '', sort = 'id', order = 'asc', ids = '' }) {
-        return super.fetch('get', `permissions?page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}&ids=${ids}`, null);
+    async getPermissions({ page = '', page_size = '', name = '', sort = 'id', order = 'asc', ids = '', query = null }) {
+        return super.fetch('get', `permissions?page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}&ids=${ids}&query=${query}`, null);
     }
 
     async update({ id, name, description }) {

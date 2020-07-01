@@ -11,7 +11,7 @@ describe('Get all roles', () => {
     // get all roles
     it('should return the right role', async () => {
         nockLogin();
-        nock('/roles?page=1&page_size=15&name=&sort=id&order=asc&ids=7,8', 'get', {}, 200, {
+        nock('/roles?page=1&page_size=15&name=&query=&sort=id&order=asc&ids=7,8', 'get', {}, 200, {
             response: {
                 pagination: [Object],
                 data: [
@@ -38,6 +38,7 @@ describe('Get all roles', () => {
             page: 1,
             page_size:15,
             name: '',
+            query:'',
             sort: 'id',
             order: 'asc',
             ids: '7,8'

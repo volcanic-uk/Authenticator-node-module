@@ -11,7 +11,7 @@ describe('should read all services', async () => {
 
     it('should return the right services', async () => {
         nockLogin();
-        nock('/services?&page=1&page_size=15&name=&sort=id&order=asc&ids=1,2', 'get', {}, 200, {
+        nock('/services?&page=1&page_size=15&name=&query=&sort=id&order=asc&ids=1,2', 'get', {}, 200, {
             response: {
                 pagination: [Object],
                 data: [
@@ -38,6 +38,7 @@ describe('should read all services', async () => {
             page: 1,
             page_size: 15,
             name: '',
+            query:'',
             sort: 'id',
             order: 'asc',
             ids: '1,2'
@@ -47,7 +48,7 @@ describe('should read all services', async () => {
 
     it('should read all services in descending order', async () => {
         nockLogin();
-        nock('/services?&page=1&page_size=15&name=&sort=id&order=desc&ids=1,2', 'get', {}, 200, {
+        nock('/services?&page=1&page_size=15&name=&query=&sort=id&order=desc&ids=1,2', 'get', {}, 200, {
             response: {
                 pagination: [Object],
                 data: [
@@ -74,6 +75,7 @@ describe('should read all services', async () => {
             page: 1,
             page_size: 15,
             name: '',
+            query:'',
             sort: 'id',
             order: 'desc',
             ids: '1,2'
