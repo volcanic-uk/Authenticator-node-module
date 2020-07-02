@@ -20,7 +20,7 @@ class Service extends V1Base {
         return super.fetch('get', `services/${name}`, null);
     }
 
-    async getServices({ page = '', page_size = '', query = '', name = 'auth', sort = 'id', order = 'asc', ids = '' }) {
+    async getServices({ page = '', page_size = '', query = '', name = '', sort = 'id', order = 'asc', ids = '' }) {
         return super.fetch('get', `services?page=${page}&page_size=${page_size}&name=${name}&sort=${sort}&order=${order}&ids=${ids}&query=${query}`, null);
     }
 
