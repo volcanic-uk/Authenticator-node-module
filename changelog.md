@@ -2,7 +2,7 @@
 All notable changes to Auth module will be documented in this file.
 
 
-## [1.1.1] - 3-7-2020
+## [1.1.2] - 3-7-2020
 ### Changes
 - Added privileges by subject
 - Added permission_id and group_id filter to privileges API
