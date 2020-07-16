@@ -64,6 +64,7 @@ class V1Base {
                 return httpResponse.response;
             return { ...httpResponse.response, status: true };
         } catch (e) {
+            console.log('show the error auth node module', e);
             if (this.internalAuth && e.response.status === 401) {
                 if (this.loginAttempts <= 5) {
                     this.loginAttempts++;
