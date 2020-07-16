@@ -14,8 +14,9 @@ class Identity extends V1Base {
             audience: audience,
             dataset_id: datasetId
         };
-
+        console.log('this is it', loginDetails);
         let result = await super.fetch('post', 'identity/login', null, loginDetails);
+        console.log('show the result', result);
         return {
             token: result.token
         };
