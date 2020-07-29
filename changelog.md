@@ -2,6 +2,9 @@
 All notable changes to Auth module will be documented in this file.
 
 ## [1.1.3] - release date
+### Changes
+- Throw AuthV1Error for forbidden access (AUTH-420)
+
 
 ## [1.1.2] - 3-7-2020
 ### Changes
