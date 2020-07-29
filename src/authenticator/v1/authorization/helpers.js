@@ -1,4 +1,6 @@
 const { server } = require('../../../../config');
+const AuthV1Error = require('../errors');
+
 const findPrivilegesByServiceNameAndPermissionName = (privilegesList = [], serviceName = '', permissionName = '') => {
     for (const service of privilegesList) {
         if (service.name === serviceName) {
@@ -34,9 +36,12 @@ const checkAuthorization = ({ privilegesList = [], serviceName = '', permissionN
         }
     }
     if (!selectedScope || !selectedScope.allow) {
-        throw new Error(`You are not allowed to perform this action for dataset_id of ${datasetID} resource type of ${resourceType} on resource id of ${resourceID}`);
+        throw new AuthV1Error({
+            message:`You are not allowed to perform this action for dataset_id of ${datasetID} resource type of ${resourceType} on resource id of ${resourceID}`,
+            status:'forbidden',
+        });
     }
-    return selectedScope.allow;
+    return selectedScope;
 };
 
 const processScope = (scope, allow) => {
@@ -100,13 +105,12 @@ const splitSubject = (subject) => {
     let datasetID = fields[3];
     let principalID = fields[4];
     let identityID = fields[5];
-    let subjectInformation = {
+    return {
         stack_name: stackName,
         dataset_id: datasetID,
         principal_secure_id: principalID,
         identity_secure_id: identityID,
     };
-    return subjectInformation;
 };
 
 const extractResourceID = (obj, scope) => {

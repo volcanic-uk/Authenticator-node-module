@@ -22,7 +22,7 @@ class Authorization extends V1Base {
             this.privileges = await this.privilege.setToken(this.token).getByToken();
             Cache.put(cacheKey, this.privileges, 10);
         }
-        checkAuthorization({
+        return checkAuthorization({
             privilegesList: this.privileges,
             serviceName,
             permissionName,
@@ -30,7 +30,6 @@ class Authorization extends V1Base {
             resourceID,
             datasetID
         });
-        return true;
     }
 }
 
