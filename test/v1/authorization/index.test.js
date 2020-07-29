@@ -40,7 +40,7 @@ describe('Authorization tests', function () {
             resourceType: 'identity',
             resourceID: '1'
         });
-        expect(result).to.eq(true);
+        expect(result).to.be.an('object');
     });
 
     it('should not authorize the request if required privileges are missing', async () => {
