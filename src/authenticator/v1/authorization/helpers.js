@@ -37,8 +37,10 @@ const checkAuthorization = ({ privilegesList = [], serviceName = '', permissionN
     }
     if (!selectedScope || !selectedScope.allow) {
         throw new AuthV1Error({
-            message:`You are not allowed to perform this action for dataset_id of ${datasetID} resource type of ${resourceType} on resource id of ${resourceID}`,
-            status:'forbidden',
+            message: `You are not allowed to perform this action for dataset_id of ${datasetID} resource type of ${resourceType} on resource id of ${resourceID}`,
+            status: 'forbidden',
+            requestID: '',
+            statusCode: 403
         });
     }
     return selectedScope;
