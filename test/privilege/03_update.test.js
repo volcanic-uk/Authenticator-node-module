@@ -2,6 +2,7 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     { nock, nockLogin } = require('../helpers'),
     Privilege = require('../../v1').Privilege,
+    timeStamp = Math.floor(Date.now() / 1000),
     expect = chai.expect;
 chai.use(chaiAsPromised);
 
@@ -11,7 +12,7 @@ describe('Update privileges', () => {
             nock('/privileges/123412', 'post', {
                 permission_id: 1,
                 group_id: 1,
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}`,
                 allow: true,
                 tag: 'privilege-tag'
             }, 404, {
@@ -20,7 +21,7 @@ describe('Update privileges', () => {
             nockLogin();
             await new Privilege().withAuth().update({
                 id: 123412,
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}`,
                 permission_id: 1,
                 group_id: 1,
                 allow: true,
@@ -37,13 +38,13 @@ describe('Update privileges', () => {
         nock('/privileges/4', 'post', {
             permission_id: 1,
             group_id: 1,
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}1`,
             allow: true,
             tag: 'privilege-tag'
         }, 200, {
             response: {
                 id: 4,
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}1`,
                 permission_id: 1,
                 group_id: 1,
                 allow: true,
@@ -56,7 +57,7 @@ describe('Update privileges', () => {
         nockLogin();
         let update = await new Privilege().withAuth().update({
             id: 4,
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}1`,
             permission_id: 1,
             group_id: 1,
             allow: true,

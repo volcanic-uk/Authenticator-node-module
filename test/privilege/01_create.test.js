@@ -2,6 +2,7 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
     Privilege = require('../../v1/index').Privilege,
+    timeStamp = Math.floor(Date.now() / 1000),
     { nock, nockLogin } = require('../helpers');
 chai.use(chaiAsPromised);
 
@@ -10,7 +11,7 @@ describe('creates privilege', () => {
     it('fails when the token is invalid', async () => {
         try {
             nock('/privileges', 'post', {
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}`,
                 permission_id: 1,
                 group_id: 1,
                 allow: true,
@@ -19,7 +20,7 @@ describe('creates privilege', () => {
                 message: 'UNAUTHORIZED', errorCode: 3001
             });
             await new Privilege().setToken('sometoken').create({
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}`,
                 permission_id: 1,
                 group_id: 1,
                 allow: true,
@@ -34,14 +35,14 @@ describe('creates privilege', () => {
     it('creates a new privilege', async () => {
         nockLogin();
         nock('/privileges', 'post', {
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp + 1}`,
             permission_id: 1,
             group_id: 1,
             allow: true,
             tag:'privilege-tag'
         }, 201, {
             response: {
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp + 1}`,
                 permission_id: 1,
                 group_id: 1,
                 subject_id: '2',
@@ -53,7 +54,7 @@ describe('creates privilege', () => {
             }
         });
         let create = await new Privilege().withAuth().create({
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp + 1}`,
             permission_id: 1,
             group_id: 1,
             allow: true,
@@ -64,14 +65,14 @@ describe('creates privilege', () => {
     it('creates a new privilege', async () => {
         nockLogin();
         nock('/privileges', 'post', {
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp + 2}`,
             permission_id: 1,
             group_id: 1,
             allow: true,
             tag:'privilege-tag'
         }, 201, {
             response: {
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp + 2}`,
                 permission_id: 1,
                 group_id: 1,
                 subject_id: '2',
@@ -83,7 +84,7 @@ describe('creates privilege', () => {
             }
         });
         let create = await new Privilege().withAuth().create({
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp + 2}`,
             permission_id: 1,
             group_id: 1,
             allow: true,

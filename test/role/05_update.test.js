@@ -2,6 +2,7 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     { nock, nockLogin } = require('../helpers'),
     Role = require('../../v1').Roles,
+    timeStamp = Math.floor(Date.now() / 1000),
     expect = chai.expect;
 chai.use(chaiAsPromised);
 describe('Role update', async () => {
@@ -9,11 +10,11 @@ describe('Role update', async () => {
     it('updates the requested role', async () => {
         nockLogin();
         nock('/roles/8', 'post', {
-            name: 'updated-name', privileges: [1, 2], parent_role_id: null
+            name: `role-update-${timeStamp}`, privileges: [1, 2], parent_role_id: null
         }, 200, {
             response: {
                 id: 8,
-                name: 'updated-name',
+                name: `role-update-${timeStamp}`,
                 service_id: 2,
                 created_at: '2019-11-01T03:53:46.332Z',
                 updated_at: '2019-11-01T06:19:34.255Z'
@@ -21,7 +22,7 @@ describe('Role update', async () => {
         });
         updateRole = await new Role().withAuth().update({
             id: 8,
-            name: 'updated-name',
+            name: `role-update-${timeStamp}`,
             privileges: [1, 2],
             parent_id: null
         });
@@ -30,11 +31,11 @@ describe('Role update', async () => {
     it('updates the parent_id of requested role', async () => {
         nockLogin();
         nock('/roles/7', 'post', {
-            name: 'updated-name', privileges: [1, 2], parent_role_id: updateRole.id
+            name: `role-update-parent-${timeStamp}`, privileges: [1, 2], parent_role_id: updateRole.id
         }, 200, {
             response: {
                 id: 7,
-                name: 'updated-name',
+                name: `role-update-parent-${timeStamp}`,
                 service_id: 2,
                 created_at: '2019-11-01T03:53:46.332Z',
                 updated_at: '2019-11-01T06:19:34.255Z'
@@ -42,7 +43,7 @@ describe('Role update', async () => {
         });
         let update = await new Role().withAuth().update({
             id: 7,
-            name: 'updated-name',
+            name: `role-update-parent-${timeStamp}`,
             privileges: [1, 2],
             parent_id: updateRole.id
         });
