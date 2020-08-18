@@ -1,4 +1,4 @@
-const { Token } = require('../v1/index').Token;
+const { Token } = require('@volcanic-uk/auth-module/v1');
 const HTTP_STATUS_CODES = require('http-status-codes');
 
 module.exports = async (req, res, next) => {
