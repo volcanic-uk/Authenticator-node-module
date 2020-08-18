@@ -1,4 +1,4 @@
-const { Authorization } = require('@volcanic-uk/auth-module/v1');
+const { Authorization } = require('../authorization');
 let t;
 module.exports = async (req, res, next) => {
     if (req.headers.authorization) {
