@@ -1,8 +1,8 @@
 const Authorization = require('../authorization/index');
-let t;
+let token;
 module.exports = async (req, res, next) => {
     if (req.headers.authorization) {
-        t = req.headers.authorization.split(' ')[1];
+        token = req.headers.authorization.split(' ')[1];
     }
     req.authorize = await authorize;
     next();
@@ -10,6 +10,6 @@ module.exports = async (req, res, next) => {
 
 };
 const authorize = async function (object) {
-    const authorization = new Authorization().setToken(t);
+    const authorization = new Authorization().setToken(token);
     await authorization.authorize(object);
 };
