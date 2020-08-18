@@ -10,6 +10,7 @@ const Group = require('../src/authenticator/v1/groups');
 const Roles = require('../src/authenticator/v1/roles');
 const Privilege = require('../src/authenticator/v1/privileges');
 const Authorization = require('../src/authenticator/v1/authorization');
+const AuthenticationMiddleware = require('../src/authenticator/v1/middleware/authentication');
 module.exports = {
     Principal,
     Identity,
@@ -22,5 +23,6 @@ module.exports = {
     Group,
     Roles,
     Privilege,
-    Authorization
+    Authorization,
+    AuthenticationMiddleware
 };
