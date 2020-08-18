@@ -1,4 +1,4 @@
-const { Authorization } = require('../authorization');
+const { Authorization } = require('../authorization/index');
 let t;
 module.exports = async (req, res, next) => {
     if (req.headers.authorization) {
