@@ -1,6 +1,5 @@
-const  Token  = require('../token');
+const Token = require('../token');
 const HTTP_STATUS_CODES = require('http-status-codes');
-
 module.exports = async (req, res, next) => {
 
     let authorizationHeader = req.headers.authorization || null;

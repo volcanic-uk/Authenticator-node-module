@@ -1,4 +1,4 @@
-const  Authorization  = require('../authorization/index');
+const Authorization = require('../authorization/index');
 let t;
 module.exports = async (req, res, next) => {
     if (req.headers.authorization) {
@@ -10,9 +10,6 @@ module.exports = async (req, res, next) => {
 
 };
 const authorize = async function (object) {
-    object.serviceName = 'aggregator';
     const authorization = new Authorization().setToken(t);
     await authorization.authorize(object);
-
-
 };

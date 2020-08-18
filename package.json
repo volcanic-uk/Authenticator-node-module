@@ -22,6 +22,8 @@
   "homepage": "https://github.com/volcanic-uk/Authenticator-node-module#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "http-status-code": "^2.1.0",
+    "http-status-codes": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
     "node-cache": "^5.1.0"
   },

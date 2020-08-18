@@ -35,6 +35,13 @@ class Roles extends V1Base {
     async delete(id) {
         return super.fetch('delete', `roles/${id}`, null);
     }
+
+    async attachPrivileges(id, privilege_ids) {
+        let body = {
+            privilege_ids: privilege_ids
+        };
+        return super.fetch('post', `roles/${id}/privileges/attach`, null, body);
+    }
 }
 
 module.exports = Roles;

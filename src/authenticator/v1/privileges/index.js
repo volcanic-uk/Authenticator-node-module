@@ -45,6 +45,7 @@ class Privileges extends V1Base {
     async delete(id) {
         return super.fetch('delete', `privileges/${id}`, null);
     }
+
 }
 
 module.exports = Privileges;
