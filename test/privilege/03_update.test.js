@@ -12,7 +12,8 @@ describe('Update privileges', () => {
                 permission_id: 1,
                 group_id: 1,
                 scope: 'vrn:{stack}:{dataset}:jobs/*',
-                allow: true
+                allow: true,
+                tag: 'privilege-tag'
             }, 404, {
                 message: 'Privilege does not exist', errorCode: 8001
             });
@@ -22,7 +23,8 @@ describe('Update privileges', () => {
                 scope: 'vrn:{stack}:{dataset}:jobs/*',
                 permission_id: 1,
                 group_id: 1,
-                allow: true
+                allow: true,
+                tag: 'privilege-tag'
             });
             throw 'should not reach this line, because the id doesnt exist';
         } catch (e) {
@@ -36,7 +38,8 @@ describe('Update privileges', () => {
             permission_id: 1,
             group_id: 1,
             scope: 'vrn:{stack}:{dataset}:jobs/*',
-            allow:true
+            allow: true,
+            tag: 'privilege-tag'
         }, 200, {
             response: {
                 id: 4,
@@ -44,6 +47,7 @@ describe('Update privileges', () => {
                 permission_id: 1,
                 group_id: 1,
                 allow: true,
+                tag: 'privilege-tag',
                 subject_id: null,
                 created_at: '2019-10-31T09:33:20.570Z',
                 updated_at: '2019-11-01T03:14:25.349Z'
@@ -55,7 +59,8 @@ describe('Update privileges', () => {
             scope: 'vrn:{stack}:{dataset}:jobs/*',
             permission_id: 1,
             group_id: 1,
-            allow:true
+            allow: true,
+            tag: 'privilege-tag'
         });
         expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
     });

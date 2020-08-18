@@ -13,7 +13,8 @@ describe('creates privilege', () => {
                 scope: 'vrn:{stack}:{dataset}:jobs/*',
                 permission_id: 1,
                 group_id: 1,
-                allow: true
+                allow: true,
+                tag:'privilege-tag'
             }, 401, {
                 message: 'UNAUTHORIZED', errorCode: 3001
             });
@@ -21,7 +22,8 @@ describe('creates privilege', () => {
                 scope: 'vrn:{stack}:{dataset}:jobs/*',
                 permission_id: 1,
                 group_id: 1,
-                allow: true
+                allow: true,
+                tag:'privilege-tag'
             });
             throw 'must not reach this line because the token is invalid';
         } catch (e) {
@@ -35,13 +37,15 @@ describe('creates privilege', () => {
             scope: 'vrn:{stack}:{dataset}:jobs/*',
             permission_id: 1,
             group_id: 1,
-            allow: true
+            allow: true,
+            tag:'privilege-tag'
         }, 201, {
             response: {
                 scope: 'vrn:{stack}:{dataset}:jobs/*',
                 permission_id: 1,
                 group_id: 1,
                 subject_id: '2',
+                tag:'privilege-tag',
                 allow: true,
                 updated_at: '2019-11-01T01:56:12.001Z',
                 created_at: '2019-11-01T01:56:12.001Z',
@@ -52,7 +56,8 @@ describe('creates privilege', () => {
             scope: 'vrn:{stack}:{dataset}:jobs/*',
             permission_id: 1,
             group_id: 1,
-            allow: true
+            allow: true,
+            tag:'privilege-tag'
         });
         expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
@@ -62,13 +67,15 @@ describe('creates privilege', () => {
             scope: 'vrn:{stack}:{dataset}:jobs/*',
             permission_id: 1,
             group_id: 1,
-            allow: true
+            allow: true,
+            tag:'privilege-tag'
         }, 201, {
             response: {
                 scope: 'vrn:{stack}:{dataset}:jobs/*',
                 permission_id: 1,
                 group_id: 1,
                 subject_id: '2',
+                tag:'privilege-tag',
                 allow: true,
                 updated_at: '2019-11-01T01:56:12.001Z',
                 created_at: '2019-11-01T01:56:12.001Z',
@@ -79,7 +86,8 @@ describe('creates privilege', () => {
             scope: 'vrn:{stack}:{dataset}:jobs/*',
             permission_id: 1,
             group_id: 1,
-            allow: true
+            allow: true,
+            tag:'privilege-tag'
         });
         expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
