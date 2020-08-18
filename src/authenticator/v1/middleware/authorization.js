@@ -1,5 +1,4 @@
-const { Authorization } = require('@volcanic-uk/auth-module/v1'),
-    { DISABLE_AUTHENTICATION_AUTHORIZATION, NODE_ENV } = require('@volcanic-uk/aggregator/config');
+const { Authorization } = require('@volcanic-uk/auth-module/v1');
 let t;
 module.exports = async (req, res, next) => {
     if (req.headers.authorization) {
