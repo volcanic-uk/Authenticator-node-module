@@ -87,7 +87,6 @@ exports.generateIdentityOrPrincipal = async (type, name, timeStamp = null) => {
             return response.id;
         }
     } else {
-        console.log('check here');
         return constants[name];
     }
 };
