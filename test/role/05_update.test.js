@@ -9,11 +9,11 @@ describe('Role update', async () => {
     it('updates the requested role', async () => {
         nockLogin();
         nock('/roles/8', 'post', {
-            name: 'updated-name', privileges: [1, 2], parent_role_id: null
+            name: 'updated-name-1', privileges: [1, 2], parent_role_id: null
         }, 200, {
             response: {
                 id: 8,
-                name: 'updated-name',
+                name: 'updated-name-1',
                 service_id: 2,
                 created_at: '2019-11-01T03:53:46.332Z',
                 updated_at: '2019-11-01T06:19:34.255Z'
@@ -21,7 +21,7 @@ describe('Role update', async () => {
         });
         updateRole = await new Role().withAuth().update({
             id: 8,
-            name: 'updated-name',
+            name: 'updated-name-1',
             privileges: [1, 2],
             parent_id: null
         });

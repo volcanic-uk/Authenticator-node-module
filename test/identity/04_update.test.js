@@ -39,9 +39,7 @@ describe('Identity update', () => {
             let updatedIdentity = await new Identity().withAuth().update({
                 name: 'new_identity_test_name',
                 id: identityId
-            })
-
-            ; //check identity creation id here
+            }); //check identity creation id here
             expect(updatedIdentity.name).to.equal('new_identity_test_name');
         });
 

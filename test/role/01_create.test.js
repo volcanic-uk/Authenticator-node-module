@@ -45,10 +45,10 @@ describe('role creates', () => {
     it('creates a new role with parent role id', async () => {
         nockLogin();
         nock('/roles', 'post', {
-            name: 'role-test', privileges: [1, 2], parent_role_id: null
+            name: 'role-test-1', privileges: [1, 2], parent_role_id: null
         }, 201, {
             response: {
-                name: 'role_test',
+                name: 'role_test-1',
                 subject_id: '2',
                 updated_at: '2019-11-01T03:53:46.332Z',
                 created_at: '2019-11-01T03:53:46.332Z',
@@ -56,16 +56,16 @@ describe('role creates', () => {
             }
         });
         createRole = await new Role().withAuth().create({
-            name: 'role-test',
+            name: 'role-test-1',
             privileges: [1, 2],
             parent_role_id: null
         });
         nockLogin();
         nock('/roles', 'post', {
-            name: 'role-test', privileges: [1, 2], parent_role_id: createRole.id
+            name: 'role-test-2', privileges: [1, 2], parent_role_id: createRole.id
         }, 201, {
             response: {
-                name: 'role-test',
+                name: 'role-test-2',
                 subject_id: null,
                 parent_id: createRole.id,
                 updated_at: '2020-06-04T07:46:23.390Z',
@@ -74,7 +74,7 @@ describe('role creates', () => {
             }
         });
         createRole2 = await new Role().withAuth().create({
-            name: 'role-test',
+            name: 'role-test-2',
             privileges: [1, 2],
             parent_id: createRole.id
         });

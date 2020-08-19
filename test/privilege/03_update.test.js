@@ -2,6 +2,7 @@ const chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     { nock, nockLogin } = require('../helpers'),
     Privilege = require('../../v1').Privilege,
+    timeStamp = Math.floor(Date.now() / 1000),
     expect = chai.expect;
 chai.use(chaiAsPromised);
 
@@ -11,18 +12,20 @@ describe('Update privileges', () => {
             nock('/privileges/123412', 'post', {
                 permission_id: 1,
                 group_id: 1,
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
-                allow: true
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}`,
+                allow: true,
+                tag: 'privilege-tag'
             }, 404, {
                 message: 'Privilege does not exist', errorCode: 8001
             });
             nockLogin();
             await new Privilege().withAuth().update({
                 id: 123412,
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}`,
                 permission_id: 1,
                 group_id: 1,
-                allow: true
+                allow: true,
+                tag: 'privilege-tag'
             });
             throw 'should not reach this line, because the id doesnt exist';
         } catch (e) {
@@ -35,15 +38,17 @@ describe('Update privileges', () => {
         nock('/privileges/4', 'post', {
             permission_id: 1,
             group_id: 1,
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
-            allow:true
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}1`,
+            allow: true,
+            tag: 'privilege-tag-update'
         }, 200, {
             response: {
                 id: 4,
-                scope: 'vrn:{stack}:{dataset}:jobs/*',
+                scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}1`,
                 permission_id: 1,
                 group_id: 1,
                 allow: true,
+                tag: 'privilege-tag',
                 subject_id: null,
                 created_at: '2019-10-31T09:33:20.570Z',
                 updated_at: '2019-11-01T03:14:25.349Z'
@@ -52,10 +57,11 @@ describe('Update privileges', () => {
         nockLogin();
         let update = await new Privilege().withAuth().update({
             id: 4,
-            scope: 'vrn:{stack}:{dataset}:jobs/*',
+            scope: `vrn:{stack}:{dataset}:jobs/${timeStamp}1`,
             permission_id: 1,
             group_id: 1,
-            allow:true
+            allow: true,
+            tag: 'privilege-tag-update'
         });
         expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
