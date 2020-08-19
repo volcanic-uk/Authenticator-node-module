@@ -13,7 +13,7 @@ const authorize = function (auth_token, serviceNameMain) {
     return async function ({ permissionName, resourceType, resourceID, datasetID, serviceName }) {
         const authorization = new Authorization().setToken(auth_token);
         await authorization.authorize({
-            serviceName:serviceName || serviceNameMain,
+            serviceName: serviceName || serviceNameMain,
             permissionName,
             resourceType,
             resourceID,
