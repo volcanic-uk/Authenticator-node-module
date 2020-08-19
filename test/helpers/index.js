@@ -72,14 +72,22 @@ exports.generateToken = async () => {
 exports.generateIdentityOrPrincipal = async (type, name, timeStamp = null) => {
     if (ENV_VARS.NOCK_OFF === 'true') {
         if (type === 'identity') {
-            let response = await new Identity().withAuth().create(`identity_test_${timeStamp}`, null, 'volcanic');
+            let response = await new Identity().withAuth().create({
+                name: `identity_test_${timeStamp}`,
+                secret: null,
+                principal_id: 'volcanic'
+            });
             return response.id;
         }
         if (type === 'principal') {
-            let response = await new Principal().withAuth().create(`principal_test_${timeStamp}`, '111');
+            let response = await new Principal().withAuth().create({
+                name: `principal_test_${timeStamp}`,
+                dataset_id: '111'
+            });
             return response.id;
         }
     } else {
+        console.log('check here');
         return constants[name];
     }
 };

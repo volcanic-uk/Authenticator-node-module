@@ -43,12 +43,12 @@ describe('attach privileges to role', () => {
             nock('/roles/1/privileges/attach', 'post', {
                 privilege_ids: 1
             }, 422, {
-                message: { privileges: '"privileges" must be an array' }
+                message: { privilege_ids: '"privilege_ids" must be an array' }
             });
             await new Role().withAuth().attachPrivileges(1, 1);
             throw 'should not reach this line, privileges are not an array';
         } catch (e) {
-            expect(e.message.privileges).to.equal('"privileges" must be an array');
+            expect(e.message.privilege_ids).to.equal('"privilege_ids" must be an array');
         }
     });
 

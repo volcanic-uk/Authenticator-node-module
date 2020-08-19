@@ -68,14 +68,14 @@ describe('creates privilege', () => {
             permission_id: 1,
             group_id: 1,
             allow: true,
-            tag:'privilege-tag'
+            tag:'privilege-tag-2'
         }, 201, {
             response: {
                 scope: 'vrn:{stack}:{dataset}:jobs/*',
                 permission_id: 1,
                 group_id: 1,
                 subject_id: '2',
-                tag:'privilege-tag',
+                tag:'privilege-tag-2',
                 allow: true,
                 updated_at: '2019-11-01T01:56:12.001Z',
                 created_at: '2019-11-01T01:56:12.001Z',
@@ -87,7 +87,7 @@ describe('creates privilege', () => {
             permission_id: 1,
             group_id: 1,
             allow: true,
-            tag:'privilege-tag'
+            tag:'privilege-tag-2'
         });
         expect(create).to.be.an.instanceOf(Object).and.have.property('group_id');
     });

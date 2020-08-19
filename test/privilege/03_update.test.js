@@ -39,7 +39,7 @@ describe('Update privileges', () => {
             group_id: 1,
             scope: 'vrn:{stack}:{dataset}:jobs/*',
             allow: true,
-            tag: 'privilege-tag'
+            tag: 'privilege-tag-update'
         }, 200, {
             response: {
                 id: 4,
@@ -60,7 +60,7 @@ describe('Update privileges', () => {
             permission_id: 1,
             group_id: 1,
             allow: true,
-            tag: 'privilege-tag'
+            tag: 'privilege-tag-update'
         });
         expect(update).to.be.an.instanceOf(Object).and.have.property('group_id');
     });
