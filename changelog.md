@@ -1,8 +1,15 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
-## [1.1.4] - Set date before release
+## [1.1.5] - 25-08-2020
 ### Added
-- Middlewares added to the node-module and tests fix 
+- Authentication and Authorization middleware
+- Better testing coverage
+- Add tag to privileges API 
+
+## [1.1.4] - 29-07-2020
+### Added
+- update forbidden errors
+
 ## [1.1.3] - 29-07-2020
 ### Changes
 - Throw AuthV1Error for forbidden access (AUTH-420)
