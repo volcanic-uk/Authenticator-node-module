@@ -8,8 +8,13 @@ module.exports = async (req, res, next) => {
         return;
     }
     let tokenValue = authorizationHeader.substr(7, authorizationHeader.length - 1);
-    let validateToken = await new Token().setToken(tokenValue).remoteValidation();
+    let token = new Token().setToken(tokenValue);
+    let validateToken = await token.remoteValidation();
     if (validateToken) {
+        req.custom = {
+            tokenData: { ...token.decoded },
+            parsedSubject: token.parseSubject()
+        };
         next();
     } else {
         res.status(HTTP_STATUS_CODES.UNAUTHORIZED).json({ 'message': 'UNAUTHORIZED' });

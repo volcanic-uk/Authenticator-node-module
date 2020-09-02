@@ -20,7 +20,7 @@ class Authorization extends V1Base {
         this.privileges = Cache.get(cacheKey);
         if (!this.privileges) {
             this.privileges = await this.privilege.setToken(this.token).getByToken();
-            Cache.put(cacheKey, this.privileges, 10);
+            Cache.put(cacheKey, this.privileges, 300);
         }
         return checkAuthorization({
             privilegesList: this.privileges,

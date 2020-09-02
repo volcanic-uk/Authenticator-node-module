@@ -1,4 +1,4 @@
-const Authorization = require('../authorization/index');
+const Authorization = require('../authorization');
 const authorization = function (serviceName) {
     return async function (req, res, next) {
         let auth_token;
