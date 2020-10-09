@@ -39,6 +39,12 @@ class Groups extends V1Base {
     async delete(id) {
         return super.fetch('delete', `groups/${id}`, null);
     }
+    async attachPermissions(id, permission_ids) {
+        let body = {
+            permission_ids: permission_ids
+        };
+        return super.fetch('post', `groups/${id}/permissions/attach`, null, body);
+    }
 }
 
 module.exports = Groups;
