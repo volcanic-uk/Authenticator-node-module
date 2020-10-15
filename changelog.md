@@ -1,13 +1,14 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
+## [1.1.7] - 15-10-2020
+### Added
+- Attach permissions to group
+
 ## [1.1.6] - 02-09-2020
 ### Added
 - Attach token, subject and subject details to express authentication middleware
 - Increase the time of caching privileges in authorization class to 5 minutes
-## [1.1.6] - set-date
-### Added
-- Permissions attach to groups
 
 ## [1.1.5] - 25-08-2020
 ### Added
