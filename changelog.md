@@ -1,7 +1,18 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
-## [1.1.8] - 09-11-2020
+## [1.1.9] - 11-11-2020
+### Added
+- Add support to module import and named imports 
+- Add types to the following 
+ - Principal.create
+ - Principal.getByID
+ - Principal.getPrincipals
+ - Identity.resetSecret
+ - Identity.getIdentities
+ - Identity.create
+
+## [1.1.8] - 11-11-2020
 ### Added
 - Add index.d.ts for TS support
 - Add "main", "files" and "types" to package.json to reduce package download size via npm install on consumers node_modules
