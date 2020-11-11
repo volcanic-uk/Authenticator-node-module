@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
+## [1.1.8] - 09-11-2020
+### Added
+- Add index.d.ts for TS support
+- Add "main", "files" and "types" to package.json to reduce package download size via npm install on consumers node_modules
+
 ## [1.1.7] - 15-10-2020
 ### Added
 - Attach permissions to group
