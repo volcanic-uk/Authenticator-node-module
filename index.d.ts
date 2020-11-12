@@ -1,8 +1,9 @@
 
 declare namespace AuthV1 {
   type DomainHostString = string;
-
-  export type LoginParams = {
+  type HTTPMethods = "POST" | "GET" | "PATCH" | "DELETE" | "PUT"
+  type SortParam = "name"| "created_at"| "updated_at"| "dataset_id"
+  export interface LoginParams {
     name: string;
     secret: string;
     datasetId: string;
@@ -21,12 +22,12 @@ declare namespace AuthV1 {
     stack_id: string;
   }
 
-  export type ILoginToken = {
+  export interface ILoginToken {
     token: string;
     checksum: string;
   }
 
-  export type SubjectObject = {
+  export interface SubjectObject {
     actor: string;
     stack_id: string;
     dataset_id: string;
@@ -65,6 +66,10 @@ declare namespace AuthV1 {
     requestID: null | string;
     errorMessage: null | any;
     errorCode: null | string;
+    withAuth(): this;
+    obtainToken(): string;
+    internalLogin(): Promise<unknown>;
+    fetch(methodType: HTTPMethods): Promise<unknown>
   }
 
   export interface INewIdentity {
@@ -146,15 +151,15 @@ declare namespace AuthV1 {
     deleted_at: null | string;
   }
 
-  export interface IPrincipalSearchParams {
+  export interface AuthSearchParams {
     query?: string;
     dataset_id?: string;
     page?: string | number;
     page_size?: string | number;
     /**
-     * @default "id"
+     * @default "created_at"
      */
-    sort?: string;
+    sort?: SortParam;
     /**
      * @default "asc"
      */
@@ -162,8 +167,9 @@ declare namespace AuthV1 {
     name?: string;
     ids?: string
   }
+  export interface IPrincipalSearchParams extends AuthSearchParams {}
 
-  export interface IIdentitySearchParams extends IPrincipalSearchParams {
+  export interface IIdentitySearchParams extends AuthSearchParams {
     principal_id?: string
   }
 
@@ -190,6 +196,10 @@ declare namespace AuthV1 {
 }
 
 declare const AuthModule: {
+  Identity: Identity
+  Token: Token
+  Principal: Principal
+  Config: AuthV1.Config
   Key: Key
   Permission: Permission
   Subject: Subject
@@ -208,6 +218,8 @@ export class Identity extends AuthV1.V1Base {
   create(identity: AuthV1.INewIdentity): Promise<AuthV1.IdentityResponse>
   resetSecret(input: { secret: null | string, id: string }): Promise<AuthV1.resetIndentitySecretResponse>
   getIdentities(searchParams: AuthV1.IIdentitySearchParams): Promise<AuthV1.IlistIdentityResponse>
+  deactivateIdentity(secure_id: string): Promise<{ result: string }>
+  activateIdentity(secure_id: string): Promise<{ message: string }>
 }
 export class Token extends AuthV1.V1Base {
   validate(token: string): Promise<boolean>

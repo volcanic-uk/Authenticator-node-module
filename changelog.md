@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
-## [1.1.9] - 11-11-2020
+## [1.1.9] - 12-11-2020
 ### Added
 - Add support to module import and named imports 
 - Add types to the following 
@@ -11,6 +11,10 @@ All notable changes to Auth module will be documented in this file.
  - Identity.resetSecret
  - Identity.getIdentities
  - Identity.create
+ - Identity.deactivateIdentity
+ - Identity.activateIdentity
+- Declare abstract super class V1Base to support instance functional chaining
+- FIX: Principal getPrincipals: change default sort value to "created_at" instead of "id" 
 
 ## [1.1.8] - 11-11-2020
 ### Added

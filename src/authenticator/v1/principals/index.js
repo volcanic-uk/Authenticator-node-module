@@ -45,7 +45,7 @@ class Principal extends V1Base {
      * @param ids ids of principals to search for
      * @returns {Promise<*|{status}|undefined>}
      */
-    async getPrincipals({ query = '', dataset_id = '', page = '', page_size = '', sort = 'id', order = 'asc', name = '', ids = '' }) {
+    async getPrincipals({ query = '', dataset_id = '', page = '', page_size = '', sort = 'created_at', order = 'asc', name = '', ids = '' }) {
         return super.fetch('get', `principals?query=${query}&dataset_id=${dataset_id}&page=${page}&page_size=${page_size}&sort=${sort}&order=${order}&name=${name}&ids=${ids}`, null);
     }
 
