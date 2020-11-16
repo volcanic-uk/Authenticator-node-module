@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
-## [1.1.9] - 12-11-2020
+## [1.1.9] - 16-11-2020
 ### Added
 - Add support to module import and named imports 
 - Add types to the following 
