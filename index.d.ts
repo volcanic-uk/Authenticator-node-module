@@ -411,8 +411,8 @@ export class Identity extends AuthV1.V1Base {
   getIdentities(
     searchParams: AuthV1.IIdentitySearchParams
   ): Promise<AuthV1.IlistIdentityResponse>
-  deactivateIdentity(secure_id: string): Promise<{ result: string }>
-  activateIdentity(secure_id: string): Promise<{ message: string }>
+  deactivateIdentity(secure_id: string): Promise<{ message: string; status: boolean }>
+  activateIdentity(secure_id: string): Promise<{ message: string; status: boolean }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
   getByID(secure_id: string): Promise<{ message: string }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
