@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
-## [1.2.1] - set date
+## [1.2.1] - 17-11-2020
 ### Changes
 - Add a new class to support VRN (AUTH-414)
 - Add VRN parser (AUTH-414)
