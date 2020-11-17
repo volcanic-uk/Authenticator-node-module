@@ -395,7 +395,7 @@ declare const AuthModule: {
 
 export default AuthModule
 export class Identity extends AuthV1.V1Base {
-  login(opts: AuthV1.LoginParams): Promise<AuthV1.ILoginToken>
+  login(name: string, secret: string, audience: string[], datasetId: string): Promise<AuthV1.ILoginToken>
   create(identity: AuthV1.INewIdentity): Promise<AuthV1.IdentityResponse>
   update(identity: AuthV1.IUpdateIdentity): Promise<AuthV1.IdentityResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF updatePrivileges`
