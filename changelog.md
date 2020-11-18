@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
+## [1.2.2] - 17-11-2020
+### Changes
+- Add typing definition for the base class method `setToken` and provide a typed response for the new Identity().logout() function
+
 ## [1.2.1] - 17-11-2020
 ### Changes
 - Add a new class to support VRN (AUTH-414)

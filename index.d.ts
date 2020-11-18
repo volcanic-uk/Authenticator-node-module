@@ -418,6 +418,11 @@ export class Identity extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(secure_id: string): Promise<{ message: string }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF logout`
+  /**
+   * @note logout an active user. This function depends on the attached Authorization header 
+   * If you'd like to logout an existing user but not your service access you should use the 
+   * Identity instance method setToken and provide the user's access token
+   */
   logout(): Promise<null>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF generateToken`
   generateToken(input: AuthV1.IGenerateToken): Promise<AuthV1.IdentityResponse>
