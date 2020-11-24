@@ -178,7 +178,7 @@ declare namespace AuthV1 {
     /**
      * @default []
      */
-    expiry_date?: Date
+    expiry_date?: number | string | Date
     /**
      * @default null
      */
@@ -240,15 +240,15 @@ declare namespace AuthV1 {
     ids?: string
   }
 
-  export interface IPrincipalSearchParams extends AuthSearchParams {}
+  export interface IPrincipalSearchParams extends AuthSearchParams { }
 
-  export interface IPermissionSearchParams extends AuthSearchParams {}
+  export interface IPermissionSearchParams extends AuthSearchParams { }
 
-  export interface IServiceSearchParams extends AuthSearchParams {}
+  export interface IServiceSearchParams extends AuthSearchParams { }
 
-  export interface IGroupsSearchParams extends AuthSearchParams {}
+  export interface IGroupsSearchParams extends AuthSearchParams { }
 
-  export interface IRolesSearchParams extends AuthSearchParams {}
+  export interface IRolesSearchParams extends AuthSearchParams { }
 
   export interface IPrivilegesSearchParams extends AuthSearchParams {
     scope?: string
@@ -425,7 +425,7 @@ export class Identity extends AuthV1.V1Base {
    */
   logout(): Promise<null>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF generateToken`
-  generateToken(input: AuthV1.IGenerateToken): Promise<AuthV1.IdentityResponse>
+  generateToken(input: AuthV1.IGenerateToken): Promise<{ token: string; checksum: string }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getIdentityById`
   getIdentityById(id: string): Promise<AuthV1.IdentityResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getRoles`
@@ -596,4 +596,4 @@ export class AuthorizationMiddleware extends AuthV1.V1Base {
   ): Promise<AuthV1.PrincipalResponse>
 }
 
-export class AuthenticationMiddleware extends AuthV1.V1Base {}
+export class AuthenticationMiddleware extends AuthV1.V1Base { }
