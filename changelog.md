@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
+## [1.2.4] - 7-1-2021
+### Changes
+- Fix missing ids filter at getIdentities
+
 ## [1.2.3] - 24-11-2020
 ### Changes
 - Fix typing definition for new Identity().generateToken() response and expiry date
