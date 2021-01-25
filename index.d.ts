@@ -388,7 +388,7 @@ declare namespace AuthV1 {
 
 
 export interface IAuthorizationMiddleware {
-  (serviceName: string, name: number): (req: Request, res: Response, next: NextFunction) => Promise<void>
+  (serviceName: string): (req: Request, res: Response, next: NextFunction) => Promise<void>
 }
 
 export interface IAuthenticationMiddleware {
