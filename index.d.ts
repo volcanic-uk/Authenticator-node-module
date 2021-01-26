@@ -1,3 +1,5 @@
+import { Request, Response, NextFunction } from 'express'
+
 declare namespace AuthV1 {
   type DomainHostString = string
   type HTTPMethods = "POST" | "GET" | "PATCH" | "DELETE" | "PUT"
@@ -374,6 +376,27 @@ declare namespace AuthV1 {
     resourceID: string
     datasetID: string | number
   }
+
+  export interface IScope {
+    allow: boolean;
+    stack?: string | null;
+    dataset_id?: string | null;
+    resourceType?: string | null;
+    resourceID?: string | null
+  }
+}
+
+
+export interface IAuthorizationMiddleware {
+  (serviceName: string): (req: Request, res: Response, next: NextFunction) => Promise<void>
+}
+
+export interface IAuthenticationMiddleware {
+  (req: Request, res: Response, next: NextFunction): Promise<void>
+}
+
+export interface AuthRequest extends Request {
+  authorize?: (obj: { permissionName: string, resourceType: string, resourceID: string }) => Promise<void>
 }
 
 declare const AuthModule: {
@@ -389,8 +412,9 @@ declare const AuthModule: {
   Roles: Roles
   Privilege: Privilege
   Authorization: Authorization
-  AuthenticationMiddleware: AuthenticationMiddleware
-  AuthorizationMiddleware: AuthorizationMiddleware
+  AuthV1Error: AuthV1Error
+  AuthenticationMiddleware: IAuthenticationMiddleware
+  AuthorizationMiddleware: IAuthorizationMiddleware
 }
 
 export default AuthModule
@@ -419,8 +443,8 @@ export class Identity extends AuthV1.V1Base {
   delete(secure_id: string): Promise<{ message: string }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF logout`
   /**
-   * @note logout an active user. This function depends on the attached Authorization header 
-   * If you'd like to logout an existing user but not your service access you should use the 
+   * @note logout an active user. This function depends on the attached Authorization header
+   * If you'd like to logout an existing user but not your service access you should use the
    * Identity instance method setToken and provide the user's access token
    */
   logout(): Promise<null>
@@ -582,18 +606,15 @@ export class Privilege extends AuthV1.V1Base {
 }
 
 export class Authorization extends AuthV1.V1Base {
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF authorize`
-  authorize(input: AuthV1.IAuthorizeObject): Promise<AuthV1.PrincipalResponse>
+  authorize(input: AuthV1.IAuthorizeObject): Promise<AuthV1.IScope>
 }
 
-export class AuthorizationMiddleware extends AuthV1.V1Base {
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF authorization`
-  authorization(serviceName: "string"): Promise<AuthV1.PrincipalResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF authorization`
-  authorize(
-    auth_token: "string",
-    serviceNameMain: "string"
-  ): Promise<AuthV1.PrincipalResponse>
+export class AuthV1Error extends Error {
+  statusCode: number;
+  requestID: string;
+  errorCode: number;
+  message: string;
+  dataError: string;
+  status: string;
+  getMessage(): string;
 }
-
-export class AuthenticationMiddleware extends AuthV1.V1Base { }

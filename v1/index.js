@@ -13,6 +13,7 @@ const Authorization = require('../src/authenticator/v1/authorization');
 const AuthenticationMiddleware = require('../src/authenticator/v1/middleware/authentication');
 const AuthorizationMiddleware = require('../src/authenticator/v1/middleware/authorization');
 const VRN = require('../src/authenticator/v1/vrn');
+const AuthV1Error = require('../src/authenticator/v1/errors');
 module.exports = {
     Principal,
     Identity,
@@ -28,5 +29,6 @@ module.exports = {
     Authorization,
     AuthenticationMiddleware,
     AuthorizationMiddleware,
-    VRN
+    VRN,
+    AuthV1Error
 };
