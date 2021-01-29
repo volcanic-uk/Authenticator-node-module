@@ -397,6 +397,23 @@ export interface IAuthenticationMiddleware {
 
 export interface AuthRequest extends Request {
   authorize?: (obj: { permissionName: string, resourceType: string, resourceID: string }) => Promise<void>
+  custom?: {
+    tokenData: {
+      sub?: string
+      exp?: number,
+      nbf?: number,
+      aud?: string[],
+      iat?: number,
+      iss?: string
+    };
+    parsedSubject: {
+      actor: string,
+      stack_id: string,
+      dataset_id: string,
+      principal_id: string,
+      identity_id: string
+    } | null;
+  }
 }
 
 declare const AuthModule: {
