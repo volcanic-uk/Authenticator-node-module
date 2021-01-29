@@ -400,6 +400,11 @@ export interface AuthRequest extends Request {
   custom?: {
     tokenData: {
       sub?: string
+      exp?: number,
+      nbf?: number,
+      aud?: string[],
+      iat?: number,
+      iss?: string
     };
     parsedSubject: {
       actor: string,
