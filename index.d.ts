@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction } from 'express';
+import {INewPrincipal, INewRole} from "./index";
 
 declare namespace AuthV1 {
   type DomainHostString = string
@@ -432,7 +433,12 @@ declare const AuthModule: {
   AuthV1Error: AuthV1Error
   AuthenticationMiddleware: IAuthenticationMiddleware
   AuthorizationMiddleware: IAuthorizationMiddleware
-}
+  INewPermission: AuthV1.INewPermission
+  INewGroup: AuthV1.INewGroup
+  INewPrivilege:AuthV1.INewPrivilege
+  INewPrincipal: AuthV1.INewPrincipal
+  INewRole: AuthV1.INewRole
+};
 
 export default AuthModule
 export class Identity extends AuthV1.V1Base {
