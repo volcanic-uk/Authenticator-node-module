@@ -395,6 +395,9 @@ export interface PrincipalResponse {
   last_active_date: null | string
   login_attempts: number
   active: boolean
+  data:{
+    length:number
+  }
   deleted_at: null | string
 }
 export interface AuthRequest extends Request {
