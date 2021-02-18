@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import {INewPrincipal, INewRole} from "./index";
 
 declare namespace AuthV1 {
   type DomainHostString = string
@@ -342,6 +341,10 @@ declare namespace AuthV1 {
     /**
      * @default null
      */
+    description?: string | null
+    /**
+     * @default null
+     */
     allow?: boolean
     /**
      * @default true
@@ -433,11 +436,6 @@ declare const AuthModule: {
   AuthV1Error: AuthV1Error
   AuthenticationMiddleware: IAuthenticationMiddleware
   AuthorizationMiddleware: IAuthorizationMiddleware
-  INewPermission: AuthV1.INewPermission
-  INewGroup: AuthV1.INewGroup
-  INewPrivilege:AuthV1.INewPrivilege
-  INewPrincipal: AuthV1.INewPrincipal
-  INewRole: AuthV1.INewRole
 };
 
 export default AuthModule
@@ -539,6 +537,7 @@ export class Permission extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(id: string): Promise<AuthV1.PrincipalResponse>
 }
+
 
 export class Subject extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getPrivilegesBySubject`
