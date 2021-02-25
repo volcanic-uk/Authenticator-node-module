@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-declare namespace AuthV1 {
+export declare namespace AuthV1 {
   type DomainHostString = string
   type HTTPMethods = "POST" | "GET" | "PATCH" | "DELETE" | "PUT"
   type SortParam = "name" | "created_at" | "updated_at" | "dataset_id"
@@ -300,6 +300,95 @@ declare namespace AuthV1 {
     resourceType?: string | null;
     resourceID?: string | null
   }
+  export interface INewPermission {
+    name: string
+    description?: string
+    /**
+     * @default ""
+     */
+    service_id: string
+  }
+
+  export interface IUpdatePermission extends INewPermission {
+    id: string
+  }
+
+  export interface INewGroup {
+    name?: string
+    /**
+     * @default null
+     */
+    permissions?: string[]
+    /**
+     * @default []
+     */
+    description?: string
+    /**
+     * @default '
+     */
+  }
+
+  export interface IUpdateGroup extends INewGroup {
+    id: string
+  }
+
+  export interface INewPrivilege {
+    scope: string
+    permission_id?: string | null
+    /**
+     * @default null
+     */
+    group_id?: string | null
+    /**
+     * @default null
+     */
+    description?: string | null
+    /**
+     * @default null
+     */
+    allow?: boolean
+    /**
+     * @default true
+     */
+    tag?: string | null
+    /**
+     * @default null
+     */
+  }
+  export interface IUpdatePrivilege extends INewPrivilege {
+    id: string
+  }
+
+  export interface INewRole {
+    name: string
+    privileges?: string[]
+    /**
+     * @default []
+     */
+    parent_id?: string
+    /**
+     * @default null
+     */
+  }
+  export interface IUpdateRole extends INewRole {
+    id: string
+  }
+  export interface PrincipalResponse {
+    id: string
+    status: boolean
+    name: string
+    dataset_id: string
+    secure_id: string
+    updated_at: string
+    created_at: string
+    last_active_date: null | string
+    login_attempts: number
+    active: boolean
+    data:{
+      length:number
+    }
+    deleted_at: null | string
+  }
 }
 
 
@@ -311,95 +400,6 @@ export interface IAuthenticationMiddleware {
   (req: Request, res: Response, next: NextFunction): Promise<void>
 }
 
-export interface INewPermission {
-  name: string
-  description?: string
-  /**
-   * @default ""
-   */
-  service_id: string
-}
-
-export interface IUpdatePermission extends INewPermission {
-  id: string
-}
-
-export interface INewGroup {
-  name?: string
-  /**
-   * @default null
-   */
-  permissions?: string[]
-  /**
-   * @default []
-   */
-  description?: string
-  /**
-   * @default '
-   */
-}
-
-export interface IUpdateGroup extends INewGroup {
-  id: string
-}
-
-export interface INewPrivilege {
-  scope: string
-  permission_id?: string | null
-  /**
-   * @default null
-   */
-  group_id?: string | null
-  /**
-   * @default null
-   */
-  description?: string | null
-  /**
-   * @default null
-   */
-  allow?: boolean
-  /**
-   * @default true
-   */
-  tag?: string | null
-  /**
-   * @default null
-   */
-}
-export interface IUpdatePrivilege extends INewPrivilege {
-  id: string
-}
-
-export interface INewRole {
-  name: string
-  privileges?: string[]
-  /**
-   * @default []
-   */
-  parent_id?: string
-  /**
-   * @default null
-   */
-}
-export interface IUpdateRole extends INewRole {
-  id: string
-}
-export interface PrincipalResponse {
-  id: string
-  status: boolean
-  name: string
-  dataset_id: string
-  secure_id: string
-  updated_at: string
-  created_at: string
-  last_active_date: null | string
-  login_attempts: number
-  active: boolean
-  data:{
-    length:number
-  }
-  deleted_at: null | string
-}
 export interface AuthRequest extends Request {
   authorize?: (obj: { permissionName: string, resourceType: string, resourceID: string }) => Promise<void>
   custom?: {
@@ -437,11 +437,6 @@ declare const AuthModule: {
   AuthV1Error: AuthV1Error
   AuthenticationMiddleware: IAuthenticationMiddleware
   AuthorizationMiddleware: IAuthorizationMiddleware
-  INewPermission: INewPermission
-  INewGroup: INewGroup
-  INewPrivilege:INewPrivilege
-  IPrincipalResponse: PrincipalResponse
-  INewRole: INewRole
 };
 
 export default AuthModule
@@ -494,19 +489,19 @@ export class Token extends AuthV1.V1Base {
 export const Config: AuthV1.Config
 
 export class Principal extends AuthV1.V1Base {
-  create(principal: AuthV1.INewPrincipal): Promise<PrincipalResponse>
-  getByID(id: string): Promise<PrincipalResponse>
+  create(principal: AuthV1.INewPrincipal): Promise<AuthV1.PrincipalResponse>
+  getByID(id: string): Promise<AuthV1.PrincipalResponse>
   getPrincipals(
     searchParams: AuthV1.IPrincipalSearchParams
   ): Promise<AuthV1.IlistPrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(principal: AuthV1.IUpdatePrincipal): Promise<PrincipalResponse>
+  update(principal: AuthV1.IUpdatePrincipal): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: string): Promise<PrincipalResponse>
+  delete(id: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF updatePrivileges`
   updatePrivileges(
     privileges: AuthV1.IUpdatePrivileges
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF updatePrivileges`
   updateRoles(roles: AuthV1.IUpdateRoles): Promise<AuthV1.IdentityResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF deactivatePrincipal`
@@ -524,24 +519,24 @@ export class Principal extends AuthV1.V1Base {
 
 export class Key extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
-  getByID(id: string, expired?: boolean): Promise<PrincipalResponse>
+  getByID(id: string, expired?: boolean): Promise<AuthV1.PrincipalResponse>
 }
 
 export class Permission extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(permission: INewPermission): Promise<PrincipalResponse>
+  create(permission: AuthV1.INewPermission): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
-  getByID(id: string): Promise<PrincipalResponse>
+  getByID(id: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getPermissions`
   getPermissions(
     searchParams: AuthV1.IPermissionSearchParams
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
   update(
-    permission: IUpdatePermission
-  ): Promise<PrincipalResponse>
+    permission: AuthV1.IUpdatePermission
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: string): Promise<PrincipalResponse>
+  delete(id: string): Promise<AuthV1.PrincipalResponse>
 }
 
 
@@ -554,81 +549,81 @@ export class Subject extends AuthV1.V1Base {
 
 export class Service extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(name: string): Promise<PrincipalResponse>
+  create(name: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
-  getByID(id: string): Promise<PrincipalResponse>
+  getByID(id: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByName`
-  getByName(name: string): Promise<PrincipalResponse>
+  getByName(name: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getServices`
   getServices(
     searchParams: AuthV1.IServiceSearchParams
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(id: "string", name: "string"): Promise<PrincipalResponse>
+  update(id: "string", name: "string"): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: "string"): Promise<PrincipalResponse>
+  delete(id: "string"): Promise<AuthV1.PrincipalResponse>
 }
 
 export class Group extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(group: INewGroup): Promise<PrincipalResponse>
+  create(group: AuthV1.INewGroup): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getById`
-  getById(id: string): Promise<PrincipalResponse>
+  getById(id: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByName`
-  getByName(name: string): Promise<PrincipalResponse>
+  getByName(name: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getGroups`
   getGroups(
     searchParams: AuthV1.IGroupsSearchParams
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(searchParams: IUpdateGroup): Promise<PrincipalResponse>
+  update(searchParams: AuthV1.IUpdateGroup): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: string): Promise<PrincipalResponse>
+  delete(id: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF attachPermissions`
   attachPermissions(
     id: "string",
     permission_ids: string[]
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
 }
 
 export class Roles extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(group: INewRole): Promise<PrincipalResponse>
+  create(group: AuthV1.INewRole): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getById`
-  getById(id: string): Promise<PrincipalResponse>
+  getById(id: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getRoles`
   getRoles(
     searchParams: AuthV1.IRolesSearchParams
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(role: IUpdateRole): Promise<PrincipalResponse>
+  update(role: AuthV1.IUpdateRole): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(secure_id: string): Promise<{ message: string }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF attachPermissions`
   attachPrivileges(
     id: "string",
     privilege_ids: string[]
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
 }
 
 export class Privilege extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(privilege: INewPrivilege): Promise<PrincipalResponse>
+  create(privilege: AuthV1.INewPrivilege): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getById`
-  getById(id: string): Promise<PrincipalResponse>
+  getById(id: string): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByServicePermissions`
   getByServicePermissions(
     serviceName: string,
     permissionName: string
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
-  getByToken(): Promise<PrincipalResponse>
+  getByToken(): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
   getPrivileges(
     searchParams: AuthV1.IPrivilegesSearchParams
-  ): Promise<PrincipalResponse>
+  ): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
-  update(privilege:IUpdatePrivilege): Promise<PrincipalResponse>
+  update(privilege:AuthV1.IUpdatePrivilege): Promise<AuthV1.PrincipalResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(id: string): Promise<{ message: string }>
 }
