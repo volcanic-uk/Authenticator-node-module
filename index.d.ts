@@ -420,8 +420,11 @@ export declare namespace AuthV1 {
     status: boolean
     name: string
     dataset_id: string
+    secure_id: string
     updated_at: string
     created_at: string
+    last_active_date: null | string
+    login_attempts: number
     active: boolean
     data:{
       length:number
