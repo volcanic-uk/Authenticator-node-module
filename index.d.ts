@@ -389,8 +389,86 @@ export declare namespace AuthV1 {
     }
     deleted_at: null | string
   }
-}
+  export interface ServiceResponse {
+    id: string
+    status: boolean
+    name: string
+    dataset_id: string
+    updated_at: string
+    created_at: string
+    active: boolean
+    data:{
+      length:number
+    }
+    deleted_at: null | string
+  }
+  export interface PermissionResponse {
+    id: string
+    status: boolean
+    name: string
+    dataset_id: string
+    updated_at: string
+    created_at: string
+    active: boolean
+    data:{
+      length:number
+    }
+    deleted_at: null | string
+  }
+  export interface GroupResponse {
+    id: string
+    status: boolean
+    name: string
+    dataset_id: string
+    updated_at: string
+    created_at: string
+    active: boolean
+    data:{
+      length:number
+    }
+    deleted_at: null | string
+  }
+  export interface RoleResponse {
+    id: string
+    status: boolean
+    name: string
+    dataset_id: string
+    updated_at: string
+    created_at: string
+    active: boolean
+    data:{
+      length:number
+    }
+    deleted_at: null | string
+  }
+  export interface PrivilegeResponse {
+    id: string
+    status: boolean
+    name: string
+    dataset_id: string
+    updated_at: string
+    created_at: string
+    active: boolean
+    data:{
+      length:number
+    }
+    deleted_at: null | string
+  }
+  export interface KeyResponse {
+    id: string
+    status: boolean
+    name: string
+    dataset_id: string
+    updated_at: string
+    created_at: string
+    active: boolean
+    data:{
+      length:number
+    }
+    deleted_at: null | string
+  }
 
+}
 
 export interface IAuthorizationMiddleware {
   (serviceName: string): (req: Request, res: Response, next: NextFunction) => Promise<void>
@@ -519,24 +597,24 @@ export class Principal extends AuthV1.V1Base {
 
 export class Key extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
-  getByID(id: string, expired?: boolean): Promise<AuthV1.PrincipalResponse>
+  getByID(id: string, expired?: boolean): Promise<AuthV1.KeyResponse>
 }
 
 export class Permission extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(permission: AuthV1.INewPermission): Promise<AuthV1.PrincipalResponse>
+  create(permission: AuthV1.INewPermission): Promise<AuthV1.PermissionResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
-  getByID(id: string): Promise<AuthV1.PrincipalResponse>
+  getByID(id: string): Promise<AuthV1.PermissionResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getPermissions`
   getPermissions(
     searchParams: AuthV1.IPermissionSearchParams
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.PermissionResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
   update(
     permission: AuthV1.IUpdatePermission
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.PermissionResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: string): Promise<AuthV1.PrincipalResponse>
+  delete(id: string): Promise<AuthV1.PermissionResponse>
 }
 
 
@@ -549,81 +627,81 @@ export class Subject extends AuthV1.V1Base {
 
 export class Service extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(name: string): Promise<AuthV1.PrincipalResponse>
+  create(name: string): Promise<AuthV1.ServiceResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
-  getByID(id: string): Promise<AuthV1.PrincipalResponse>
+  getByID(id: string): Promise<AuthV1.ServiceResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByName`
-  getByName(name: string): Promise<AuthV1.PrincipalResponse>
+  getByName(name: string): Promise<AuthV1.ServiceResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getServices`
   getServices(
     searchParams: AuthV1.IServiceSearchParams
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.ServiceResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(id: "string", name: "string"): Promise<AuthV1.PrincipalResponse>
+  update(id: "string", name: "string"): Promise<AuthV1.ServiceResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: "string"): Promise<AuthV1.PrincipalResponse>
+  delete(id: "string"): Promise<AuthV1.ServiceResponse>
 }
 
 export class Group extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(group: AuthV1.INewGroup): Promise<AuthV1.PrincipalResponse>
+  create(group: AuthV1.INewGroup): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getById`
-  getById(id: string): Promise<AuthV1.PrincipalResponse>
+  getById(id: string): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByName`
-  getByName(name: string): Promise<AuthV1.PrincipalResponse>
+  getByName(name: string): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getGroups`
   getGroups(
     searchParams: AuthV1.IGroupsSearchParams
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(searchParams: AuthV1.IUpdateGroup): Promise<AuthV1.PrincipalResponse>
+  update(searchParams: AuthV1.IUpdateGroup): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: string): Promise<AuthV1.PrincipalResponse>
+  delete(id: string): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF attachPermissions`
   attachPermissions(
     id: "string",
     permission_ids: string[]
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.GroupResponse>
 }
 
 export class Roles extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(group: AuthV1.INewRole): Promise<AuthV1.PrincipalResponse>
+  create(group: AuthV1.INewRole): Promise<AuthV1.RoleResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getById`
-  getById(id: string): Promise<AuthV1.PrincipalResponse>
+  getById(id: string): Promise<AuthV1.RoleResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getRoles`
   getRoles(
     searchParams: AuthV1.IRolesSearchParams
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.RoleResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(role: AuthV1.IUpdateRole): Promise<AuthV1.PrincipalResponse>
+  update(role: AuthV1.IUpdateRole): Promise<AuthV1.RoleResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(secure_id: string): Promise<{ message: string }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF attachPermissions`
   attachPrivileges(
     id: "string",
     privilege_ids: string[]
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.RoleResponse>
 }
 
 export class Privilege extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
-  create(privilege: AuthV1.INewPrivilege): Promise<AuthV1.PrincipalResponse>
+  create(privilege: AuthV1.INewPrivilege): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getById`
-  getById(id: string): Promise<AuthV1.PrincipalResponse>
+  getById(id: string): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByServicePermissions`
   getByServicePermissions(
     serviceName: string,
     permissionName: string
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
-  getByToken(): Promise<AuthV1.PrincipalResponse>
+  getByToken(): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
   getPrivileges(
     searchParams: AuthV1.IPrivilegesSearchParams
-  ): Promise<AuthV1.PrincipalResponse>
+  ): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
-  update(privilege:AuthV1.IUpdatePrivilege): Promise<AuthV1.PrincipalResponse>
+  update(privilege:AuthV1.IUpdatePrivilege): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(id: string): Promise<{ message: string }>
 }
