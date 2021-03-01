@@ -228,7 +228,7 @@ export declare namespace AuthV1 {
     /**
      * @default ""
      */
-    group_id?: number
+    group_id?: string | number
     /**
      * @default ""
      */
@@ -338,7 +338,7 @@ export declare namespace AuthV1 {
     /**
      * @default null
      */
-    group_id?: number | null
+    group_id?: string | number | null
     /**
      * @default null
      */
@@ -361,7 +361,7 @@ export declare namespace AuthV1 {
 
   export interface INewRole {
     name: string
-    privileges?: number[]
+    privileges?: string[] | number[]
     /**
      * @default []
      */
