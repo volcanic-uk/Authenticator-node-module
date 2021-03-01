@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
 
+## [1.2.5] - 1-3-2021
+### Changes
+- fix typing definition for AuthMiddleware
+
 ## [1.2.4] - 7-1-2021
 ### Changes
 - Fix missing ids filter at getIdentities
