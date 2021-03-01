@@ -228,7 +228,7 @@ export declare namespace AuthV1 {
     /**
      * @default ""
      */
-    group_id?: string
+    group_id?: string | number
     /**
      * @default ""
      */
@@ -338,7 +338,7 @@ export declare namespace AuthV1 {
     /**
      * @default null
      */
-    group_id?: string | null
+    group_id?: number | null
     /**
      * @default null
      */
@@ -361,7 +361,7 @@ export declare namespace AuthV1 {
 
   export interface INewRole {
     name: string
-    privileges?: string[]
+    privileges?: number[]
     /**
      * @default []
      */
@@ -392,6 +392,9 @@ export declare namespace AuthV1 {
   export interface ServiceResponse {
     id: string
     name: string
+    data:{
+      length:number
+    }
     updated_at: string
     created_at: string
     active: boolean
@@ -399,6 +402,9 @@ export declare namespace AuthV1 {
   export interface PermissionResponse {
     id: string
     name: string
+    data:{
+      length:number
+    }
     description: string
     service_id: number
     updated_at: string
@@ -408,6 +414,9 @@ export declare namespace AuthV1 {
   export interface GroupResponse {
     id: number
     name: string
+    data:{
+      length:number
+    }
     description: string
     updated_at: string
     created_at: string
@@ -416,6 +425,9 @@ export declare namespace AuthV1 {
   export interface RoleResponse {
     id: string
     name: string
+    data:{
+      length:number
+    }
     updated_at: string
     created_at: string
     parent_id: number
@@ -423,6 +435,9 @@ export declare namespace AuthV1 {
   export interface PrivilegeResponse {
     id: number
     scope: string
+    data:{
+      length:number
+    }
     permission_id?: number
     group_id?: number
     allow: boolean
@@ -432,6 +447,9 @@ export declare namespace AuthV1 {
   }
   export interface KeyResponse {
     id: number
+    data:{
+      length:number
+    }
     public_key: string
     updated_at: string
     created_at: string
