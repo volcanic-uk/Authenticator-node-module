@@ -1,4 +1,4 @@
-const { customFetch } = require('../../helpers/index');
+const { customFetch, logger } = require('../../helpers/index');
 const Cache = require('../cache');
 const config = require('../../../config');
 const AuthV1Error = require('./errors');
@@ -74,6 +74,7 @@ class V1Base {
             this.setRequestID(e.response.requestID);
             this.setErrorMessage(e.response.data.message);
             this.setErrorCode(e.response.errorCode);
+            logger(e);
             throw new AuthV1Error({
                 statusCode: e.response.status,
                 requestID: e.response.data.requestID || null,
