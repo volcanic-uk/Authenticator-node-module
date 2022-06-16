@@ -21,7 +21,8 @@ exports.customFetch = async (methodType = 'get', path, headers, data = null) => 
         method: methodType,
         url: envConfigs.server.domainName + path
     };
-    this.logger('request config', req_config);
+    this.logger('request config');
+    this.logger(req_config);
     let response = await axios({
         method: methodType,
         url: envConfigs.server.domainName + path,
