@@ -306,11 +306,11 @@ export declare namespace AuthV1 {
     /**
      * @default ""
      */
-    service_id: string
+    service_id: number
   }
 
   export interface IUpdatePermission extends INewPermission {
-    id: string
+    id: number
   }
 
   export interface INewGroup {
@@ -329,12 +329,12 @@ export declare namespace AuthV1 {
   }
 
   export interface IUpdateGroup extends INewGroup {
-    id: string
+    id: number
   }
 
   export interface INewPrivilege {
     scope: string
-    permission_id?: string | null
+    permission_id?: number | null
     /**
      * @default null
      */
@@ -365,7 +365,7 @@ export declare namespace AuthV1 {
     /**
      * @default []
      */
-    parent_id?: string
+    parent_id?: number
     /**
      * @default null
      */
@@ -384,60 +384,76 @@ export declare namespace AuthV1 {
     last_active_date: null | string
     login_attempts: number
     active: boolean
-    data:{
-      length:number
-    }
     deleted_at: null | string
   }
+
+  export interface PrincipalListResponse {
+    pagination: AuthPagination
+    data: PrincipalListResponse
+    status: boolean
+  }
   export interface ServiceResponse {
-    id: string
+    id: number
+    subject_id: number | undefined
     name: string
-    data:{
-      length:number
-    }
     updated_at: string
     created_at: string
     active: boolean
   }
+
+  export interface ServiceListResponse {
+    pagination: AuthPagination
+    data: ServiceResponse[]
+    status: boolean
+  }
+
   export interface PermissionResponse {
     id: string
     name: string
-    data:{
-      length:number
-    }
     description: string
     service_id: number
     updated_at: string
     created_at: string
     active: boolean
   }
+
+  export interface PermissionListResponse {
+    pagination: AuthPagination
+    data: PermissionResponse[]
+    status: boolean
+  }
+
   export interface GroupResponse {
     id: number
     name: string
-    data:{
-      length:number
-    }
     description: string
     updated_at: string
     created_at: string
     active: boolean
   }
+
+  export interface GroupListResponse {
+    pagination: AuthPagination
+    data: GroupResponse[]
+    status: boolean
+  }
   export interface RoleResponse {
     id: string
     name: string
-    data:{
-      length:number
-    }
     updated_at: string
     created_at: string
     parent_id: number
   }
+
+  export interface RoleListResponse {
+    pagination: AuthPagination
+    data: RoleResponse[]
+    status: boolean
+  } 
+
   export interface PrivilegeResponse {
     id: number
     scope: string
-    data:{
-      length:number
-    }
     permission_id?: number
     group_id?: number
     allow: boolean
@@ -445,6 +461,13 @@ export declare namespace AuthV1 {
     created_at: string
     tag: string
   }
+
+  export interface PrivilegeListResponse {
+    pagination: AuthPagination
+    data: PrivilegeResponse[]
+    status: boolean
+  } 
+
   export interface KeyResponse {
     id: number
     data:{
@@ -456,14 +479,6 @@ export declare namespace AuthV1 {
     overridden_at: string
     deleted_at: string
   }
-}
-
-export interface IAuthorizationMiddleware {
-  (serviceName: string): (req: Request, res: Response, next: NextFunction) => Promise<void>
-}
-
-export interface IAuthenticationMiddleware {
-  (req: Request, res: Response, next: NextFunction): Promise<void>
 }
 
 export interface AuthRequest extends Request {
@@ -501,11 +516,16 @@ declare const AuthModule: {
   Privilege: Privilege
   Authorization: Authorization
   AuthV1Error: AuthV1Error
-  AuthenticationMiddleware: IAuthenticationMiddleware
-  AuthorizationMiddleware: IAuthorizationMiddleware
+  AuthenticationMiddleware: AuthenticationMiddleware
+  AuthorizationMiddleware: AuthorizationMiddleware
 };
 
 export default AuthModule
+
+export function AuthorizationMiddleware(serviceName: string): (req: Request, res: Response, next: NextFunction) => Promise<void>;
+
+export function AuthenticationMiddleware(req: Request, res: Response, next: NextFunction): Promise<void>;
+
 export class Identity extends AuthV1.V1Base {
   login(name: string, secret: string, audience: string[], datasetId: string): Promise<AuthV1.ILoginToken>
   create(identity: AuthV1.INewIdentity): Promise<AuthV1.IdentityResponse>
@@ -593,10 +613,9 @@ export class Permission extends AuthV1.V1Base {
   create(permission: AuthV1.INewPermission): Promise<AuthV1.PermissionResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
   getByID(id: string): Promise<AuthV1.PermissionResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getPermissions`
   getPermissions(
       searchParams: AuthV1.IPermissionSearchParams
-  ): Promise<AuthV1.PermissionResponse>
+  ): Promise<AuthV1.PermissionListResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
   update(
       permission: AuthV1.IUpdatePermission
@@ -614,20 +633,14 @@ export class Subject extends AuthV1.V1Base {
 }
 
 export class Service extends AuthV1.V1Base {
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF create`
   create(name: string): Promise<AuthV1.ServiceResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByID`
   getByID(id: string): Promise<AuthV1.ServiceResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByName`
   getByName(name: string): Promise<AuthV1.ServiceResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getServices`
   getServices(
       searchParams: AuthV1.IServiceSearchParams
-  ): Promise<AuthV1.ServiceResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
-  update(id: "string", name: "string"): Promise<AuthV1.ServiceResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
-  delete(id: "string"): Promise<AuthV1.ServiceResponse>
+  ): Promise<AuthV1.ServiceListResponse>
+  update(id: number, name: string): Promise<AuthV1.ServiceResponse>
+  delete(id: number): Promise<AuthV1.ServiceResponse>
 }
 
 export class Group extends AuthV1.V1Base {
@@ -637,18 +650,17 @@ export class Group extends AuthV1.V1Base {
   getById(id: string): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByName`
   getByName(name: string): Promise<AuthV1.GroupResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getGroups`
   getGroups(
       searchParams: AuthV1.IGroupsSearchParams
-  ): Promise<AuthV1.GroupResponse>
+  ): Promise<AuthV1.GroupListResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
   update(searchParams: AuthV1.IUpdateGroup): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(id: string): Promise<AuthV1.GroupResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF attachPermissions`
   attachPermissions(
-      id: "string",
-      permission_ids: string[]
+      id: number,
+      permission_ids: number[]
   ): Promise<AuthV1.GroupResponse>
 }
 
@@ -660,14 +672,14 @@ export class Roles extends AuthV1.V1Base {
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getRoles`
   getRoles(
       searchParams: AuthV1.IRolesSearchParams
-  ): Promise<AuthV1.RoleResponse>
+  ): Promise<AuthV1.RoleListResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF update`
   update(role: AuthV1.IUpdateRole): Promise<AuthV1.RoleResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
   delete(secure_id: string): Promise<{ message: string }>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF attachPermissions`
   attachPrivileges(
-      id: "string",
+      id: number,
       privilege_ids: string[]
   ): Promise<AuthV1.RoleResponse>
 }
@@ -684,10 +696,9 @@ export class Privilege extends AuthV1.V1Base {
   ): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
   getByToken(): Promise<AuthV1.PrivilegeResponse>
-  // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
   getPrivileges(
       searchParams: AuthV1.IPrivilegesSearchParams
-  ): Promise<AuthV1.PrivilegeResponse>
+  ): Promise<AuthV1.PrivilegeListResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF getByToken`
   update(privilege:AuthV1.IUpdatePrivilege): Promise<AuthV1.PrivilegeResponse>
   // TODO: `FIGURE OUT WHAT IS THE RETURN TYPE OF delete`
@@ -698,12 +709,23 @@ export class Authorization extends AuthV1.V1Base {
   authorize(input: AuthV1.IAuthorizeObject): Promise<AuthV1.IScope>
 }
 
+interface IAuthV1Error {
+  statusCode?: number;
+  requestID?: string;
+  errorCode?: number;
+  message?: string;
+  dataError?: string;
+  status?: string;
+}
+
 export class AuthV1Error extends Error {
-  statusCode: number;
-  requestID: string;
-  errorCode: number;
-  message: string;
-  dataError: string;
-  status: string;
+  constructor(arg: IAuthV1Error)
+
+  statusCode?: number;
+  requestID?: string;
+  errorCode?: number;
+  message?: string;
+  dataError?: string;
+  status?: string;
   getMessage(): string;
 }
