@@ -1,6 +1,6 @@
 {
   "name": "@volcanic-uk/auth-module",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "a node module meant to authorize communication to various volcanic services",
   "main": "v1/index.js",
   "types": "index.d.ts",
