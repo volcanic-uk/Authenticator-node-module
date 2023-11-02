@@ -1,5 +1,8 @@
 # Changelog
 All notable changes to Auth module will be documented in this file.
+## [1.2.7] - 23-12-2022
+### Changes
+- bump dep
 ## [1.2.6] - 23-12-2022
 ### Changes
 - audit dependecies and update type
