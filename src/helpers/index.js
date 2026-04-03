@@ -1,5 +1,6 @@
 // Third party modules includes here:
-const axios = require('axios');
+const _axios = require('axios');
+const axios = _axios.default || _axios;
 const envConfigs = require('../../config');
 const jwt = require('jsonwebtoken');
 const { createHash } = require('crypto');
