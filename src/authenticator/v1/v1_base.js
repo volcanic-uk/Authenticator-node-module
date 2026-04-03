@@ -64,23 +64,25 @@ class V1Base {
                 return httpResponse.response;
             return { ...httpResponse.response, status: true };
         } catch (e) {
-            if (this.internalAuth && e.response.status === 401) {
+            const response = e.response || {};
+            const responseData = response.data || {};
+            if (this.internalAuth && response.status === 401) {
                 if (this.loginAttempts <= 5) {
                     this.loginAttempts++;
                     Cache.del('internal_token');
                     return this.fetch(methodType, path, headers, data);
                 }
             }
-            this.setRequestID(e.response.requestID);
-            this.setErrorMessage(e.response.data.message);
-            this.setErrorCode(e.response.errorCode);
+            this.setRequestID(responseData.requestID || null);
+            this.setErrorMessage(responseData.message || e.message);
+            this.setErrorCode(responseData.errorCode || null);
             throw new AuthV1Error({
-                statusCode: e.response.status,
-                requestID: e.response.data.requestID || null,
+                statusCode: response.status || 0,
+                requestID: responseData.requestID || null,
                 status: false,
-                errorCode: e.response.data.errorCode,
-                message: e.response.data.message,
-                dataError: e.response.data || null
+                errorCode: responseData.errorCode || null,
+                message: responseData.message || e.message,
+                dataError: responseData || null
             });
         }
     }
