@@ -3,23 +3,30 @@ const chai = require('chai'),
 
 const Nock = require('nock');
 const ModuleConfig = require('../../config');
-
-// Set config for tests
-ModuleConfig.server.set({
-    domainName: 'http://localhost:3003',
-    stack_id: 'local'
-});
-
 const { customFetch } = require('../../src/helpers');
 
 describe('customFetch', () => {
+    let originalServerConfig;
+    const testDomain = 'http://localhost:3003';
+
+    before(() => {
+        originalServerConfig = ModuleConfig.server.get();
+        ModuleConfig.server.set({
+            domainName: testDomain,
+            stack_id: 'local'
+        });
+    });
+
+    after(() => {
+        ModuleConfig.server.set(originalServerConfig);
+    });
 
     afterEach(() => {
         Nock.cleanAll();
     });
 
     it('should not include data property in request config for GET requests with data=null', async () => {
-        const scope = Nock('http://localhost:3003')
+        const scope = Nock(testDomain)
             .get('/api/v1/test-endpoint')
             .reply(200, { response: { result: 'ok' } });
 
@@ -29,7 +36,7 @@ describe('customFetch', () => {
     });
 
     it('should not include data property in request config for GET requests with no data argument', async () => {
-        const scope = Nock('http://localhost:3003')
+        const scope = Nock(testDomain)
             .get('/api/v1/test-endpoint')
             .reply(200, { response: { result: 'ok' } });
 
@@ -40,7 +47,7 @@ describe('customFetch', () => {
 
     it('should include data property in request config for POST requests', async () => {
         const postData = { name: 'test', secret: 'test123' };
-        const scope = Nock('http://localhost:3003')
+        const scope = Nock(testDomain)
             .post('/api/v1/test-endpoint', postData)
             .reply(200, { response: { token: 'abc123' } });
 
@@ -51,7 +58,7 @@ describe('customFetch', () => {
 
     it('should include data property in request config for PUT requests', async () => {
         const putData = { name: 'updated' };
-        const scope = Nock('http://localhost:3003')
+        const scope = Nock(testDomain)
             .put('/api/v1/test-endpoint', putData)
             .reply(200, { response: { status: 'updated' } });
 
@@ -61,7 +68,7 @@ describe('customFetch', () => {
     });
 
     it('should not include data property for DELETE requests with data=null', async () => {
-        const scope = Nock('http://localhost:3003')
+        const scope = Nock(testDomain)
             .delete('/api/v1/test-endpoint')
             .reply(200, { response: { deleted: true } });
 
@@ -71,7 +78,7 @@ describe('customFetch', () => {
     });
 
     it('should pass headers correctly', async () => {
-        const scope = Nock('http://localhost:3003', {
+        const scope = Nock(testDomain, {
             reqheaders: {
                 'Authorization': 'Bearer test-token'
             }
@@ -85,7 +92,7 @@ describe('customFetch', () => {
     });
 
     it('should throw on HTTP errors', async () => {
-        Nock('http://localhost:3003')
+        Nock(testDomain)
             .get('/api/v1/test-endpoint')
             .reply(400, { message: 'Bad Request' });
 
