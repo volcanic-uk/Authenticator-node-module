@@ -6,12 +6,7 @@ class Subject extends V1Base {
     }
 
     async getPrivilegesBySubject({ subject = '', serviceName = '', permissionName = '' }) {
-        const params = new URLSearchParams({
-            'filter[subject]': subject,
-            'filter[permission]': permissionName,
-            'filter[service]': serviceName
-        });
-        return super.fetch('get', `subject/privileges?${params.toString()}`);
+        return super.fetch('get', `subject/privileges?filter[subject]=${subject}&filter[permission]=${permissionName}&filter[service]=${serviceName}`);
     }
 }
 

@@ -29,8 +29,7 @@ class Privileges extends V1Base {
     }
 
     async getPrivileges({ page = '', page_size = '', sort = 'id', order = 'asc', scope = '', group_id = '', permission_id = '', query = '', tag = '', allow =true }) {
-        const params = new URLSearchParams({ page, page_size, sort, order, scope, permission_id, group_id, query, tag, allow });
-        return super.fetch('get', `privileges?${params.toString()}`, null);
+        return super.fetch('get', `privileges?page=${page}&page_size=${page_size}&sort=${sort}&order=${order}&scope=${scope}&permission_id=${permission_id}&group_id=${group_id}&query=${query}&tag=${tag}&allow=${allow}`, null);
 
     }
 
