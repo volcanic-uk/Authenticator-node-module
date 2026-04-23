@@ -18,14 +18,17 @@ const { createHash } = require('crypto');
 
 // define the custom fetch method as an async function
 exports.customFetch = async (methodType = 'get', path, headers, data = null) => {
-    let response = await axios({
+    const config = {
         method: methodType,
         url: envConfigs.server.domainName + path,
         headers: {
             ...headers
         },
-        data: data
-    });
+    };
+    if (data !== null && data !== undefined) {
+        config.data = data;
+    }
+    let response = await axios(config);
     return response.data;
 };
 
