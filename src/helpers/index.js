@@ -18,9 +18,12 @@ const { createHash } = require('crypto');
 
 // define the custom fetch method as an async function
 exports.customFetch = async (methodType = 'get', path, headers, data = null) => {
+    // Encode { and } which are invalid in URIs per RFC 3986.
+    // Axios 0.21.x auto-encoded these via url.parse(); axios 1.x does not.
+    const safePath = path.replace(/[{}]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
     const config = {
         method: methodType,
-        url: envConfigs.server.domainName + path,
+        url: envConfigs.server.domainName + safePath,
         headers: {
             ...headers
         },
